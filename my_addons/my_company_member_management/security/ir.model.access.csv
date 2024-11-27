@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_member_approval_system,member.approval.system.admin,model_company_member_approval,base.group_system,1,1,1,1
+access_member_approval_admin,member.approval.company.admin,model_company_member_approval,my_company_member_management.group_single_company_admin,1,1,1,1
+access_member_approval_user,member.approval.company.user,model_company_member_approval,my_company_member_management.group_single_company_user,1,1,1,0
+access_res_users_company_admin,res.users.company.admin,base.model_res_users,my_company_member_management.group_single_company_admin,1,1,1,0
+access_res_users_company_user,res.users.company.user,base.model_res_users,my_company_member_management.group_single_company_user,1,0,0,0

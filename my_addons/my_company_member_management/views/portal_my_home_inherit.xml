@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- 继承 portal.portal_my_home 视图 -->
+        <template id="portal_my_home_inherit" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[@id='portal_common_category']" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/portal/static/src/img/portal-connection.svg'"/>
+                    <t t-set="title">Create company</t>
+                    <t t-set="text">Create your own company</t>
+                    <t t-set="url" t-value="'/company/select'"/>
+                    <t t-set="config_card" t-value="True"/>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

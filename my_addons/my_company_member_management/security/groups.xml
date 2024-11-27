@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 定义新的用户组 -->
+        <record id="group_single_company_admin" model="res.groups">
+            <field name="name">Single Company Administrator</field>
+            <field name="category_id" ref="base.module_category_administration"/>
+            <!-- 继承 base.group_system 的权限 -->
+            <field name="implied_ids" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- 定义新的普通用户组 -->
+        <record id="group_single_company_user" model="res.groups">
+            <field name="name">Single Company User</field>
+            <!-- 定义一个普通分类，不属于用户类型 -->
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <!-- 继承 base.group_user 的权限 -->
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

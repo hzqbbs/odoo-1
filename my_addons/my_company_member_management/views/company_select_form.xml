@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="company_select_form" name="Select or Create Company Form">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h1>Select or Create Company</h1>
+                <form action="/company/select/submit" method="post">
+                    <!-- CSRF Token -->
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="company_option" id="join_existing" value="join"
+                               t-att-checked="'checked' if request.params.get('company_option') == 'join' else ''"/>
+                        <label class="form-check-label" for="join_existing">
+                            Join an existing company
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="company_id">Select Company</label>
+                        <select class="form-control" id="company_id" name="company_id"
+                                t-att-disabled="'disabled' if request.params.get('company_option') == 'create' else ''">
+                            <t t-foreach="companies" t-as="company">
+                                <option t-att-value="company.id"><t t-esc="company.name"/></option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="company_option" id="create_new" value="create"
+                               t-att-checked="'checked' if request.params.get('company_option') == 'create' else ''"/>
+                        <label class="form-check-label" for="create_new">
+                            Create a new company
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="company_name">Company Name</label>
+                        <input type="text" class="form-control" id="company_name" name="company_name"
+                               t-att-disabled="'disabled' if request.params.get('company_option') == 'join' else ''"/>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const joinExistingRadio = document.getElementById('join_existing');
+                    const createNewRadio = document.getElementById('create_new');
+                    const companyNameInput = document.getElementById('company_name');
+                    const companySelect = document.getElementById('company_id');
+
+                    function toggleInputs() {
+                        if (joinExistingRadio.checked) {
+                            companyNameInput.disabled = true;
+                            companySelect.disabled = false;
+                        } else if (createNewRadio.checked) {
+                            companyNameInput.disabled = false;
+                            companySelect.disabled = true;
+                        }
+                    }
+
+                    joinExistingRadio.addEventListener('change', toggleInputs);
+                    createNewRadio.addEventListener('change', toggleInputs);
+
+                    // Initial call to set the correct state on load
+                    toggleInputs();
+                });
+            </script>
+        </t>
+    </template>
+</odoo>

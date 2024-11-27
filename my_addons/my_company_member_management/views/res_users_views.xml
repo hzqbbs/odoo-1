@@ -1,0 +1,84 @@
+<odoo>
+    <!-- Tree view for res.users -->
+    <record id="view_users_tree_custom" model="ir.ui.view">
+        <field name="name">res.users.tree.custom</field>
+        <field name="model">res.users</field>
+        <field name="type">list</field> <!-- 将 type 修改为 list -->
+        <field name="arch" type="xml">
+            <list string="Users" decoration-muted="active == False">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="login"/>
+                <field name="email"/>
+                <field name="company_id"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view for res.users -->
+    <record id="view_users_form_custom" model="ir.ui.view">
+        <field name="name">res.users.form.custom</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="toggle_active" type="object" string="Archive" class="oe_highlight"
+                            invisible="context.get('uid', False) == id or active == False" />
+                    <button name="toggle_active" type="object" string="Activate"
+                            invisible="context.get('uid', False) == id or active == True"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="login"/>
+                            <field name="password" password="True"/>
+                            <field name="email"/>
+                            <field name="company_id"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="groups_id" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Preferences">
+                            <group>
+                                <field name="lang"/>
+                                <field name="tz"/>
+                                <field name="signature"/>
+                                <field name="notification_type"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Action for res.users -->
+    <record id="action_users_custom" model="ir.actions.act_window">
+        <field name="name">Users</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_users_tree_custom"/>
+    </record>
+
+    <!-- Server action to set the custom domain -->
+    <record id="action_users_custom_server" model="ir.actions.server">
+        <field name="name">Users</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_users_custom()</field>
+    </record>
+
+    <!-- Menu item for Users under Settings -->
+    <menuitem id="menu_action_users_custom" name="Users"
+              parent="base.menu_administration"
+              action="action_users_custom_server"
+              groups="my_company_member_management.group_single_company_admin"
+    />
+
+    <menuitem id="menu_settings" name="Settings" sequence="0" groups="base.group_system"/>
+    <menuitem id="menu_website" name="Website" sequence="2" groups="website.group_website_designer"/>
+</odoo>
