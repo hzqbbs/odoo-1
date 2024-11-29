@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order_api,sale.order.api,model_sale_order_api,base.group_system,1,1,1,1
+access_sale_order_api_admin,sale.order.api.admin,model_sale_order_api,base.group_system,1,1,1,1
+access_sale_order_api_user,sale.order.api.user,model_sale_order_api,sales_team.group_sale_salesman,1,1,1,1

@@ -8,7 +8,7 @@
         This module automatically assigns the sales and purchase groups to newly created users.
     """,
     'author': 'He Zhongqing',
-    'depends': ['base', 'portal', 'website', 'auth_signup'],
+    'depends': ['base', 'website_sale', 'auth_signup'],
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',
