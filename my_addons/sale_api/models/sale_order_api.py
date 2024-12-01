@@ -3,6 +3,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 import logging
+import random
+from datetime import timedelta, datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -12,7 +14,9 @@ class SaleOrderAPI(models.TransientModel):
     _description = 'Sale Order API Interface'
 
     @api.model
-    def create_sale_order(self, partner_name, company_name, order_lines_data):
+    def create_sale_order(self, partner_name, company_name, order_lines_data,
+                          delivery_address, delivery_date, shipping_weight,
+                          customer_reference):
         """
         创建销售订单的API接口
 
@@ -25,6 +29,10 @@ class SaleOrderAPI(models.TransientModel):
                     'quantity': float,    # 数量
                     'price': float        # 单价
                 }
+            delivery_address (str): 送货地址
+            delivery_date (str): 送货日期，格式 'YYYY-MM-DD'
+            shipping_weight (float): 运输重量
+            customer_reference (str): 客户参考信息
 
         Returns:
             dict: 包含订单创建结果的字典
@@ -55,18 +63,27 @@ class SaleOrderAPI(models.TransientModel):
                     'product_id': product.id,
                     'product_uom_qty': line['quantity'],
                     'price_unit': line['price'],
+                    'tax_id': [(6, 0, [])],  # 设置税为0
                 }))
+
+            # 计算订单日期 (Delivery Date 往前推 3~15 天)
+            delivery_date_obj = datetime.strptime(delivery_date, '%Y-%m-%d')
+            order_date = delivery_date_obj - timedelta(days=random.randint(3, 15))
 
             # 创建订单
             values = {
                 'partner_id': partner.id,
-                'date_order': fields.Datetime.now(),
+                'date_order': order_date,
+                'commitment_date': delivery_date,  # 设置送货日期
                 'order_line': order_lines,
                 'pricelist_id': pricelist.id if pricelist else False,
                 'payment_term_id': payment_term.id if payment_term else False,
                 'user_id': user.id,
                 'company_id': company.id,
                 'state': 'draft',
+                'partner_shipping_id': self._get_or_create_partner(delivery_address).id,  # 送货地址
+                'client_order_ref': customer_reference,  # 客户参考
+                'shipping_weight': shipping_weight,  # 运输重量
             }
 
             sale_order = self.env['sale.order'].create(values)
@@ -89,14 +106,15 @@ class SaleOrderAPI(models.TransientModel):
             }
 
     def _get_or_create_partner(self, partner_name):
-        """获取或创建客户"""
+        """获取或创建客户，并默认设置为公司类型"""
         Partner = self.env['res.partner']
         partner = Partner.search([('name', '=', partner_name)], limit=1)
 
         if not partner:
             partner = Partner.create({
                 'name': partner_name,
-                'customer_rank': 1
+                'customer_rank': 1,  # 设置为客户
+                'is_company': True,  # 默认设置为公司类型
             })
 
         return partner
@@ -132,11 +150,16 @@ class SaleOrderAPI(models.TransientModel):
         ], limit=1)
 
     def _get_default_payment_term(self, company):
-        """获取默认支付条款"""
-        return self.env['account.payment.term'].search([
-            ('company_id', '=', company.id),
-            ('active', '=', True)
+        """获取默认支付条款 (设置为 End of Following Month)"""
+        payment_term = self.env['account.payment.term'].search([
+            ('name', 'ilike', 'End of Following Month'),
+            ('active', '=', True),
         ], limit=1)
+
+        if not payment_term:
+            raise ValidationError('未找到默认支付条款 End of Following Month')
+
+        return payment_term
 
     def _get_or_create_product(self, product_name, price, company):
         """获取或创建产品"""
