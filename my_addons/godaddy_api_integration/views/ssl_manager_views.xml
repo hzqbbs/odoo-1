@@ -1,0 +1,41 @@
+<!-- ssl_manager_views.xml -->
+
+<odoo>
+    <record id="view_ssl_manager_tree" model="ir.ui.view">
+        <field name="name">ssl.manager.list</field>
+        <field name="model">your_module.ssl_manager</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="domain"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ssl_manager_form" model="ir.ui.view">
+        <field name="name">ssl.manager.form</field>
+        <field name="model">your_module.ssl_manager</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="domain"/>
+                        <field name="status" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="setup_ssl" type="object" string="Setup SSL" class="btn-primary" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_ssl_manager_root" name="SSL Manager" />
+    <menuitem id="menu_ssl_manager" name="SSL Certificates" parent="menu_ssl_manager_root" action="action_ssl_manager" />
+
+    <record id="action_ssl_manager" model="ir.actions.act_window">
+        <field name="name">SSL Manager</field>
+        <field name="res_model">your_module.ssl_manager</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
