@@ -7,7 +7,8 @@ import { isBinarySize } from "@web/core/utils/binary";
 import { FileUploader } from "../file_handler";
 import { standardFieldProps } from "../standard_field_props";
 
-import { Component, useState } from "@odoo/owl";
+import { Component, useState, onWillRender } from "@odoo/owl";
+const { DateTime } = luxon;
 
 export const fileTypeMagicWordMap = {
     "/": "jpg",
@@ -57,6 +58,20 @@ export class ImageField extends Component {
                 "ImageField: previewImage must be provided when set on a many2one field"
             );
         }
+        const field = this.props.record.fields[this.props.name];
+        if (field.related?.includes(".")) {
+            this.lastUpdate = DateTime.now();
+            let key = this.props.value;
+            onWillRender(() => {
+                const nextKey = this.props.value;
+
+                if (key !== nextKey) {
+                    this.lastUpdate = DateTime.now();
+                }
+
+                key = nextKey;
+            });
+        }
     }
 
     get imgAlt() {
@@ -75,7 +90,7 @@ export class ImageField extends Component {
     }
 
     get rawCacheKey() {
-        return this.props.record.data.write_date;
+        return this.lastUpdate || this.props.record.data.write_date;
     }
 
     get sizeStyle() {
@@ -116,7 +131,8 @@ export class ImageField extends Component {
             this.lastURL = imageUrl(
                 this.props.record.fields[this.props.name].relation,
                 this.props.record.data[this.props.name][0],
-                imageFieldName
+                imageFieldName,
+                { unique: this.rawCacheKey }
             );
         } else if (isBinarySize(this.props.record.data[this.props.name])) {
             this.lastURL = imageUrl(
@@ -170,8 +186,10 @@ export class ImageField extends Component {
                 canvas.width = image.width * ratio;
                 canvas.height = image.height * ratio;
                 const ctx = canvas.getContext("2d");
-                ctx.fillStyle = "rgb(255, 255, 255)";
+                ctx.fillStyle = "transparent";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = "high";
                 ctx.drawImage(
                     image,
                     0,
@@ -199,6 +217,7 @@ export class ImageField extends Component {
                     ],
                 ]);
                 referenceId = referenceId || resizedId; // Keep track of original.
+                // Converted to JPEG for use in PDF files, alpha values will default to white
                 await this.orm.call("ir.attachment", "create_unique", [
                     [
                         {
@@ -217,9 +236,6 @@ export class ImageField extends Component {
     }
     onLoadFailed() {
         this.state.isValid = false;
-        this.notification.add(_t("Could not display the selected image"), {
-            type: "danger",
-        });
     }
 }
 

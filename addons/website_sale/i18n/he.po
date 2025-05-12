@@ -11,31 +11,34 @@
 # Sagi Ahiel, 2024
 # Amit Spilman <amit@laylinetech.com>, 2024
 # Fishfur A Banter <fishfurbanter@gmail.com>, 2024
-# yael terner, 2024
 # Mor Kir <morki@013.net.il>, 2024
-# Lilach Gilliam <lilach.gilliam@gmail.com>, 2024
-# ExcaliberX <excaliberx@gmail.com>, 2024
 # דודי מלכה <Dudimalka6@gmail.com>, 2024
-# hed shefer <hed@laylinetech.com>, 2024
+# Hed Shefer <hed@laylinetech.com>, 2024
 # shaked <shaked@laylinetech.com>, 2024
 # Netta Waizer, 2024
 # MichaelHadar, 2024
-# Martin Trigaux, 2024
 # Orel Nahmany, 2024
 # Yihya Hugirat <hugirat@gmail.com>, 2024
 # david danilov, 2024
 # NoaFarkash, 2024
-# ZVI BLONDER <ZVIBLONDER@gmail.com>, 2024
 # Uri Segman, 2024
 # Ha Ketem <haketem@gmail.com>, 2024
+# tomerlayline, 2024
+# Mendi Soudry, 2024
+# yael terner, 2024
+# ExcaliberX <excaliberx@gmail.com>, 2024
+# ZVI BLONDER <ZVIBLONDER@gmail.com>, 2025
+# Martin Trigaux, 2025
+# Lilach Gilliam <lilach.gilliam@gmail.com>, 2025
+# or balmas, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-03-19 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Ha Ketem <haketem@gmail.com>, 2024\n"
+"Last-Translator: or balmas, 2025\n"
 "Language-Team: Hebrew (https://app.transifex.com/odoo/teams/41243/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +88,7 @@ msgstr "&amp;nbsp; "
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.checkout_layout
 msgid "&amp;nbsp;item(s)&amp;nbsp;-&amp;nbsp;"
-msgstr ""
+msgstr "&amp;nbsp;מוצר(ים)&amp;nbsp;-&amp;nbsp;"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -142,13 +145,13 @@ msgstr "<b>תקשורת: </b>"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_on_payment
 msgid "<b>Deliver to pickup point: </b>"
-msgstr ""
+msgstr "<b>משלוח לנקודת איסוף: </b>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_on_payment
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
 msgid "<b>Delivery: </b>"
-msgstr ""
+msgstr "<b>משלוח: </b>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.filter_products_price
@@ -185,6 +188,8 @@ msgid ""
 "<i class=\"fa fa-angle-left me-2 fw-light\"/>\n"
 "                                    Return to shipping"
 msgstr ""
+"<i class=\"fa fa-angle-left me-2 fw-light\"/>\n"
+"                                    חזרה למשלוח"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_buy_now
@@ -192,6 +197,8 @@ msgid ""
 "<i class=\"fa fa-bolt me-2\"/>\n"
 "                Buy now"
 msgstr ""
+"<i class=\"fa fa-bolt me-2\"/>\n"
+"                קנה עכשיו "
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_add_to_cart
@@ -224,6 +231,8 @@ msgid ""
 "<i class=\"fa fa-plus me-md-2\"/>\n"
 "                    <span class=\"d-none d-md-inline\">Add address</span>"
 msgstr ""
+"<i class=\"fa fa-plus me-md-2\"/>\n"
+"                     <span class=\"d-none d-md-inline\">הוסף כתובת</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
@@ -259,11 +268,13 @@ msgid ""
 "<i class=\"oi oi-chevron-left d-lg-none me-1\" role=\"presentation\"/>All "
 "Products"
 msgstr ""
+"<i class=\"oi oi-chevron-left d-lg-none me-1\" role=\"presentation\"/>כל "
+"המוצרים  "
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 msgid "<i class=\"oi oi-chevron-left me-1\" role=\"presentation\"/>All Products"
-msgstr ""
+msgstr "<i class=\"oi oi-chevron-left me-1\" role=\"presentation\"/>כל המוצרים"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.shop_product_carousel
@@ -287,7 +298,7 @@ msgstr "<option value=\"\">ארץ...</option>"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "<option value=\"\">State / Province...</option>"
-msgstr ""
+msgstr "<option value=\"\">מדינה\\מחוז...</option>"
 
 #. module: website_sale
 #. odoo-python
@@ -318,6 +329,8 @@ msgid ""
 "<small class=\"mx-auto\"><b>Clear Filters</b></small>\n"
 "                            <i class=\"oi oi-close\" role=\"presentation\"/>"
 msgstr ""
+"<small class=\"mx-auto\"><b>נקה מסננים</b></small>\n"
+"                        <i class=\"oi oi-close\" role=\"presentation\"/>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.suggested_products_list
@@ -410,6 +423,8 @@ msgid ""
 "<span class=\"text-muted\" invisible=\"product_variant_count &lt;= 1\">Based"
 " on variants</span>"
 msgstr ""
+"<span class=\"text-muted\" invisible=\"product_variant_count &lt;= 1\">מבוסס"
+" על וריאנטים</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -419,12 +434,12 @@ msgstr "<span class=\"visually-hidden\">מסננים פעילים</span>"
 #. module: website_sale
 #: model_terms:web_tour.tour,rainbow_man_message:website_sale.test_01_admin_shop_tour
 msgid "<span><b>Good job!</b> You went through all steps of this tour.</span>"
-msgstr ""
+msgstr "<span><b>עבודה מעולה!</b> עברת על כל השלבים של המדריך.</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "<span>Already have an account?</span>"
-msgstr ""
+msgstr "<span>ש לך כבר חשבון?</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
@@ -434,7 +449,7 @@ msgstr "<span>הזמנה</span>"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_document_kanban
 msgid "<span>Publish on website</span>"
-msgstr ""
+msgstr "<span>פרסם באתר אינטרנט </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
@@ -451,7 +466,7 @@ msgstr "<span>תצוגה מקדימה של וידאו</span>"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_form
 msgid "<strong>No suitable delivery method could be found.</strong>"
-msgstr ""
+msgstr "<strong>לא נמצאה שיטת משלוח מתאימה.</strong>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
@@ -480,17 +495,17 @@ msgid ""
 "            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 0px 0px 0px; border-collapse:separate;\">\n"
 "                <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
 "                    <h1 style=\"color:#A9A9A9;\">THERE'S SOMETHING IN YOUR CART.</h1>\n"
-"                    Would you like to complete your purchase?<br><br>\n"
+"                    Would you like to complete your purchase?<br/><br/>\n"
 "                    <t t-if=\"object.order_line\">\n"
 "                        <t t-foreach=\"object.website_order_line\" t-as=\"line\">\n"
-"                            <hr>\n"
+"                            <hr/>\n"
 "                            <table width=\"100%\">\n"
 "                                <tr>\n"
 "                                    <td style=\"padding: 10px; width:150px;\">\n"
-"                                        <img t-attf-src=\"/web/image/product.product/{{ line.product_id.id }}/image_128\" style=\"width: 100px; height: 100px; object-fit: contain;\" alt=\"Product image\">\n"
+"                                        <img t-attf-src=\"/web/image/product.product/{{ line.product_id.id }}/image_128\" style=\"width: 100px; height: 100px; object-fit: contain;\" alt=\"Product image\"/>\n"
 "                                    </td>\n"
 "                                    <td>\n"
-"                                        <strong t-out=\"line.product_id.display_name or ''\">[FURN_7800] Desk Combination</strong><br><t t-out=\"line.name or ''\">[FURN_7800] Desk Combination Desk combination, black-brown: chair + desk + drawer.</t>\n"
+"                                        <strong t-out=\"line.product_id.display_name or ''\">[FURN_7800] Desk Combination</strong><br/><t t-out=\"line.name or ''\">[FURN_7800] Desk Combination Desk combination, black-brown: chair + desk + drawer.</t>\n"
 "                                    </td>\n"
 "                                    <td width=\"100px\" align=\"right\">\n"
 "                                        <t t-out=\"int(line.product_uom_qty) or ''\">10000</t> <t t-out=\"line.product_uom.name or ''\">Units</t>\n"
@@ -498,14 +513,14 @@ msgid ""
 "                                </tr>\n"
 "                            </table>\n"
 "                        </t>\n"
-"                        <hr>\n"
+"                        <hr/>\n"
 "                    </t>\n"
 "                    <div style=\"text-align: center; padding: 16px 0px 16px 0px; font-size: 14px;\">\n"
 "                        <a t-attf-href=\"{{ object.get_base_url() }}/shop/cart?access_token={{ object.access_token }}\" target=\"_blank\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                            Resume order\n"
 "                        </a>\n"
 "                    </div>\n"
-"                    <t t-set=\"company\" t-value=\"object.company_id or object.user_id.company_id or user.company_id\"></t>\n"
+"                    <t t-set=\"company\" t-value=\"object.company_id or object.user_id.company_id or user.company_id\"/>\n"
 "                    <div style=\"text-align: center;\"><strong>Thank you for shopping with <t t-out=\"company.name or ''\">My Company (San Francisco)</t>!</strong></div>\n"
 "                </td></tr>\n"
 "            </table>\n"
@@ -519,6 +534,12 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_custom_text
 msgid "<u>Terms and Conditions</u>"
+msgstr "<u>תנאים והגבלות</u>"
+
+#. module: website_sale
+#. odoo-python
+#: code:addons/website_sale/controllers/combo_configurator.py:0
+msgid "A combo product can't be empty. Please select at least one option."
 msgstr ""
 
 #. module: website_sale
@@ -596,7 +617,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Accept Terms & Conditions"
-msgstr ""
+msgstr "קבל את התנאים וההגבלות"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
@@ -702,7 +723,7 @@ msgstr "הוסף אחד"
 #: model_terms:ir.ui.view,arch_db:website_sale.s_add_to_cart_options
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Add to Cart"
-msgstr "הוסף לסל"
+msgstr "הוסף לעגלה"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippets
@@ -738,9 +759,8 @@ msgstr "כל המשתמשים"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_delivery_carrier_form_website_delivery
-#: model_terms:ir.ui.view,arch_db:website_sale.website_sale_pricelist_form_view
-msgid "Select a website"
-msgstr ""
+msgid "All websites"
+msgstr "כל האתרים"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -791,7 +811,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Apartment, suite, etc."
-msgstr ""
+msgstr "דירה, כניסה וכו'."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.coupon_form
@@ -807,7 +827,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Assignment"
-msgstr ""
+msgstr "משימה"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -834,13 +854,13 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Automatically send abandoned checkout emails"
-msgstr ""
+msgstr "שלח אוטומטית מיילים על עגלות נטושות"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/product_list/product_list.js:0
 msgid "Available options"
-msgstr ""
+msgstr "אופציות זמינות"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_template__rating_avg
@@ -851,13 +871,13 @@ msgstr "דירוג ממוצע"
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "Back to cart"
-msgstr ""
+msgstr "בחזרה לעגלה"
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "Back to delivery"
-msgstr ""
+msgstr "בחזרה למשלוח"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -909,7 +929,7 @@ msgstr "BeNeLux"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_beds
 msgid "Beds"
-msgstr ""
+msgstr "מיטות"
 
 #. module: website_sale
 #: model:product.pricelist,name:website_sale.list_benelux
@@ -935,7 +955,7 @@ msgstr "חיוב"
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 #: model_terms:ir.ui.view,arch_db:website_sale.billing_address_row
 msgid "Billing address"
-msgstr ""
+msgstr "כתובת לחיוב:"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_on_payment
@@ -976,7 +996,7 @@ msgstr "תחתון"
 #. odoo-python
 #: code:addons/website_sale/models/website_snippet_filter.py:0
 msgid "Box"
-msgstr ""
+msgstr "קופסה"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes
@@ -1051,7 +1071,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Cart"
-msgstr ""
+msgstr "עגלה"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_sale_order__cart_quantity
@@ -1140,7 +1160,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_method
 msgid "Change location"
-msgstr ""
+msgstr "שנה מיקום"
 
 #. module: website_sale
 #. odoo-python
@@ -1181,7 +1201,7 @@ msgstr "לתשלום"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Checkout Pages"
-msgstr ""
+msgstr "דפי השלמת רכישה"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__child_id
@@ -1192,6 +1212,19 @@ msgstr "תתי קטגוריות"
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_form
 msgid "Choose a delivery method"
 msgstr "בחר שיטת משלוח"
+
+#. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
+msgid "Choose a pick-up point"
+msgstr "בחר נקודת איסוף"
+
+#. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
+#: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
+msgid "Choose this location"
+msgstr "בחר מיקום"
 
 #. module: website_sale
 #: model:product.pricelist,name:website_sale.list_christmas
@@ -1207,12 +1240,12 @@ msgstr "עיר"
 #: model_terms:ir.ui.view,arch_db:website_sale.o_wsale_offcanvas
 #: model_terms:ir.ui.view,arch_db:website_sale.products_attributes
 msgid "Clear Filters"
-msgstr ""
+msgstr "נקה מסננים"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_website_sale_collect
 msgid "Click & Collect"
-msgstr ""
+msgstr "הזמן & אסוף"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -1235,7 +1268,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/tours/website_sale_shop.js:0
 msgid "Click on <em>Save</em> to create the product."
-msgstr ""
+msgstr "לחץ על <em>שמור</em> כדי לייצר מוצר."
 
 #. module: website_sale
 #. odoo-javascript
@@ -1248,6 +1281,12 @@ msgstr "לחץ על כפתור זה כדי שהלקוחות שלך יוכלו ל
 #: code:addons/website_sale/static/src/js/notification/cart_notification/cart_notification.xml:0
 #: model_terms:ir.ui.view,arch_db:website_sale.o_wsale_offcanvas
 msgid "Close"
+msgstr "סגור"
+
+#. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_schedule/location_schedule.js:0
+msgid "Closed"
 msgstr "סגור"
 
 #. module: website_sale
@@ -1303,7 +1342,7 @@ msgstr "שם החברה"
 #: model:ir.model.fields,field_description:website_sale.field_product_product__compare_list_price
 #: model:ir.model.fields,field_description:website_sale.field_product_template__compare_list_price
 msgid "Compare to Price"
-msgstr ""
+msgstr "השווה למחיר"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__group_product_price_comparison
@@ -1391,7 +1430,7 @@ msgstr "אשר הזמנה"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment
 msgid "Confirm order"
-msgstr ""
+msgstr "אשר הזמנה"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_sales_order_filter_ecommerce
@@ -1438,6 +1477,8 @@ msgid ""
 "Continue checkout\n"
 "                                    <i class=\"fa fa-angle-right ms-2 fw-light\"/>"
 msgstr ""
+"המשך לתשלום\n"
+"                                    <i class=\"fa fa-angle-right ms-2 fw-light\"/>"
 
 #. module: website_sale
 #. odoo-python
@@ -1611,7 +1652,7 @@ msgstr "מטבע ברירת מחדל"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__pricelist_id
 msgid "Default Pricelist if any"
-msgstr ""
+msgstr "מחירון מחדל אם"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -1669,17 +1710,12 @@ msgstr "שיטות משלוח"
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_address_row
 msgid "Delivery address"
-msgstr ""
+msgstr "כתובת לאספקה"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_delivery_and_installation
 msgid "Delivery and Installation"
-msgstr ""
-
-#. module: website_sale
-#: model_terms:ir.ui.view,arch_db:website_sale.total
-msgid "Delivery will be updated after choosing a new delivery method"
-msgstr "המשלוח יעודכן לאחר בחירת שיטת משלוח חדשה"
+msgstr "משלוח והתקנה"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_searchbar_input_snippet_options
@@ -1710,7 +1746,7 @@ msgstr "תיאור עבור אתר האינטרנט"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_design_and_planning
 msgid "Design and Planning"
-msgstr ""
+msgstr "עיצוב ותכנון"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_desk
@@ -1811,7 +1847,7 @@ msgstr "אין לך גישה, דלג על נתונים אלה עבור תקצי�
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/website_sale_reorder.js:0
 msgid "Do you wish to clear your cart before adding products to it?"
-msgstr ""
+msgstr "האם ברצונך לנקות את העגלה לפני הוספת מוצרים אליה?"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
@@ -1915,7 +1951,7 @@ msgstr ""
 #. module: website_sale
 #: model:mail.template,name:website_sale.mail_template_sale_cart_recovery
 msgid "Ecommerce: Cart Recovery"
-msgstr ""
+msgstr "אתר אינטרנט: שחזור עגלה"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
@@ -1959,7 +1995,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/product_template_attribute_line/product_template_attribute_line.js:0
 msgid "Enter a customized value"
-msgstr ""
+msgstr "הכנס ערך מותאם אישית"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1971,12 +2007,12 @@ msgstr "הזן שם למוצר החדש שלך"
 #. odoo-python
 #: code:addons/website_sale/models/product_public_category.py:0
 msgid "Error! You cannot create recursive categories."
-msgstr ""
+msgstr "שגיאה! לא ניתן ליצור קטגוריות רקורסיביות."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Extra Images"
-msgstr ""
+msgstr "תמונות נוספות"
 
 #. module: website_sale
 #. odoo-python
@@ -1993,7 +2029,7 @@ msgstr "הוספת מדיה על המוצר"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Extra Step"
-msgstr ""
+msgstr "צעד נוסף"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__enabled_extra_checkout_step
@@ -2013,7 +2049,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.extra_info
 msgid "Extra info"
-msgstr ""
+msgstr "מידע נוסף"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_share_buttons
@@ -2024,7 +2060,7 @@ msgstr "פייסבוק"
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "Featured"
-msgstr ""
+msgstr "מומלצים"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -2064,7 +2100,14 @@ msgstr "למלא"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Fill in your address"
-msgstr ""
+msgstr "מלא את כתובתך"
+
+#. module: website_sale
+#. odoo-python
+#: code:addons/website_sale/models/product_template.py:0
+msgid ""
+"Final price may vary based on selection. Tax will be calculated at checkout."
+msgstr "המחיר הסופי עשוי להשתנות בהתאם לבחירה. מיסים יחשבו בעת תשלום."
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__fiscal_position_id
@@ -2105,7 +2148,7 @@ msgstr "מאתר אינטרנט"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Full name"
-msgstr ""
+msgstr "שם מלא"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures
@@ -2178,12 +2221,12 @@ msgstr "נסתר"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__prevent_zero_price_sale
 msgid "Hide 'Add To Cart' when price = 0"
-msgstr ""
+msgstr "הסתר  'הוסף לעגלה' כאשר המחיר הוא 0"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Hours."
-msgstr ""
+msgstr "שעות."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
@@ -2393,7 +2436,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/website_sale_utils.js:0
 msgid "Item(s) added to your cart"
-msgstr ""
+msgstr "מוצר(ים) נוספו לעגלה"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_account_move
@@ -2545,9 +2588,21 @@ msgid "List"
 msgstr "רשימה"
 
 #. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
+msgid "List view"
+msgstr "תצוגת רשימה"
+
+#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Little Icons"
 msgstr "אייקונים/ סמלים קטנים"
+
+#. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
+msgid "Loading..."
+msgstr "טוען..."
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__ecommerce_access__logged_in
@@ -2600,6 +2655,12 @@ msgid "Mandatory (no guest checkout)"
 msgstr "חובה (אין אפשרות לקנות כאורחים)"
 
 #. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
+msgid "Map view"
+msgstr "תצוגת מפה "
+
+#. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_medicine
 msgid "Medicine Cabinets"
 msgstr ""
@@ -2638,7 +2699,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_sale.accordion_more_information
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "More Information"
-msgstr ""
+msgstr "מידע נוסף"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippets_options_web_editor
@@ -2714,7 +2775,7 @@ msgstr "חדש!"
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "Newest Arrivals"
-msgstr ""
+msgstr "מוצרים הכי חדשים"
 
 #. module: website_sale
 #: model:website.snippet.filter,name:website_sale.dynamic_filter_newest_products
@@ -2758,12 +2819,18 @@ msgstr "לא מוגדר מוצר"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "No product defined in this category."
-msgstr ""
+msgstr "לא הוגדר מוצר בקטגוריה זו."
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.website_sale_visitor_product_action
 msgid "No product views yet for this visitor"
 msgstr "אין עדיין צפיות במוצר עבור מבקר זה"
+
+#. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
+msgid "No result"
+msgstr "אין תוצאה"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -2794,7 +2861,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/models/sale_order.py:0
 msgid "No shipping method is selected."
-msgstr ""
+msgstr "לא נבחרה שיטת משלוח."
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_spacing__none
@@ -2811,7 +2878,7 @@ msgstr "לא פורסם"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/product/product.xml:0
 msgid "Not available for sale"
-msgstr ""
+msgstr "לא זמין למכירה"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2908,12 +2975,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/models/res_partner.py:0
 msgid "Open Sale Orders"
-msgstr ""
+msgstr "הזמנות לקוחות פתוחות"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.brand_promotion
 msgid "Open Source eCommerce"
 msgstr "מסחר אלקטרוני קוד פתוח"
+
+#. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location/location.js:0
+#: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
+msgid "Opening hours"
+msgstr "שעות פעילות"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
@@ -2954,7 +3028,7 @@ msgstr "שורות הזמנה מוצגות באתר האינטרנט"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
 msgid "Order overview"
-msgstr "Order overview"
+msgstr "סקירת הזמנה"
 
 #. module: website_sale
 #: model:ir.actions.act_window,name:website_sale.action_orders_ecommerce
@@ -3003,7 +3077,7 @@ msgstr "תשלום"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
 msgid "Payment Information"
-msgstr ""
+msgstr "פרטי תשלום"
 
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_ecommerce_payment_methods
@@ -3029,6 +3103,12 @@ msgstr "אסימוני תשלום"
 #: model:ir.ui.menu,name:website_sale.menu_ecommerce_payment_transactions
 msgid "Payment Transactions"
 msgstr "עסקאות תשלום"
+
+#. module: website_sale
+#. odoo-python
+#: code:addons/website_sale/controllers/payment.py:0
+msgid "Payment is already being processed."
+msgstr "התשלום כבר נמצא בתהליך עיבוד."
 
 #. module: website_sale
 #. odoo-python
@@ -3123,7 +3203,7 @@ msgstr "מחיר - נמוך לגבוה"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Price Filter"
-msgstr ""
+msgstr "מסנן מחיר"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_product__base_unit_price
@@ -3137,9 +3217,19 @@ msgid "Price list available for this Ecommerce/Website"
 msgstr "מחירון זמין עבור מסחר אלקטרוני / אתר זה"
 
 #. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.total
+msgid "Price will be updated after choosing a delivery method"
+msgstr ""
+
+#. module: website_sale
 #: model:ir.model,name:website_sale.model_product_pricelist
 msgid "Pricelist"
 msgstr "מחירון"
+
+#. module: website_sale
+#: model:ir.model,name:website_sale.model_product_pricelist_item
+msgid "Pricelist Rule"
+msgstr "כלל מחירון"
 
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_catalog_pricelists
@@ -3216,7 +3306,7 @@ msgstr "כלי השוואת מוצרים"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_document
 msgid "Product Document"
-msgstr ""
+msgstr "מסמך מוצר"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_image
@@ -3237,12 +3327,12 @@ msgstr "שם מוצר"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_template_options
 msgid "Product Names"
-msgstr ""
+msgstr "שמות מוצר"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Product Page"
-msgstr ""
+msgstr "עמוד מוצר"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_website_sale_website_form
@@ -3418,7 +3508,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_document__shown_on_product_page
 msgid "Publish on website"
-msgstr ""
+msgstr "פרסם באתר האינטרנט"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_pages_kanban_view
@@ -3507,7 +3597,7 @@ msgstr "דירוגים"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/xml/website_sale_reorder_modal.xml:0
 msgid "Re-Order"
-msgstr ""
+msgstr "הזמן מחדש"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -3605,13 +3695,13 @@ msgstr ""
 #: model:ir.model.fields,help:website_sale.field_product_tag__website_id
 #: model:ir.model.fields,help:website_sale.field_product_template__website_id
 msgid "Restrict to a specific website."
-msgstr ""
+msgstr "הגבל לאתר ספציפי."
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/sale_order.py:0
 msgid "Resume Order"
-msgstr ""
+msgstr "המשך בהזמנה"
 
 #. module: website_sale
 #. odoo-python
@@ -3709,7 +3799,7 @@ msgstr "איש מכירות"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.billing_address_row
 msgid "Same as delivery address"
-msgstr ""
+msgstr "זהה לכתובת משלוח"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.dynamic_filter_template_product_product_add_to_cart
@@ -3730,7 +3820,7 @@ msgstr "דגימה"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Save address"
-msgstr ""
+msgstr "שמור כתובת"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_sales_order_filter_ecommerce_abondand
@@ -3760,12 +3850,17 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Select Quantity"
-msgstr ""
+msgstr "בחר כמות"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_method
 msgid "Select a location"
-msgstr ""
+msgstr "בחר מיקום"
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.website_sale_pricelist_form_view
+msgid "Select a website"
+msgstr "בחר אתר אינטרנט"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_pricelist__selectable
@@ -3790,7 +3885,7 @@ msgstr "שלח בדוא\"ל"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__send_abandoned_cart_email
 msgid "Send email to customers who abandoned their cart."
-msgstr ""
+msgstr "שלח מייל ללקוחות שנטשו את העגלה שלהם."
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__seo_name
@@ -3899,12 +3994,12 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_document_search
 msgid "Show on Ecommerce"
-msgstr ""
+msgstr "הצג באתר האינטרנט"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_template_options
 msgid "Show variants"
-msgstr ""
+msgstr "הצג וריאנטים"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -3963,7 +4058,7 @@ msgstr "קטן"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_sofas
 msgid "Sofas"
-msgstr ""
+msgstr "ספות"
 
 #. module: website_sale
 #: model:product.ribbon,name:website_sale.sold_out_ribbon
@@ -4032,7 +4127,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Street and Number"
-msgstr ""
+msgstr "רחוב ומספר"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -4128,7 +4223,13 @@ msgstr "המס' 1"
 #. odoo-python
 #: code:addons/website_sale/controllers/payment.py:0
 msgid "The access token is invalid."
-msgstr ""
+msgstr "האסימון גישה אינו חוקי."
+
+#. module: website_sale
+#. odoo-python
+#: code:addons/website_sale/controllers/payment.py:0
+msgid "The cart has already been paid. Please refresh the page."
+msgstr "העגלה הזו כבר שולמה. אנא רענן את הדף."
 
 #. module: website_sale
 #. odoo-python
@@ -4166,6 +4267,7 @@ msgstr "המוצר הנתון אינו קיים ולכן לא ניתן להוס�
 
 #. module: website_sale
 #. odoo-python
+#: code:addons/website_sale/controllers/combo_configurator.py:0
 #: code:addons/website_sale/models/sale_order.py:0
 msgid ""
 "The given product does not have a price therefore it cannot be added to "
@@ -4185,7 +4287,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/controllers/payment.py:0
 msgid "The order has been cancelled."
-msgstr ""
+msgstr "ההזמנה בוטלה."
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__public_categ_ids
@@ -4227,6 +4329,12 @@ msgid "There is no unpaid order from the website yet"
 msgstr "אין עדיין הזמנות מאתר האינטרנט שלא שולמו"
 
 #. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
+msgid "There was an error loading the map"
+msgstr ""
+
+#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 msgid "This combination does not exist."
 msgstr "שילוב זה אינו קיים."
@@ -4254,7 +4362,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/snippets/s_add_to_cart/000.js:0
 msgid "This product does not exist therefore it cannot be added to cart."
-msgstr ""
+msgstr "מוצר זה לא קיים ולכן לא ניתן להוסיף אותו לעגלה."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
@@ -4270,7 +4378,7 @@ msgstr "מוצר זה אינו זמין יותר."
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/website_sale_reorder.js:0
 msgid "This product is not available for purchase."
-msgstr ""
+msgstr "מוצר זה לא זמין לרכישה."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products_item
@@ -4333,7 +4441,7 @@ msgstr "סה\"כ צפיות במוצרים"
 #: code:addons/website_sale/static/src/js/combo_configurator_dialog/combo_configurator_dialog.js:0
 #: code:addons/website_sale/static/src/js/product_list/product_list.js:0
 msgid "Total: %s"
-msgstr ""
+msgstr "סה\"כ: %s"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_touch
@@ -4458,12 +4566,12 @@ msgstr "צפיה במוצר"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/notification/add_to_cart_notification/add_to_cart_notification.xml:0
 msgid "View cart"
-msgstr ""
+msgstr "צפה בעגלה"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.dynamic_filter_template_product_product_view_detail
 msgid "View product"
-msgstr ""
+msgstr "צפיה במוצר"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4576,7 +4684,7 @@ msgstr "אתר אינטרנט"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_product_view_form_normalized
 msgid "Website Category"
-msgstr ""
+msgstr "קטגורית אתר אינטרנט"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_menu
@@ -4728,6 +4836,9 @@ msgid ""
 "                                        at the same time!<br/>\n"
 "                                        If you want to modify your billing address, create a"
 msgstr ""
+"אתה עורך את<b> כתובות האספקה והחיוב שלך</b>\n"
+"                         בו זמנית!<br/>\n"
+"                  אם ברצונך לשנות את כתובת החיוב שלך, צור"
 
 #. module: website_sale
 #. odoo-python
@@ -4781,8 +4892,9 @@ msgstr "השם שלך"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
+#: model_terms:ir.ui.view,arch_db:website_sale.billing_address_row
 msgid "Your address"
-msgstr ""
+msgstr "כתובת שלך"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart_lines
@@ -4794,18 +4906,24 @@ msgstr "העגלה שלך ריקה!"
 #. odoo-python
 #: code:addons/website_sale/controllers/delivery.py:0
 msgid "Your cart is empty."
-msgstr ""
+msgstr "העגלה שלך ריקה."
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/sale_order.py:0
 msgid "Your cart is not ready to be paid, please verify previous steps."
-msgstr ""
+msgstr "העגלה שלך לא מוכנה לתשלום, אנא בדוק שלבים קודמים."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
 msgid "Your payment has been authorized."
 msgstr "התשלום שלך אושר."
+
+#. module: website_sale
+#. odoo-javascript
+#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
+msgid "Your postal code"
+msgstr "המיקוד שלך"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
@@ -4820,7 +4938,7 @@ msgstr "מיקוד"
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_delivery_zip_prefix
 msgid "Zip Prefix"
-msgstr ""
+msgstr "קידומת מיקוד"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -4915,7 +5033,7 @@ msgstr "כתובת חדשה"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart_lines
 msgid "remove"
-msgstr ""
+msgstr "הסר"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.accept_terms_and_conditions

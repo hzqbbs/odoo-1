@@ -4,6 +4,8 @@ import { user } from "@web/core/user";
 import { Mutex } from "@web/core/utils/concurrency";
 import { debounce } from "@web/core/utils/timing";
 import { PeerToPeer, RequestError } from "./PeerToPeer";
+import { ancestors } from "@html_editor/utils/dom_traversal";
+import { childNodeIndex } from "@html_editor/utils/position";
 
 /**
  * @typedef {Object} CollaborationSelection
@@ -43,7 +45,7 @@ let ICE_SERVERS = null;
 
 export class CollaborationOdooPlugin extends Plugin {
     static id = "collaborationOdoo";
-    static dependencies = ["history", "collaboration", "selection"];
+    static dependencies = ["baseContainer", "history", "collaboration", "selection"];
     static shared = ["getPeerMetadata"];
     resources = {
         selectionchange_handlers: debounce(() => {
@@ -580,7 +582,8 @@ export class CollaborationOdooPlugin extends Plugin {
             return;
         }
 
-        let content = record[this.config.collaboration.collaborationChannel.collaborationFieldName];
+        const content =
+            record[this.config.collaboration.collaborationChannel.collaborationFieldName];
         const lastHistoryId = content && this.getLastHistoryStepId(content);
         // If a change was made in the document while retrieving it, the
         // lastHistoryId will be different if the odoo bus did not have time to
@@ -593,9 +596,12 @@ export class CollaborationOdooPlugin extends Plugin {
         }
 
         this.isDocumentStale = false;
-        content = content || "<p><br></p>";
-        // content here is trusted
-        this.editable.innerHTML = content;
+        if (content) {
+            // content here is trusted
+            this.editable.innerHTML = content;
+        } else {
+            this.editable.replaceChildren(this.dependencies.baseContainer.createBaseContainer());
+        }
         stripHistoryIds(this.editable);
         this.dispatchTo("normalize_handlers", this.editable);
 
@@ -722,11 +728,26 @@ export class CollaborationOdooPlugin extends Plugin {
         if (this.historySyncAtLeastOnce) {
             return;
         }
+        const selection = this.dependencies.selection.getEditableSelection();
+        let anchorNodeIndexPath = this._getNodeIndexPath(selection.anchorNode);
+        let anchorOffset = selection.anchorOffset;
+        if (selection.anchorNode === this.editable) {
+            anchorNodeIndexPath = this._getNodeIndexPath(this.editable.firstChild);
+            anchorOffset = 0;
+        }
         const applied = this.applySnapshot(snapshot);
         if (!applied) {
             return;
         }
-        this.dependencies.selection.setCursorStart(this.editable.firstChild);
+        const anchorNode = this._getNodeFromIndexPath(anchorNodeIndexPath);
+        if (
+            this.dependencies.selection.isSelectionInEditable({ anchorNode, focusNode: anchorNode })
+        ) {
+            this.dependencies.selection.setSelection({
+                anchorNode,
+                anchorOffset,
+            });
+        }
         this.historySyncFinished = true;
         // In case there are steps received in the meantime, process them.
         if (this.historyStepsBuffer.length) {
@@ -785,6 +806,30 @@ export class CollaborationOdooPlugin extends Plugin {
         if (firstChild) {
             firstChild.setAttribute("data-last-history-steps", historyIds);
         }
+    }
+
+    /**
+     * Generates the path to a node as an array of indices, relative to a given ancestor.
+     *
+     * @param {Node} node - The node to trace the path for.
+     * @returns {number[]} The path as an array of child indices.
+     */
+    _getNodeIndexPath(node) {
+        return [node, ...ancestors(node, this.editable)].map((ancestor) =>
+            childNodeIndex(ancestor)
+        );
+    }
+    /**
+     * Finds a node in the DOM based on a path of child indices.
+     *
+     * @param {number[]} indexPath - The path as an array of child indices.
+     * @returns {Node|undefined} The node at the specified path, or null if not found.
+     */
+    _getNodeFromIndexPath(indexPath) {
+        return indexPath.reduceRight(
+            (node, index) => node?.childNodes?.[index],
+            this.editable.parentElement
+        );
     }
 }
 

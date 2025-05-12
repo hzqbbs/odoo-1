@@ -56,7 +56,6 @@ defineActions([
         xml_id: "action_1",
         name: "Partners Action 1",
         res_model: "partner",
-        type: "ir.actions.act_window",
         views: [[1, "kanban"]],
     },
     {
@@ -64,8 +63,6 @@ defineActions([
         xml_id: "action_3",
         name: "Partners",
         res_model: "partner",
-        mobile_view_mode: "kanban",
-        type: "ir.actions.act_window",
         views: [
             [false, "list"],
             [1, "kanban"],
@@ -79,12 +76,12 @@ defineActions([
         res_id: 2,
         res_model: "partner",
         target: "inline",
-        type: "ir.actions.act_window",
         views: [[false, "form"]],
     },
 ]);
 
-test.tags("desktop")("rainbowman integrated to webClient", async () => {
+test.tags("desktop");
+test("rainbowman integrated to webClient", async () => {
     patchWithCleanup(user, { showEffect: true });
 
     await mountWithCleanup(WebClient);
@@ -109,7 +106,8 @@ test.tags("desktop")("rainbowman integrated to webClient", async () => {
     expect(".o_list_view").toHaveCount(1);
 });
 
-test.tags("desktop")("on close with effect from server", async () => {
+test.tags("desktop");
+test("on close with effect from server", async () => {
     patchWithCleanup(user, { showEffect: true });
     onRpc("/web/dataset/call_button/*", () => {
         return {
@@ -127,7 +125,8 @@ test.tags("desktop")("on close with effect from server", async () => {
     expect(".o_reward").toHaveCount(1);
 });
 
-test.tags("desktop")("on close with effect in xml on desktop", async () => {
+test.tags("desktop");
+test("on close with effect in xml on desktop", async () => {
     patchWithCleanup(user, { showEffect: true });
 
     Partner._views["form,false"] = `
@@ -148,7 +147,8 @@ test.tags("desktop")("on close with effect in xml on desktop", async () => {
     expect(".o_reward .o_reward_msg_content").toHaveText("rainBowInXML");
 });
 
-test.tags("mobile")("on close with effect in xml on mobile", async () => {
+test.tags("mobile");
+test("on close with effect in xml on mobile", async () => {
     patchWithCleanup(user, { showEffect: true });
 
     Partner._views["form,false"] = `

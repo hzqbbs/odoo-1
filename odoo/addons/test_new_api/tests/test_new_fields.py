@@ -600,6 +600,13 @@ class TestFields(TransactionCaseWithUserDemo, TransactionExpressionCase):
         self.registry.setup_models(self.cr)
         self.assertEqual(self.registry.field_depends[Model.full_name], ('name1', 'name2'))
 
+    def test_12_one2many_reference_domain(self):
+        model = self.env['test_new_api.inverse_m2o_ref']
+        o2m_field = model._fields['model_ids']
+        self.assertEqual(o2m_field.get_domain_list(model), [('res_model', '=', model._name)])
+        o2m_field = model._fields['model_computed_ids']
+        self.assertEqual(o2m_field.get_domain_list(model), [])
+
     def test_13_inverse(self):
         """ test inverse computation of fields """
         Category = self.env['test_new_api.category']
@@ -1647,6 +1654,26 @@ class TestFields(TransactionCaseWithUserDemo, TransactionExpressionCase):
             self.assertEqual(record_company.truth, False)
             self.assertEqual(record_company.count, 0)
             self.assertEqual(record_company.phi, 0.0)
+    
+    def test_27_company_dependent_missing_many2one(self):
+        """ Test ORM can handle missing records for many2one company dependent fields """
+        company0 = self.env.ref('base.main_company')
+        company1 = self.env['res.company'].create({'name': 'A'})
+        Model = self.env['test_new_api.company']
+        record = Model.create({})
+        record.tag_id = 1000  # non-existing record id
+        record.invalidate_recordset()
+
+        self.env.cr.execute(
+            'SELECT id FROM test_new_api_company WHERE id = %s and (tag_id->%s)::int = %s',
+            [record.id, str(self.env.company.id), 1000],
+        )
+        self.assertEqual(self.env.cr.rowcount, 1)
+        self.assertFalse(record.tag_id)
+        self.assertEqual(
+            record.search([('id', '=', record.id), ('tag_id', '=', False)]),
+            record,
+        )
 
     def test_28_company_dependent_search(self):
         """ Test the search on company-dependent fields in all corner cases.
@@ -4558,6 +4585,20 @@ class TestComputeQueries(TransactionCase):
             record = model.create({'foo': 'Foo', 'bar': 'Bar'})
         self.assertEqual(record.foo, 'Bar')
         self.assertEqual(record.bar, 'Bar')
+
+    def test_x2many_computed_inverse(self):
+        record = self.env['test_new_api.compute.inverse'].create(
+            {'child_ids': [Command.create({'foo': 'child'})]},
+        )
+        self.assertEqual(
+            len(record.child_ids), 1,
+            f"Should be a single record: {record.child_ids!r}",
+        )
+        self.assertTrue(
+            record.child_ids.id,
+            f"Should be database records: {record.child_ids!r}",
+        )
+        self.assertEqual(record.foo, 'has one child')
 
     def test_multi_create(self):
         model = self.env['test_new_api.foo']

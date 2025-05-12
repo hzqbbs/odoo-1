@@ -183,6 +183,15 @@
         }
     }
 
+    &, & .o_form_editable {
+        // FIXME: those specific rules shouldn't be necessary but require a more 
+        // global cleanup of the fields + .o_row styling to be removed in master.
+        .o_field_reference .o_row > * {
+            flex: 1 1 auto;
+            width: auto !important;
+        }
+    }
+
     .o_form_view_container {
         display: flex;
         flex-flow: column nowrap;
@@ -468,7 +477,6 @@
         display: flex;
 
         @include media-breakpoint-down(sm) {
-            flex-wrap: wrap;
             .o_field_boolean {
                 order: -1;
             }
@@ -620,6 +628,15 @@
                     }
                 }
             }
+        }
+
+        &.o_field_many2one_avatar {
+            --fieldWidget-display: inline;
+        }
+
+        &.o_field_many2many_tags_avatar {
+            --fieldWidget-display: inline-flex;
+            min-height: calc(var(--Avatar-size, #{$o-avatar-size}) + #{$o-input-padding-y} * 2 + #{$input-border-width});
         }
     }
     .o_field_widget, .btn {

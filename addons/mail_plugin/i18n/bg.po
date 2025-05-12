@@ -3,7 +3,6 @@
 # 	* mail_plugin
 # 
 # Translators:
-# Petko Karamotchev, 2024
 # Ивайло Малинов <iv.malinov@gmail.com>, 2024
 # Igor Sheludko <igor.sheludko@gmail.com>, 2024
 # Rumena Georgieva <rumena.georgieva@gmail.com>, 2024
@@ -11,6 +10,9 @@
 # KeyVillage, 2024
 # aleksandar ivanov, 2024
 # Maria Boyadjieva <marabo2000@gmail.com>, 2024
+# Petko Karamotchev, 2024
+# Martin Dinovski, 2025
+# Veselina Slavkova, 2025
 # 
 msgid ""
 msgstr ""
@@ -18,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Maria Boyadjieva <marabo2000@gmail.com>, 2024\n"
+"Last-Translator: Veselina Slavkova, 2025\n"
 "Language-Team: Bulgarian (https://app.transifex.com/odoo/teams/41243/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +45,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Add Contact To Database"
-msgstr ""
+msgstr "Добавяне на контакт към базата данни."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -61,13 +63,13 @@ msgstr "Позволете"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "An error has occurred when trying to fetch translations."
-msgstr ""
+msgstr "Възникна грешка при опит за извличане на преводи."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Annual Revenue"
-msgstr ""
+msgstr "Годишни приходи"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -76,6 +78,8 @@ msgid ""
 "Attachments could not be logged in Odoo because their total size exceeded "
 "the allowed maximum."
 msgstr ""
+"Прикачените файлове не могат да бъдат регистрирани в Odoo, защото общият им "
+"размер надхвърля разрешения максимум."
 
 #. module: mail_plugin
 #. odoo-python
@@ -93,19 +97,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Buy new credits"
-msgstr ""
+msgstr "Купи нови кредити."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Can not save the contact"
-msgstr ""
+msgstr "Контактът не може да бъде запазен"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Clear Translations Cache"
-msgstr ""
+msgstr "Изчистване на кеша с преводи"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -123,7 +127,7 @@ msgstr "Фирма"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Company Created."
-msgstr ""
+msgstr "Компанията е Създадена."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -143,13 +147,13 @@ msgstr "Тип на фирмата"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Company created"
-msgstr ""
+msgstr "Компанията е създадена"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Company updated"
-msgstr ""
+msgstr "Компанията е актуализирана."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -168,37 +172,44 @@ msgstr "Данни за контакта"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Contact created"
-msgstr ""
+msgstr "Контактът е създаден"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Contacts Found (%(count)s)"
-msgstr ""
+msgstr "Намерени контакти (%(count)s)"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Could not autocomplete the company. Internal error. Try again later..."
 msgstr ""
+"Компанията не може да бъде автоматично довършена. Вътрешна грешка. Моля, "
+"опитайте отново по-късно..."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Could not connect to database. Try to log out and in."
 msgstr ""
+"Не може да се установи връзка с базата данни. Опитайте да излезете и да "
+"влезете отново."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Could not connect to your database. Please try again."
 msgstr ""
+"Не може да се установи връзка с вашата база данни. Моля, опитайте отново."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Could not display image %(attachmentName)s, size is over limit."
 msgstr ""
+" Изображението не може да бъде показано%(attachmentName)s, размерът на файла"
+" е твърде голям."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -210,13 +221,13 @@ msgstr "Създай"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Create a Company"
-msgstr ""
+msgstr "Създаване на Компания"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Create a company"
-msgstr ""
+msgstr "Създаване на компания"
 
 #. module: mail_plugin
 #: model:ir.model.fields,field_description:mail_plugin.field_res_partner_iap__create_uid
@@ -309,7 +320,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "From:"
-msgstr ""
+msgstr "От:"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -320,7 +331,7 @@ msgstr ""
 #. module: mail_plugin
 #: model:ir.model,name:mail_plugin.model_ir_http
 msgid "HTTP Routing"
-msgstr ""
+msgstr "HTTP Маршрутизиране"
 
 #. module: mail_plugin
 #: model:ir.model.fields,field_description:mail_plugin.field_res_partner__iap_enrich_info
@@ -364,7 +375,7 @@ msgstr "Предмет на дейност"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Invalid URL"
-msgstr ""
+msgstr "Невалиден URL"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -425,7 +436,7 @@ msgstr "Изход"
 #. odoo-python
 #: code:addons/mail_plugin/controllers/mail_plugin.py:0
 msgid "No Access"
-msgstr ""
+msgstr "Няма достъп"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -437,43 +448,46 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "No company attached to this contact"
-msgstr ""
+msgstr "Няма компания, свързана с този контакт"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "No company attached to this contact."
-msgstr ""
+msgstr "Няма компания, свързана с този контакт."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "No company linked to this contact could be enriched"
 msgstr ""
+"Няма компания, свързана с този контакт, която да може да бъде обогатена"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "No company linked to this contact could be enriched or found in Odoo"
 msgstr ""
+"Няма компания, свързана с този контакт, която да може да бъде обогатена или "
+"намерена в Odoo"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "No contact found."
-msgstr ""
+msgstr "Не е намерен контакт."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "No data found for this email address."
-msgstr ""
+msgstr "Не са намерени данни за този имейл адрес."
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "No extra information found"
-msgstr ""
+msgstr "Не е намерена допълнителна информация"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -562,13 +576,13 @@ msgstr "Телефони"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Read more"
-msgstr ""
+msgstr "Прочетете повече"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Refresh"
-msgstr ""
+msgstr "Опресни"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -586,13 +600,13 @@ msgstr "Приходи"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "Save in Odoo"
-msgstr ""
+msgstr "Запази в Odoo"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid "Save the contact to create the company"
-msgstr ""
+msgstr "Запазете контакта, за да създадете компанията."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -660,7 +674,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid "This contact does not exist in the Odoo database."
-msgstr ""
+msgstr "Този контакт не съществува в базата данни на Odoo."
 
 #. module: mail_plugin
 #. odoo-javascript

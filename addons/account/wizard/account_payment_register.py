@@ -179,7 +179,7 @@ class AccountPaymentRegister(models.TransientModel):
         '''
         if len(lines.move_id) == 1:
             move = lines.move_id
-            label = (len(lines) == 1 and lines.name) or move.ref or move.name
+            label = move.payment_reference or move.ref or move.name
         else:
             label = self.company_id.get_next_batch_payment_communication()
         return label
@@ -252,7 +252,7 @@ class AccountPaymentRegister(models.TransientModel):
             # Receiving money on a bank account linked to the journal.
             return journal.bank_account_id
         else:
-            company = min(batch_result['lines'].company_id, key=lambda c: len(c.parent_ids))
+            company = min(batch_result['lines'].company_id, key=lambda c: len(c.sudo().parent_ids))
             # Sending money to a bank account owned by a partner.
             return batch_result['lines'].partner_id.bank_ids.filtered(lambda x: x.company_id.id in (False, company.id))._origin
 
@@ -485,6 +485,8 @@ class AccountPaymentRegister(models.TransientModel):
     @api.depends('available_journal_ids')
     def _compute_journal_id(self):
         for wizard in self:
+            if wizard.journal_id in wizard.available_journal_ids:
+                continue
             move_payment_method_lines = wizard.line_ids.move_id.preferred_payment_method_line_id
             if move_payment_method_lines and len(move_payment_method_lines) == 1:
                 wizard.journal_id = move_payment_method_lines.journal_id
@@ -536,6 +538,9 @@ class AccountPaymentRegister(models.TransientModel):
                 available_payment_method_lines = wizard.journal_id._get_available_payment_method_lines(wizard.payment_type)
             else:
                 available_payment_method_lines = False
+
+            if available_payment_method_lines and wizard.payment_method_line_id in available_payment_method_lines:
+                continue
 
             # Select the first available one by default.
             if available_payment_method_lines:

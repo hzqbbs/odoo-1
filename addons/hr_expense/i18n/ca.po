@@ -6,7 +6,6 @@
 # Arnau Ros, 2024
 # Susanna Pujol, 2024
 # Carles Antoli <carlesantoli@hotmail.com>, 2024
-# Harcogourmet, 2024
 # Sandra Franch <sandra.franch@upc.edu>, 2024
 # José Cabrera Lozano <jose.cabrera@edukative.es>, 2024
 # RGB Consulting <odoo@rgbconsulting.com>, 2024
@@ -19,25 +18,27 @@
 # marcescu, 2024
 # Iván Infantes Castarnado, 2024
 # jabiri7, 2024
-# Santiago Payà <santiagopim@gmail.com>, 2024
 # Guspy12, 2024
 # Óscar Fonseca <tecnico@pyming.com>, 2024
 # 7b9408628f00af852f513eb4f12c005b_f9c6891, 2024
 # Pere Martínez, 2024
 # Manel Fernandez Ramirez <manelfera@outlook.com>, 2024
 # Ivan Espinola, 2024
-# Quim - eccit <quim@eccit.com>, 2024
+# Quim - coopdevs <quim.rebull@coopdevs.org>, 2024
 # CristianCruzParra, 2024
 # Josep Anton Belchi, 2024
 # Martin Trigaux, 2024
+# Xavier, 2024
+# Noemi Pla, 2025
+# Santiago Payà <santiagopim@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"POT-Creation-Date: 2025-01-27 13:02+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Martin Trigaux, 2024\n"
+"Last-Translator: Santiago Payà <santiagopim@gmail.com>, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/odoo/teams/41243/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +76,7 @@ msgstr "%(date_from)s - %(date_to)s"
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid "%(employee_name)s: %(expense_name)s"
-msgstr ""
+msgstr "%(employee_name)s: %(expense_name)s"
 
 #. module: hr_expense
 #. odoo-python
@@ -633,11 +634,6 @@ msgid "Default outstanding account for expenses paid by company."
 msgstr ""
 
 #. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
-msgid "Default outstanding account for expenses paid by employees."
-msgstr ""
-
-#. module: hr_expense
 #: model:ir.model,name:hr_expense.model_hr_department
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_sheet__department_id
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_sheet_view_search
@@ -669,7 +665,7 @@ msgstr "Nom mostrat"
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__distribution_analytic_account_ids
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_split__distribution_analytic_account_ids
 msgid "Distribution Analytic Account"
-msgstr ""
+msgstr "Compte analític de distribució"
 
 #. module: hr_expense
 #: model_terms:digest.tip,tip_description:hr_expense.digest_tip_hr_expense_0
@@ -737,11 +733,6 @@ msgstr "Empleat (a reembolsar)"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid "Employee Expense Journal"
-msgstr ""
-
-#. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
-msgid "Employee Expense Oustanding Account"
 msgstr ""
 
 #. module: hr_expense
@@ -1108,6 +1099,11 @@ msgid "Hotel, plane ticket, taxi, etc."
 msgstr "Hotel, bitllet d'avió, taxi, etc."
 
 #. module: hr_expense
+#: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__hr_expense_alias_domain_id
+msgid "Hr Expense Alias Domain"
+msgstr ""
+
+#. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__id
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_approve_duplicate__id
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_refuse_wizard__id
@@ -1359,7 +1355,7 @@ msgstr "Kilometratge"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.report_expense_sheet
 msgid "Mitchell Admin"
-msgstr ""
+msgstr "Mitchell Admin"
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__my_activity_date_deadline
@@ -1752,12 +1748,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_refuse_wizard__reason
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_refuse_wizard_view_form
 msgid "Reason"
-msgstr "Raó"
+msgstr "Motiu"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_refuse_reason
 msgid "Reason:"
-msgstr "Raó:"
+msgstr "Motiu:"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.product_product_expense_categories_tree_view
@@ -1935,13 +1931,6 @@ msgid "Show missing work email employees"
 msgstr ""
 
 #. module: hr_expense
-#. odoo-python
-#: code:addons/hr_expense/models/hr_expense_sheet.py:0
-msgid "Specify expense journal to generate accounting entries."
-msgstr ""
-"Especifiqueu el diari de despeses per generar assentaments comptables."
-
-#. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_expense__accounting_date
 #: model:ir.model.fields,help:hr_expense.field_hr_expense_sheet__accounting_date
 msgid "Specify the bill date of the related vendor bill."
@@ -2087,11 +2076,6 @@ msgid ""
 msgstr ""
 
 #. module: hr_expense
-msgid ""
-"The account used to record the outstanding amount of the employee expenses."
-msgstr ""
-
-#. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_res_company__expense_journal_id
 #: model:ir.model.fields,help:hr_expense.field_res_config_settings__expense_journal_id
 msgid ""
@@ -2135,14 +2119,6 @@ msgstr "El diari s'ha de configurar en funció de la despesa publicada"
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_expense_sheet__employee_journal_id
 msgid "The journal used when the expense is paid by employee."
-msgstr ""
-
-#. module: hr_expense
-#. odoo-python
-#: code:addons/hr_expense/models/hr_expense_sheet.py:0
-msgid ""
-"The payment method %(method)s needs an account, or a default outstanding "
-"account must be defined in the settings."
 msgstr ""
 
 #. module: hr_expense
@@ -2595,7 +2571,7 @@ msgstr "La vostra despesa s'ha registrat correctament."
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid "alias"
-msgstr ""
+msgstr "àlies"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.product_product_expense_form_view
@@ -2620,7 +2596,7 @@ msgstr "p.e. Viatge a NY"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid "e.g. mycompany.com"
-msgstr ""
+msgstr "e.g. lamevaempresa.com"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_form

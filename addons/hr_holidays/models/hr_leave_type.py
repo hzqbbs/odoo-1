@@ -552,17 +552,17 @@ class HolidaysType(models.Model):
                                                                         )
                 if closest_expiration_date:
                     closest_allocation_expire = format_date(self.env, closest_expiration_date)
-                    calendar = employee.resource_calendar_id\
-                                or self.env.company.resource_calendar_id
-                    # closest_allocation_duration corresponds to the time remaining before the allocation expires
-                    calendar_attendance = calendar._work_intervals_batch(
-                        datetime.combine(target_date, time.min).replace(tzinfo=pytz.UTC),
-                        datetime.combine(closest_expiration_date, time.max).replace(tzinfo=pytz.UTC),
-                        resources=employee.resource_id
-                    )
-                    closest_allocation_dict =\
-                        self.env['resource.calendar']._get_attendance_intervals_days_data(
-                            calendar_attendance[employee.resource_id.id])
+                    calendar = employee.resource_calendar_id
+                    start_datetime = datetime.combine(target_date, time.min).replace(tzinfo=pytz.UTC)
+                    end_datetime = datetime.combine(closest_expiration_date, time.max).replace(tzinfo=pytz.UTC)
+                    closest_allocation_dict = {}
+                    if not calendar:
+                        closest_allocation_dict['hours'] = float_round((end_datetime - start_datetime).total_seconds() / 3600, precision_rounding=0.001)
+                        closest_allocation_dict['days'] = (end_datetime - start_datetime).days + 1
+                    else:
+                        # closest_allocation_duration corresponds to the time remaining before the allocation expires
+                        calendar_attendance = calendar._work_intervals_batch(start_datetime, end_datetime, resources=employee.resource_id)
+                        closest_allocation_dict = calendar._get_attendance_intervals_days_data(calendar_attendance[employee.resource_id.id])
                     if leave_type.request_unit in ['hour']:
                         closest_allocation_duration = closest_allocation_dict['hours']
                     else:
@@ -602,7 +602,7 @@ class HolidaysType(models.Model):
             carryover_policy = accrual_plan_level.action_with_unused_accruals if accrual_plan_level else False
             carryover_date = False
             if carryover_policy in ['maximum', 'lost']:
-                carryover_date = allocation._get_carryover_date(target_date)
+                carryover_date = allocation.sudo()._get_carryover_date(target_date)
                 # If carry over date == target date, then add 1 year to carry over date.
                 # Rational: for example if carry over date = 01/01 this year and target date = 01/01 this year,
                 # then any accrued days on 01/01 this year will have their carry over date 01/01 next year

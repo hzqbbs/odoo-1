@@ -15,6 +15,7 @@ class TestMrpStockReports(TestReportsCommon):
         product_chocolate = self.env['product.product'].create({
             'name': 'Chocolate',
             'type': 'consu',
+            'standard_price': 10
         })
         product_chococake = self.env['product.product'].create({
             'name': 'Choco Cake',
@@ -40,7 +41,7 @@ class TestMrpStockReports(TestReportsCommon):
                 (0, 0, {'product_id': product_chocolate.id, 'product_qty': 4}),
             ],
             'byproduct_ids':
-                [(0, 0, {'product_id': byproduct.id, 'product_qty': 2})],
+                [(0, 0, {'product_id': byproduct.id, 'product_qty': 2, 'cost_share': 1.8})],
         })
         bom_double_chococake = self.env['mrp.bom'].create({
             'product_id': product_double_chococake.id,
@@ -101,9 +102,17 @@ class TestMrpStockReports(TestReportsCommon):
         mo_1.button_mark_done()
 
         self.env.flush_all()  # flush to correctly build report
-        report_values = self.env['report.mrp.report_mo_overview']._get_report_data(mo_1.id)['byproducts']['details'][0]
-        self.assertEqual(report_values['name'], byproduct.name)
-        self.assertEqual(report_values['quantity'], 18)
+        report_values = self.env['report.mrp.report_mo_overview']._get_report_data(mo_1.id)
+        self.assertEqual(report_values['byproducts']['details'][0]['name'], byproduct.name)
+        self.assertEqual(report_values['byproducts']['details'][0]['quantity'], 18)
+        # (Component price $10) * (4 unit to produce one finished) * (the mo qty = 10 units) = $400
+        self.assertEqual(report_values['components'][0]['summary']['mo_cost'], 400)
+        # cost_share of byproduct = 1.8 -> 1.8 / 100 -> 0.018 * 400 = 7.2
+        self.assertAlmostEqual(report_values['byproducts']['summary']['mo_cost'], 7.2)
+        byproduct_report_values = report_values['cost_breakdown'][1]
+        self.assertEqual(byproduct_report_values['name'], byproduct.name)
+        # 7.2 / 18 units = 0.4
+        self.assertAlmostEqual(byproduct_report_values['unit_avg_total_cost'], 0.4)
 
     def test_report_forecast_2_production_backorder(self):
         """ Creates a manufacturing order and produces half the quantity.
@@ -340,6 +349,14 @@ class TestMrpStockReports(TestReportsCommon):
             'name': 'Choco Cake',
             'is_storable': True,
         })
+        workcenter = self.env['mrp.workcenter'].create({
+            'name': 'workcenter test',
+            'costs_hour': 10,
+            'time_start': 10,
+            'time_stop': 10,
+            'time_efficiency': 90,
+        })
+
         self.env['mrp.bom'].create({
             'product_id': product_chococake.id,
             'product_tmpl_id': product_chococake.product_tmpl_id.id,
@@ -349,6 +366,14 @@ class TestMrpStockReports(TestReportsCommon):
             'bom_line_ids': [
                 (0, 0, {'product_id': product_chocolate.id, 'product_qty': 4}),
             ],
+            'operation_ids': [
+                Command.create({
+                    'name': 'Cutting Machine',
+                    'workcenter_id': workcenter.id,
+                    'time_cycle': 60,
+                    'sequence': 1
+                }),
+            ],
         })
         mo = self.env['mrp.production'].create({
             'name': 'MO',
@@ -357,6 +382,10 @@ class TestMrpStockReports(TestReportsCommon):
         })
 
         mo.action_confirm()
+        # check that the mo and bom cost are correctly calculated after mo confirmation
+        overview_values = self.env['report.mrp.report_mo_overview'].get_report_values(mo.id)
+        self.assertEqual(round(overview_values['data']['operations']['summary']['mo_cost'], 2), 14.45)
+        self.assertEqual(round(overview_values['data']['operations']['summary']['bom_cost'], 2), 14.44)
         mo.button_mark_done()
         mo.qty_produced = 0.
 

@@ -28,7 +28,7 @@ msgstr "<span class=\"o_stat_text\">Organigrama</span>"
 #. module: hr_org_chart
 #: model_terms:ir.actions.act_window,help:hr_org_chart.action_hr_employee_org_chart
 msgid "Add a new employee"
-msgstr "Agregar un nuevo empleado"
+msgstr "Añadir un nuevo empleado"
 
 #. module: hr_org_chart
 #: model:ir.model,name:hr_org_chart.model_hr_employee_base
@@ -85,6 +85,8 @@ msgid ""
 "In the Organigram you will have a clear overview of the hierarchy of "
 "employees."
 msgstr ""
+"El organigrama le proporcionará información clara acerca de la jerarquía de "
+"los empleados."
 
 #. module: hr_org_chart
 #: model:ir.model.fields,field_description:hr_org_chart.field_hr_employee__child_all_count

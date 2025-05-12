@@ -2230,6 +2230,11 @@ class TestBoM(TestMrpCommon):
         This test checks the behaviour of updating the BoM associated with a routing workcenter,
         It verifies that the link between the BOM lines and the operation is correctly deleted.
         """
+        resource_calendar_std_id = self.env.ref('resource.resource_calendar_std').id
+        mrp_workcenter_1 = self.env['mrp.workcenter'].create({
+            'name': 'Drill Station 1',
+            'resource_calendar_id': resource_calendar_std_id,
+        })
         p1, c1, c2, byproduct = self.make_prods(4)
         bom = self.env['mrp.bom'].create({
             'product_tmpl_id': p1.product_tmpl_id.id,
@@ -2246,12 +2251,12 @@ class TestBoM(TestMrpCommon):
         operation_1, operation_2 = self.env['mrp.routing.workcenter'].create([
             {
                 'name': 'Operation 1',
-                'workcenter_id': self.env.ref('mrp.mrp_workcenter_1').id,
+                'workcenter_id': mrp_workcenter_1.id,
                 'bom_id': bom.id,
             },
             {
                 'name': 'Operation 2',
-                'workcenter_id': self.env.ref('mrp.mrp_workcenter_1').id,
+                'workcenter_id': mrp_workcenter_1.id,
                 'bom_id': bom.id,
             }
         ])
@@ -2346,17 +2351,18 @@ class TestBoM(TestMrpCommon):
         self.assertEqual((notification['type'], notification['tag']), ('ir.actions.client', 'display_notification'))
 
     def test_bom_never_attribute(self):
-        # We create 4 bom lines, one without any attribute values, two with one value and one with two values
-        # Create a MO with, modify its never_product_template_attribute_value_ids and check if the moves created are correct
+        # We create 4 bom lines, 4 operations and 4 byproducts, each with:
+        # one without any attribute values, two with one value and one with two values
+        # Create a MO with, modify its never_product_template_attribute_value_ids and check if the moves/workorders created are correct
 
         product_attribute_radio = self.env['product.attribute'].create({
             'name': 'PA',
             'display_type': 'radio',
             'create_variant': 'no_variant',
         })
-        product = self.env['product.product'].create({
-            'name': 'test1',
-        })
+        product, bp1, bp2, bp3, bp4 = self.env['product.product'].create([{
+            'name': name,
+        } for name in ['test1', 'bp1', 'bp2', 'bp3', 'bp4']])
         self.env['product.attribute.value'].create([{
             'name': 'radio_PAV' + str(i),
             'attribute_id': product_attribute_radio.id
@@ -2393,7 +2399,49 @@ class TestBoM(TestMrpCommon):
                     'product_qty': 10,
                     'bom_product_template_attribute_value_ids': [Command.link(tmpl_attr_line_radio.product_template_value_ids[1].id), Command.link(tmpl_attr_line_radio.product_template_value_ids[2].id)]
                 }),
-            ]
+            ],
+            'operation_ids': [
+                Command.create({
+                    'name': 'OPE_ALL',
+                    'workcenter_id': self.workcenter_1.id,
+                }),
+                Command.create({
+                    'name': 'OPE_VAR_1',
+                    'workcenter_id': self.workcenter_1.id,
+                    'bom_product_template_attribute_value_ids': [Command.link(tmpl_attr_line_radio.product_template_value_ids[0].id)],
+                }),
+                Command.create({
+                    'name': 'OPE_VAR_2',
+                    'workcenter_id': self.workcenter_1.id,
+                    'bom_product_template_attribute_value_ids': [Command.link(tmpl_attr_line_radio.product_template_value_ids[1].id)],
+                }),
+                Command.create({
+                    'name': 'OPE_VAR_2_3',
+                    'workcenter_id': self.workcenter_1.id,
+                    'bom_product_template_attribute_value_ids': [Command.link(tmpl_attr_line_radio.product_template_value_ids[1].id), Command.link(tmpl_attr_line_radio.product_template_value_ids[2].id)],
+                }),
+            ],
+            'byproduct_ids': [
+                Command.create({
+                    'product_id': bp1.id,
+                    'product_qty': 1.0,
+                }),
+                Command.create({
+                    'product_id': bp2.id,
+                    'product_qty': 1.0,
+                    'bom_product_template_attribute_value_ids': [Command.link(tmpl_attr_line_radio.product_template_value_ids[0].id)],
+                }),
+                Command.create({
+                    'product_id': bp3.id,
+                    'product_qty': 1.0,
+                    'bom_product_template_attribute_value_ids': [Command.link(tmpl_attr_line_radio.product_template_value_ids[1].id)],
+                }),
+                Command.create({
+                    'product_id': bp4.id,
+                    'product_qty': 1.0,
+                    'bom_product_template_attribute_value_ids': [Command.link(tmpl_attr_line_radio.product_template_value_ids[1].id), Command.link(tmpl_attr_line_radio.product_template_value_ids[2].id)],
+                }),
+            ],
         })
 
         mo_form = Form(self.env['mrp.production'])
@@ -2403,16 +2451,73 @@ class TestBoM(TestMrpCommon):
         # no never values, so only the first bom line should be used
         self.assertEqual(len(mo_order.move_raw_ids), 1, "Only one move with no never_product_template_attribute_value_ids should be created")
         self.assertEqual(mo_order.move_raw_ids.product_id, self.product_2)
+        self.assertEqual(len(mo_order.workorder_ids), 1)
+        self.assertEqual(mo_order.workorder_ids.name, 'OPE_ALL')
+        self.assertEqual(len(mo_order.move_byproduct_ids), 1)
+        self.assertEqual(mo_order.move_byproduct_ids.product_id, bp1)
 
         # one never values, the two first bom line should match
         mo_order.never_product_template_attribute_value_ids = tmpl_attr_line_radio.product_template_value_ids[0]
         self.assertEqual(len(mo_order.move_raw_ids), 2)
         self.assertEqual(mo_order.move_raw_ids.product_id, self.product_2 + self.product_3)
+        self.assertEqual(len(mo_order.workorder_ids), 2)
+        self.assertListEqual(mo_order.workorder_ids.mapped('name'), ['OPE_ALL', 'OPE_VAR_1'])
+        self.assertEqual(len(mo_order.move_byproduct_ids), 2)
+        self.assertEqual(mo_order.move_byproduct_ids.product_id, bp1 + bp2)
 
         # two never values, the first and fourth bom line should match
         mo_order.never_product_template_attribute_value_ids = tmpl_attr_line_radio.product_template_value_ids[1] + tmpl_attr_line_radio.product_template_value_ids[2]
         self.assertEqual(len(mo_order.move_raw_ids), 3)
         self.assertEqual(mo_order.move_raw_ids.product_id, self.product_2 + product + self.product_8)
+        self.assertEqual(len(mo_order.workorder_ids), 3)
+        self.assertListEqual(mo_order.workorder_ids.mapped('name'), ['OPE_ALL', 'OPE_VAR_2', 'OPE_VAR_2_3'])
+        self.assertEqual(len(mo_order.move_byproduct_ids), 3)
+        self.assertEqual(mo_order.move_byproduct_ids.product_id, bp1 + bp3 + bp4)
+
+    def test_bom_never_attribute_mix(self):
+        """ For a product that has two 'no_variant' attributes but only one used in its bom,
+            check that it computes properly which line to get when using the other attribute.
+        """
+        color, size = self.env['product.attribute'].create([{
+            'name': name,
+            'display_type': 'multi',
+            'create_variant': 'no_variant',
+        } for name in ['color', 'size']])
+
+        self.env['product.attribute.value'].create([{
+            'name': 'Meh',
+            'attribute_id': attribute.id,
+        } for attribute in [color, size]])
+
+        tmpl_attr_line_color, tmpl_attr_line_size = self.env['product.template.attribute.line'].create([{
+            'attribute_id': attribute.id,
+            'product_tmpl_id': self.product_1.product_tmpl_id.id,
+            'value_ids': [Command.set(attribute.value_ids.ids)],
+        } for attribute in [color, size]])
+
+        bom = self.env['mrp.bom'].create({
+            'product_tmpl_id': self.product_1.product_tmpl_id.id,
+            'product_uom_id': self.product_1.product_tmpl_id.uom_id.id,
+            'product_qty': 1.0,
+            'type': 'normal',
+            'bom_line_ids': [
+                Command.create({
+                    'product_id': self.product_2.id,
+                    'product_qty': 1,
+                    'bom_product_template_attribute_value_ids': [
+                        Command.link(tmpl_attr_line_color.product_template_value_ids[0].id),
+                    ],
+                }),
+            ],
+        })
+        order = self.env['mrp.production'].create({
+            'product_id': self.product_1.id,
+            'bom_id': bom.id,
+            'never_product_template_attribute_value_ids': [
+                Command.link(tmpl_attr_line_size.product_template_value_ids[0].id),
+            ],
+        })
+        self.assertEqual(len(order.move_raw_ids), 0, "No component should be selected")
 
     def test_workorders_on_bom_changes(self):
         """
@@ -2538,27 +2643,71 @@ class TestBoM(TestMrpCommon):
         self.assertEqual(bom.bom_line_ids[1].operation_id, ope_2)
         self.assertEqual(bom.byproduct_ids[1].operation_id, ope_2)
 
+    def test_bom_overview_for_product_template_with_dynamic_variants(self):
+        """
+        This test checks if the bom overview report is generated when we have a product with dynamic create variants
+        meaning the product variants are only created on adding them to a sales order
+        """
+        dynamic_attribute = self.env['product.attribute'].create({
+            'name': 'Dynamic',
+            'create_variant': 'dynamic',
+            'value_ids': [
+                Command.create({'name': 'red', 'sequence': 1}),
+            ]
+        })
+        attr_val = dynamic_attribute['value_ids'][0]
+        product_with_dynamic_variant = self.env['product.template'].create({
+            'name': 'John Cutter',
+            'attribute_line_ids': [Command.create({
+                'attribute_id': dynamic_attribute.id,
+                'value_ids': [attr_val.id]
+            })],
+        })
+        bom = self.env['mrp.bom'].create({
+            'product_tmpl_id': product_with_dynamic_variant.id,
+            'operation_ids': [
+                Command.create({'name': 'Rub it gently with a cloth two at once', 'workcenter_id': self.workcenter_3.id}),
+            ],
+            'bom_line_ids': [
+                Command.create({
+                    'product_id': self.product_1.id,
+                })
+            ],
+            'byproduct_ids': [
+                Command.create({
+                    'product_id': self.product_1.id
+                }),
+            ]
+        })
+        bom_overview = self.env['report.mrp.report_bom_structure']._get_report_data(bom.id)['lines']
+        self.assertTrue(bom_overview['byproducts'])
+        self.assertFalse(bom_overview['product'])
+        self.assertTrue(bom_overview['components'])
 
 @tagged('-at_install', 'post_install')
 class TestTourBoM(HttpCase):
-    def test_mrp_bom_product_catalog(self):
-        product = self.env['product.product'].create({
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.product = cls.env['product.product'].create({
             'name': 'test1',
             'is_storable': True,
         })
-        bom = self.env['mrp.bom'].create({
-            'product_id': product.id,
-            'product_tmpl_id': product.product_tmpl_id.id,
+        cls.bom = cls.env['mrp.bom'].create({
+            'product_id': cls.product.id,
+            'product_tmpl_id': cls.product.product_tmpl_id.id,
             'product_qty': 1,
-            'type': 'normal'
+            'type': 'normal',
         })
+    
+    def test_mrp_bom_product_catalog(self):
 
-        self.assertEqual(len(bom.bom_line_ids), 0)
+        self.assertEqual(len(self.bom.bom_line_ids), 0)
 
-        url = f'/odoo/action-mrp.mrp_bom_form_action/{bom.id}'
+        url = f'/odoo/action-mrp.mrp_bom_form_action/{self.bom.id}'
 
         self.start_tour(url, 'test_mrp_bom_product_catalog', login='admin')
-        self.assertEqual(len(bom.bom_line_ids), 1)
+        self.assertEqual(len(self.bom.bom_line_ids), 1)
 
     def test_manufacture_from_bom(self):
         """

@@ -54,7 +54,6 @@ defineActions([
         xml_id: "action_1",
         name: "Partners Action 1",
         res_model: "partner",
-        type: "ir.actions.act_window",
         views: [[1, "kanban"]],
     },
     {
@@ -62,8 +61,6 @@ defineActions([
         xml_id: "action_3",
         name: "Partners",
         res_model: "partner",
-        mobile_view_mode: "kanban",
-        type: "ir.actions.act_window",
         views: [
             [false, "list"],
             [1, "kanban"],
@@ -76,7 +73,6 @@ defineActions([
         name: "Create a Partner",
         res_model: "partner",
         target: "new",
-        type: "ir.actions.act_window",
         views: [[false, "form"]],
     },
 ]);
@@ -164,7 +160,8 @@ test("history back calls on_close handler of dialog action", async () => {
     expect(".modal").toHaveCount(0);
 });
 
-test.tags("desktop")("history back called within on_close", async () => {
+test.tags("desktop");
+test("history back called within on_close", async () => {
     let list;
     patchWithCleanup(listView.Controller.prototype, {
         setup() {
@@ -221,7 +218,8 @@ test("history back calls onclose handler of dialog action with 2 breadcrumbs", a
     expect(".modal").toHaveCount(0);
 });
 
-test.tags("desktop")("web client is not deadlocked when a view crashes", async () => {
+test.tags("desktop");
+test("web client is not deadlocked when a view crashes", async () => {
     expect.assertions(4);
     expect.errors(1);
 

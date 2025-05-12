@@ -4,10 +4,10 @@ import { isImageUrl } from "@html_editor/utils/url";
 import { ImageDescription } from "./image_description";
 import { ImagePadding } from "./image_padding";
 import { createFileViewer } from "@web/core/file_viewer/file_viewer_hook";
-import { boundariesOut } from "@html_editor/utils/position";
-import { ImageTransformation } from "./image_transformation";
-import { registry } from "@web/core/registry";
+import { boundariesOut, childNodeIndex } from "@html_editor/utils/position";
 import { withSequence } from "@html_editor/utils/resource";
+import { ImageTransformButton } from "./image_transform_button";
+import { isEmpty } from "@html_editor/utils/dom_info";
 
 function hasShape(imagePlugin, shapeName) {
     return () => imagePlugin.isSelectionShaped(shapeName);
@@ -55,12 +55,6 @@ export class ImagePlugin extends Plugin {
                 run: () => this.setImageShape("img-thumbnail"),
             },
             { id: "resizeImage", run: this.resizeImage.bind(this) },
-            {
-                id: "transformImage",
-                title: _t("Transform the picture (click twice to reset transformation)"),
-                icon: "fa-object-ungroup",
-                run: this.transformImage.bind(this),
-            },
         ],
         toolbar_namespaces: [
             {
@@ -169,8 +163,9 @@ export class ImagePlugin extends Plugin {
             {
                 id: "image_transform",
                 groupId: "image_transform",
-                commandId: "transformImage",
-                isActive: () => this.isImageTransformationOpen(),
+                title: _t("Transform the picture (click twice to reset transformation)"),
+                Component: ImageTransformButton,
+                props: this.getImageTransformProps(),
             },
             {
                 id: "image_delete",
@@ -178,11 +173,15 @@ export class ImagePlugin extends Plugin {
                 commandId: "deleteImage",
             },
         ],
-        selectionchange_handlers: this.onSelectionChange.bind(this),
         paste_url_overrides: this.handlePasteUrl.bind(this),
     };
 
     setup() {
+        this.addDomListener(this.editable, "dblclick", (e) => {
+            if (e.target.tagName === "IMG") {
+                this.previewImage();
+            }
+        });
         this.addDomListener(this.editable, "pointerup", (e) => {
             if (e.target.tagName === "IMG") {
                 const [anchorNode, anchorOffset, focusNode, focusOffset] = boundariesOut(e.target);
@@ -200,7 +199,6 @@ export class ImagePlugin extends Plugin {
 
     destroy() {
         super.destroy();
-        this.closeImageTransformation();
     }
 
     setImagePadding({ size } = {}) {
@@ -223,14 +221,6 @@ export class ImagePlugin extends Plugin {
         }
         selectedImg.style.width = size || "";
         this.dependencies.history.addStep();
-    }
-
-    transformImage() {
-        const selectedImg = this.getSelectedImage();
-        if (!selectedImg) {
-            return;
-        }
-        this.openImageTransformation(selectedImg);
     }
 
     setImageShape(className, { excludeClasses = [] } = {}) {
@@ -266,18 +256,22 @@ export class ImagePlugin extends Plugin {
     deleteImage() {
         const selectedImg = this.getSelectedImage();
         if (selectedImg) {
+            const anchorNode = selectedImg.parentElement;
+            let anchorOffset = childNodeIndex(selectedImg);
             selectedImg.remove();
-            this.closeImageTransformation();
+            // When an image is added as the first element of a <p> tag,
+            // the `dom_plugin.insert` method automatically creates a #text node just before the <img>.
+            // After removing the image and setting the selection at the <p> tag (offset 0),
+            // the selection unexpectedly jumps back to the parent node during input.
+            // To address this issue, we handle this specific case separately.
+            if (anchorNode.nodeName === "P" && isEmpty(anchorNode)) {
+                const br = this.document.createElement("br");
+                anchorNode.replaceChildren(br);
+                anchorOffset = 0;
+            }
+            this.dependencies.selection.setSelection({ anchorNode, anchorOffset });
             this.dependencies.history.addStep();
         }
-    }
-
-    onSelectionChange(selectionData) {
-        const { anchorNode, focusNode } = selectionData.documentSelection;
-        if (!anchorNode && !focusNode) {
-            return;
-        }
-        this.closeImageTransformation();
     }
 
     getSelectedImage() {
@@ -334,33 +328,6 @@ export class ImagePlugin extends Plugin {
         }
     }
 
-    openImageTransformation(image) {
-        if (registry.category("main_components").contains("ImageTransformation")) {
-            return;
-        }
-        Promise.resolve().then(() => {
-            this.document.getSelection()?.removeAllRanges();
-        });
-        registry.category("main_components").add("ImageTransformation", {
-            Component: ImageTransformation,
-            props: {
-                image,
-                document: this.document,
-                destroy: () => this.closeImageTransformation(),
-                onChange: () => this.dependencies.history.addStep(),
-            },
-        });
-    }
-
-    isImageTransformationOpen() {
-        return registry.category("main_components").contains("ImageTransformation");
-    }
-
-    closeImageTransformation() {
-        if (this.isImageTransformationOpen()) {
-            registry.category("main_components").remove("ImageTransformation");
-        }
-    }
     updateImageDescription({ description, tooltip } = {}) {
         const selectedImg = this.getSelectedImage();
         if (!selectedImg) {
@@ -369,5 +336,24 @@ export class ImagePlugin extends Plugin {
         selectedImg.setAttribute("alt", description);
         selectedImg.setAttribute("title", tooltip);
         this.dependencies.history.addStep();
+    }
+
+    resetImageTransformation(image) {
+        image.setAttribute(
+            "style",
+            (image.getAttribute("style") || "").replace(/[^;]*transform[\w:]*;?/g, "")
+        );
+        this.dependencies.history.addStep();
+    }
+
+    getImageTransformProps() {
+        return {
+            icon: "fa-object-ungroup",
+            getSelectedImage: this.getSelectedImage.bind(this),
+            resetImageTransformation: this.resetImageTransformation.bind(this),
+            addStep: this.dependencies.history.addStep.bind(this),
+            document: this.document,
+            editable: this.editable,
+        };
     }
 }

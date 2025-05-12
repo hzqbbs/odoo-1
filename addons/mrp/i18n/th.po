@@ -4,15 +4,15 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Rasareeyar Lappiam, 2024
+# Rasareeyar Lappiam, 2025
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 08:17+0000\n"
+"POT-Creation-Date: 2025-02-10 13:22+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Rasareeyar Lappiam, 2024\n"
+"Last-Translator: Rasareeyar Lappiam, 2025\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,6 +43,17 @@ msgstr ""
 #: code:addons/mrp/models/stock_rule.py:0
 msgid " <br/><br/> The components will be taken from <b>%s</b>."
 msgstr " <br/><br/> ส่วนประกอบจะถูกนำมาจาก<b>%s</b>"
+
+#. module: mrp
+#. odoo-python
+#: code:addons/mrp/models/stock_rule.py:0
+msgid ""
+" <br/><br/> The manufactured products will be moved towards "
+"<b>%(destination)s</b>, <br/> as specified from <b>%(operation)s</b> "
+"destination."
+msgstr ""
+" <br/><br/> สินค้าที่ผลิตจะถูกเคลื่อนย้ายไปยัง<b>%(destination)s</b><br/> "
+"ที่ระบุจากปลายทาง <b>%(operation)s</b> "
 
 #. module: mrp
 #: model:ir.model.fields.selection,name:mrp.selection__mrp_bom__ready_to_produce__all_available
@@ -80,19 +91,19 @@ msgstr "# ของ BoM ที่ถูกใช้"
 #. odoo-python
 #: code:addons/mrp/models/stock_warehouse.py:0
 msgid "%(name)s Sequence picking before manufacturing"
-msgstr ""
+msgstr "%(name)s การเลือกก่อนการผลิตตามลำดับ"
 
 #. module: mrp
 #. odoo-python
 #: code:addons/mrp/models/stock_warehouse.py:0
 msgid "%(name)s Sequence production"
-msgstr ""
+msgstr "%(name)s การผลิตตามลำดับ"
 
 #. module: mrp
 #. odoo-python
 #: code:addons/mrp/models/stock_warehouse.py:0
 msgid "%(name)s Sequence stock after manufacturing"
-msgstr ""
+msgstr "%(name)s สต็อกหลังการผลิตตามลำดับ"
 
 #. module: mrp
 #. odoo-python
@@ -104,7 +115,7 @@ msgstr "%(producible_qty)s พร้อมแล้ว"
 #. odoo-python
 #: code:addons/mrp/models/mrp_unbuild.py:0
 msgid "%(product)s: Insufficient Quantity To Unbuild"
-msgstr ""
+msgstr "%(product)s: ปริมาณไม่เพียงพอที่จะยกเลิกการสร้าง"
 
 #. module: mrp
 #. odoo-python
@@ -254,7 +265,7 @@ msgstr "987654321098"
 #. odoo-javascript
 #: code:addons/mrp/static/src/workcenter_dashboard_graph/workcenter_dashboard_graph_field.js:0
 msgid ":  hours"
-msgstr ""
+msgstr ":  ชั่วโมง"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.workcenter_line_kanban
@@ -264,7 +275,7 @@ msgstr "<i class=\"fa fa-pause\" role=\"img\" aria-label=\"Pause\" title=\"ห�
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.workcenter_line_kanban
 msgid "<i class=\"fa fa-play fs-6\" role=\"img\" aria-label=\"Run\" title=\"Run\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-play fs-6\" role=\"img\" aria-label=\"ทำงาน\" title=\"ทำงาน\"/>"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.workcenter_line_kanban
@@ -290,7 +301,7 @@ msgstr ""
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.stock_production_type_kanban
 msgid "<span class=\"col-6\">In Progress</span>"
-msgstr ""
+msgstr "<span class=\"col-6\">อยู่ระหว่างดำเนินการ</span>"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.stock_production_type_kanban
@@ -300,7 +311,7 @@ msgstr "<span class=\"col-6\">ล่าช้า</span>"
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.stock_production_type_kanban
 msgid "<span class=\"col-6\">To Close</span>"
-msgstr ""
+msgstr "<span class=\"col-6\">เพื่อปิด</span>"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.stock_production_type_kanban
@@ -309,8 +320,8 @@ msgstr "<span class=\"col-6\">กำลังรอ</span>"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_production_form_view
-msgid "<span class=\"fw-bold\">To Produce</span>"
-msgstr "<span class=\"fw-bold\">ผลิต</span>"
+msgid "<span class=\"fw-bold text-nowrap\">To Produce</span>"
+msgstr "<span class=\"fw-bold text-nowrap\">เพื่อผลิต</span>"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_production_form_view
@@ -697,12 +708,12 @@ msgstr "ทั้งหมด"
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_production__all_move_ids
 msgid "All Move"
-msgstr ""
+msgstr "ย้ายทั้งหมด"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_production__all_move_raw_ids
 msgid "All Move Raw"
-msgstr ""
+msgstr "ย้ายแบบดิบทั้งหมด"
 
 #. module: mrp
 #: model:ir.model.constraint,message:mrp.constraint_mrp_bom_line_bom_qty_zero
@@ -829,11 +840,6 @@ msgstr "คุณแน่ใจหรือไม่ว่าต้องกา
 #: model_terms:ir.ui.view,arch_db:mrp.report_mrporder
 msgid "Assembling"
 msgstr "การประกอบ"
-
-#. module: mrp
-#: model:ir.model,name:mrp.model_ir_attachment
-msgid "Attachment"
-msgstr "การแนบ"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_bom__message_attachment_count
@@ -1138,15 +1144,11 @@ msgstr ""
 "                หรือแพ็คสินค้า"
 
 #. module: mrp
+#. odoo-javascript
+#: code:addons/mrp/static/src/components/wo_list_view_dropdown/wo_list_view_dropdown.js:0
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_workcenter_block_wizard_form
 msgid "Block"
 msgstr "บล็อก"
-
-#. module: mrp
-#. odoo-javascript
-#: code:addons/mrp/static/src/components/wo_list_view_dropdown/wo_list_view_dropdown.xml:0
-msgid "Block WC"
-msgstr "บล็อกห้องสุขา"
 
 #. module: mrp
 #: model:ir.actions.act_window,name:mrp.act_mrp_block_workcenter
@@ -1217,7 +1219,7 @@ msgstr "ต้นทุน BoM"
 #. odoo-javascript
 #: code:addons/mrp/static/src/components/mo_overview_display_filter/mrp_mo_overview_display_filter.js:0
 msgid "BoM Costs"
-msgstr ""
+msgstr "ต้นทุน BOM"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_move__bom_line_id
@@ -1326,6 +1328,8 @@ msgid ""
 "Cannot compute days to prepare due to missing route info for at least 1 "
 "component or for the final product."
 msgstr ""
+"ไม่สามารถคำนวณวันในการเตรียมการได้เนื่องจากขาดข้อมูลเส้นทางสำหรับส่วนประกอบอย่างน้อย"
+" 1 ชิ้นหรือสำหรับผลิตภัณฑ์ขั้นสุดท้าย"
 
 #. module: mrp
 #. odoo-python
@@ -1385,6 +1389,14 @@ msgstr "เปลี่ยนจำนวนการผลิต"
 #: model:ir.actions.act_window,name:mrp.action_change_production_qty
 msgid "Change Quantity To Produce"
 msgstr "เปลี่ยนจำนวนที่จะผลิต"
+
+#. module: mrp
+#. odoo-python
+#: code:addons/mrp/models/mrp_bom.py:0
+msgid ""
+"Changing the product or variant will permanently reset all previously "
+"encoded variant-related data."
+msgstr ""
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_production_form_view
@@ -1636,13 +1648,13 @@ msgstr "ส่วนแบ่งต้นทุน (%)"
 #. odoo-javascript
 #: code:addons/mrp/static/src/components/mo_overview/mrp_mo_overview.xml:0
 msgid "Cost as it is currently accumulated"
-msgstr ""
+msgstr "ต้นทุนตามที่สะสมในปัจจุบัน"
 
 #. module: mrp
 #. odoo-javascript
 #: code:addons/mrp/static/src/components/mo_overview/mrp_mo_overview.xml:0
 msgid "Cost based on cost projection"
-msgstr ""
+msgstr "ต้นทุนขึ้นอยู่กับการคาดการณ์ต้นทุน"
 
 #. module: mrp
 #. odoo-javascript
@@ -1656,7 +1668,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mrp/static/src/components/mo_overview/mrp_mo_overview.xml:0
 msgid "Cost based on the BoM"
-msgstr ""
+msgstr "ต้นทุนตาม BoM"
 
 #. module: mrp
 #. odoo-javascript
@@ -1688,12 +1700,6 @@ msgstr "ข้อมูลการคิดต้นทุน"
 #: code:addons/mrp/static/src/components/bom_overview_display_filter/mrp_bom_overview_display_filter.js:0
 msgid "Costs"
 msgstr "ต้นทุน"
-
-#. module: mrp
-#. odoo-javascript
-#: code:addons/mrp/static/src/views/fields/google_slides_viewer.js:0
-msgid "Could not display the selected spreadsheet"
-msgstr "ไม่สามารถแสดงสเปรดชีตที่เลือกได้"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_picking__production_count
@@ -1998,12 +2004,12 @@ msgstr "วันที่แจ้งเตือนล่าช้า"
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.view_mrp_production_filter
 msgid "Delayed Productions"
-msgstr ""
+msgstr "การผลิตที่ล่าช้า"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.res_config_settings_view_form
 msgid "Delegate part of the production process to subcontractors"
-msgstr ""
+msgstr "มอบหมายส่วนหนึ่งของกระบวนการผลิตให้กับผู้รับเหมาช่วง"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_production__delivery_count
@@ -2500,12 +2506,6 @@ msgid "Google Slide Link"
 msgstr "ลิงก์ Google Slide"
 
 #. module: mrp
-#. odoo-javascript
-#: code:addons/mrp/static/src/views/fields/google_slides_viewer.js:0
-msgid "Google Slides Viewer"
-msgstr "โปรแกรมดู Google สไลด์"
-
-#. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.view_mrp_production_workorder_form_view_filter
 msgid "Group By"
 msgstr "กลุ่มโดย"
@@ -2561,7 +2561,7 @@ msgstr "ซ่อนแล้ว"
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_bom_line__manual_consumption
 msgid "Highlight Consumption"
-msgstr ""
+msgstr "เน้นการบริโภค"
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_workcenter__costs_hour
@@ -2732,7 +2732,7 @@ msgstr "ไม่สามารถวางแผนคำสั่งงาน
 #. odoo-python
 #: code:addons/mrp/report/mrp_report_bom_structure.py:0
 msgid "Impossible to plan. Please check the workcenter availabilities."
-msgstr ""
+msgstr "ไม่สามารถวางแผนได้ กรุณาตรวจสอบความพร้อมของศูนย์ปฏิบัติงาน"
 
 #. module: mrp
 #: model:ir.model.fields.selection,name:mrp.selection__mrp_production__state__progress
@@ -2755,12 +2755,12 @@ msgstr "อยู่ระหว่างการขนส่ง"
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.product_view_search_catalog
 msgid "In the BoM"
-msgstr ""
+msgstr "ใน BoM"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.product_view_search_catalog
 msgid "In the MO"
-msgstr ""
+msgstr "ใน MO"
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_production__date_deadline
@@ -3114,13 +3114,13 @@ msgstr "คำสั่งล่วงหน้า MO"
 #: model:mail.message.subtype,description:mrp.mrp_mo_in_cancelled
 #: model:mail.message.subtype,name:mrp.mrp_mo_in_cancelled
 msgid "MO Cancelled"
-msgstr ""
+msgstr "MO ยกเลิกแล้ว"
 
 #. module: mrp
 #: model:mail.message.subtype,description:mrp.mrp_mo_in_confirmed
 #: model:mail.message.subtype,name:mrp.mrp_mo_in_confirmed
 msgid "MO Confirmed"
-msgstr ""
+msgstr "MO ยืนยันแล้ว"
 
 #. module: mrp
 #. odoo-javascript
@@ -3139,7 +3139,7 @@ msgstr "ต้นทุน MO"
 #: model:mail.message.subtype,description:mrp.mrp_mo_in_done
 #: model:mail.message.subtype,name:mrp.mrp_mo_in_done
 msgid "MO Done"
-msgstr ""
+msgstr "MO เสร็จสิ้น"
 
 #. module: mrp
 #. odoo-python
@@ -3167,7 +3167,7 @@ msgstr "MO รอดำเนินการ"
 #: model:mail.message.subtype,description:mrp.mrp_mo_in_progress
 #: model:mail.message.subtype,name:mrp.mrp_mo_in_progress
 msgid "MO Progress"
-msgstr ""
+msgstr "MO กำลังดำเนินการ"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_production__reservation_state
@@ -3183,7 +3183,7 @@ msgstr "MO พร้อมแล้ว"
 #: model:mail.message.subtype,description:mrp.mrp_mo_in_to_close
 #: model:mail.message.subtype,name:mrp.mrp_mo_in_to_close
 msgid "MO To Close"
-msgstr ""
+msgstr "MO เพื่อปิด"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_product_document__attached_on_mrp
@@ -3530,12 +3530,12 @@ msgstr "วันครบกำหนดกิจกรรมของฉัน
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.view_mrp_production_filter
 msgid "My MOs"
-msgstr ""
+msgstr "MO ของฉัน"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_production__never_product_template_attribute_value_ids
 msgid "Never attribute values"
-msgstr ""
+msgstr "ไม่ต้องระบุค่าแอตทริบิวต์"
 
 #. module: mrp
 #. odoo-python
@@ -3704,7 +3704,7 @@ msgstr "จํานวนการดําเนินการ"
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_picking_type__count_mo_in_progress
 msgid "Number of Manufacturing Orders In Progress"
-msgstr ""
+msgstr "จำนวนคำสั่งซื้อการผลิตที่อยู่ระหว่างดำเนินการ"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_picking_type__count_mo_late
@@ -3714,7 +3714,7 @@ msgstr "จำนวนใบสั่งผลิตที่ล่าช้า
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_picking_type__count_mo_to_close
 msgid "Number of Manufacturing Orders To Close"
-msgstr ""
+msgstr "จำนวนคำสั่งซื้อการผลิตที่ต้องปิด"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_picking_type__count_mo_waiting
@@ -4372,12 +4372,12 @@ msgstr "ความจุของสินค้า"
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_product_product__product_catalog_product_is_in_bom
 msgid "Product Catalog Product Is In Bom"
-msgstr ""
+msgstr "แคตตาล็อกสินค้า สินค้าอยู่ใน BOM"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_product_product__product_catalog_product_is_in_mo
 msgid "Product Catalog Product Is In Mo"
-msgstr ""
+msgstr "แคตตาล็อกสินค้า สินค้าอยู่ใน Mo"
 
 #. module: mrp
 #. odoo-javascript
@@ -4647,7 +4647,7 @@ msgstr "จำนวนการผลิต"
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_production_workorder_tree_editable_view
 msgid "Quantity Remaining"
-msgstr ""
+msgstr "จำนวนคงเหลือ"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_workorder__qty_remaining
@@ -5108,12 +5108,6 @@ msgid "Show backorder lines"
 msgstr "แสดงรายการคำสั่งล่วงหน้า"
 
 #. module: mrp
-#. odoo-javascript
-#: code:addons/mrp/static/src/views/fields/google_slides_viewer.xml:0
-msgid "Slides viewer"
-msgstr "โปรแกรมดูสไลด์"
-
-#. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_workorder__leave_id
 msgid "Slot into workcenter calendar once planned"
 msgstr "สล็อตลงในปฏิทินศูนย์งานเมื่อวางแผนไว้"
@@ -5374,7 +5368,7 @@ msgstr "สัญญาช่วง"
 #. module: mrp
 #: model:product.template,name:mrp.product_product_computer_desk_product_template
 msgid "Table"
-msgstr "โต๊ะ"
+msgstr "ตาราง"
 
 #. module: mrp
 #: model:product.template,name:mrp.product_product_table_kit_product_template
@@ -5985,7 +5979,8 @@ msgid "Unable to split with more than the quantity to produce."
 msgstr "ไม่สามารถแบ่งได้มากกว่าจำนวนที่ผลิตได้"
 
 #. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.mrp_production_workorder_tree_editable_view
+#. odoo-javascript
+#: code:addons/mrp/static/src/components/wo_list_view_dropdown/wo_list_view_dropdown.js:0
 msgid "Unblock"
 msgstr "เลิกบล็อก"
 
@@ -6147,21 +6142,6 @@ msgid "Use Reception Report with Manufacturing Orders"
 msgstr "ใช้รายงานการรับสินค้ากับใบสั่งผลิต"
 
 #. module: mrp
-#: model_terms:ir.actions.act_window,help:mrp.action_mrp_workorder_production
-#: model_terms:ir.actions.act_window,help:mrp.action_mrp_workorder_production_specific
-#: model_terms:ir.actions.act_window,help:mrp.action_mrp_workorder_workcenter
-#: model_terms:ir.actions.act_window,help:mrp.action_work_orders
-#: model_terms:ir.actions.act_window,help:mrp.mrp_workorder_todo
-msgid ""
-"Use the table work center control panel to register operations in the shop floor directly.\n"
-"            The tablet provides worksheets for your workers and allow them to scrap products, track time,\n"
-"            launch a maintenance request, perform quality tests, etc."
-msgstr ""
-"ใช้โต๊ะแผงควบคุมศูนย์งานเพื่อลงทะเบียนการปฏิบัติงานในชั้นของร้านค้าโดยตรง\n"
-"            แท็บเล็ตมีแผ่นงานสำหรับพนักงานของคุณ และอนุญาตให้พวกเขาทำเศษสินค้า ติดตามเวลา\n"
-"           เรียกใช้คำขอบำรุงรักษา ทำการทดสอบคุณภาพ และอื่นๆ "
-
-#. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.product_product_form_view_bom_button
 #: model_terms:ir.ui.view,arch_db:mrp.product_template_form_view_bom_button
 msgid "Used In"
@@ -6231,7 +6211,7 @@ msgstr "ดูคำสั่งงาน"
 msgid ""
 "View and allocate production quantities to customer orders or other "
 "manufacturing orders"
-msgstr ""
+msgstr "ดูและจัดสรรปริมาณการผลิตตามคำสั่งซื้อของลูกค้าหรือใบสั่งผลิตอื่นๆ"
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_warehouse_orderpoint__manufacturing_visibility_days
@@ -6541,10 +6521,18 @@ msgid "Work center"
 msgstr "ศูนย์งาน"
 
 #. module: mrp
+#: model_terms:ir.actions.act_window,help:mrp.action_work_orders
+msgid ""
+"Work orders are operations to do as part of a manufacturing order.\n"
+"                    Operations are defined in the bill of materials or added in the manufacturing order directly."
+msgstr ""
+"คำสั่งงานคือการปฏิบัติการที่ต้องทำโดยเป็นส่วนหนึ่งของใบสั่งผลิต\n"
+"                    การปฏิบัติการถูกกำหนดไว้ในบิลวัสดุหรือเพิ่มในใบสั่งผลิตโดยตรง"
+
+#. module: mrp
 #: model_terms:ir.actions.act_window,help:mrp.action_mrp_workorder_production
 #: model_terms:ir.actions.act_window,help:mrp.action_mrp_workorder_production_specific
 #: model_terms:ir.actions.act_window,help:mrp.action_mrp_workorder_workcenter
-#: model_terms:ir.actions.act_window,help:mrp.action_work_orders
 #: model_terms:ir.actions.act_window,help:mrp.mrp_workorder_todo
 msgid ""
 "Work orders are operations to do as part of a manufacturing order.\n"
@@ -6766,7 +6754,7 @@ msgstr "คุณไม่สามารถใช้หมายเลขซี
 #. odoo-python
 #: code:addons/mrp/models/mrp_workorder.py:0
 msgid "You cannot start a work order that is already done or cancelled"
-msgstr ""
+msgstr "คุณไม่สามารถเริ่มใบสั่งงานที่เสร็จสิ้นหรือถูกยกเลิกไปแล้วได้"
 
 #. module: mrp
 #. odoo-python
@@ -6860,6 +6848,8 @@ msgid ""
 "You need to supply Lot/Serial Number for products and 'consume' them: "
 "%(missing_products)s"
 msgstr ""
+"คุณต้องระบุหมายเลขล็อต/หมายเลขซีเรียลสำหรับผลิตภัณฑ์และ \"บริโภค\" "
+":%(missing_products)s"
 
 #. module: mrp
 #: model:ir.actions.act_window,name:mrp.action_mrp_production_backorder
@@ -6901,7 +6891,7 @@ msgstr "วัน"
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.res_config_settings_view_form
 msgid "days before"
-msgstr ""
+msgstr "วันก่อนหน้า"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_production_workorder_form_view_inherit

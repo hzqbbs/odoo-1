@@ -5,7 +5,6 @@ import * as wsTourUtils from '@website_sale/js/tours/tour_utils';
 
 registry.category("web_tour.tours").add('check_shipping_discount', {
     url: '/shop?search=Plumbus',
-    checkDelay: 50,
     steps: () => [
         {
             content: "select Plumbus",
@@ -57,7 +56,7 @@ registry.category("web_tour.tours").add('check_shipping_discount', {
         },
         {
             content: "check eWallet discount",
-            trigger: '[data-reward-type=discount] .oe_currency_value:contains(- 349.60)',
+            trigger: "[data-reward-type=discount] .oe_currency_value:contains(- 304.00)",
         },
         {
             content: "select delivery1",
@@ -66,7 +65,7 @@ registry.category("web_tour.tours").add('check_shipping_discount', {
         },
         {
             content: "check for eWallet update after shipping cost change",
-            trigger: '[data-reward-type=discount] .oe_currency_value:contains(- 345.00)',
+            trigger: "[data-reward-type=discount] .oe_currency_value:contains(- 300.00)",
         },
         {
             content: "check if new delivery price is correct",

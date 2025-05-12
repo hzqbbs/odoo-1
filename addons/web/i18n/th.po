@@ -5,16 +5,17 @@
 # Translators:
 # Wichanon Jamwutthipreecha, 2024
 # Khwunchai Jaengsawang <khwunchai.j@ku.th>, 2024
-# Wil Odoo, 2024
-# Rasareeyar Lappiam, 2024
+# Rasareeyar Lappiam, 2025
+# Ped, 2025
+# Wil Odoo, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-02-10 13:24+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Rasareeyar Lappiam, 2024\n"
+"Last-Translator: Wil Odoo, 2025\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +94,7 @@ msgstr "'%s'ไม่ใช่วันที่หรือวันที่�
 #. odoo-javascript
 #: code:addons/web/static/src/core/file_upload/file_upload_progress_record.js:0
 msgid "(%(mbLoaded)s/%(mbTotal)sMB)"
-msgstr ""
+msgstr "(%(mbLoaded)s/%(mbTotal)sMB)"
 
 #. module: web
 #. odoo-javascript
@@ -602,6 +603,8 @@ msgid ""
 "<strong class=\"text-nowrap\">$ <span class=\"oe_currency_value\">\n"
 "                                                       22,137.50</span></strong>"
 msgstr ""
+"<strong class=\"text-nowrap\">$ <span class=\"oe_currency_value\">\n"
+"                                                       22,137.50</span></strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
@@ -701,7 +704,7 @@ msgstr "ต้องระบุชื่อตัวกรองที่คุ
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "A name for your new action is required."
-msgstr ""
+msgstr "จำเป็นต้องมีชื่อสำหรับการดำเนินการใหม่ของคุณได้รับความสำคัญ"
 
 #. module: web
 #. odoo-javascript
@@ -1045,7 +1048,7 @@ msgstr "ท่ามกลาง"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "An action with the same name already exists."
-msgstr ""
+msgstr "มีการดำเนินการที่มีชื่อเดียวกันอยู่แล้ว"
 
 #. module: web
 #. odoo-javascript
@@ -1121,7 +1124,7 @@ msgstr "คุณแน่ใจหรือไม่ว่าต้องกา
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "Are you sure that you want to remove this embedded action?"
-msgstr ""
+msgstr "คุณแน่ใจหรือไม่ว่าต้องการลบการดำเนินการฝังตัวนี้"
 
 #. module: web
 #. odoo-javascript
@@ -1148,6 +1151,9 @@ msgid ""
 "Are you sure you want to delete this property field? It will be removed for "
 "everyone using the \"%(parentName)s\" %(parentFieldLabel)s."
 msgstr ""
+"คุณแน่ใจหรือไม่ว่าต้องการลบฟิลด์คุณสมบัตินี้ "
+"ฟิลด์คุณสมบัตินี้จะถูกลบออกสำหรับทุกคนที่ใช้ %(parentFieldLabel) "
+"\"%(parentName)\""
 
 #. module: web
 #. odoo-javascript
@@ -1275,6 +1281,18 @@ msgstr "ลูกศรย้อนกลับ"
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "Back"
 msgstr "กลับ"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s”"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s” form"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -1622,6 +1640,7 @@ msgid ""
 "Choose which maximal precision (days, months, ...) you want in the datetime "
 "picker."
 msgstr ""
+"เลือกความแม่นยำสูงสุด (วัน, เดือน, ...) ที่คุณต้องการในตัวเลือกวันที่และเวลา"
 
 #. module: web
 #. odoo-javascript
@@ -1630,6 +1649,8 @@ msgid ""
 "Choose which minimal precision (days, months, ...) you want in the datetime "
 "picker."
 msgstr ""
+"เลือกความแม่นยำขั้นต่ำ (วัน, เดือน, ...) "
+"ที่คุณต้องการในตัวเลือกวันที่และเวลา"
 
 #. module: web
 #. odoo-javascript
@@ -1977,7 +1998,6 @@ msgstr "สงวนลิขสิทธิ์ © 2004"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 msgid "Could not display the selected image"
 msgstr "ไม่สามารถแสดงภาพที่เลือกได้"
@@ -1990,9 +2010,9 @@ msgstr "ไม่สามารถแสดงไฟล์ PDF ที่เล�
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
-msgid "Could not display the specified image url."
-msgstr "ไม่สามารถแสดง URL รูปภาพที่ระบุ"
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+msgid "Could not display the selected spreadsheet"
+msgstr "ไม่สามารถแสดงสเปรดชีตที่เลือกได้"
 
 #. module: web
 #. odoo-javascript
@@ -2121,7 +2141,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/web/controllers/view.py:0
 msgid "Custom view %(view)s does not belong to user %(user)s"
-msgstr ""
+msgstr "มุมมองที่กำหนดเอง %(view)s ไม่เป็นของผู้ใช้ %(user)s"
 
 #. module: web
 #. odoo-javascript
@@ -2458,13 +2478,13 @@ msgstr "แสดงไอคอนคำเตือนหากวันที
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Displays or hides the seconds in the datetime value."
-msgstr ""
+msgstr "แสดงหรือซ่อนวินาทีในค่าวันที่เวลา"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Displays or hides the time in the datetime value."
-msgstr ""
+msgstr "แสดงหรือซ่อนเวลาในค่าวันที่เวลา"
 
 #. module: web
 #. odoo-javascript
@@ -2473,6 +2493,8 @@ msgid ""
 "Displays the value of the selected field as a textual hint. If the selected "
 "field is empty, the static placeholder attribute is displayed instead."
 msgstr ""
+"แสดงค่าของฟิลด์ที่เลือกเป็นคำแนะนำข้อความ หากฟิลด์ที่เลือกว่างเปล่า "
+"แอตทริบิวต์ตัวแทนคงที่จะแสดงแทน"
 
 #. module: web
 #. odoo-javascript
@@ -3115,6 +3137,13 @@ msgstr "รับฟีเจอร์นี้และฟีเจอร์อ
 #: code:addons/web/static/src/views/fields/url/url_field.xml:0
 msgid "Go to URL"
 msgstr "ไปที่ URL"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+msgid "Google Slide Viewer"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3897,6 +3926,12 @@ msgstr "ตัวอย่าง ข้อมูล"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid "Load everything anyway."
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/search/search_bar/search_bar.js:0
 msgid "Load more"
 msgstr "โหลดเพิ่ม"
@@ -3998,7 +4033,7 @@ msgstr "การดำเนินการหลัก"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.xml:0
 msgid "Make this embedded action available to other users"
-msgstr ""
+msgstr "ทำให้การดำเนินการฝังนี้พร้อมใช้งานสำหรับผู้ใช้รายอื่น"
 
 #. module: web
 #. odoo-javascript
@@ -4048,6 +4083,12 @@ msgstr "Many2one"
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Match"
 msgstr "จับคู่"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+msgid "Max value"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4266,6 +4307,12 @@ msgstr "เพิ่มเติม"
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "More Menu"
 msgstr "เมนูเพิ่มเติม"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "More..."
+msgstr "มากกว่า..."
 
 #. module: web
 #. odoo-javascript
@@ -4549,8 +4596,8 @@ msgstr "ไม่พบอุปกรณ์"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "No emoji match your search"
-msgstr "ไม่มีอีโมจิที่ตรงกับการค้นหาของคุณ"
+msgid "No emoji matches your search"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4805,6 +4852,8 @@ msgid ""
 "Of the %(selectedRecord)s selected records, only the first %(firstRecords)s "
 "have been archived/unarchived."
 msgstr ""
+"จาก %(selectedRecord)s รายการที่เลือก มีเพียง %(firstRecords)s "
+"รายการแรกเท่านั้นที่ได้รับการเก็บถาวร/ยกเลิกการจัดเก็บ"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
@@ -4860,6 +4909,7 @@ msgid ""
 "Only the first %(count)s records have been deleted (out of %(total)s "
 "selected)"
 msgstr ""
+"มีเพียง %(count)s รายการแรกเท่านั้นที่ถูกลบ (จาก %(total)s รายการที่เลือก)"
 
 #. module: web
 #. odoo-python
@@ -5797,6 +5847,12 @@ msgstr "ค้นหาเพิ่มเติม..."
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "Search emoji"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/commands/default_providers.js:0
 msgid "Search for a command..."
 msgstr "ค้นหาคำสั่ง..."
@@ -5806,12 +5862,6 @@ msgstr "ค้นหาคำสั่ง..."
 #: code:addons/web/static/src/webclient/menus/menu_providers.js:0
 msgid "Search for a menu..."
 msgstr "ค้นหาเมนู..."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "Search for an emoji"
-msgstr "ค้นหาอีโมจิ"
 
 #. module: web
 #. odoo-javascript
@@ -6058,6 +6108,8 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Set to true to display days, months (and hours) with unpadded numbers"
 msgstr ""
+"ตั้งค่าให้เป็นจริงเพื่อแสดงวัน เดือน (และชั่วโมง) "
+"พร้อมตัวเลขที่ไม่เติมช่องว่าง"
 
 #. module: web
 #. odoo-javascript
@@ -6180,6 +6232,8 @@ msgid ""
 "Something went wrong... If you really are stuck, share the report with your "
 "friendly support service"
 msgstr ""
+"มีบางอย่างผิดพลาด... หากคุณยังคงพบปัญหา "
+"โปรดแชร์รายงานกับฝ่ายบริการสนับสนุนของคุณ"
 
 #. module: web
 #. odoo-javascript
@@ -6242,6 +6296,12 @@ msgstr "เทพีเสรีภาพ"
 #: code:addons/web/static/src/views/fields/statusbar/statusbar_field.js:0
 msgid "Status"
 msgstr "สถานะ"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "Statusbar"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6477,13 +6537,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "The app cannot be installed with this browser"
-msgstr ""
+msgstr "ไม่สามารถติดตั้งแอปด้วยเบราว์เซอร์นี้ได้"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "The app seems to be installed on your device"
-msgstr ""
+msgstr "แอปดูเหมือนจะได้รับการติดตั้งบนอุปกรณ์ของคุณแล้ว"
 
 #. module: web
 #. odoo-python
@@ -6519,6 +6579,8 @@ msgid ""
 "The selected file (%(size)sB) is larger than the maximum allowed file size "
 "(%(maxSize)sB)."
 msgstr ""
+"ไฟล์ที่เลือก (%(size)sB) มีขนาดใหญ่กว่าขนาดไฟล์สูงสุดที่อนุญาต "
+"(%(maxSize)sB)"
 
 #. module: web
 #. odoo-javascript
@@ -6533,12 +6595,24 @@ msgstr ""
 " ดูคอนโซลของเบราว์เซอร์หรือบันทึกเซิร์ฟเวอร์เพื่อดูรายละเอียดเพิ่มเติม"
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr ""
+"มีข้อมูลมากเกินไป กราฟแสดงเฉพาะตัวอย่างเท่านั้น "
+"ใช้ตัวกรองเพื่อปรับแต่งขอบเขต"
+
+#. module: web
 #. odoo-python
 #: code:addons/web/controllers/export.py:0
 msgid ""
 "There are too many rows (%(count)s rows, limit: %(limit)s) to export as "
 "Excel 2007-2013 (.xlsx) format. Consider splitting the export."
 msgstr ""
+"มีแถวมากเกินไป (%(count)s แถว ลิมิต: %(limit)s) ที่จะส่งออกเป็นรูปแบบ Excel "
+"2007-2013 (.xlsx) ลองแยกการส่งออก"
 
 #. module: web
 #. odoo-javascript
@@ -6573,7 +6647,7 @@ msgstr "ไม่รองรับโดเมนนี้"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "This embedded action is global and will be removed for everyone."
-msgstr ""
+msgstr "การดำเนินการฝังตัวนี้เป็นแบบสากลและจะถูกลบออกสำหรับทุกคน"
 
 #. module: web
 #. odoo-javascript
@@ -6683,6 +6757,18 @@ msgstr "ไททาเนีย"
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
 msgstr "คำนำหน้าชื่อ"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To next categories"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To previous categories"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6890,13 +6976,13 @@ msgstr ""
 msgid ""
 "Unable to find Wkhtmltopdf on this system. The report will be shown in "
 "html.%(link)s"
-msgstr ""
+msgstr "ไม่พบ Wkhtmltopdf ในระบบนี้ รายงานจะแสดงในรูปแบบ html.%(link)s"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/form/form_status_indicator/form_status_indicator.xml:0
 msgid "Unable to save. Correct the issue or discard all changes"
-msgstr ""
+msgstr "ไม่สามารถบันทึกได้ แก้ไขปัญหาหรือยกเลิกการเปลี่ยนแปลงทั้งหมด"
 
 #. module: web
 #. odoo-javascript
@@ -7061,7 +7147,7 @@ msgstr "ใช้ร่วมกับตัวเลือก \"รูปแบ
 #. odoo-javascript
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 msgid "Use this filter by default when opening this view"
-msgstr ""
+msgstr "ใช้ตัวกรองนี้ตามค่าเริ่มต้นเมื่อเปิดมุมมองนี้"
 
 #. module: web
 #. odoo-javascript
@@ -7200,7 +7286,7 @@ msgstr "มุมมองข้อมูลอภิพันธุ์"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "View: %(displayName)s"
-msgstr ""
+msgstr "มุมมอง: %(displayName)s"
 
 #. module: web
 #. odoo-javascript
@@ -7315,7 +7401,7 @@ msgstr "ทำได้ดีมาก!"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "What should we write if the field is empty"
-msgstr ""
+msgstr "ถ้าช่องว่างต้องเขียนว่าอย่างไร"
 
 #. module: web
 #. odoo-javascript
@@ -7352,7 +7438,7 @@ msgstr "เขียนโดเมนเพื่ออนุญาตให้
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
 msgid "Write your phone, email, bank account, tax ID, ..."
-msgstr ""
+msgstr "เขียนเบอร์โทรศัพท์, อีเมล, บัญชีธนาคาร, หมายเลขผู้เสียภาษี, ..."
 
 #. module: web
 #. odoo-python
@@ -7421,7 +7507,7 @@ msgstr "คุณออฟไลน์อยู่"
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "You can install the app from the browser menu"
-msgstr ""
+msgstr "คุณสามารถติดตั้งแอปได้จากเมนูเบราว์เซอร์"
 
 #. module: web
 #. odoo-javascript
@@ -7452,7 +7538,7 @@ msgstr "คุณต้องมีสิทธิ์แก้ไขในเอ
 #. odoo-python
 #: code:addons/web/controllers/json.py:0
 msgid "You need export permissions to use the /json route"
-msgstr ""
+msgstr "คุณต้องมีสิทธิ์ส่งออกเพื่อใช้เส้นทาง /json"
 
 #. module: web
 #. odoo-javascript
@@ -7502,6 +7588,7 @@ msgid ""
 "Your installation of Wkhtmltopdf seems to be broken. The report will be "
 "shown in html.%(link)s"
 msgstr ""
+"การติดตั้ง Wkhtmltopdf ของคุณดูเหมือนจะเสียหาย รายงานจะแสดงเป็น HTML%(link)s"
 
 #. module: web
 #. odoo-javascript

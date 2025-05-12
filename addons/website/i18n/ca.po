@@ -5,9 +5,8 @@
 # Translators:
 # Cristian Cruz, 2024
 # Albert Parera, 2024
-# Santiago Payà <santiagopim@gmail.com>, 2024
 # ericrolo, 2024
-# Josep Sànchez <papapep@gmx.com>, 2024
+# Josep Sànchez <papapep@pinatell.net>, 2024
 # Iván Infantes Castarnado, 2024
 # José Cabrera Lozano <jose.cabrera@edukative.es>, 2024
 # Carles Antoli <carlesantoli@hotmail.com>, 2024
@@ -24,20 +23,24 @@
 # jabiri7, 2024
 # Martin Trigaux, 2024
 # RGB Consulting <odoo@rgbconsulting.com>, 2024
-# Harcogourmet, 2024
-# Quim - eccit <quim@eccit.com>, 2024
+# Xavier, 2024
+# Quim - coopdevs <quim.rebull@coopdevs.org>, 2024
 # Arnau Ros, 2024
 # Jonatan Gk, 2024
 # marcescu, 2024
 # Josep Anton Belchi, 2024
+# Wil Odoo, 2025
+# EstudiTIC - estuditic.com <odoo@estuditic.com>, 2025
+# Noemi Pla, 2025
+# Santiago Payà <santiagopim@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Josep Anton Belchi, 2024\n"
+"Last-Translator: Santiago Payà <santiagopim@gmail.com>, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/odoo/teams/41243/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -338,7 +341,7 @@ msgstr "+ Lloc web nou"
 #: model_terms:ir.ui.view,arch_db:website.template_footer_descriptive
 #: model_terms:ir.ui.view,arch_db:website.template_footer_headline
 msgid "+1 555-555-5556"
-msgstr ""
+msgstr "+1 555-555-5556"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.template_footer_links
@@ -359,16 +362,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_charts
 msgid "+25.000"
 msgstr ""
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
-msgid ", .s_searchbar_input"
-msgstr ", .s_searchbar_input"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.s_website_form_options
-msgid ", .s_website_form"
-msgstr ", .s_website_form"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
@@ -579,7 +572,7 @@ msgstr "302 S'ha mogut temporalment"
 #: model:ir.model.fields.selection,name:website.selection__website_rewrite__redirect_type__308
 #: model_terms:ir.ui.view,arch_db:website.view_rewrite_search
 msgid "308 Redirect / Rewrite"
-msgstr "Redirecció 308 / Reescriptura"
+msgstr "Redirecció 308 / Reescriptura d'URL"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_contact_info
@@ -616,7 +609,7 @@ msgstr "404 No trobat"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_countdown
 msgid "45"
-msgstr ""
+msgstr "5"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_showcase
@@ -1117,7 +1110,7 @@ msgstr "<i class=\"fa fa-fw fa-thumbs-up\"/> Colzes"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_form
 msgid "<i class=\"fa fa-fw o_button_icon fa-circle text-danger\" title=\"Offline\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-fw o_button_icon fa-circle text-danger\" title=\"Offline\"/>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_form
@@ -1125,6 +1118,8 @@ msgid ""
 "<i class=\"fa fa-fw o_button_icon fa-circle text-success\" "
 "title=\"Connected\"/>"
 msgstr ""
+"<i class=\"fa fa-fw o_button_icon fa-circle text-success\" "
+"title=\"Connected\"/>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_pages_kanban_view
@@ -1286,8 +1281,8 @@ msgid ""
 "<i class=\"s_mega_menu_thumbnails_icon fa fa-shopping-basket me-2\"/> Pickup"
 " in store"
 msgstr ""
-"<i class=\"s_mega_menu_thumbnails_icon fa fa-shopping-basket me-2\"/> Pickup"
-" al magatzem"
+"<i class=\"s_mega_menu_thumbnails_icon fa fa-shopping-basket me-2\"/> "
+"Recollida en la botiga"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_thumbnails
@@ -2223,7 +2218,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/xml/web_editor.xml:0
 msgid "AI"
-msgstr ""
+msgstr "IA"
 
 #. module: website
 #. odoo-javascript
@@ -2526,8 +2521,8 @@ msgstr "Afegeix llengües"
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
-msgid "Add new %s"
-msgstr " Afegir nou %s"
+msgid "Add option"
+msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.view_edit_third_party_domains
@@ -3500,7 +3495,7 @@ msgstr "Fil d'Ariadna"
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "Build my website"
-msgstr "Contruir el meu lloc web"
+msgstr "Construir el meu lloc web"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_table_of_content
@@ -3913,6 +3908,12 @@ msgid "Checkbox"
 msgstr "Casella de selecció"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Checkbox List"
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team
 msgid "Chief Commercial Officer"
 msgstr ""
@@ -3986,7 +3987,7 @@ msgstr "Tria el teu favorit"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_product_catalog
 msgid "Cinnamon Roll"
-msgstr ""
+msgstr "Espiral de canyella"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_countdown_options
@@ -4417,8 +4418,8 @@ msgid ""
 "Contact us about anything related to our company or services.<br/>\n"
 "                                    We'll do our best to get back to you as soon as possible."
 msgstr ""
-"Posi's en contacte amb nosaltres per a qualsevol cosa relacionada amb la nostra empresa o els nostres serveis.<br/>\n"
-"                                   Farem tot el possible per respondre-li al més aviat possible."
+"Contacta amb nosaltres si tens qualsevol consulta sobre la nostra empresa o els nostres serveis.<br/>\n"
+"                                   Farem tot el possible per respondre al més aviat possible."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.template_footer_contact
@@ -4748,7 +4749,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_product_catalog
 msgid "Croissant"
-msgstr ""
+msgstr "Croissant"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_landing_s_color_blocks_2
@@ -4805,6 +4806,12 @@ msgstr "Clau personalitzada"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_card_options
 msgid "Custom Ratio"
+msgstr ""
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Custom Text"
 msgstr ""
 
 #. module: website
@@ -5713,12 +5720,6 @@ msgid "E.g. https://www.mydomain.com"
 msgstr "E.g. https://www.mydomain.com"
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid "EXTERNAL SUBMISSION - Customer not verified"
-msgstr ""
-
-#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_horizontal
 msgid ""
 "Each update is thoroughly tested to guarantee compatibility and reliability,"
@@ -6061,7 +6062,7 @@ msgstr "Error"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_pricelist_cafe
 msgid "Espresso"
-msgstr ""
+msgstr "Expresso"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_features_grid
@@ -6122,9 +6123,15 @@ msgstr "Exemples"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Existing Fields"
+msgstr "Camps existents"
+
+#. module: website
+#. odoo-javascript
 #: code:addons/website/static/src/components/resource_editor/utils.js:0
 msgid "Expected %(char)s"
-msgstr ""
+msgstr "S'espera %(char)s"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_grid
@@ -6290,7 +6297,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.footer_custom
 msgid "Extra page"
-msgstr ""
+msgstr "Pàgina addicional"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -6424,6 +6431,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_dynamic_snippet_options_template
 msgid "Fetched Elements"
 msgstr ""
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Field"
+msgstr "Camp"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_snippet_filter__field_names
@@ -6707,7 +6720,7 @@ msgstr ""
 #: code:addons/website/static/src/components/resource_editor/resource_editor.xml:0
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Format"
-msgstr "Formata"
+msgstr "Format"
 
 #. module: website
 #. odoo-javascript
@@ -7613,7 +7626,7 @@ msgstr "Estic segur d'això."
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "I want"
-msgstr "Jo vull"
+msgstr "Vull"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_personal_s_image_text
@@ -9159,7 +9172,7 @@ msgstr "Carregant..."
 #: code:addons/website/static/src/js/editor/snippets.editor.js:0
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Logo"
-msgstr "Logo"
+msgstr "Logotip"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.template_footer_centered
@@ -10193,7 +10206,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "OR"
-msgstr "OR"
+msgstr "O"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -10439,6 +10452,12 @@ msgid "Option 3"
 msgstr "Opció 3"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Option List"
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Optional"
 msgstr "Opcional"
@@ -10526,7 +10545,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_mini_s_text_block_h2
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_s_three_columns
 msgid "Our Story"
-msgstr ""
+msgstr "La nostra història"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_s_picture
@@ -10876,13 +10895,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/js/utils.js:0
 msgid "Page description not set."
-msgstr ""
+msgstr "Descripció de pàgina no establerta."
 
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/js/utils.js:0
 msgid "Page title not set."
-msgstr ""
+msgstr "Títol de pàgina no establert."
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_theme_website_page__copy_ids
@@ -11563,6 +11582,12 @@ msgid "Radio"
 msgstr "Ràdio"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Radio Button List"
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Radio Buttons"
 msgstr "Botons d'opció"
@@ -11922,7 +11947,7 @@ msgstr "Revertida"
 #. module: website
 #: model:ir.actions.act_window,name:website.action_website_rewrite_list
 msgid "Rewrite"
-msgstr "Reescriptura"
+msgstr "Reescriptura d'URL"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.bs_debug_view
@@ -12306,7 +12331,7 @@ msgstr "Veure Tot"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_dynamic_snippet_template
 msgid "See all <i class=\"fa fa-long-arrow-right ms-2\"/>"
-msgstr ""
+msgstr "Veure-ho tot <i class=\"fa fa-long-arrow-right ms-2\"/>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_cta_badge
@@ -12885,7 +12910,7 @@ msgstr "So"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_product_catalog
 msgid "Sourdough Bread"
-msgstr ""
+msgstr "Pa de massa mare"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -13575,6 +13600,12 @@ msgid "The limit must be between 1 and 16."
 msgstr "El límit ha d'estar entre 1 i 16."
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/client_actions/configurator/configurator.js:0
+msgid "The logo is too large. Please upload a logo smaller than 2.5 MB."
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "The maximum number of files that can be uploaded."
 msgstr ""
@@ -13745,14 +13776,6 @@ msgstr "Tercera característica"
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_multi_menus
 msgid "Third Menu"
 msgstr "Tercer menú"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid ""
-"This %(model_name)s was submitted by %(user_name)s (%(user_email)s) on "
-"behalf of %(form_email)s"
-msgstr ""
 
 #. module: website
 #. odoo-javascript
@@ -13948,6 +13971,7 @@ msgstr "Aquest arc de visió s'ha modificat"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/systray_items/website_switcher.js:0
 #: code:addons/website/static/src/systray_items/website_switcher.xml:0
 msgid "This website does not have a domain configured."
 msgstr ""
@@ -13983,7 +14007,7 @@ msgstr "Miniatures"
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
 #: model_terms:ir.ui.view,arch_db:website.s_social_media
 msgid "TikTok"
-msgstr ""
+msgstr "TikTok"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website__social_tiktok
@@ -14832,7 +14856,7 @@ msgstr "Veure mode heretat"
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "View more themes"
-msgstr ""
+msgstr "Veure més temes"
 
 #. module: website
 #. odoo-javascript
@@ -15544,17 +15568,17 @@ msgstr "Imatge del lloc web"
 #. module: website
 #: model:ir.model,name:website.model_website_rewrite
 msgid "Website rewrite"
-msgstr "Reescriptura del lloc web"
+msgstr "Reescriptura d'URL del lloc web"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.view_website_rewrite_form
 msgid "Website rewrite Settings"
-msgstr "Configuració de reescriptura del lloc web"
+msgstr "Configuració de reescriptura d'URL del lloc web"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.action_website_rewrite_tree
 msgid "Website rewrites"
-msgstr "Reescritures del lloc web"
+msgstr "Reescriptures d'URL del lloc web"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_grid
@@ -16189,7 +16213,7 @@ msgstr "btn-secundari"
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "business"
-msgstr "negoci"
+msgstr ","
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -16419,7 +16443,7 @@ msgstr "fonts.google.com"
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "for my"
-msgstr "per a mi"
+msgstr "per a la meva empresa de"
 
 #. module: website
 #. odoo-javascript
@@ -17003,7 +17027,7 @@ msgstr "pàgina web"
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "with the main objective to"
-msgstr "amb l'objectiu principal a"
+msgstr "amb l'objectiu principal de"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.qweb_500

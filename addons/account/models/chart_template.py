@@ -99,7 +99,7 @@ class AccountChartTemplate(models.AbstractModel):
         field = self.env['ir.module.module']._fields['account_templates']
         modules = (
             self.env.cache.get_records(self.env['ir.module.module'], field)
-            or self.env['ir.module.module'].search([])
+            or self.env['ir.module.module'].sudo().search([])
         )
 
         return {
@@ -129,7 +129,7 @@ class AccountChartTemplate(models.AbstractModel):
     # Loading
     # --------------------------------------------------------------------------------
 
-    def try_loading(self, template_code, company, install_demo=False):
+    def try_loading(self, template_code, company, install_demo=False, force_create=True):
         """Check if the chart template can be loaded then proceeds installing it.
 
         :param template_code: code of the chart template to be loaded.
@@ -154,12 +154,12 @@ class AccountChartTemplate(models.AbstractModel):
 
         template_code = template_code or company and self._guess_chart_template(company.country_id)
 
-        if template_code == 'syscohada' and template_code != company.chart_template:
-            raise UserError(_("The Syscohada chart template shouldn't be selected directly. Instead, you should directly select the chart template related to your country."))
+        if template_code in {'syscohada', 'syscebnl'} and template_code != company.chart_template:
+            raise UserError(_("The %s chart template shouldn't be selected directly. Instead, you should directly select the chart template related to your country.", template_code))
 
-        return self._load(template_code, company, install_demo)
+        return self._load(template_code, company, install_demo, force_create)
 
-    def _load(self, template_code, company, install_demo):
+    def _load(self, template_code, company, install_demo, force_create=True ):
         """Install this chart of accounts for the current company.
 
         :param template_code: code of the chart template to be loaded.
@@ -201,10 +201,17 @@ class AccountChartTemplate(models.AbstractModel):
         company.chart_template = template_code
 
         if not reload_template and (not company.root_id._existing_accounting() or self.env.ref('base.module_account').demo):
+            children_companies = self.env['res.company'].search([('id', 'child_of', company.id)])
             for model in ('account.move',) + TEMPLATE_MODELS[::-1]:
                 if not company.parent_id:
                     company_field = 'company_id' if 'company_id' in self.env[model] else 'company_ids'
-                    self.env[model].sudo().with_context(active_test=False).search([(company_field, 'child_of', company.id)]).with_context({MODULE_UNINSTALL_FLAG: True}).unlink()
+                    records = self.env[model].sudo().with_context(active_test=False).search([(company_field, 'child_of', company.id)])
+                    if company_field == 'company_ids':
+                        records_to_keep = records.filtered(lambda r: r.company_ids - children_companies)
+                        records -= records_to_keep
+                        for records_for_companies in records_to_keep.grouped('company_ids').values():
+                            records_for_companies.company_ids -= children_companies
+                    records.with_context({MODULE_UNINSTALL_FLAG: True}).unlink()
 
         data = self._get_chart_template_data(template_code)
         template_data = data.pop('template_data')
@@ -214,7 +221,7 @@ class AccountChartTemplate(models.AbstractModel):
             }
 
         if reload_template:
-            self._pre_reload_data(company, template_data, data)
+            self._pre_reload_data(company, template_data, data, force_create)
             install_demo = False
         data = self._pre_load_data(template_code, company, template_data, data)
         self._load_data(data)
@@ -235,7 +242,7 @@ class AccountChartTemplate(models.AbstractModel):
                 # Do not rollback installation of CoA if demo data failed
                 _logger.exception('Error while loading accounting demo data')
         for subsidiary in company.child_ids:
-            self._load(template_code, subsidiary, install_demo)
+            self._load(template_code, subsidiary, install_demo, force_create)
 
     @api.model
     def _install_demo(self, companies):
@@ -245,7 +252,7 @@ class AccountChartTemplate(models.AbstractModel):
             self.sudo()._load_data(self._get_demo_data(company))
             self._post_load_demo_data(company)
 
-    def _pre_reload_data(self, company, template_data, data):
+    def _pre_reload_data(self, company, template_data, data, force_create=True):
         """Pre-process the data in case of reloading the chart of accounts.
 
         When we reload the chart of accounts, we only want to update fields that are main
@@ -257,6 +264,8 @@ class AccountChartTemplate(models.AbstractModel):
             if prop.startswith('property_'):
                 template_data.pop(prop)
         data.pop('account.reconcile.model', None)
+        if 'res.company' in data:
+            data['res.company'][company.id].setdefault('anglo_saxon_accounting', company.anglo_saxon_accounting)
 
         for xmlid, journal_data in list(data.get('account.journal', {}).items()):
             if self.ref(xmlid, raise_if_not_found=False):
@@ -294,11 +303,19 @@ class AccountChartTemplate(models.AbstractModel):
         current_taxes = self.env['account.tax'].with_context(active_test=False).search([
             *self.env['account.tax']._check_company_domain(company),
         ])
+
+        current_fiscal_positions =  self.env['account.fiscal.position'].with_context(active_test=False).search([
+            *self.env['account.fiscal.position']._check_company_domain(company),
+        ])
         unique_tax_name_key = lambda t: (t.name, t.type_tax_use, t.tax_scope, t.company_id)
         unique_tax_name_keys = set(current_taxes.mapped(unique_tax_name_key))
         xmlid2tax = {
             xml_id.split('.')[1].split('_', maxsplit=1)[1]: self.env['account.tax'].browse(record)
             for record, xml_id in current_taxes.get_external_id().items() if xml_id.startswith('account.')
+        }
+        xmlid2fiscal_position= {
+            xml_id.split('.')[1].split('_', maxsplit=1)[1]: self.env['account.fiscal.position'].browse(record)
+            for record, xml_id in current_fiscal_positions.get_external_id().items() if xml_id.startswith('account.')
         }
         def tax_template_changed(tax, template):
             template_line_ids = [x for x in template.get('repartition_line_ids', []) if x[0] != Command.CLEAR]
@@ -309,11 +326,16 @@ class AccountChartTemplate(models.AbstractModel):
                 or len(template_line_ids) not in (0, len(tax.repartition_line_ids))
             )
 
+        existing_current_year_earnings_account = self.env['account.account'].search([('company_ids', '=', company.id),('account_type', '=', 'equity_unaffected')], limit=1)
         obsolete_xmlid = set()
         skip_update = set()
         for model_name, records in data.items():
             for xmlid, values in records.items():
                 if model_name == 'account.fiscal.position':
+                    # if xmlid is not in xmlid2fiscal_position and we do not force create so we will skip_update for that record
+                    if xmlid not in xmlid2fiscal_position and not force_create:
+                        skip_update.add((model_name, xmlid))
+                        continue
                     # Only add tax mappings containing new taxes
                     if old_tax_ids := values.pop('tax_ids', []):
                         new_tax_ids = []
@@ -330,6 +352,9 @@ class AccountChartTemplate(models.AbstractModel):
                 elif model_name == 'account.tax':
                     # Only update the tags of existing taxes
                     if xmlid not in xmlid2tax or tax_template_changed(xmlid2tax[xmlid], values):
+                        if not force_create:
+                            skip_update.add((model_name, xmlid))
+                            continue
                         if self._context.get('force_new_tax_active'):
                             values['active'] = True
                         if xmlid in xmlid2tax:
@@ -358,6 +383,9 @@ class AccountChartTemplate(models.AbstractModel):
                                         repartition_line_values.clear()
                                         repartition_line_values['tag_ids'] = tags or [Command.clear()]
                 elif model_name == 'account.account':
+                    if  existing_current_year_earnings_account and values['account_type'] == 'equity_unaffected':
+                        skip_update.add((model_name, xmlid))
+                        continue
                     # Point or create xmlid to existing record to avoid duplicate code
                     account = self.ref(xmlid, raise_if_not_found=False)
                     normalized_code = f'{values["code"]:<0{int(template_data.get("code_digits", 6))}}'
@@ -380,7 +408,7 @@ class AccountChartTemplate(models.AbstractModel):
                     # on existing accounts, only tag_ids are to be updated using default data
                     if account and 'tag_ids' in data[model_name][xmlid]:
                         data[model_name][xmlid] = {'tag_ids': data[model_name][xmlid]['tag_ids']}
-                    elif account:
+                    elif account or not force_create:
                         skip_update.add((model_name, xmlid))
 
         for skip_model, skip_xmlid in skip_update:
@@ -463,11 +491,12 @@ class AccountChartTemplate(models.AbstractModel):
             if model in data:
                 data[model] = data.pop(model)
 
-        # Remove data of unknown fields present in the company template
-        company_data = data.get('res.company')
-        if company_data and not self.env.context.get('l10n_check_fields_complete'):
-            for fname in list(company_data.get(company.id)):
-                if fname not in company._fields:
+        if data.get('res.company', {}).get(company.id):
+            # Filter out default values that we don't want to ignore if the field is not present, in any case.
+            company_data_to_filter = {'account_production_wip_account_id', 'account_production_wip_overhead_account_id'}
+            # Remove data of unknown fields present in the company template
+            for fname in list(data['res.company'][company.id]):
+                if fname not in company._fields and (not self.env.context.get('l10n_check_fields_complete') or fname in company_data_to_filter):
                     del data['res.company'][company.id][fname]
 
         # Translate the untranslatable fields we want to translate anyway
@@ -517,16 +546,13 @@ class AccountChartTemplate(models.AbstractModel):
                     try:
                         values[fname] = self.ref(value).id if value not in ('', 'False', 'None') else False
                     except ValueError:
-                        if model != self.env['res.company']:
+                        if model._name == 'res.company':
+                            # Try a fallback on the company when reloading/loading on a branch
+                            values[fname] = self.env.company[fname] or self.env.company.root_id[fname] or False
+                        else:
                             _logger.warning("Failed when trying to recover %s for field=%s", value, field)
                             failed_fields.append(fname)
-
-                        # We can't find the record referenced in the chart template in our database.
-                        # This might happen when we're creating a branch and the parent company has deleted the
-                        # referenced record and replaced it with something else.
-                        #
-                        # In this case, we try looking for the record already set on the company or its root.
-                        values[fname] = self.env.company[fname] or self.env.company.parent_ids[0][fname] or False
+                            values[fname] = False
                 elif field.type in ('one2many', 'many2many') and isinstance(value[0], (list, tuple)):
                     for i, (command, _id, *last_part) in enumerate(value):
                         if last_part:
@@ -1150,7 +1176,15 @@ class AccountChartTemplate(models.AbstractModel):
                     format_tag = re.sub(r'\s+', ' ', tag.strip())
                     mapped_tag = tags.get(format_tag)
                     if not mapped_tag:
-                        raise UserError(self.env._('Error while loading the localization. You should probably update your localization app first.'))
+                        country = self.env['res.country'].browse(country_id)
+                        message = self.env._(
+                            'Error while loading the localization: missing tax tag %(tag_name)s for country %(country_name)s. You should probably update your localization app first.',
+                            tag_name=format_tag, country_name=country.name)
+                        if not self._context.get('ignore_missing_tags'):
+                            raise UserError(message)
+                        else:
+                            _logger.error(message)
+                            continue
                     res.append(mapped_tag)
             return res
         return mapping_getter
@@ -1360,9 +1394,11 @@ class AccountChartTemplate(models.AbstractModel):
 
         # Gather translations for records that are created from the chart_template data
         for chart_template, chart_companies in groupby(companies, lambda c: c.chart_template):
-            template_data = template_data or self.env['account.chart.template']._get_chart_template_data(chart_template)
-            template_data.pop('template_data', None)
-            for mname, data in template_data.items():
+            chart_template_data = template_data or self.env['account.chart.template'] \
+                .with_context(ignore_missing_tags=True) \
+                ._get_chart_template_data(chart_template)
+            chart_template_data.pop('template_data', None)
+            for mname, data in chart_template_data.items():
                 for _xml_id, record in data.items():
                     fnames = {fname.split('@')[0] for fname in record if fname != '__translation_module__'}
                     for lang in langs:

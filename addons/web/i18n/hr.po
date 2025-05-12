@@ -13,7 +13,6 @@
 # Davor Bojkić <davor.bojkic@storm.hr>, 2024
 # Ivica Dimjašević <ivica.dimjasevic@storm.hr>, 2024
 # hrvoje sić <hrvoje.sic@gmail.com>, 2024
-# 0ba0ac30481a756f36528ba6f9a4317e_6443a87 <52eefe24349934c364624ef40611b7a3_1010754>, 2024
 # Đurđica Žarković <durdica.zarkovic@storm.hr>, 2024
 # Ivan Marijanović <ivanm101@yahoo.com>, 2024
 # Vladimir Olujić <olujic.vladimir@storm.hr>, 2024
@@ -21,17 +20,22 @@
 # Karolina Tonković <karolina.tonkovic@storm.hr>, 2024
 # Mario Jureša <mario.juresa@uvid.hr>, 2024
 # Tina Milas, 2024
-# Bole <bole@dajmi5.com>, 2024
 # Martin Trigaux, 2024
 # Vladimir Vrgoč, 2024
+# Bole <bole@dajmi5.com>, 2024
+# 0ba0ac30481a756f36528ba6f9a4317e_6443a87 <52eefe24349934c364624ef40611b7a3_1010754>, 2025
+# Miro Sertić, 2025
+# Zvonimir Galic, 2025
+# Denis Gobin, 2025
+# Goran Kliska <gkliska@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-02-10 13:24+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Vladimir Vrgoč, 2024\n"
+"Last-Translator: Goran Kliska <gkliska@gmail.com>, 2025\n"
 "Language-Team: Croatian (https://app.transifex.com/odoo/teams/41243/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1283,6 +1287,18 @@ msgid "Back"
 msgstr "Natrag"
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s”"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s” form"
+msgstr ""
+
+#. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
 msgid "Background"
 msgstr "Pozadina"
@@ -1848,7 +1864,7 @@ msgstr "Podesite izgled vaših dokumenata"
 #: code:addons/web/static/src/views/list/list_confirmation_dialog.xml:0
 #: code:addons/web/static/src/webclient/switch_company_menu/switch_company_menu.xml:0
 msgid "Confirm"
-msgstr "Potrvdi"
+msgstr "Potvrdi"
 
 #. module: web
 #. odoo-javascript
@@ -1973,7 +1989,6 @@ msgstr ""
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 msgid "Could not display the selected image"
 msgstr "Odabranu sliku nije moguće prikazati."
@@ -1986,9 +2001,9 @@ msgstr ""
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
-msgid "Could not display the specified image url."
-msgstr "Url odabrane slike nije moguće prikazati."
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+msgid "Could not display the selected spreadsheet"
+msgstr "Odabranu tablicu nije moguće prikazati"
 
 #. module: web
 #. odoo-javascript
@@ -2407,7 +2422,7 @@ msgstr "Odbaci"
 #. odoo-javascript
 #: code:addons/web/static/src/views/form/form_status_indicator/form_status_indicator.xml:0
 msgid "Discard all changes"
-msgstr ""
+msgstr "Odbaci sve promjene"
 
 #. module: web
 #. odoo-javascript
@@ -3108,6 +3123,13 @@ msgstr ""
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+msgid "Google Slide Viewer"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/colorlist/colorlist.js:0
 msgid "Green"
 msgstr "Zeleno"
@@ -3452,14 +3474,14 @@ msgstr "Nepostojeći lanac polja"
 #. odoo-javascript
 #: code:addons/web/static/src/views/calendar/quick_create/calendar_quick_create.js:0
 msgid "Invalid fields"
-msgstr ""
+msgstr "Nesipravna polja"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/model/relational_model/record.js:0
 #: code:addons/web/static/src/views/kanban/kanban_record_quick_create.js:0
 msgid "Invalid fields: "
-msgstr ""
+msgstr "Nesipravna polja:"
 
 #. module: web
 #. odoo-python
@@ -3865,6 +3887,12 @@ msgstr "Učitaj demo podatke"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid "Load everything anyway."
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/search/search_bar/search_bar.js:0
 msgid "Load more"
 msgstr "Prikaži više"
@@ -4016,6 +4044,12 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Match"
 msgstr "Odgovarajuće"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+msgid "Max value"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4233,6 +4267,12 @@ msgstr "Više"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "More Menu"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "More..."
 msgstr ""
 
 #. module: web
@@ -4517,7 +4557,7 @@ msgstr ""
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "No emoji match your search"
+msgid "No emoji matches your search"
 msgstr ""
 
 #. module: web
@@ -4826,7 +4866,7 @@ msgstr ""
 msgid ""
 "Only the first %(count)s records have been deleted (out of %(total)s "
 "selected)"
-msgstr ""
+msgstr "Samo prvih %(count)s zapisa je izbirsano (od %(total)s označenih)"
 
 #. module: web
 #. odoo-python
@@ -4973,7 +5013,7 @@ msgstr "PDF datoteka"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "Page <span class=\"page\"/> / <span class=\"topage\"/>"
-msgstr ""
+msgstr "Stranica <span class=\"page\"/> / <span class=\"topage\"/>"
 
 #. module: web
 #. odoo-javascript
@@ -4999,7 +5039,7 @@ msgstr "Zaporka"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "Payment Communication: <b><span>INV/2023/00003</span></b>"
-msgstr ""
+msgstr "Poziv na broj: <b><span>INV/2023/00003</span></b>"
 
 #. module: web
 #. odoo-javascript
@@ -5724,7 +5764,7 @@ msgstr "Spremi zadano"
 #. odoo-javascript
 #: code:addons/web/static/src/views/form/form_status_indicator/form_status_indicator.xml:0
 msgid "Save manually"
-msgstr ""
+msgstr "Spremi ručno"
 
 #. module: web
 #. odoo-javascript
@@ -5762,6 +5802,12 @@ msgstr "Traži dalje..."
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "Search emoji"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/commands/default_providers.js:0
 msgid "Search for a command..."
 msgstr ""
@@ -5770,12 +5816,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/menus/menu_providers.js:0
 msgid "Search for a menu..."
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "Search for an emoji"
 msgstr ""
 
 #. module: web
@@ -6208,6 +6248,12 @@ msgstr "Status"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "Statusbar"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/settings_confirmation_dialog.xml:0
 msgid "Stay Here"
 msgstr "Ostani ovdje"
@@ -6491,12 +6537,22 @@ msgid ""
 msgstr ""
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr ""
+
+#. module: web
 #. odoo-python
 #: code:addons/web/controllers/export.py:0
 msgid ""
 "There are too many rows (%(count)s rows, limit: %(limit)s) to export as "
 "Excel 2007-2013 (.xlsx) format. Consider splitting the export."
 msgstr ""
+"Postoji previše redaka (%(count)s redaka, limit: %(limit)s) za izvoz u Excel"
+" 2007-2013 (.xlsx) formatu. Razmislite o dijeljenju izvozne datoteke."
 
 #. module: web
 #. odoo-javascript
@@ -6640,6 +6696,18 @@ msgstr ""
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
 msgstr "Naslov"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To next categories"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To previous categories"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7152,7 +7220,7 @@ msgstr "Pokaži metapodatke"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "View: %(displayName)s"
-msgstr ""
+msgstr "Pregleda: %(displayName)s"
 
 #. module: web
 #. odoo-javascript

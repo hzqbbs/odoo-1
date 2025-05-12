@@ -1,6 +1,7 @@
 import { Plugin } from "@html_editor/plugin";
+import { baseContainerGlobalSelector } from "@html_editor/utils/base_container";
 import { isBlock } from "@html_editor/utils/blocks";
-import { removeClass, splitTextNode } from "@html_editor/utils/dom";
+import { fillShrunkPhrasingParent, removeClass, splitTextNode } from "@html_editor/utils/dom";
 import {
     getDeepestPosition,
     isProtected,
@@ -46,7 +47,15 @@ function isUnremovableTableComponent(node, root) {
  */
 export class TablePlugin extends Plugin {
     static id = "table";
-    static dependencies = ["dom", "history", "selection", "delete", "split", "color"];
+    static dependencies = [
+        "baseContainer",
+        "dom",
+        "history",
+        "selection",
+        "delete",
+        "split",
+        "color",
+    ];
     static shared = [
         "insertTable",
         "addColumn",
@@ -90,6 +99,9 @@ export class TablePlugin extends Plugin {
     setup() {
         this.addDomListener(this.editable, "mousedown", this.onMousedown);
         this.addDomListener(this.editable, "mouseup", this.onMouseup);
+        this.addDomListener(this.editable, "keydown", (ev) => {
+            this._isKeyDown = true;
+        });
         this.onMousemove = this.onMousemove.bind(this);
     }
 
@@ -119,7 +131,10 @@ export class TablePlugin extends Plugin {
     }
 
     createTable({ rows = 2, cols = 2 } = {}) {
-        const tdsHtml = new Array(cols).fill("<td><p><br></p></td>").join("");
+        const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+        fillShrunkPhrasingParent(baseContainer);
+        const baseContainerHtml = baseContainer.outerHTML;
+        const tdsHtml = new Array(cols).fill(`<td>${baseContainerHtml}</td>`).join("");
         const trsHtml = new Array(rows).fill(`<tr>${tdsHtml}</tr>`).join("");
         const tableHtml = `<table class="table table-bordered o_table"><tbody>${trsHtml}</tbody></table>`;
         return parseHTML(this.document, tableHtml);
@@ -148,7 +163,9 @@ export class TablePlugin extends Plugin {
     }
     insertTable({ rows = 2, cols = 2 } = {}) {
         const table = this._insertTable({ rows, cols });
-        this.dependencies.selection.setCursorStart(table.querySelector("p"));
+        this.dependencies.selection.setCursorStart(
+            table.querySelector(baseContainerGlobalSelector)
+        );
         this.dependencies.history.addStep();
     }
     /**
@@ -158,8 +175,10 @@ export class TablePlugin extends Plugin {
     addColumn(position, reference) {
         const columnIndex = getColumnIndex(reference);
         const table = closestElement(reference, "table");
-        const tableWidth = table.style.width ? parseFloat(table.style.width) : table.clientWidth;
-        const referenceColumn = table.querySelectorAll(`tr td:nth-of-type(${columnIndex + 1})`);
+        const tableWidth = table.style.width && parseFloat(table.style.width);
+        const referenceColumn = table.querySelectorAll(
+            `tr td:nth-of-type(${columnIndex + 1}), tr th:nth-of-type(${columnIndex + 1})`
+        );
         const referenceCellWidth = reference.style.width
             ? parseFloat(reference.style.width)
             : reference.clientWidth;
@@ -169,64 +188,68 @@ export class TablePlugin extends Plugin {
             (child) => child.nodeName === "TD" || child.nodeName === "TH"
         );
         let totalWidth = 0;
-        for (const cell of firstRowCells) {
-            const width = cell.style.width ? parseFloat(cell.style.width) : cell.clientWidth;
-            cell.style.width = width + "px";
-            // Spread the widths to preserve proportions.
-            // -1 for the width of the border of the new column.
-            const newWidth = Math.max(
-                Math.round((width * tableWidth) / (tableWidth + referenceCellWidth - 1)),
-                13
-            );
-            cell.style.width = newWidth + "px";
-            totalWidth += newWidth;
+        if (tableWidth) {
+            for (const cell of firstRowCells) {
+                const width = parseFloat(cell.style.width);
+                cell.style.width = width + "px";
+                // Spread the widths to preserve proportions.
+                // -1 for the width of the border of the new column.
+                const newWidth = Math.max(
+                    Math.round((width * tableWidth) / (tableWidth + referenceCellWidth - 1)),
+                    13
+                );
+                cell.style.width = newWidth + "px";
+                totalWidth += newWidth;
+            }
         }
         referenceColumn.forEach((cell, rowIndex) => {
-            const newCell = this.document.createElement("td");
-            const p = this.document.createElement("p");
-            p.append(this.document.createElement("br"));
-            newCell.append(p);
+            const newCell = this.document.createElement(cell.tagName);
+            const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+            baseContainer.append(this.document.createElement("br"));
+            newCell.append(baseContainer);
             cell[position](newCell);
-            if (rowIndex === 0) {
+            if (rowIndex === 0 && tableWidth) {
                 newCell.style.width = cell.style.width;
                 totalWidth += parseFloat(cell.style.width);
             }
         });
-        if (totalWidth !== tableWidth - 1) {
-            // -1 for the width of the border of the new column.
-            firstRowCells[firstRowCells.length - 1].style.width =
-                parseFloat(firstRowCells[firstRowCells.length - 1].style.width) +
-                (tableWidth - totalWidth - 1) +
-                "px";
+        if (tableWidth) {
+            if (totalWidth !== tableWidth - 1) {
+                // -1 for the width of the border of the new column.
+                firstRowCells[firstRowCells.length - 1].style.width =
+                    parseFloat(firstRowCells[firstRowCells.length - 1].style.width) +
+                    (tableWidth - totalWidth - 1) +
+                    "px";
+            }
+            // Fix the table and row's width so it doesn't change.
+            table.style.width = tableWidth + "px";
         }
-        // Fix the table and row's width so it doesn't change.
-        table.style.width = tableWidth + "px";
     }
     /**
      * @param {'before'|'after'} position
      * @param {HTMLTableRowElement} reference
      */
     addRow(position, reference) {
-        const referenceRowHeight = reference.style.height
-            ? parseFloat(reference.style.height)
-            : reference.clientHeight;
+        const referenceRowHeight = reference.style.height && parseFloat(reference.style.height);
         const newRow = this.document.createElement("tr");
-        newRow.style.height = referenceRowHeight + "px";
-        const cells = reference.querySelectorAll("td");
-        const referenceRowWidths = [...cells].map(
-            (cell) => cell.style.width || cell.clientWidth + "px"
-        );
+        if (referenceRowHeight) {
+            newRow.style.height = referenceRowHeight + "px";
+        }
+        const cells = reference.querySelectorAll("td, th");
+        const referenceRowWidths = [...cells].map((cell) => cell.style.width);
         newRow.append(
-            ...Array.from(Array(cells.length)).map(() => {
-                const td = this.document.createElement("td");
-                const p = this.document.createElement("p");
-                p.append(this.document.createElement("br"));
-                td.append(p);
+            ...Array.from(cells).map((cell) => {
+                const td = this.document.createElement(cell.tagName);
+                const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+                baseContainer.append(this.document.createElement("br"));
+                td.append(baseContainer);
                 return td;
             })
         );
         reference[position](newRow);
-        newRow.style.height = referenceRowHeight + "px";
+        if (referenceRowHeight) {
+            newRow.style.height = referenceRowHeight + "px";
+        }
         // Preserve the width of the columns (applied only on the first row).
         if (getRowIndex(newRow) === 0) {
             let columnIndex = 0;
@@ -334,11 +357,11 @@ export class TablePlugin extends Plugin {
         if (!table) {
             return;
         }
-        const p = this.document.createElement("p");
-        p.appendChild(this.document.createElement("br"));
-        table.before(p);
+        const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+        baseContainer.appendChild(this.document.createElement("br"));
+        table.before(baseContainer);
         table.remove();
-        this.dependencies.selection.setCursorStart(p);
+        this.dependencies.selection.setCursorStart(baseContainer);
     }
 
     // @todo @phoenix: handle deleteBackward on table cells
@@ -524,10 +547,15 @@ export class TablePlugin extends Plugin {
             // It will be retriggered with selectionchange
             return;
         }
-        this.deselectTable();
         const selection = selectionData.editableSelection;
         const startTd = closestElement(selection.startContainer, "td");
         const endTd = closestElement(selection.endContainer, "td");
+        if (!(startTd && startTd === endTd) || this._isKeyDown) {
+            delete this._isKeyDown;
+            // Prevent deselecting single cell unless selection changes
+            // through keyboard.
+            this.deselectTable();
+        }
         const startTable = ancestors(selection.startContainer, this.editable)
             .filter((node) => node.nodeName === "TABLE")
             .pop();
@@ -699,13 +727,22 @@ export class TablePlugin extends Plugin {
         return didDeselectTable;
     }
 
-    applyTableColor(color, mode) {
+    applyTableColor(color, mode, previewMode) {
         const selectedTds = [...this.editable.querySelectorAll("td.o_selected_td")].filter(
             (node) => node.isContentEditable
         );
         if (selectedTds.length && mode === "backgroundColor") {
+            if (previewMode) {
+                // Temporarily remove backgroundColor applied by "o_selected_td" class with !important.
+                selectedTds.forEach((td) => td.classList.remove("o_selected_td"));
+            }
             for (const td of selectedTds) {
                 this.dependencies.color.colorElement(td, color, mode);
+                if (color) {
+                    td.style["color"] = getComputedStyle(td).color;
+                } else {
+                    td.style["color"] = "";
+                }
             }
         }
     }

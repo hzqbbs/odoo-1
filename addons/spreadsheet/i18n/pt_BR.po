@@ -8,15 +8,15 @@
 # a75f12d3d37ea5bf159c4b3e85eb30e7_0fa6927, 2024
 # Martin Trigaux, 2024
 # Wil Odoo, 2024
-# Maitê Dietze, 2024
+# Maitê Dietze, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-03-19 20:37+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Maitê Dietze, 2024\n"
+"Last-Translator: Maitê Dietze, 2025\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/odoo/teams/41243/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -896,13 +896,6 @@ msgstr ""
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "All the ranges and the range values must have the same size"
-msgstr ""
-"Todos os intervalos e os valores de intervalo devem ter o mesmo tamanho"
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "All the ranges must have the same dimensions."
 msgstr "Todos os intervalos devem ter as mesmas dimensões."
 
@@ -1669,6 +1662,12 @@ msgstr "Não é possível fazer uma colagem especial de uma figura."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Cannot duplicate a pivot in error."
+msgstr "Não é possível duplicar um pivô com erro."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cannot find workbook relations file"
 msgstr "Não é possível encontrar o arquivo de relações da pasta de trabalho"
 
@@ -2185,6 +2184,12 @@ msgstr "Converte uma cadeia de caracteres especificada em letras minúsculas."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Converts a specified string to uppercase."
 msgstr "Converte uma cadeia de caracteres especificada em maiúsculas."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Converts a string to a numeric value."
+msgstr "Converte uma cadeia de caracteres em um valor numérico."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3340,6 +3345,7 @@ msgstr "Campo %(field)s não é suportado devido ao seu tipo (%(type)s)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/odoo_pivot.js:0
 #: code:addons/spreadsheet/static/src/pivot/pivot_helpers.js:0
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
 msgid "Field %s does not exist"
 msgstr "O campo %s não existe"
 
@@ -5723,7 +5729,7 @@ msgstr "Pivô duplicado."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Pivot duplication failed"
+msgid "Pivot duplication failed."
 msgstr "Falha na duplicação do pivô."
 
 #. module: spreadsheet
@@ -6695,6 +6701,12 @@ msgstr "Valor único de um intervalo semelhante a uma tabela."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
+msgid "Some measures are not available: %s"
+msgstr "Algumas medidas não estão disponíveis: %s"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Some used characters are not allowed in a sheet name (Forbidden characters "
@@ -7414,6 +7426,24 @@ msgstr "A matriz que será transformada."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The base (%s) must be between 2 and 36 inclusive."
 msgstr "A base (%s) deve estar entre 2 e 36, inclusive."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base (%s) must be strictly positive."
+msgstr "A base (%s) deve ser estritamente positiva."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base must be different from 1."
+msgstr "A base deve ser diferente de 1."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base of the logarithm."
+msgstr "A base do logaritmo."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8461,6 +8491,12 @@ msgstr "O logaritmo de um número, base e (número de Euler)."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The logarithm of a number, for a given base."
+msgstr "The logarithm of a number, for a given base."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The low end of the random range."
 msgstr "O limite inferior do intervalo aleatório."
 
@@ -8598,6 +8634,23 @@ msgstr "O minuendo, ou o número a ser subtraído."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The minute component of the time."
 msgstr "O componente de minuto da hora."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/data_sources/data_source.js:0
+#: code:addons/spreadsheet/static/src/pivot/odoo_pivot_loader.js:0
+msgid "The model \"%(model)s\" does not exist."
+msgstr "O modelo \"%(model)s\" não existe."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/global_filters/components/filter_value/filter_value.js:0
+msgid ""
+"The model (%(model)s) of this global filter is not valid (it may have been "
+"renamed/deleted)."
+msgstr ""
+"O modelo (%(model)s) desse filtro global não é válido (ele pode ter sido "
+"renomeado/excluído)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10156,6 +10209,12 @@ msgstr "O valor para o qual será calculada a tangente inversa."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value for which to calculate the logarithm, base e."
 msgstr "O valor para o qual será calculado o logaritmo, base e."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The value for which to calculate the logarithm."
+msgstr "The value for which to calculate the logarithm."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12079,6 +12138,12 @@ msgid ""
 msgstr ""
 "A combinação de modo de pesquisa e de correspondência não é compatível com a"
 " avaliação XLOOKUP."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "the string to be converted"
+msgstr "a cadeia de caracteres a converter"
 
 #. module: spreadsheet
 #. odoo-javascript

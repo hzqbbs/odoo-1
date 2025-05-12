@@ -24,7 +24,7 @@ class ProductTemplate(models.Model):
 
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
-        if 'uom_id' in fields_list and not res.get('uom_id'):
+        if 'uom_id' in fields_list and not res.get('uom_id') or self.env.context.get('default_uom_id') is False:
             res['uom_id'] = self._get_default_uom_id().id
         return res
 
@@ -119,9 +119,11 @@ class ProductTemplate(models.Model):
         default=_get_default_uom_id, required=True,
         help="Default unit of measure used for all stock operations.")
     uom_name = fields.Char(string='Unit of Measure Name', related='uom_id.name', readonly=True)
+    uom_category_id = fields.Many2one('uom.category', string='UoM Category', related="uom_id.category_id")
     uom_po_id = fields.Many2one(
         'uom.uom', 'Purchase Unit',
         compute='_compute_uom_po_id', required=True, readonly=False, store=True, precompute=True,
+        domain="[('category_id', '=', uom_category_id)]",
         help="Default unit of measure used for purchase orders. It must be in the same category as the default unit of measure.")
     company_id = fields.Many2one(
         'res.company', 'Company', index=True)
@@ -201,17 +203,13 @@ class ProductTemplate(models.Model):
 
     def _compute_product_document_count(self):
         for template in self:
-            template.product_document_count = template.env['product.document'].search_count([
-                '|',
-                    '&', ('res_model', '=', 'product.template'), ('res_id', '=', template.id),
-                    '&',
-                        ('res_model', '=', 'product.product'),
-                        ('res_id', 'in', template.product_variant_ids.ids),
-            ])
+            template.product_document_count = template.env['product.document'].search_count(
+                template._get_product_document_domain()
+            )
 
     @api.depends('image_1920', 'image_1024')
     def _compute_can_image_1024_be_zoomed(self):
-        for template in self:
+        for template in self.with_context(bin_size=False):
             template.can_image_1024_be_zoomed = template.image_1920 and is_image_size_above(template.image_1920, template.image_1024)
 
     @api.depends(
@@ -231,9 +229,7 @@ class ProductTemplate(models.Model):
         for product in self:
             product.has_configurable_attributes = (
                 product.has_dynamic_attributes() or any(
-                    ptal.attribute_id.display_type == 'multi'
-                    or len(ptal.value_ids) >= 2
-                    or ptal.value_ids.is_custom
+                    ptal._is_configurable()
                     for ptal in product.attribute_line_ids
                 )
             )
@@ -259,7 +255,7 @@ class ProductTemplate(models.Model):
     def _compute_cost_currency_id(self):
         env_currency_id = self.env.company.currency_id.id
         for template in self:
-            template.cost_currency_id = template.company_id.currency_id.id or env_currency_id
+            template.cost_currency_id = template.company_id.sudo().currency_id.id or env_currency_id
 
     def _compute_template_field_from_variant_field(self, fname, default=False):
         """Sets the value of the given field based on the template variant values
@@ -473,7 +469,14 @@ class ProductTemplate(models.Model):
     def _onchange_type(self):
         if self.type == 'combo':
             if self.attribute_line_ids:
-                raise UserError(_("Combo products can't have attributes"))
+                raise UserError(_("Combo products can't have attributes."))
+            combo_items = self.env['product.combo.item'].sudo().search([
+                ('product_id', 'in', self.product_variant_ids.ids)
+            ])
+            if combo_items:
+                raise UserError(_(
+                    "This product is part of a combo, so its type can't be changed to \"combo\"."
+                ))
             self.purchase_ok = False
         return {}
 
@@ -534,6 +537,9 @@ class ProductTemplate(models.Model):
                 'image_128',
                 'can_image_1024_be_zoomed',
             ])
+        for product_template in self:
+            if "type" in vals and vals.get("type") != "combo":
+                product_template.combo_ids = False
         return res
 
     def copy_data(self, default=None):
@@ -623,13 +629,7 @@ class ProductTemplate(models.Model):
                 'default_res_id': self.id,
                 'default_company_id': self.company_id.id,
             },
-            'domain': [
-                '|',
-                    '&', ('res_model', '=', 'product.template'), ('res_id', '=', self.id),
-                    '&',
-                        ('res_model', '=', 'product.product'),
-                        ('res_id', 'in', self.product_variant_ids.ids),
-            ],
+            'domain': self._get_product_document_domain(),
             'target': 'current',
             'help': """
                 <p class="o_view_nocontent_smiling_face">
@@ -641,7 +641,7 @@ class ProductTemplate(models.Model):
                     %s
                 </p>
                 <p>
-                    <a class="oe_link" href="https://www.odoo.com/documentation/18.0/_downloads/5f0840ed187116c425fdac2ab4b592e1/pdfquotebuilderexamples.zip">
+                    <a class="oe_link" href="https://www.odoo.com/documentation/18.0/_downloads/c2c6ce32294dfddffcfefcf2775f7a09/pdfquotebuilderexamples.zip">
                     %s
                     </a>
                 </p>
@@ -1252,6 +1252,8 @@ class ProductTemplate(models.Model):
         value_index_per_line = [-1] * len(product_template_attribute_values_per_line)
         # determines which line line we're working on
         line_index = 0
+        # determines which ptav we're working on
+        current_ptav = None
 
         while True:
             current_line_values = product_template_attribute_values_per_line[line_index]
@@ -1262,11 +1264,12 @@ class ProductTemplate(models.Model):
                 if line_index == len(product_template_attribute_values_per_line) - 1:
                     # submit combination if we're on the last line
                     yield partial_combination
+                    # will break or continue further down as current_ptav_index is always -1 here
                 else:
                     line_index += 1
                     continue
-
-            current_ptav = current_line_values[current_ptav_index]
+            else:
+                current_ptav = current_line_values[current_ptav_index]
 
             # removing exclusions from current_ptav as we're removing it from partial_combination
             if current_ptav_index >= 0:
@@ -1455,6 +1458,16 @@ class ProductTemplate(models.Model):
         This method is meant to be overriden in other standard modules.
         """
         return self.env['product.pricelist'].browse(self.env.context.get('pricelist'))
+
+    def _get_product_document_domain(self):
+        self.ensure_one()
+        return expression.OR([
+            expression.AND([[('res_model', '=', 'product.template')], [('res_id', '=', self.id)]]),
+            expression.AND([
+                [('res_model', '=', 'product.product')],
+                [('res_id', 'in', self.product_variant_ids.ids)],
+            ])
+        ])
 
     ###################
     # DEMO DATA SETUP #

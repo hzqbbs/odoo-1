@@ -35,6 +35,7 @@ export class TableUIPlugin extends Plugin {
         /** @type {import("@html_editor/core/overlay_plugin").Overlay} */
         this.picker = this.dependencies.overlay.createOverlay(TablePicker, {
             positionOptions: {
+                updatePositionOnResize: false,
                 onPositioned: (picker, position) => {
                     const popperRect = picker.getBoundingClientRect();
                     const { left } = position;
@@ -105,7 +106,7 @@ export class TableUIPlugin extends Plugin {
             return;
         }
         if (
-            ev.target.tagName === "TD" &&
+            ["TD", "TH"].includes(target.tagName) &&
             target !== this.activeTd &&
             this.editable.contains(target)
         ) {
@@ -117,7 +118,7 @@ export class TableUIPlugin extends Plugin {
             if (isOverlay) {
                 return;
             }
-            const parentTd = closestElement(target, "td");
+            const parentTd = closestElement(target, "td, th");
             if (!parentTd) {
                 this.setActiveTd(null);
             }

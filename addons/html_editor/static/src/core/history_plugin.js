@@ -299,8 +299,19 @@ export class HistoryPlugin extends Plugin {
     setIdOnRecords(records) {
         for (const record of records) {
             if (record.type === "childList" && record.addedNodes.length) {
-                for (const node of record.addedNodes) {
-                    this.setNodeId(node);
+                const { addedNodes, removedNodes } = record;
+                if (this.isSameTextContentMutation(record)) {
+                    const oldId = this.nodeToIdMap.get(removedNodes[0]);
+                    if (oldId) {
+                        this.nodeToIdMap.delete(removedNodes[0]);
+                        this.idToNodeMap.delete(oldId);
+                        this.nodeToIdMap.set(addedNodes[0], oldId);
+                        this.idToNodeMap.set(oldId, addedNodes[0]);
+                    }
+                } else {
+                    for (const node of addedNodes) {
+                        this.setNodeId(node);
+                    }
                 }
             }
         }
@@ -366,11 +377,32 @@ export class HistoryPlugin extends Plugin {
                 if (!attributeCache.get(record.target)[record.attributeName]) {
                     continue;
                 }
+            } else if (record.type === "childList" && this.isSameTextContentMutation(record)) {
+                continue;
             }
             filteredRecords.push(record);
         }
         // @todo @phoenix allow an option to filter mutation records.
         return filteredRecords;
+    }
+
+    /**
+     * Check if a mutation consists of removing and adding a single text node
+     * with the same text content, which occurs in Firefox but is optimized
+     * away in Chrome.
+     *
+     * @param { MutationRecord } record
+     */
+    isSameTextContentMutation(record) {
+        const { addedNodes, removedNodes } = record;
+        return (
+            record.type === "childList" &&
+            addedNodes.length === 1 &&
+            removedNodes.length === 1 &&
+            addedNodes[0].nodeType === Node.TEXT_NODE &&
+            removedNodes[0].nodeType === Node.TEXT_NODE &&
+            addedNodes[0].textContent === removedNodes[0].textContent
+        );
     }
 
     /**
@@ -530,12 +562,20 @@ export class HistoryPlugin extends Plugin {
 
         this.handleObserverRecords();
         const currentStep = this.currentStep;
-        if (!currentStep.mutations.length) {
+        const currentMutationsCount = currentStep.mutations.length;
+        if (currentMutationsCount === 0) {
             return false;
         }
         const stepCommonAncestor = this.getMutationsRoot(currentStep.mutations) || this.editable;
         this.dispatchTo("normalize_handlers", stepCommonAncestor);
         this.handleObserverRecords();
+        if (currentMutationsCount === currentStep.mutations.length) {
+            // If there was no registered mutation during the normalization step,
+            // force the dispatch of a content_updated to allow i.e. the hint
+            // plugin to react to non-observed changes (i.e. a div becoming
+            // a baseContainer).
+            this.dispatchContentUpdated();
+        }
 
         currentStep.previousStepId = this.steps.at(-1)?.id;
 
@@ -1031,6 +1071,21 @@ export class HistoryPlugin extends Plugin {
     }
     /**
      * Unserialize a node and its children if the collaboration is true.
+     *
+     * TODO: find a solution so that the following issue can never happen:
+     *   If there is already another node in `nodeToIdMap` pointing to the
+     *   current id before executing `this.nodeToIdMap.set(node, id)` in this
+     *   function, there will be 2 different nodes pointing to the same id.
+     *
+     *   2 different nodes for the same id is pretty common:
+     *     Unserializing a text node in `_unserializeNode` always creates
+     *     another (new) node.
+     *
+     *   If mutations concerning both nodes are bundled in the same step, they
+     *   will all be erroneously serialized as if they concern the node which
+     *   had its id set the latest, which is likely to cause issues when
+     *   applying these mutations (undo/redo, collaboration).
+     *
      * @param { SerializedNode } node
      * @returns { Node }
      */

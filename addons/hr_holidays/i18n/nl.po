@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2024
+# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
+# Manon Rondou, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-04-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Erwin van der Ploeg <erwin@odooexperts.nl>, 2024\n"
+"Last-Translator: Manon Rondou, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid " to %(date_to_utc)s"
-msgstr " t/m%(date_to_utc)s"
+msgstr " t/m %(date_to_utc)s"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -343,7 +344,7 @@ msgid ""
 "<span>You can only take this time off in whole days, so if your schedule has"
 " half days, it won't be used efficiently.</span>"
 msgstr ""
-"<span>Je kan dit verlof alleen in hele dagen opnemen, dus als je rooster "
+"<span>Je kunt dit verlof alleen in hele dagen opnemen, dus als je rooster "
 "halve dagen heeft, zal deze niet efficiënt worden gebruikt.</span>"
 
 #. module: hr_holidays
@@ -616,7 +617,7 @@ msgstr "Alle verlof"
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__action_with_unused_accruals__all
 msgid "All accrued time carried over"
-msgstr "Alle overgedragen opgebouwde dagen"
+msgstr "Alle opgebouwde dagen overdragen"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__last_several_days
@@ -712,18 +713,11 @@ msgstr "Soort toewijzing"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid ""
-"Allocation must be \"To Approve\" or \"Second Approval\" in order to "
-"validate it."
+"Allocation must be confirmed \"To Approve\" or validated once \"Second "
+"Approval\" in order to approve it."
 msgstr ""
-"De toewijzing moet 'Goed te keuren' of 'Tweede goedkeuring' zijn om zijn om "
-"deze te valideren."
-
-#. module: hr_holidays
-#. odoo-python
-#: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid "Allocation must be confirmed (\"To Approve\") in order to approve it."
-msgstr ""
-"Toewijzing moet bevestigd zijn ('Goed te keuren') om het te goed te keuren."
+"De toewijzing moet worden bevestigd \"Goedkeuren\" of eenmalig worden "
+"bevestigd \"Tweede goedkeuring\" om deze te kunnen goedkeuren."
 
 #. module: hr_holidays
 #. odoo-python
@@ -791,7 +785,7 @@ msgstr ""
 "- Per werknemer : voor een specifieke werknemer \n"
 "- Per bedrijf: alle werknemers van het opgegeven bedrijf\n"
 "- Per afdeling: alle werknemers van de opgegeven afdeling\n"
-"- Per werknemer label: alle werknemers van de specifieke werknemerscategorie"
+"- Per werknemertag: alle werknemers van de specifieke werknemerscategorie"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__already_accrued
@@ -1054,7 +1048,7 @@ msgstr "Per werknemer"
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_allocation_generate_multi_wizard__allocation_mode__category
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_generate_multi_wizard__allocation_mode__category
 msgid "By Employee Tag"
-msgstr "Per werknemer label"
+msgstr "Per werknemertag"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__allocation_validation_type__manager
@@ -1685,12 +1679,18 @@ msgstr "Verzoeken van werknemers"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation_generate_multi_wizard__category_id
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_generate_multi_wizard__category_id
 msgid "Employee Tag"
-msgstr "Werknemer label"
+msgstr "Werknemertag"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "Employee accrue"
 msgstr "Opbouw werknemer"
+
+#. module: hr_holidays
+#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_kanban
+#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban_approve_department
+msgid "Employee's image"
+msgstr "Afbeelding van de werknemer"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_summary_employee__emp
@@ -1804,7 +1804,7 @@ msgstr "Volgers"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__message_partner_ids
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Volgers (Relaties)"
+msgstr "Volgers (Partners)"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__activity_type_icon
@@ -2206,7 +2206,7 @@ msgstr "Verloftype verhoogt duur"
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_employee_type_report__holiday_status__left
 msgid "Left"
-msgstr "Links"
+msgstr "Overgebleven"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -2733,6 +2733,16 @@ msgstr "Nog"
 
 #. module: hr_holidays
 #. odoo-python
+#: code:addons/hr_holidays/models/hr_leave_allocation.py:0
+msgid ""
+"Only %s's Time Off Approver, a time off Officer/Responsible or Administrator"
+" can approve or refuse allocation requests."
+msgstr ""
+"Alleen de verlofgoedkeurder van %s, een verlofbeheerder/verantwoordelijke of"
+" een manager kan toewijzingsverzoeken goedkeuren of weigeren."
+
+#. module: hr_holidays
+#. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "Only a Time Off Manager can reset a refused leave."
 msgstr "Alleen een verlof manager kan een afgewezen verlofaanvraag resetten."
@@ -2767,18 +2777,19 @@ msgstr "Enkel een manager kan een geannuleerd verlof wijzingen."
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid "Only a time off Manager can approve its own requests."
-msgstr "Alleen een verlof manager kan zijn eigen verzoeken goedkeuren."
+msgid "Only a time off Administrator can approve their own requests."
+msgstr ""
+"Alleen een verlofbeheerder kan zijn of haar eigen verzoeken goedkeuren."
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid ""
-"Only a time off Officer/Responsible or Manager can approve or refuse time "
-"off requests."
+"Only a time off Officer/Responsible or Administrator can approve or refuse "
+"allocation requests."
 msgstr ""
-"Alleen een verlofbeheerder of managers kunnen verlofaanvragen goedkeuren of "
-"afwijzen."
+"Alleen een verlofbeheerder/verantwoordelijke kan toewijzingsverzoeken "
+"goedkeuren of weigeren"
 
 #. module: hr_holidays
 #. odoo-python
@@ -2888,6 +2899,12 @@ msgid "Rate"
 msgstr "Hoeveel"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__rating_ids
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__rating_ids
+msgid "Ratings"
+msgstr "Beoordelingen"
+
+#. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_cancel_leave__reason
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_tree
 msgid "Reason"
@@ -2970,7 +2987,7 @@ msgstr "Rapportages"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.res_users_view_form
 msgid "Request Allocation"
-msgstr "Verzoek toewijzing"
+msgstr "Verzoek verloftoewijzing"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__request_date_to
@@ -3560,6 +3577,16 @@ msgstr ""
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
+msgid ""
+"There is no employee set on the time off. Please make sure you're logged in "
+"the correct company."
+msgstr ""
+"Er is geen werknemer op de verlofaanvraag ingesteld. Zorg ervoor dat je bij "
+"het juiste bedrijf bent ingelogd."
+
+#. module: hr_holidays
+#. odoo-python
+#: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "There is no valid allocation to cover that request."
 msgstr "Er is geen geldige toewijzing om dat verzoek te dekken."
 
@@ -4000,7 +4027,7 @@ msgstr ""
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.holiday_status_training
 msgid "Training Time Off"
-msgstr "Trainingstijd uit"
+msgstr "Opleidingsverlof"
 
 #. module: hr_holidays
 #: model_terms:ir.actions.act_window,help:hr_holidays.mail_activity_type_action_config_hr_holidays
@@ -4084,7 +4111,7 @@ msgstr "Ongelezen berichten"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "Up to"
-msgstr "Tot en met"
+msgstr "T/m"
 
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_res_users
@@ -4249,8 +4276,8 @@ msgid ""
 "When the field is checked the total amount accrued each year will be capped "
 "at the specified amount"
 msgstr ""
-"Als het veld is aangevinkt, wordt het totale bedrag dat elk jaar wordt "
-"opgebouwd, afgetopt op het opgegeven bedrag"
+"Wanneer het veld is aangevinkt, wordt het totale aantal dat elk jaar wordt "
+"opgebouwd beperkt tot het opgegeven aantal"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__time_type__other
@@ -4422,7 +4449,7 @@ msgid ""
 "You cannot refuse this allocation request since the employee has already "
 "taken leaves for it. Please refuse or delete those leaves first."
 msgstr ""
-"Je kan deze toewijzingsaanvraag niet weigeren omdat de werknemer reeds "
+"Je kunt deze toewijzingsaanvraag niet weigeren omdat de werknemer reeds "
 "verlof heeft genomen. Weiger of verwijder eerst het verlof."
 
 #. module: hr_holidays
@@ -4439,6 +4466,16 @@ msgstr ""
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "You must be %s's Manager to approve this leave"
 msgstr "Je moet de manager van %s zijn om dit verlof goed te keuren"
+
+#. module: hr_holidays
+#. odoo-python
+#: code:addons/hr_holidays/models/hr_leave_allocation.py:0
+msgid ""
+"You must be either %s's Time Off Approver or Time off Administrator to "
+"validate this allocation request."
+msgstr ""
+"Je moet de verlofgoedkeurder of verlofbeheerder van %s zijn om dit "
+"toewijzingsverzoek te valideren."
 
 #. module: hr_holidays
 #. odoo-python
@@ -4502,7 +4539,7 @@ msgstr "Je %(leave_type)s gepland op %(date)s is afgewezen"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "Your Time Off"
-msgstr "Jouw verlof"
+msgstr "Je verlof"
 
 #. module: hr_holidays
 #. odoo-python
@@ -4663,7 +4700,7 @@ msgstr "nee"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "of"
-msgstr "of"
+msgstr "van"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -4679,7 +4716,7 @@ msgstr "van de maand"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "on"
-msgstr "met"
+msgstr "op"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form

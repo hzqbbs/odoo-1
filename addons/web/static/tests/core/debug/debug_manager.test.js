@@ -1,5 +1,6 @@
 import { browser } from "@web/core/browser/browser";
-import { regenerateAssets } from "@web/core/debug/debug_menu_items";
+import { user } from "@web/core/user";
+import { regenerateAssets, becomeSuperuser } from "@web/core/debug/debug_menu_items";
 import { openViewItem } from "@web/webclient/debug/debug_items";
 import { describe, test, expect, beforeEach } from "@odoo/hoot";
 import { animationFrame } from "@odoo/hoot-mock";
@@ -24,7 +25,7 @@ import {
     makeDialogMockEnv,
 } from "@web/../tests/web_test_helpers";
 import { Component, xml } from "@odoo/owl";
-import { queryOne, queryAll, queryAllTexts, click } from "@odoo/hoot-dom";
+import { queryOne, queryAll, queryAllTexts, click, queryAllProperties } from "@odoo/hoot-dom";
 
 class DebugMenuParent extends Component {
     static template = xml`<DebugMenu/>`;
@@ -39,11 +40,11 @@ const debugRegistry = registry.category("debug");
 
 onRpc(async (args) => {
     if (args.method === "has_access") {
-        return Promise.resolve(true);
+        return true;
     }
     if (args.route === "/web/dataset/call_kw/ir.attachment/regenerate_assets_bundles") {
         expect.step("ir.attachment/regenerate_assets_bundles");
-        return Promise.resolve(true);
+        return true;
     }
 });
 
@@ -54,7 +55,8 @@ beforeEach(() => {
     clearRegistry(debugRegistry.category("custom"));
 });
 
-describe.tags("desktop")("DebugMenu", () => {
+describe.tags("desktop");
+describe("DebugMenu", () => {
     test("can be rendered", async () => {
         debugRegistry
             .category("default")
@@ -230,6 +232,14 @@ describe.tags("desktop")("DebugMenu", () => {
         await click(item);
         await animationFrame();
         expect.verifySteps(["ir.attachment/regenerate_assets_bundles", "reloadPage"]);
+    });
+
+    test("cannot acess the Become superuser menu if not admin", async () => {
+        debugRegistry.category("default").add("becomeSuperuser", becomeSuperuser);
+        user.isAdmin = false;
+        await mountWithCleanup(DebugMenuParent);
+        await contains("button.dropdown-toggle").click();
+        expect(".dropdown-menu .dropdown-item").toHaveCount(0);
     });
 
     test("can open a view", async () => {
@@ -686,5 +696,86 @@ describe.tags("desktop")("DebugMenu", () => {
         expect(".breadcrumb-item").toHaveCount(1);
         expect(".o_breadcrumb .active").toHaveCount(1);
         expect(".o_breadcrumb .active").toHaveText("Partner");
+    });
+
+    test("set defaults: settings default value with a very long value", async () => {
+        serverState.debug = "1";
+
+        const fooValue = "12".repeat(250);
+        const argSteps = [];
+
+        onRpc("ir.default", "set", async (args) => {
+            argSteps.push(args.args);
+            return true;
+        });
+
+        class Partner extends models.Model {
+            _name = "partner";
+
+            foo = fields.Char();
+            description = fields.Html();
+            bar = fields.Many2one({ relation: "ir.ui.view" });
+
+            _records = [
+                {
+                    id: 1,
+                    display_name: "p1",
+                    foo: fooValue,
+                    description: fooValue,
+                    bar: 18,
+                },
+            ];
+
+            _views = {
+                form: `
+                    <form>
+                        <field name="foo"/>
+                        <field name="description"/>
+                        <field name="bar" invisible="1"/>
+                    </form>`,
+                search: "<search/>",
+            };
+        }
+
+        class IrUiView extends models.Model {
+            _name = "ir.ui.view";
+
+            name = fields.Char();
+            model = fields.Char();
+
+            _records = [{ id: 18 }];
+        }
+
+        defineModels([Partner, IrUiView]);
+
+        await mountWithCleanup(WebClient);
+
+        await getService("action").doAction({
+            name: "Partners",
+            res_model: "partner",
+            res_id: 1,
+            type: "ir.actions.act_window",
+            views: [[18, "form"]],
+        });
+        await contains(".o_debug_manager button").click();
+        await contains(".dropdown-menu .dropdown-item:contains('Set Default Values')").click();
+        expect(".modal").toHaveCount(1);
+
+        expect(queryAllTexts`.modal #formview_default_fields option`).toEqual([
+            "",
+            "Foo = 121212121212121212121212121212121212121212121212121212121...",
+            "Description = 121212121212121212121212121212121212121212121212121212121...",
+        ]);
+
+        expect(queryAllProperties(".modal #formview_default_fields option", "value")).toEqual([
+            "",
+            "foo",
+            "description",
+        ]);
+
+        await contains(".modal #formview_default_fields").select("foo");
+        await contains(".modal .modal-footer button:nth-child(2)").click();
+        expect(".modal").toHaveCount(0);
+        expect(argSteps).toEqual([["partner", "foo", fooValue, true, true, false]]);
     });
 });

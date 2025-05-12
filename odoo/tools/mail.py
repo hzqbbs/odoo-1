@@ -61,7 +61,8 @@ safe_attrs = defs.safe_attrs | frozenset(
      'data-o-mail-quote', 'data-o-mail-quote-node',  # quote detection
      'data-oe-model', 'data-oe-id', 'data-oe-field', 'data-oe-type', 'data-oe-expression', 'data-oe-translation-source-sha', 'data-oe-nodeid',
      'data-last-history-steps', 'data-oe-protected', 'data-embedded', 'data-embedded-editable', 'data-embedded-props', 'data-oe-version',
-     'data-oe-transient-content', 'data-behavior-props', 'data-prop-name',  # legacy editor
+     'data-oe-transient-content', 'data-behavior-props', 'data-prop-name', 'data-width', 'data-height', 'data-scale-x', 'data-scale-y', 'data-x', 'data-y',  # legacy editor
+     'data-oe-role', 'data-oe-aria-label',
      'data-publish', 'data-id', 'data-res_id', 'data-interval', 'data-member_id', 'data-scroll-background-ratio', 'data-view-id',
      'data-class', 'data-mimetype', 'data-original-src', 'data-original-id', 'data-gl-filter', 'data-quality', 'data-resize-width',
      'data-shape', 'data-shape-colors', 'data-file-name', 'data-original-mimetype',
@@ -83,10 +84,12 @@ class _Cleaner(clean.Cleaner):
     _style_whitelist = [
         'font-size', 'font-family', 'font-weight', 'font-style', 'background-color', 'color', 'text-align',
         'line-height', 'letter-spacing', 'text-transform', 'text-decoration', 'text-decoration', 'opacity',
-        'float', 'vertical-align', 'display',
+        'float', 'vertical-align', 'display', 'object-fit',
         'padding', 'padding-top', 'padding-left', 'padding-bottom', 'padding-right',
         'margin', 'margin-top', 'margin-left', 'margin-bottom', 'margin-right',
         'white-space',
+        # appearance
+        'background-image', 'background-position', 'background-size', 'background-repeat', 'background-origin',
         # box model
         'border', 'border-color', 'border-radius', 'border-style', 'border-width', 'border-top', 'border-bottom',
         'height', 'width', 'max-width', 'min-width', 'min-height',
@@ -189,7 +192,6 @@ def tag_quote(el):
 
     # gmail or yahoo // # outlook, html // # msoffice
     if 'gmail_extra' in el_class or \
-            'divRplyFwdMsg' in el_id or \
             ('SkyDrivePlaceholder' in el_class or 'SkyDrivePlaceholder' in el_class):
         el.set('data-o-mail-quote', '1')
         if el.getparent() is not None:
@@ -201,6 +203,32 @@ def tag_quote(el):
         el.set('data-o-mail-quote', '1')
         for sibling in el.itersiblings(preceding=False):
             sibling.set('data-o-mail-quote', '1')
+
+    # odoo, gmail and outlook automatic signature wrapper
+    is_signature_wrapper = 'odoo_signature_wrapper' in el_class or 'gmail_signature' in el_class or el_id == "Signature"
+    is_outlook_auto_message = 'appendonsend' in el_id
+    # gmail and outlook reply quote
+    is_outlook_reply_quote = 'divRplyFwdMsg' in el_id
+    is_gmail_quote = 'gmail_quote' in el_class
+    is_quote_wrapper = is_signature_wrapper or is_gmail_quote or is_outlook_reply_quote
+    if is_quote_wrapper:
+        el.set('data-o-mail-quote-container', '1')
+        el.set('data-o-mail-quote', '1')
+
+    # outlook reply wrapper is preceded with <hr> and a div containing recipient info
+    if is_outlook_reply_quote:
+        hr = el.getprevious()
+        reply_quote = el.getnext()
+        if hr is not None and hr.tag == 'hr':
+            hr.set('data-o-mail-quote', '1')
+        if reply_quote is not None:
+            reply_quote.set('data-o-mail-quote-container', '1')
+            reply_quote.set('data-o-mail-quote', '1')
+
+    if is_outlook_auto_message:
+        if not el.text or not el.text.strip():
+            el.set('data-o-mail-quote-container', '1')
+            el.set('data-o-mail-quote', '1')
 
     # html signature (-- <br />blah)
     signature_begin = re.compile(r"((?:(?:^|\n)[-]{2}[\s]?$))")
@@ -218,7 +246,19 @@ def tag_quote(el):
         # remove single node
         el.set('data-o-mail-quote-node', '1')
         el.set('data-o-mail-quote', '1')
-    if el.getparent() is not None and (el.getparent().get('data-o-mail-quote') or el.getparent().get('data-o-mail-quote-container')) and not el.getparent().get('data-o-mail-quote-node'):
+    if el.getparent() is not None and not el.getparent().get('data-o-mail-quote-node'):
+        if el.getparent().get('data-o-mail-quote'):
+            el.set('data-o-mail-quote', '1')
+        # only quoting the elements following the first quote in the container
+        # avoids issues with repeated calls to html_normalize
+        elif el.getparent().get('data-o-mail-quote-container'):
+            if (first_sibling_quote := el.getparent().find("*[@data-o-mail-quote]")) is not None:
+                siblings = el.getparent().getchildren()
+                quote_index = siblings.index(first_sibling_quote)
+                element_index = siblings.index(el)
+                if quote_index < element_index:
+                    el.set('data-o-mail-quote', '1')
+    if el.getprevious() is not None and el.getprevious().get('data-o-mail-quote') and not el.text_content().strip():
         el.set('data-o-mail-quote', '1')
 
 
@@ -401,10 +441,12 @@ def create_link(url, label):
     return f'<a href="{url}" target="_blank" rel="noreferrer noopener">{label}</a>'
 
 
-def html2plaintext(html, body_id=None, encoding='utf-8'):
+def html2plaintext(html, body_id=None, encoding='utf-8', include_references=True):
     """ From an HTML text, convert the HTML to plain text.
     If @param body_id is provided then this is the tag where the
     body (not necessarily <body>) starts.
+    :param include_references: If False, numbered references and
+        URLs for links and images will not be included.
     """
     ## (c) Fry-IT, www.fry-it.com, 2007
     ## <peter@fry-it.com>
@@ -428,18 +470,22 @@ def html2plaintext(html, body_id=None, encoding='utf-8'):
 
     url_index = []
     linkrefs = itertools.count(1)
-    for link in tree.findall('.//a'):
-        if url := link.get('href'):
-            link.tag = 'span'
-            link.text = f'{link.text} [{next(linkrefs)}]'
-            url_index.append(url)
+    if include_references:
+        for link in tree.findall('.//a'):
+            if url := link.get('href'):
+                link.tag = 'span'
+                link.text = f'{link.text} [{next(linkrefs)}]'
+                url_index.append(url)
 
-    for img in tree.findall('.//img'):
-        if src := img.get('src'):
-            img.tag = 'span'
-            img_name = re.search(r'[^/]+(?=\.[a-zA-Z]+(?:\?|$))', src)
-            img.text = '%s [%s]' % (img_name[0] if img_name else 'Image', next(linkrefs))
-            url_index.append(src)
+        for img in tree.findall('.//img'):
+            if src := img.get('src'):
+                img.tag = 'span'
+                if src.startswith('data:'):
+                    img_name = None  # base64 image
+                else:
+                    img_name = re.search(r'[^/]+(?=\.[a-zA-Z]+(?:\?|$))', src)
+                img.text = '%s [%s]' % (img_name[0] if img_name else 'Image', next(linkrefs))
+                url_index.append(src)
 
     html = etree.tostring(tree, encoding="unicode")
     # \r char is converted into &#13;, must remove it
@@ -649,6 +695,14 @@ def email_split_and_format(text):
         return []
     return [formataddr((name, email)) for (name, email) in email_split_tuples(text)]
 
+def email_split_and_format_normalize(text):
+    """ Same as 'email_split_and_format' but normalizing email. """
+    return [
+        formataddr(
+            (name, _normalize_email(email))
+        ) for (name, email) in email_split_tuples(text)
+    ]
+
 def email_normalize(text, strict=True):
     """ Sanitize and standardize email address entries. As of rfc5322 section
     3.4.1 local-part is case-sensitive. However most main providers do consider
@@ -729,6 +783,38 @@ def _normalize_email(email):
     else:
         local_part = local_part.lower()
     return local_part + at + domain.lower()
+
+def email_anonymize(normalized_email, *, redact_domain=False):
+    """
+    Replace most charaters in the local part of the email address with
+    '*' to hide the recipient, but keep enough characters for debugging
+    purpose.
+
+    The email address must be normalized already.
+
+    >>> email_anonymize('admin@example.com')
+    'a****@example.com'
+    >>> email_anonymize('portal@example.com')
+    'p***al@example.com'
+    >>> email_anonymize('portal@example.com', redact_domain=True)
+    'p***al@e******.com'
+    """
+    if not normalized_email:
+        return normalized_email
+
+    local, at, domain = normalized_email.partition('@')
+    if len(local) <= 5:
+        anon_local = local[:1] + '*' * (len(local) - 1)
+    else:
+        anon_local = local[:1] + '*' * (len(local) - 3) + local[-2:]
+
+    host, dot, tld = domain.rpartition('.')
+    if redact_domain and not domain.startswith('[') and all((host, dot, tld)):
+        anon_host = host[0] + '*' * (len(host) - 1)
+    else:
+        anon_host = host
+
+    return f'{anon_local}{at}{anon_host}{dot}{tld}'
 
 def email_domain_extract(email):
     """ Extract the company domain to be used by IAP services notably. Domain
@@ -811,7 +897,6 @@ def formataddr(pair, charset='utf-8'):
             return f'"{name}" <{local}@{domain}>'
     return f"{local}@{domain}"
 
-
 def encapsulate_email(old_email, new_email):
     """Change the FROM of the message and use the old one as name.
 
@@ -865,3 +950,14 @@ def parse_contact_from_email(text):
         name, email_normalized = text, ''
 
     return name, email_normalized
+
+def unfold_references(msg_references):
+    """ As it declared in [RFC2822] long header bodies can be "folded" using
+    CRLF+WSP. Some mail clients split References header body which contains
+    Message Ids by "\n ".
+
+    RFC2882: https://tools.ietf.org/html/rfc2822#section-2.2.3 """
+    return [
+        re.sub(r'[\r\n\t ]+', r'', ref)  # "Unfold" buggy references
+        for ref in mail_header_msgid_re.findall(msg_references)
+    ]

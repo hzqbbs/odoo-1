@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { queryAll } from "@odoo/hoot-dom";
+import { queryAll, waitFor } from "@odoo/hoot-dom";
 import { rpc } from "@web/core/network/rpc";
 import { registry } from "@web/core/registry";
 import { stepUtils } from "@web_tour/tour_service/tour_utils";
@@ -52,8 +52,10 @@ function closeProfileDialog({content, totp_state}) {
 
     return [{
         content,
-        trigger,
-        run(helpers) {
+        //TODO: remove when PIPU macro PR is merged: https://github.com/odoo/odoo/pull/194508
+        trigger: 'a[role=tab]:contains("Account Security").active',
+        async run(helpers) {
+            await waitFor(trigger, { timeout: 5000 });
             const modal = document.querySelector(".o_dialog");
             if (modal) {
                 modal.querySelector("button[name=preference_cancel]").click();
@@ -76,8 +78,12 @@ registry.category("web_tour.tours").add('totp_tour_setup', {
     url: '/odoo',
     steps: () => [...openUserProfileAtSecurityTab(), {
     content: "Open totp wizard",
-    trigger: 'button[name=action_totp_enable_wizard]',
-    run: "click",
+    //TODO: remove when PIPU macro PR is merged: https://github.com/odoo/odoo/pull/194508
+    trigger: 'a[role=tab]:contains("Account Security").active',
+    async run(actions) {
+        const el = await waitFor('button[name=action_totp_enable_wizard]', { timeout: 5000 });
+        await actions.click(el);
+    }
 },
 {
     trigger: ".modal div:contains(entering your password)",
@@ -85,7 +91,7 @@ registry.category("web_tour.tours").add('totp_tour_setup', {
 {
     content: "Check that we have to enter enhanced security mode and input password",
     trigger: '[name=password] input',
-    run: "edit demo",
+    run: 'edit test_user',
 }, {
     content: "Confirm",
     trigger: "button:contains(Confirm Password)",
@@ -139,11 +145,11 @@ registry.category("web_tour.tours").add('totp_login_enabled', {
 }, {
     content: "input login",
     trigger: 'input#login',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: 'input password',
     trigger: 'input#password',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: "click da button",
     trigger: 'button:contains("Log in")',
@@ -178,11 +184,11 @@ registry.category("web_tour.tours").add('totp_login_device', {
 }, {
     content: "input login",
     trigger: 'input#login',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: 'input password',
     trigger: 'input#password',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: "click da button",
     trigger: 'button:contains("Log in")',
@@ -222,11 +228,11 @@ registry.category("web_tour.tours").add('totp_login_device', {
 }, {
     content: "input login again",
     trigger: 'input#login',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: 'input password again',
     trigger: 'input#password',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: "click da button again",
     trigger: 'button:contains("Log in")',
@@ -241,16 +247,20 @@ registry.category("web_tour.tours").add('totp_login_device', {
 ...openUserProfileAtSecurityTab(),
 {
     content: "Open totp wizard",
-    trigger: 'button[name=action_totp_disable]',
-    run: "click",
+    //TODO: remove when PIPU macro PR is merged: https://github.com/odoo/odoo/pull/194508
+    trigger: 'a[role=tab]:contains("Account Security").active',
+    async run(actions) {
+        const el = await waitFor('button[name=action_totp_disable]', { timeout: 5000 });
+        await actions.click(el);
+    }
 },
 {
     trigger: ".modal div:contains(entering your password)",
 },
 {
     content: "Check that we have to enter enhanced security mode and input password",
-    trigger: ".modal [name=password] input",
-    run: "edit demo",
+    trigger: '.modal [name=password] input',
+    run: "edit test_user",
 }, {
     content: "Confirm",
     trigger: ".modal button:contains(Confirm Password)",
@@ -276,11 +286,11 @@ registry.category("web_tour.tours").add('totp_login_disabled', {
 }, {
     content: "input login",
     trigger: 'input#login',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: 'input password',
     trigger: 'input#password',
-    run: "edit demo",
+    run: "edit test_user",
 }, {
     content: "click da button",
     trigger: 'button:contains("Log in")',
@@ -314,8 +324,8 @@ registry.category("web_tour.tours").add('totp_admin_disables', {
     trigger: '[data-menu-xmlid="base.menu_action_res_users"]',
     run: "click",
 }, {
-    content: "Find Demo User",
-    trigger: 'td.o_data_cell:contains("demo")',
+    content: "Find test_user User",
+    trigger: 'td.o_data_cell:contains("test_user")',
     run(helpers) {
         const titles = queryAll("tr:first th", { root: this.anchor.closest("table") });
         titles.forEach((el, i) => {
@@ -352,14 +362,20 @@ registry.category("web_tour.tours").add('totp_admin_disables', {
 },
 {
     content: "open the user's form",
-    trigger: "td.o_data_cell:contains(demo)",
+    trigger: "td.o_data_cell:contains(test_user)",
     run: "click",
 }, {
     content: "go to Account security Tab",
     trigger: "a.nav-link:contains(Account Security)",
     run: "click",
-}, ...closeProfileDialog({
-    content: "check that demo user has been de-totp'd",
-    totp_state: false,
-}),
+}, {
+    content: "check 2FA button",
+    trigger: 'body',
+    run: () => {
+        const button = document.querySelector('button[name=action_totp_enable_wizard]').disabled
+        if (!button) {
+            console.error("2FA button should be disabled.");
+        }
+    },
+}
 ]})

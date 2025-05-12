@@ -416,7 +416,8 @@ class IrActionsReport(models.Model):
                     'subst': False,
                     'body': Markup(lxml.html.tostring(node, encoding='unicode')),
                     'base_url': base_url,
-                    'report_xml_id': self.xml_id
+                    'report_xml_id': self.xml_id,
+                    'debug': self.env.context.get("debug"),
                 }, raise_if_not_found=False)
             bodies.append(body)
             if node.get('data-oe-model') == report_model:
@@ -439,13 +440,15 @@ class IrActionsReport(models.Model):
             'subst': True,
             'body': Markup(lxml.html.tostring(header_node, encoding='unicode')),
             'base_url': base_url,
-            'report_xml_id': self.xml_id
+            'report_xml_id': self.xml_id,
+            'debug': self.env.context.get("debug"),
         })
         footer = self.env['ir.qweb']._render(layout.id, {
             'subst': True,
             'body': Markup(lxml.html.tostring(footer_node, encoding='unicode')),
             'base_url': base_url,
-            'report_xml_id': self.xml_id
+            'report_xml_id': self.xml_id,
+            'debug': self.env.context.get("debug"),
         })
 
         return bodies, res_ids, header, footer, specific_paperformat_args
@@ -536,6 +539,7 @@ class IrActionsReport(models.Model):
             temp_session = root.session_store.new()
             temp_session.update({
                 **request.session,
+                'debug': '',
                 '_trace_disable': True,
             })
             if temp_session.uid:
@@ -844,6 +848,7 @@ class IrActionsReport(models.Model):
             # because the resources files are not loaded in time.
             # https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2083
             additional_context = {'debug': False}
+            data.setdefault("debug", False)
 
             html = self.with_context(**additional_context)._render_qweb_html(report_ref, all_res_ids_wo_stream, data=data)[0]
 
@@ -961,7 +966,7 @@ class IrActionsReport(models.Model):
 
             # if res_id is false
             # we are unable to fetch the record, it won't be saved as we can't split the documents unambiguously
-            if not res_id:
+            if not res_id or not stream_data['stream']:
                 _logger.warning(
                     "These documents were not saved as an attachment because the template of %s doesn't "
                     "have any headers seperating different instances of it. If you want it saved,"

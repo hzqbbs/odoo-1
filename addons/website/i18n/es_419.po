@@ -3,17 +3,17 @@
 # 	* website
 # 
 # Translators:
-# Wil Odoo, 2024
-# Patricia Gutiérrez Capetillo <pagc@odoo.com>, 2024
-# Fernanda Alvarez, 2024
+# Wil Odoo, 2025
+# Patricia Gutiérrez Capetillo <pagc@odoo.com>, 2025
+# Fernanda Alvarez, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Fernanda Alvarez, 2024\n"
+"Last-Translator: Fernanda Alvarez, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/odoo/teams/41243/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -349,16 +349,6 @@ msgid "+25.000"
 msgstr "+25.000"
 
 #. module: website
-#: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
-msgid ", .s_searchbar_input"
-msgstr ", .s_searchbar_input"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.s_website_form_options
-msgid ", .s_website_form"
-msgstr ", .s_website_form"
-
-#. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
 msgid ", author:"
 msgstr ", autor:"
@@ -537,7 +527,7 @@ msgstr ""
 msgid ""
 "250 Executive Park Blvd, Suite 3400 • San Francisco CA 94134 • United States"
 msgstr ""
-"250 Executive Park Blvd, Suite 3400 • San Francisco CA 94134 • Estados "
+"250 Executive Park Blvd, Suite 3400 • San Francisco, CA 94134 • Estados "
 "Unidos"
 
 #. module: website
@@ -944,7 +934,7 @@ msgid ""
 "calling extra attention to featured content or information.<br/><br/>"
 msgstr ""
 "<br/>Bloque de texto estilo jumbotrón, sirve para destacar y llamar la "
-"atención para su contenido o información..<br/><br/>"
+"atención para su contenido o información.<br/><br/>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_horizontal
@@ -1347,7 +1337,7 @@ msgid ""
 " in store"
 msgstr ""
 "<i class=\"s_mega_menu_thumbnails_icon fa fa-shopping-basket me-2\"/> "
-"Recoger en tienda"
+"Recolectar en tienda"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_thumbnails
@@ -2742,8 +2732,8 @@ msgstr "Agregar idiomas"
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
-msgid "Add new %s"
-msgstr "Agregar nuevo %s"
+msgid "Add option"
+msgstr "Agregar opción"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.view_edit_third_party_domains
@@ -3404,7 +3394,7 @@ msgstr "Fondo"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_s_features
 msgid "Backend"
-msgstr "Salir (sin cerrar sesión)"
+msgstr "Backend"
 
 #. module: website
 #. odoo-javascript
@@ -3725,7 +3715,7 @@ msgstr "Cuadro de llamada a la acción"
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 #: model_terms:ir.ui.view,arch_db:website.snippet_options_carousel
 msgid "Boxed"
-msgstr "Archivado"
+msgstr "Con caja"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_countdown_options
@@ -4171,6 +4161,12 @@ msgid "Checkbox"
 msgstr "Casilla"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Checkbox List"
+msgstr "Lista de casillas de verificación"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team
 msgid "Chief Commercial Officer"
 msgstr "Director comercial"
@@ -4440,7 +4436,7 @@ msgstr "Filtro de color"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Color Presets"
-msgstr "Preajustes de color"
+msgstr "Valores predeterminados de color"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_color_blocks_2
@@ -4941,7 +4937,7 @@ msgstr "Cree un proyecto de Google y obtenga una clave"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Create a link to target this section"
-msgstr "Cree un enlace para orientar sus anuncios a esta sección"
+msgstr "Crear enlace para redirigir a esta sección"
 
 #. module: website
 #. odoo-javascript
@@ -5085,6 +5081,12 @@ msgstr "Clave personalizada"
 #: model_terms:ir.ui.view,arch_db:website.s_card_options
 msgid "Custom Ratio"
 msgstr "Proporción personalizada"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Custom Text"
+msgstr "Texto personalizado"
 
 #. module: website
 #. odoo-javascript
@@ -5362,7 +5364,7 @@ msgid ""
 "message. Click on the picture to change its <em>rounded corner</em> style."
 msgstr ""
 "Elimine la imagen anterior o reemplácela por otra que ilustre su mensaje. "
-"Haga clic en la imagen para cambiar su <em> esquina redondeada</em>."
+"Haga clic en la imagen para cambiar su <em>esquina redondeada</em>."
 
 #. module: website
 #. odoo-javascript
@@ -6012,12 +6014,6 @@ msgid "E.g. https://www.mydomain.com"
 msgstr "Por ejemplo, https://www.midominio.com"
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid "EXTERNAL SUBMISSION - Customer not verified"
-msgstr "ENVÍO EXTERNO - Cliente sin verificar"
-
-#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_horizontal
 msgid ""
 "Each update is thoroughly tested to guarantee compatibility and reliability,"
@@ -6037,7 +6033,7 @@ msgstr "Earl grey"
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/website_dashboard/website_dashboard.xml:0
 msgid "Easily track your visitor with Plausible"
-msgstr "Rastree con facilidad a su visitante con Plausible"
+msgstr "Use Plausible para rastrear a sus visitantes con facilidad"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_landing_s_text_cover
@@ -6412,7 +6408,7 @@ msgstr "Todos los viernes de 6 pm a 7 pm"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Every Time"
-msgstr "Cada vez"
+msgstr "Siempre"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
@@ -6434,6 +6430,12 @@ msgstr "Todo lo que necesita para comenzar."
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
 msgid "Examples"
 msgstr "Ejemplos"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Existing Fields"
+msgstr "Campos existentes"
 
 #. module: website
 #. odoo-javascript
@@ -6758,6 +6760,12 @@ msgstr "Lo que nos distingue"
 #: model_terms:ir.ui.view,arch_db:website.s_dynamic_snippet_options_template
 msgid "Fetched Elements"
 msgstr "Elementos obtenidos"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Field"
+msgstr "Campo"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_snippet_filter__field_names
@@ -7834,7 +7842,7 @@ msgstr "De a conocer su historia, muestre el crecimiento y los logros clave."
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_showcase
 msgid "Highlights Key Attributes"
-msgstr "Destaca atributos Clave"
+msgstr "Destaque atributos clave"
 
 #. module: website
 #. odoo-javascript
@@ -9428,7 +9436,7 @@ msgstr "Enlace ancla"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Link Style"
-msgstr "Estilo de enlace"
+msgstr "Estilo del enlace"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.bs_debug_view
@@ -10699,7 +10707,7 @@ msgstr "A la salida"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "On Hover"
-msgstr "Al deslizar el mouse"
+msgstr "Al pasar el cursor por encima"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -10860,6 +10868,12 @@ msgstr "Opción 2"
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
 msgid "Option 3"
 msgstr "Opción 3"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Option List"
+msgstr "Lista de opciones"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -11282,7 +11296,7 @@ msgstr "Página indexada"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Page Layout"
-msgstr "Diseño de página"
+msgstr "Diseño de la página"
 
 #. module: website
 #. odoo-javascript
@@ -12049,6 +12063,12 @@ msgid "Radio"
 msgstr "Opción"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Radio Button List"
+msgstr "Lista de botones de opción"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Radio Buttons"
 msgstr "Botones de opción"
@@ -12182,7 +12202,7 @@ msgstr "Tipo de redirección"
 #. module: website
 #: model:ir.ui.menu,name:website.menu_website_rewrite
 msgid "Redirects"
-msgstr "Redirecciona"
+msgstr "Redireccionamientos"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -12327,7 +12347,7 @@ msgstr "Reportes"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Required"
-msgstr "Requerido"
+msgstr "Obligatorio"
 
 #. module: website
 #. odoo-javascript
@@ -12412,7 +12432,7 @@ msgstr "Revertido"
 #. module: website
 #: model:ir.actions.act_window,name:website.action_website_rewrite_list
 msgid "Rewrite"
-msgstr "Volver a escribir"
+msgstr "Reescritura de URL"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.bs_debug_view
@@ -12654,7 +12674,7 @@ msgstr "Desplazar hacia arriba"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Scroll Top Button"
-msgstr "Botón superior de desplazamiento"
+msgstr "Botón para regresar a la parte superior"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -13750,7 +13770,7 @@ msgstr "CONSEJO"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
 msgid "Table of Content"
-msgstr "Índice"
+msgstr "Tabla de contenidos"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
@@ -14100,6 +14120,12 @@ msgid "The limit must be between 1 and 16."
 msgstr "El límite debe estar entre 1 y 16."
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/client_actions/configurator/configurator.js:0
+msgid "The logo is too large. Please upload a logo smaller than 2.5 MB."
+msgstr "El logo es demasiado grande. Suba un logo que pese menos de 2.5 MB."
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "The maximum number of files that can be uploaded."
 msgstr "El número máximo de archivos que se pueden subir."
@@ -14271,16 +14297,6 @@ msgstr "Tercera característica"
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_multi_menus
 msgid "Third Menu"
 msgstr "Tercer menú"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid ""
-"This %(model_name)s was submitted by %(user_name)s (%(user_email)s) on "
-"behalf of %(form_email)s"
-msgstr ""
-"%(user_name)s (%(user_email)s) envió %(model_name)s a nombre de "
-"%(form_email)s"
 
 #. module: website
 #. odoo-javascript
@@ -14495,6 +14511,7 @@ msgstr "Se modificó esta arquitectura de vista"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/systray_items/website_switcher.js:0
 #: code:addons/website/static/src/systray_items/website_switcher.xml:0
 msgid "This website does not have a domain configured."
 msgstr "Este sitio web no tiene un dominio configurado."
@@ -14649,8 +14666,8 @@ msgid ""
 "To add your page to this category, open the page properties: \"Site -> "
 "Properties\"."
 msgstr ""
-"Para agregar esta página a esta categoría, abra las propiedades de la página"
-" en \"Sitio -> Propiedades\"."
+"Abra las propiedades de la página desde \"Sitio -> Propiedades\" para "
+"agregar la página a esta categoría."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_tabs
@@ -15665,7 +15682,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_references_grid
 #: model_terms:ir.ui.view,arch_db:website.s_references_social
 msgid "We are in good company."
-msgstr "Tenemos buena compañía."
+msgstr "Está en las mejores manos."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_landing_s_text_image
@@ -17420,7 +17437,7 @@ msgstr "info@tuempresa.com"
 #: model_terms:ir.ui.view,arch_db:website.template_footer_centered
 #: model_terms:ir.ui.view,arch_db:website.template_footer_headline
 msgid "info@yourcompany.example.com"
-msgstr "info@tuempresa.ejemplo.com"
+msgstr "info@suempresa.ejemplo.com"
 
 #. module: website
 #. odoo-javascript
@@ -17816,7 +17833,7 @@ msgstr "sitio web"
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "with the main objective to"
-msgstr "con el principal objetivo de"
+msgstr "con el objetivo principal de"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.qweb_500

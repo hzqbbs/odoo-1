@@ -6,7 +6,7 @@ import { url } from "@web/core/utils/urls";
 
 export class MentionPlugin extends Plugin {
     static id = "mention";
-    static dependencies = ["overlay", "dom", "history", "selection"];
+    static dependencies = ["overlay", "dom", "history", "input", "selection"];
 
     resources = {
         beforeinput_handlers: this.onBeforeInput.bind(this),
@@ -20,6 +20,7 @@ export class MentionPlugin extends Plugin {
     }
 
     onSelect(ev, option) {
+        this.dependencies.selection.focusEditable();
         const mentionBlock = renderToElement("mail.Wysiwyg.mentionLink", {
             option,
             href: url(
@@ -47,7 +48,6 @@ export class MentionPlugin extends Plugin {
                     type: ev.data === "@" ? "partner" : "channel",
                     close: () => {
                         this.mentionList.close();
-                        this.dependencies.selection.focusEditable();
                     },
                 },
             });

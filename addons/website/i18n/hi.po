@@ -5,14 +5,19 @@
 # Translators:
 # Gautam Hingrajiya, 2024
 # Martin Trigaux, 2024
+# Wil Odoo, 2024
+# Hideki Akiyoshi, 2025
+# Ronald Kung, 2025
+# Habeebat Kehinde, 2025
+# Manav Shah, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-02-10 13:22+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Martin Trigaux, 2024\n"
+"Last-Translator: Manav Shah, 2025\n"
 "Language-Team: Hindi (https://app.transifex.com/odoo/teams/41243/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -327,16 +332,6 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_charts
 msgid "+25.000"
-msgstr ""
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
-msgid ", .s_searchbar_input"
-msgstr ""
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.s_website_form_options
-msgid ", .s_website_form"
 msgstr ""
 
 #. module: website
@@ -2229,7 +2224,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.color_combinations_debug_view
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_kanban
 msgid "Active"
-msgstr ""
+msgstr "सक्रिय"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_three_columns
@@ -2409,7 +2404,7 @@ msgstr ""
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
-msgid "Add new %s"
+msgid "Add option"
 msgstr ""
 
 #. module: website
@@ -2943,7 +2938,7 @@ msgstr ""
 #. module: website
 #: model:ir.model,name:website.model_ir_asset
 msgid "Asset"
-msgstr ""
+msgstr "सक्रिय"
 
 #. module: website
 #: model:ir.model,name:website.model_web_editor_assets
@@ -3137,7 +3132,7 @@ msgstr ""
 #. module: website
 #: model:ir.model.fields.selection,name:website.selection__theme_ir_asset__directive__before
 msgid "Before"
-msgstr ""
+msgstr "पहले"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_comparisons
@@ -3686,7 +3681,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.theme_view_search
 msgid "Category"
-msgstr ""
+msgstr "वर्ग"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
@@ -3775,6 +3770,12 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Checkbox"
+msgstr ""
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Checkbox List"
 msgstr ""
 
 #. module: website
@@ -4004,7 +4005,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_embed_code_options
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Code"
-msgstr ""
+msgstr "कोड"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -4105,7 +4106,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website.field_website__company_id
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
 msgid "Company"
-msgstr ""
+msgstr "संस्था"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -4158,7 +4159,7 @@ msgstr ""
 #. module: website
 #: model:ir.ui.menu,name:website.menu_website_global_configuration
 msgid "Configuration"
-msgstr ""
+msgstr "कॉन्फ़िगरेशन"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website__configurator_done
@@ -4222,7 +4223,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_tabs
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Contact"
-msgstr ""
+msgstr "संपर्क"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -4266,7 +4267,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_text_cover
 #: model_terms:ir.ui.view,arch_db:website.template_footer_headline
 msgid "Contact us"
-msgstr ""
+msgstr "हमसे संपर्क करें"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.contactus
@@ -4431,7 +4432,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_kanban
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_search
 msgid "Country"
-msgstr ""
+msgstr "देश"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_visitor__country_flag
@@ -4552,7 +4553,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website.field_website_visitor__create_uid
 #: model_terms:ir.ui.view,arch_db:website.view_rewrite_search
 msgid "Created by"
-msgstr ""
+msgstr "द्वारा निर्मित"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_cards
@@ -4653,6 +4654,12 @@ msgstr ""
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Custom Text"
+msgstr ""
+
+#. module: website
+#. odoo-javascript
 #: code:addons/website/static/src/components/dialog/seo.xml:0
 msgid "Custom Url"
 msgstr ""
@@ -4687,7 +4694,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_cards
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_images_subtitles
 msgid "Customers"
-msgstr ""
+msgstr "साथी"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_features_wave
@@ -4778,7 +4785,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_page_view_search
 msgid "Date"
-msgstr ""
+msgstr "तिथि"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -4980,7 +4987,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 #: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
 msgid "Description"
-msgstr ""
+msgstr "विवरण"
 
 #. module: website
 #: model:website.configurator.feature,description:website.feature_page_our_services
@@ -5039,7 +5046,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/components/views/theme_preview.xml:0
 msgid "Desktop"
-msgstr ""
+msgstr "डेस्कटॉप"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
@@ -5054,7 +5061,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_form
 msgid "Details"
-msgstr ""
+msgstr "विवरण"
 
 #. module: website
 #. odoo-javascript
@@ -5504,7 +5511,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_features_grid
 msgid "Duplicate"
-msgstr ""
+msgstr "नकली "
 
 #. module: website
 #. odoo-javascript
@@ -5525,7 +5532,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Duration"
-msgstr ""
+msgstr "अवधि"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -5547,12 +5554,6 @@ msgstr ""
 #: model:ir.model.fields,help:website.field_res_config_settings__website_domain
 #: model:ir.model.fields,help:website.field_website__domain
 msgid "E.g. https://www.mydomain.com"
-msgstr ""
-
-#. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid "EXTERNAL SUBMISSION - Customer not verified"
 msgstr ""
 
 #. module: website
@@ -5691,7 +5692,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.layout
 msgid "Editor"
-msgstr ""
+msgstr "संपादक "
 
 #. module: website
 #: model:res.groups,name:website.group_website_designer
@@ -5952,6 +5953,12 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
 msgid "Examples"
+msgstr ""
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Existing Fields"
 msgstr ""
 
 #. module: website
@@ -6255,6 +6262,12 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_dynamic_snippet_options_template
 msgid "Fetched Elements"
+msgstr ""
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Field"
 msgstr ""
 
 #. module: website
@@ -9255,7 +9268,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_facebook_page_options
 msgid "Messages"
-msgstr ""
+msgstr "संदेश"
 
 #. module: website
 #. odoo-python
@@ -9608,7 +9621,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.menu_search
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_tree
 msgid "Name"
-msgstr ""
+msgstr "नाम"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
@@ -10184,6 +10197,12 @@ msgid "Option 3"
 msgstr ""
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Option List"
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Optional"
 msgstr ""
@@ -10713,7 +10732,7 @@ msgstr ""
 #. module: website
 #: model:ir.actions.act_window,name:website.visitor_partner_action
 msgid "Partners"
-msgstr ""
+msgstr "साथी"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_references
@@ -10990,7 +11009,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
 msgid "Pricelist"
-msgstr ""
+msgstr "मूल्य सूची"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -11062,7 +11081,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_pricelist_cafe_add_product_widget
 #: model_terms:ir.ui.view,arch_db:website.s_product_catalog_add_product_widget
 msgid "Product"
-msgstr ""
+msgstr "उत्पाद"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team_detail
@@ -11300,6 +11319,12 @@ msgid "Radio"
 msgstr ""
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Radio Button List"
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Radio Buttons"
 msgstr ""
@@ -11436,7 +11461,7 @@ msgstr ""
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
 msgid "References"
-msgstr ""
+msgstr "संदर्भ"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -12153,7 +12178,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website.field_website_page__priority
 #: model:ir.model.fields,field_description:website.field_website_rewrite__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "अनुक्रम"
 
 #. module: website
 #. odoo-javascript
@@ -12202,7 +12227,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.website_pages_kanban_view
 #: model_terms:ir.ui.view,arch_db:website.website_pages_tree_view
 msgid "Settings"
-msgstr ""
+msgstr "कॉन्फ़िगरेशन"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
@@ -12878,7 +12903,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/js/send_mail_form.js:0
 msgid "Subject"
-msgstr ""
+msgstr "विषय"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.contactus
@@ -12970,7 +12995,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_tabs_options
 #: model_terms:ir.ui.view,arch_db:website.snippets
 msgid "Tabs"
-msgstr ""
+msgstr "टैब्स"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -13459,14 +13484,6 @@ msgid "Third Menu"
 msgstr ""
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid ""
-"This %(model_name)s was submitted by %(user_name)s (%(user_email)s) on "
-"behalf of %(form_email)s"
-msgstr ""
-
-#. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/components/dialog/page_properties.xml:0
 msgid "This URL is contained in the “%(field)s” of the following “%(model)s”"
@@ -13646,6 +13663,7 @@ msgstr ""
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/systray_items/website_switcher.js:0
 #: code:addons/website/static/src/systray_items/website_switcher.xml:0
 msgid "This website does not have a domain configured."
 msgstr ""
@@ -14031,7 +14049,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 #: model_terms:ir.ui.view,arch_db:website.website_page_properties_view_form
 msgid "Type"
-msgstr ""
+msgstr "प्रकार"
 
 #. module: website
 #. odoo-javascript
@@ -14373,7 +14391,7 @@ msgstr ""
 #. module: website
 #: model:ir.model,name:website.model_res_users
 msgid "User"
-msgstr ""
+msgstr "उपयोगकर्ता"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_list

@@ -1,13 +1,14 @@
 import { Plugin } from "@html_editor/plugin";
 import {
     isColorGradient,
-    rgbToHex,
+    rgbaToHex,
     hasColor,
     hasAnyNodesColor,
     TEXT_CLASSES_REGEX,
     BG_CLASSES_REGEX,
+    RGBA_REGEX,
 } from "@html_editor/utils/color";
-import { fillEmpty } from "@html_editor/utils/dom";
+import { fillEmpty, unwrapContents } from "@html_editor/utils/dom";
 import {
     isContentEditable,
     isEmptyBlock,
@@ -21,6 +22,9 @@ import { ColorSelector } from "./color_selector";
 import { reactive } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { withSequence } from "@html_editor/utils/resource";
+
+const RGBA_OPACITY = 0.6;
+const HEX_OPACITY = "99";
 
 /**
  * @typedef { Object } ColorShared
@@ -66,7 +70,7 @@ export class ColorPlugin extends Plugin {
     setup() {
         this.selectedColors = reactive({ color: "", backgroundColor: "" });
         this.previewableApplyColor = this.dependencies.history.makePreviewableOperation(
-            (color, mode) => this._applyColor(color, mode)
+            (color, mode, previewMode) => this._applyColor(color, mode, previewMode)
         );
     }
 
@@ -74,7 +78,7 @@ export class ColorPlugin extends Plugin {
      * @param {'foreground'|'background'} type
      */
     getPropsForColorSelector(type) {
-        const mode = type === "foreground" ? "color" : "background";
+        const mode = type === "foreground" ? "color" : "backgroundColor";
         return {
             type,
             getUsedCustomColors: () => this.getUsedCustomColors(mode),
@@ -100,12 +104,25 @@ export class ColorPlugin extends Plugin {
         const hasGradient = isColorGradient(backgroundImage);
         const hasTextGradientClass = el.classList.contains("text-gradient");
 
+        let backgroundColor = elStyle.backgroundColor;
+        const activeTab = document
+            .querySelector(".o_font_color_selector button.active")
+            ?.innerHTML.trim();
+        if (backgroundColor.startsWith("rgba") && activeTab === "Solid") {
+            // Buttons in the solid tab of color selector have no
+            // opacity, hence to match selected color correctly,
+            // we need to remove applied 0.6 opacity.
+            const values = backgroundColor.match(RGBA_REGEX) || [];
+            const alpha = parseFloat(values.pop()); // Extract alpha value
+            if (alpha === RGBA_OPACITY) {
+                backgroundColor = `rgb(${values.slice(0, 3).join(", ")})`; // Remove alpha
+            }
+        }
+
         this.selectedColors.color =
-            hasGradient && hasTextGradientClass ? backgroundImage : rgbToHex(elStyle.color);
+            hasGradient && hasTextGradientClass ? backgroundImage : rgbaToHex(elStyle.color);
         this.selectedColors.backgroundColor =
-            hasGradient && !hasTextGradientClass
-                ? backgroundImage
-                : rgbToHex(elStyle.backgroundColor);
+            hasGradient && !hasTextGradientClass ? backgroundImage : rgbaToHex(backgroundColor);
     }
 
     /**
@@ -128,7 +145,8 @@ export class ColorPlugin extends Plugin {
      * @param {string} param.mode 'color' or 'backgroundColor'
      */
     applyColorPreview({ color, mode }) {
-        this.previewableApplyColor.preview(color, mode);
+        // Preview the color before applying it.
+        this.previewableApplyColor.preview(color, mode, true);
         this.updateSelectedColor();
     }
     /**
@@ -149,7 +167,7 @@ export class ColorPlugin extends Plugin {
                 const hasAnySelectedNodeColor = (mode) => {
                     const nodes = this.dependencies.selection
                         .getTraversedNodes()
-                        .filter(isTextNode);
+                        .filter((n) => isTextNode(n) || n.classList.contains("o_selected_td"));
                     return hasAnyNodesColor(nodes, mode);
                 };
                 while (hasAnySelectedNodeColor(mode) && max > 0) {
@@ -170,10 +188,19 @@ export class ColorPlugin extends Plugin {
      *
      * @param {string} color hexadecimal or bg-name/text-name class
      * @param {string} mode 'color' or 'backgroundColor'
+     * @param {boolean} [previewMode=false] true - apply color in preview mode
      */
-    _applyColor(color, mode) {
-        if (this.delegateTo("color_apply_overrides", color, mode)) {
+    _applyColor(color, mode, previewMode = false) {
+        if (this.delegateTo("color_apply_overrides", color, mode, previewMode)) {
             return;
+        }
+        const activeTab = document
+            .querySelector(".o_font_color_selector button.active")
+            ?.innerHTML.trim();
+        if (mode === "backgroundColor" && activeTab === "Solid" && color.startsWith("#")) {
+            // Apply default transparency to selected solid tab colors in background
+            // mode to make text highlighting more usable between light and dark modes.
+            color += HEX_OPACITY;
         }
         let selection = this.dependencies.selection.getEditableSelection();
         let selectionNodes;
@@ -207,7 +234,7 @@ export class ColorPlugin extends Plugin {
         }
 
         const selectedNodes =
-            mode === "backgroundColor"
+            mode === "backgroundColor" && color
                 ? selectionNodes.filter((node) => !closestElement(node, "table.o_selected_table"))
                 : selectionNodes;
 
@@ -222,16 +249,53 @@ export class ColorPlugin extends Plugin {
             return selectedNodes.flatMap((node) => {
                 let font = closestElement(node, "font") || closestElement(node, "span");
                 const children = font && descendants(font);
+                const hasInlineGradient = font && isColorGradient(font.style["background-image"]);
                 if (
                     font &&
-                    (font.nodeName === "FONT" || (font.nodeName === "SPAN" && font.style[mode]))
+                    (font.nodeName === "FONT" || (font.nodeName === "SPAN" && font.style[mode])) &&
+                    (isColorGradient(color) || color === "" || !hasInlineGradient)
                 ) {
                     // Partially selected <font>: split it.
                     const selectedChildren = children.filter((child) =>
                         selectedNodes.includes(child)
                     );
                     if (selectedChildren.length) {
-                        font = this.dependencies.split.splitAroundUntil(selectedChildren, font);
+                        const closestGradientEl = closestElement(
+                            node,
+                            'font[style*="background-image"], span[style*="background-image"]'
+                        );
+                        const isGradientBeingUpdated = closestGradientEl && isColorGradient(color);
+                        const splitnode = isGradientBeingUpdated ? closestGradientEl : font;
+                        font = this.dependencies.split.splitAroundUntil(
+                            selectedChildren,
+                            splitnode
+                        );
+                        if (isGradientBeingUpdated) {
+                            const classRegex =
+                                mode === "color" ? TEXT_CLASSES_REGEX : BG_CLASSES_REGEX;
+                            // When updating a gradient, remove color applied to
+                            // its descendants.This ensures the gradient remains
+                            // visible without being overwritten by a descendant's color.
+                            for (const node of descendants(font)) {
+                                if (
+                                    node.nodeType === Node.ELEMENT_NODE &&
+                                    (node.style[mode] || classRegex.test(node.className))
+                                ) {
+                                    this.colorElement(node, "", mode);
+                                    node.style.webkitTextFillColor = "";
+                                    if (!node.getAttribute("style")) {
+                                        unwrapContents(node);
+                                    }
+                                }
+                            }
+                        } else if (
+                            mode === "color" &&
+                            (font.style.webkitTextFillColor ||
+                                (closestGradientEl &&
+                                    closestGradientEl.classList.contains("text-gradient")))
+                        ) {
+                            font.style.webkitTextFillColor = color;
+                        }
                     } else {
                         font = [];
                     }
@@ -263,8 +327,13 @@ export class ColorPlugin extends Plugin {
                         font = previous;
                     } else {
                         // No <font> found: insert a new one.
+                        const isTextGradient =
+                            hasInlineGradient && font.classList.contains("text-gradient");
                         font = this.document.createElement("font");
                         node.after(font);
+                        if (isTextGradient && mode === "color") {
+                            font.style.webkitTextFillColor = color;
+                        }
                     }
                     if (node.textContent) {
                         font.appendChild(node);
@@ -314,7 +383,7 @@ export class ColorPlugin extends Plugin {
         const usedCustomColors = new Set();
         for (const font of allFont) {
             if (isCSSColor(font.style[mode])) {
-                usedCustomColors.add(font.style[mode]);
+                usedCustomColors.add(rgbaToHex(font.style[mode]));
             }
         }
         return usedCustomColors;

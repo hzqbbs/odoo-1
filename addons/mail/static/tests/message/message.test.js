@@ -130,6 +130,11 @@ test("Can edit message comment in chatter", async () => {
     await insertText(".o-mail-Message .o-mail-Composer-input", "edited message", { replace: true });
     await click(".o-mail-Message a", { text: "save" });
     await contains(".o-mail-Message-content", { text: "edited message (edited)" });
+    // save without change should keep (edited)
+    await click(".o-mail-Message [title='Expand']");
+    await click(".o-mail-Message-moreMenu [title='Edit']");
+    await click(".o-mail-Message a", { text: "save" });
+    await contains(".o-mail-Message-content", { text: "edited message (edited)" });
 });
 
 test("Can edit message comment in chatter (mobile)", async () => {
@@ -835,7 +840,7 @@ test("message comment of same author within 5min. should be squashed", async () 
     await contains(".o-mail-Message", {
         contains: [
             [".o-mail-Message-content", { text: "body2" }],
-            [".o-mail-Message-sidebar .o-mail-Message-date", { text: "10:02" }],
+            [".o-mail-Message-sidebar .o-mail-Message-date", { text: "10:02 AM" }],
         ],
     });
 });

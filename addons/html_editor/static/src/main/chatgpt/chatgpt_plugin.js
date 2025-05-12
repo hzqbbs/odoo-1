@@ -6,10 +6,20 @@ import { ChatGPTAlternativesDialog } from "./chatgpt_alternatives_dialog";
 import { ChatGPTTranslateDialog } from "./chatgpt_translate_dialog";
 import { LanguageSelector } from "./language_selector";
 import { withSequence } from "@html_editor/utils/resource";
+import { user } from "@web/core/user";
+import { isContentEditable } from "@html_editor/utils/dom_info";
 
 export class ChatGPTPlugin extends Plugin {
     static id = "chatgpt";
-    static dependencies = ["selection", "history", "dom", "sanitize", "dialog"];
+    static dependencies = [
+        "baseContainer",
+        "selection",
+        "history",
+        "dom",
+        "sanitize",
+        "dialog",
+        "split",
+    ];
     resources = {
         user_commands: [
             {
@@ -29,11 +39,15 @@ export class ChatGPTPlugin extends Plugin {
                 groupId: "ai",
                 title: _t("Translate with AI"),
                 isAvailable: (selection) => {
-                    return !selection.isCollapsed;
+                    return !selection.isCollapsed && user.userId;
                 },
+                isDisabled: this.isNotReplaceableByAI.bind(this),
                 Component: LanguageSelector,
                 props: {
                     onSelected: (language) => this.openDialog({ language }),
+                    isDisabled: (selection) => {
+                        return this.isNotReplaceableByAI(selection);
+                    },
                 },
             },
             {
@@ -41,6 +55,7 @@ export class ChatGPTPlugin extends Plugin {
                 groupId: "ai",
                 commandId: "openChatGPTDialog",
                 text: "AI",
+                isDisabled: this.isNotReplaceableByAI.bind(this),
             },
         ],
 
@@ -52,6 +67,14 @@ export class ChatGPTPlugin extends Plugin {
             // isAvailable: () => !this.odooEditor.isSelectionInBlockRoot(), // TODO!
         },
     };
+
+    isNotReplaceableByAI(selection = this.dependencies.selection.getEditableSelection()) {
+        const isEmpty = !selection.textContent().replace(/\s+/g, "");
+        const cannotReplace = this.dependencies.selection
+            .getTraversedNodes()
+            .find((el) => this.dependencies.split.isUnsplittable(el) || !isContentEditable(el));
+        return cannotReplace || isEmpty;
+    }
 
     openDialog(params = {}) {
         const selection = this.dependencies.selection.getEditableSelection();
@@ -97,6 +120,7 @@ export class ChatGPTPlugin extends Plugin {
             },
             ...params,
         };
+        dialogParams.baseContainer = this.dependencies.baseContainer.getDefaultNodeName();
         // collapse to end
         const sanitize = this.dependencies.sanitize.sanitize;
         if (selection.isCollapsed) {

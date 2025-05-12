@@ -3,15 +3,19 @@
 # 	* pos_self_order
 # 
 # Translators:
+# Tereza Mokrá, 2024
 # Wil Odoo, 2024
+# Vojtěch Olšan, 2025
+# Radim Bílý, 2025
+# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 08:55+0000\n"
+"POT-Creation-Date: 2025-05-07 20:37+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Wil Odoo, 2024\n"
+"Last-Translator: Marta Wacławek, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,6 +34,12 @@ msgstr ""
 msgid ""
 "%s is not available anymore, it has thus been removed from your order. "
 "Please review your order and validate it again."
+msgstr ""
+
+#. module: pos_self_order
+#. odoo-python
+#: code:addons/pos_self_order/models/pos_config.py:0
+msgid "(require Odoo Enterprise)"
 msgstr ""
 
 #. module: pos_self_order
@@ -129,16 +139,16 @@ msgstr ""
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_category__hour_after
 msgid "Availability After"
-msgstr ""
+msgstr "Dostupnost po"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_category__hour_until
 msgid "Availability Until"
-msgstr ""
+msgstr "Dostupnost do"
 
 #. module: pos_self_order
 #. odoo-javascript
-#: code:addons/pos_self_order/static/src/overrides/components/product_info_banner/product_info_banner.xml:0
+#: code:addons/pos_self_order/static/src/overrides/components/product_info_popup/product_info_popup.xml:0
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
 msgid "Available"
 msgstr "Dostupný"
@@ -152,7 +162,7 @@ msgstr ""
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.pos_self_order_product_pos_category_form_view
 msgid "Available between"
-msgstr ""
+msgstr "Dostupné mezi"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.product_template_search_view_pos
@@ -190,7 +200,7 @@ msgstr "Zrušit"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/cancel_popup/cancel_popup.xml:0
 msgid "Cancel Order"
-msgstr ""
+msgstr "Zrušit objednávku"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -245,12 +255,12 @@ msgstr "Zavřít relaci"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/order_history_page/order_history_page.xml:0
 msgid "Combo"
-msgstr ""
+msgstr "Kombinace"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_order_line__combo_id
 msgid "Combo reference"
-msgstr ""
+msgstr "Reference kombinace"
 
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_res_config_settings
@@ -324,7 +334,7 @@ msgstr "Nebezpečí"
 #. module: pos_self_order
 #: model:ir.model.fields.selection,name:pos_self_order.selection__pos_self_order_custom_link__style__dark
 msgid "Dark"
-msgstr ""
+msgstr "Tmavý"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
@@ -673,7 +683,7 @@ msgstr ""
 
 #. module: pos_self_order
 #. odoo-javascript
-#: code:addons/pos_self_order/static/src/overrides/components/product_info_banner/product_info_banner.xml:0
+#: code:addons/pos_self_order/static/src/overrides/components/product_info_popup/product_info_popup.xml:0
 msgid "Not available"
 msgstr "Není k dispozici"
 
@@ -728,7 +738,7 @@ msgstr ""
 #: code:addons/pos_self_order/static/src/app/components/combo_selection/combo_selection.xml:0
 #: code:addons/pos_self_order/static/src/app/components/product_card/product_card.xml:0
 msgid "Out of stock"
-msgstr ""
+msgstr "Není skladem"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -770,6 +780,12 @@ msgstr ""
 #. module: pos_self_order
 #: model:ir.model.fields.selection,name:pos_self_order.selection__pos_config__self_ordering_service_mode__counter
 msgid "Pickup zone"
+msgstr ""
+
+#. module: pos_self_order
+#. odoo-javascript
+#: code:addons/pos_self_order/static/src/app/self_order_service.js:0
+msgid "Please wait until the price is loaded"
 msgstr ""
 
 #. module: pos_self_order
@@ -850,6 +866,7 @@ msgstr "Produkt"
 
 #. module: pos_self_order
 #. odoo-javascript
+#: code:addons/pos_self_order/static/src/app/components/combo_selection/combo_selection.xml:0
 #: code:addons/pos_self_order/static/src/app/components/product_card/product_card.xml:0
 msgid "Product Information"
 msgstr "Informace o výrobku"
@@ -1019,7 +1036,7 @@ msgstr ""
 
 #. module: pos_self_order
 #. odoo-javascript
-#: code:addons/pos_self_order/static/src/overrides/components/product_info_banner/product_info_banner.xml:0
+#: code:addons/pos_self_order/static/src/overrides/components/product_info_popup/product_info_popup.xml:0
 msgid "Self-ordering:"
 msgstr ""
 
@@ -1101,7 +1118,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/eating_location_page/eating_location_page.xml:0
 msgid "Take Out"
-msgstr ""
+msgstr "S sebou"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1160,6 +1177,12 @@ msgstr ""
 #: code:addons/pos_self_order/models/res_config_settings.py:0
 msgid "The user must be a POS user"
 msgstr ""
+
+#. module: pos_self_order
+#. odoo-javascript
+#: code:addons/pos_self_order/static/src/app/pages/product_page/product_page.xml:0
+msgid "This combination does not exist."
+msgstr "Tato kombinace neexistuje."
 
 #. module: pos_self_order
 #. odoo-javascript

@@ -4,17 +4,16 @@
 # 
 # Translators:
 # Martin Trigaux, 2024
-# Yoshi Tashiro (Quartile) <tashiro@roomsfor.hk>, 2024
-# Wil Odoo, 2024
-# Junko Augias, 2024
+# Wil Odoo, 2025
+# Junko Augias, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-02-10 13:24+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Junko Augias, 2024\n"
+"Last-Translator: Junko Augias, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -869,7 +868,7 @@ msgstr "カスタムグループ追加"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor.xml:0
 msgid "Add New Rule"
-msgstr "新しい規則を追加"
+msgstr "新しいルールを追加"
 
 #. module: web
 #. odoo-javascript
@@ -1244,7 +1243,7 @@ msgstr "自動保存"
 #. odoo-javascript
 #: code:addons/web/static/src/views/view_dialogs/export_data_dialog.xml:0
 msgid "Available fields"
-msgstr "利用可能な項目"
+msgstr "利用可能なフィールド"
 
 #. module: web
 #. odoo-javascript
@@ -1276,6 +1275,18 @@ msgstr "戻る矢印"
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "Back"
 msgstr "戻る"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s”"
+msgstr "“%s” に戻る"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s” form"
+msgstr "“%s” フォームに戻る"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -1842,7 +1853,7 @@ msgstr "ドキュメントレイアウトを設定"
 #: code:addons/web/static/src/views/list/list_confirmation_dialog.xml:0
 #: code:addons/web/static/src/webclient/switch_company_menu/switch_company_menu.xml:0
 msgid "Confirm"
-msgstr "確認"
+msgstr "確定"
 
 #. module: web
 #. odoo-javascript
@@ -1967,7 +1978,6 @@ msgstr "Copyright © 2004"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 msgid "Could not display the selected image"
 msgstr "選択された画像を表示できませんでした"
@@ -1980,9 +1990,9 @@ msgstr "選択されたpdfを表示できませんでした"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
-msgid "Could not display the specified image url."
-msgstr "指定された画像urlを表示できませんでした。"
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+msgid "Could not display the selected spreadsheet"
+msgstr "選択されたスプレッドシートを表示できませんでした"
 
 #. module: web
 #. odoo-javascript
@@ -2151,7 +2161,7 @@ msgstr "データベース"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.neutralize_banner
 msgid "Database neutralized for testing: no emails sent, etc."
-msgstr "テスト用にデータベースを無効化：電子メールの送信などを行わない"
+msgstr "テスト用にデータベースが安全化されました: メール送信などは無効です。"
 
 #. module: web
 #. odoo-javascript
@@ -3000,7 +3010,7 @@ msgid ""
 msgstr ""
 "Excel との互換性について、カラム数が 16384 を超える場合はデータをエクスポートできません。\n"
 "\n"
-"ヒント: 軸を反転させる、さらにフィルタリングする、または単位数を減らしてみて下さい。"
+"ヒント: 軸を反転させる、さらにフィルタリングする、または集計項目数を減らしてみて下さい。"
 
 #. module: web
 #. odoo-javascript
@@ -3102,6 +3112,13 @@ msgstr "Odoo企業版では、この機能やその他多数の機能がご利�
 #: code:addons/web/static/src/views/fields/url/url_field.xml:0
 msgid "Go to URL"
 msgstr "URLへ移動"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+msgid "Google Slide Viewer"
+msgstr "Googleスライドビュワー"
 
 #. module: web
 #. odoo-javascript
@@ -3872,6 +3889,12 @@ msgstr "デモデータをロード"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid "Load everything anyway."
+msgstr "とにかく全てを読込みます。"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/search/search_bar/search_bar.js:0
 msgid "Load more"
 msgstr "もっと読み込む"
@@ -4027,6 +4050,12 @@ msgstr "突合"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+msgid "Max value"
+msgstr "最高値"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 #: code:addons/web/static/src/views/fields/progress_bar/progress_bar_field.js:0
 msgid "Max value field"
 msgstr "最大値フィールド"
@@ -4053,7 +4082,7 @@ msgstr "F5キーを押してアプリケーションを再ロードすること�
 #. odoo-javascript
 #: code:addons/web/static/src/views/view_components/report_view_measures.xml:0
 msgid "Measures"
-msgstr "分析対象"
+msgstr "集計項目"
 
 #. module: web
 #. odoo-javascript
@@ -4214,7 +4243,7 @@ msgstr "月曜日"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/monetary/monetary_field.js:0
 msgid "Monetary"
-msgstr "金銭"
+msgstr "金額"
 
 #. module: web
 #. odoo-javascript
@@ -4241,6 +4270,12 @@ msgstr "さらに"
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "More Menu"
 msgstr "他のメニュー"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "More..."
+msgstr "さらに"
 
 #. module: web
 #. odoo-javascript
@@ -4385,7 +4420,7 @@ msgstr "新しいプロパティ"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor.xml:0
 msgid "New Rule"
-msgstr "新しい規則"
+msgstr "新しいルール"
 
 #. module: web
 #. odoo-javascript
@@ -4477,7 +4512,7 @@ msgstr "プロパティなし"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 msgid "No Update:"
-msgstr "ノーアップデート："
+msgstr "更新なし:"
 
 #. module: web
 #. odoo-javascript
@@ -4524,7 +4559,7 @@ msgstr "デバイスが見つかりません"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "No emoji match your search"
+msgid "No emoji matches your search"
 msgstr "検索にマッチする絵文字がありません"
 
 #. module: web
@@ -4712,7 +4747,7 @@ msgstr "Odooクライアントエラー"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
 msgid "Odoo Enterprise"
-msgstr "Odooエンタープライズ"
+msgstr "Odoo企業版"
 
 #. module: web
 #. odoo-javascript
@@ -5768,6 +5803,12 @@ msgstr "さらに検索..."
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "Search emoji"
+msgstr "絵文字を検索"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/commands/default_providers.js:0
 msgid "Search for a command..."
 msgstr "コマンドを検索..."
@@ -5777,12 +5818,6 @@ msgstr "コマンドを検索..."
 #: code:addons/web/static/src/webclient/menus/menu_providers.js:0
 msgid "Search for a menu..."
 msgstr "メニューを検索..."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "Search for an emoji"
-msgstr "絵文字を検索"
 
 #. module: web
 #. odoo-javascript
@@ -6214,6 +6249,12 @@ msgstr "状態"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "Statusbar"
+msgstr "ステータスバー"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/settings_confirmation_dialog.xml:0
 msgid "Stay Here"
 msgstr "このページに留まる"
@@ -6496,6 +6537,14 @@ msgstr ""
 "スタイルのコンパイルに失敗しました。これは管理者または開発者のエラーで、作業を続行する前にデータベース全体を修正する必要があります。詳細については、ブラウザコンソールまたはサーバログを参照して下さい。"
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr "データが多すぎます。グラフはサンプルのみを表示しています。フィルタを使用して範囲を絞り込んで下さい。"
+
+#. module: web
 #. odoo-python
 #: code:addons/web/controllers/export.py:0
 msgid ""
@@ -6646,6 +6695,18 @@ msgstr "妖精"
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
 msgstr "タイトル"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To next categories"
+msgstr "次のカテゴリへ"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To previous categories"
+msgstr "前のカテゴリへ"
 
 #. module: web
 #. odoo-javascript
@@ -6864,13 +6925,13 @@ msgstr "保存できません。問題を修正するか、変更を全て破棄
 #: code:addons/web/static/src/views/form/form_controller.js:0
 #: code:addons/web/static/src/views/list/list_controller.js:0
 msgid "Unarchive"
-msgstr "アーカイブ取消"
+msgstr "アーカイブ解除"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_header.js:0
 msgid "Unarchive All"
-msgstr "すべてアーカイブ取消"
+msgstr "すべてアーカイブ解除"
 
 #. module: web
 #. odoo-javascript
@@ -7133,13 +7194,13 @@ msgstr "動画"
 #: code:addons/web/static/src/views/list/list_renderer.xml:0
 #: model:ir.model,name:web.model_ir_ui_view
 msgid "View"
-msgstr "ビュー"
+msgstr "表示"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_renderer.xml:0
 msgid "View Button"
-msgstr "ビューボタン"
+msgstr "表示ボタン"
 
 #. module: web
 #. odoo-javascript
@@ -7914,7 +7975,7 @@ msgstr "建築"
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_confirmation_dialog.xml:0
 msgid "are valid for this update."
-msgstr "はこのアップデートに有効です。"
+msgstr "はこの更新で有効です。"
 
 #. module: web
 #. odoo-javascript
@@ -8262,7 +8323,7 @@ msgstr "プリン"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "bakery"
-msgstr "製パン店"
+msgstr "ベーカリー"
 
 #. module: web
 #. odoo-javascript
@@ -10650,7 +10711,7 @@ msgstr "建設作業員"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "contains"
-msgstr "が次を含む"
+msgstr "次を含む"
 
 #. module: web
 #. odoo-javascript
@@ -15443,7 +15504,7 @@ msgstr "が次の間である"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "is in"
-msgstr "は以下内:"
+msgstr "次のいずれかに一致:"
 
 #. module: web
 #. odoo-javascript

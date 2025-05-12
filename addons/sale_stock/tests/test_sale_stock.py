@@ -2119,3 +2119,114 @@ class TestSaleStock(TestSaleStockCommon, ValuationReconciliationTestCommon):
         error_message = "You must set a warehouse on your sale order to proceed."
         with self.assertRaisesRegex(UserError, error_message), self.env.cr.savepoint():
             so.with_company(new_company).action_confirm()
+
+    def test_package_with_moves_to_different_location_dest(self):
+        """
+        Create a two-step delivery with two products, and package both products together.
+        Ensure that the destination location is different for the two moves in the second
+        picking. check that the first picking can be validated.
+        """
+        # Set-up multi-step routes
+        self.env.user.groups_id += self.env.ref('stock.group_stock_multi_locations')
+        self.env.user.groups_id += self.env.ref('stock.group_adv_location')
+        warehouse = self.company_data['default_warehouse']
+        # Create two child locations.
+        parent_location = self.partner_a.property_stock_customer
+        child_location_1 = self.env['stock.location'].create({
+                'name': 'child_1',
+                'location_id': parent_location.id,
+        })
+        child_location_2 = self.env['stock.location'].create({
+                'name': 'child_2',
+                'location_id': parent_location.id,
+        })
+        # Enable 2-steps delivery
+        with Form(warehouse) as w:
+            w.delivery_steps = 'pick_ship'
+        delivery_route = warehouse.delivery_route_id
+        delivery_route.rule_ids[0].write({
+            'location_dest_id': delivery_route.rule_ids[1].location_src_id.id,
+        })
+        delivery_route.rule_ids[1].write({'action': 'pull'})
+        so = self._get_new_sale_order(product=self.product_a)
+        self.env['sale.order.line'].create({
+            'product_id': self.product_b.id,
+            'order_id': so.id,
+        })
+        self.assertEqual(len(so.order_line), 2)
+        so.action_confirm()
+        self.assertEqual(len(so.picking_ids), 2)
+        so.picking_ids[1].move_ids[0].location_dest_id = child_location_1
+        so.picking_ids[1].move_ids[1].location_dest_id = child_location_2
+        # Pack the moves of the first picking together.
+        package = so.picking_ids[0].action_put_in_pack()
+        # a new package is made and done quantities should be in same package
+        self.assertTrue(package)
+        so.picking_ids[0].button_validate()
+        self.assertEqual(so.picking_ids[0].state, 'done')
+        self.assertEqual(so.picking_ids[1].move_ids.move_line_ids[0].location_dest_id, child_location_1)
+        self.assertEqual(so.picking_ids[1].move_ids.move_line_ids[1].location_dest_id, child_location_2)
+
+    def test_custom_delivery_route_new_sale_line(self):
+        """
+        Create a custom delivery route Stock -> Transit -> Customer that uses pull rules.
+        Ensure that the validating the move from Stock to Transit does NOT create a new SaleOrderLine.
+        """
+        warehouse = self.company_data['default_warehouse']
+        stock_location = warehouse.lot_stock_id
+        customer_location = self.env.ref('stock.stock_location_customers')
+        transit_location = self.env['stock.location'].create({
+            'name': 'Transit',
+            'usage': 'transit',
+            'location_id': warehouse.view_location_id.id,
+        })
+        warehouse.pick_type_id.default_location_dest_id = transit_location
+
+        warehouse.delivery_route_id = self.env['stock.route'].create({
+            'name': '2 Steps Pull Delivery Route',
+            'warehouse_selectable': True,
+            'warehouse_ids': [(4, warehouse.id)],
+            'rule_ids': [
+                Command.create({
+                    'name': 'Stock to Output',
+                    'action': 'pull',
+                    'location_src_id': stock_location.id,
+                    'location_dest_id': transit_location.id,
+                    'picking_type_id': warehouse.pick_type_id.id,
+                    'procure_method': 'make_to_stock',
+                }),
+                Command.create({
+                    'name': 'Output to Customer',
+                    'action': 'pull',
+                    'location_src_id': transit_location.id,
+                    'location_dest_id': customer_location.id,
+                    'picking_type_id': warehouse.out_type_id.id,
+                    'procure_method': 'make_to_order',
+                })
+            ]
+        })
+
+        sale_order = self.env['sale.order'].create({
+            'partner_id': self.partner_a.id,
+            'order_line': [Command.create({
+                'name': 'Test Product',
+                'product_id': self.product_a.id,
+                'product_uom_qty': 1.0,
+                'price_unit': 1.0,
+            })],
+        })
+        sale_order.action_confirm()
+
+        # Ensure the created pickings follow the expected route
+        pickings = sale_order.picking_ids
+        self.assertEqual(len(pickings), 2, "Expected two pickings: Stock->Output and Output->Customer")
+        self.assertEqual(pickings[0].location_id, stock_location)
+        self.assertEqual(pickings[0].location_dest_id, transit_location)
+        self.assertEqual(pickings[1].location_id, transit_location)
+        self.assertEqual(pickings[1].location_dest_id, customer_location)
+
+        pickings[0].move_ids.picked = True
+        pickings[0].button_validate()
+
+        self.assertEqual(pickings[0].state, 'done')
+        self.assertEqual(len(sale_order.order_line), 1)

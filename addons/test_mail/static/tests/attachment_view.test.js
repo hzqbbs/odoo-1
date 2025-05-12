@@ -11,6 +11,8 @@ import {
     startServer,
     patchUiSize,
     SIZES,
+    dragenterFiles,
+    dropFiles,
 } from "@mail/../tests/mail_test_helpers";
 import { browser } from "@web/core/browser/browser";
 import { patchWithCleanup } from "@web/../tests/web_test_helpers";
@@ -26,6 +28,9 @@ beforeEach(() => {
         closed: false,
         get document() {
             const doc = popoutIframe.contentDocument;
+            if (!doc) {
+                return undefined;
+            }
             const originalWrite = doc.write;
             doc.write = (content) => {
                 // This avoids duplicating the test script in the popoutWindow
@@ -128,7 +133,50 @@ test("Attachment view popout controls test", async () => {
     expect(".o_attachment_preview").not.toBeVisible();
 });
 
-test("Attachment view / chatter popout across multiple records test", async () => {
+test("Chatter main attachment: can change from non-viewable to viewable", async () => {
+    const pyEnv = await startServer();
+    const recordId = pyEnv['mail.test.simple.main.attachment'].create({});
+    const irAttachmentId = pyEnv['ir.attachment'].create({
+        mimetype: 'text/plain',
+        name: "Blah.txt",
+        res_id: recordId,
+        res_model: 'mail.test.simple.main.attachment',
+    });
+    pyEnv['mail.message'].create({
+        attachment_ids: [irAttachmentId],
+        model: 'mail.test.simple.main.attachment',
+        res_id: recordId,
+    });
+    pyEnv['mail.test.simple.main.attachment'].write([recordId], {message_main_attachment_id : irAttachmentId});
+
+    registerArchs({
+        "mail.test.simple.main.attachment,false,form": `
+            <form string="Test document">
+                <sheet>
+                    <field name="name"/>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <chatter/>
+            </form>`,
+    });
+    patchUiSize({ size: SIZES.XXL });
+    await start();
+    await openFormView("mail.test.simple.main.attachment", recordId);
+
+    // Add a PDF file
+    const pdfFile = new File([new Uint8Array(1)], "text.pdf", { type: "application/pdf" });
+    await dragenterFiles(".o-mail-Chatter", [pdfFile]);
+    await dropFiles(".o-Dropzone", [pdfFile]);
+    await contains(".o_attachment_preview");
+    await contains(".o-mail-Attachment > iframe", { count: 0 }); // The viewer tries to display the text file not the PDF
+
+    // Switch to the PDF file in the viewer
+    await click(".o_move_next");
+    await contains(".o-mail-Attachment > iframe"); // There should be iframe for PDF viewer
+});
+
+test.skip("Attachment view / chatter popout across multiple records test", async () => {
+    // skip because test has race conditions: https://runbot.odoo.com/odoo/runbot.build.error/109795
     const pyEnv = await startServer();
     const recordIds = pyEnv["mail.test.simple.main.attachment"].create([
         {

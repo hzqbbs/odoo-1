@@ -4,6 +4,7 @@ import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { getVisibleElements } from "@web/core/utils/ui";
 import { Macro } from "@web/core/macro";
+import { click, edit } from "@odoo/hoot-dom";
 
 function clickOnButton(selector) {
     const button = document.body.querySelector(selector);
@@ -28,20 +29,23 @@ function updatePager(position) {
         return;
     }
     new Macro({
-        checkDelay: 16,
         name: "updating pager",
         timeout: 1000,
         steps: [
             {
                 trigger: "span.o_pager_value",
-                action: "click"
+                async action(trigger) {
+                    await click(trigger);
+                },
             },
             {
                 trigger: "input.o_pager_value",
-                action: "text",
-                value: next
-            }
-        ]
+                async action(trigger) {
+                    await click(trigger);
+                    await edit(next, { confirm: "blur" });
+                },
+            },
+        ],
     }).start();
 }
 

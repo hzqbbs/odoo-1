@@ -1,5 +1,7 @@
+import * as PartnerList from "@point_of_sale/../tests/tours/utils/partner_list_util";
 import * as PosLoyalty from "@pos_loyalty/../tests/tours/utils/pos_loyalty_util";
 import * as ProductScreen from "@point_of_sale/../tests/tours/utils/product_screen_util";
+import * as PaymentScreen from "@point_of_sale/../tests/tours/utils/payment_screen_util";
 import * as Chrome from "@point_of_sale/../tests/tours/utils/chrome_util";
 import * as Dialog from "@point_of_sale/../tests/tours/utils/dialog_util";
 import * as combo from "@point_of_sale/../tests/tours/utils/combo_popup_util";
@@ -138,6 +140,7 @@ registry.category("web_tour.tours").add("PosLoyaltyChangeRewardQty", {
         [
             Chrome.startPoS(),
             ProductScreen.clickPartnerButton(),
+            PartnerList.searchCustomerValue("DDD Test Partner"),
             ProductScreen.clickCustomer("DDD Test Partner"),
             ProductScreen.addOrderline("Desk Organizer", "1"),
             PosLoyalty.isRewardButtonHighlighted(true),
@@ -202,6 +205,18 @@ registry.category("web_tour.tours").add("PosLoyaltyDontGrantPointsForRewardOrder
         ].flat(),
 });
 
+registry.category("web_tour.tours").add("PosLoyaltyNextOrderCouponExpirationDate", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+
+            ProductScreen.addOrderline("Desk Organizer", "3"),
+
+            PosLoyalty.finalizeOrder("Cash", "15.3"),
+        ].flat(),
+});
+
 registry.category("web_tour.tours").add("PosComboCheapestRewardProgram", {
     steps: () =>
         [
@@ -241,5 +256,49 @@ registry.category("web_tour.tours").add("PosComboSpecificProductProgram", {
             Order.hasLine({ productName: "10% on Office Combo" }),
             PosLoyalty.orderTotalIs("216.00"),
             PosLoyalty.finalizeOrder("Cash", "216.00"),
+        ].flat(),
+});
+
+registry.category("web_tour.tours").add("PosCheapestProductTaxInclude", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+            ProductScreen.clickDisplayedProduct("Product"),
+            ProductScreen.addOrderline("Desk Organizer", "1"),
+            Order.hasLine({ productName: "10% on the cheapest product" }),
+            PosLoyalty.orderTotalIs("6.00"),
+        ].flat(),
+});
+
+registry.category("web_tour.tours").add("test_not_create_loyalty_card_expired_program", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+            ProductScreen.clickPartnerButton(),
+            ProductScreen.clickCustomer("Test Partner"),
+            ProductScreen.addOrderline("Desk Organizer", "3"),
+            PosLoyalty.finalizeOrder("Cash", "15.3"),
+        ].flat(),
+});
+
+registry.category("web_tour.tours").add("PosLoyaltyMultipleOrders", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+
+            // Order1: Add a product and leave the order in draft.
+            ProductScreen.addOrderline("Whiteboard Pen", "2"),
+            ProductScreen.clickPartnerButton(),
+            ProductScreen.clickCustomer("Test Partner"),
+            ProductScreen.clickPayButton(),
+            PaymentScreen.clickPaymentMethod("Cash"),
+
+            // Order2: Finalize a different order.
+            Chrome.createFloatingOrder(),
+            ProductScreen.addOrderline("Desk Organizer", "1"),
+            PosLoyalty.finalizeOrder("Cash", "10"),
         ].flat(),
 });

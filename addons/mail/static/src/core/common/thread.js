@@ -422,6 +422,7 @@ export class Thread extends Component {
             } else if (snapshot && messagesAtBottom) {
                 setScroll(snapshot.scrollTop);
             } else if (
+                !this.scrollingToHighlight &&
                 !this.env.messageHighlight?.highlightedMessageId &&
                 thread.scrollTop !== undefined
             ) {
@@ -544,6 +545,7 @@ export class Thread extends Component {
         this.props.thread.loadNewer = false;
         this.props.thread.scrollTop = "bottom";
         this.state.showJumpPresent = false;
+        this.scrollingToHighlight = false;
     }
 
     async onClickUnreadMessagesBanner() {
@@ -579,6 +581,9 @@ export class Thread extends Component {
             return false;
         }
         if (!msg.thread?.eq(prevMsg.thread)) {
+            return false;
+        }
+        if (msg.is_note) {
             return false;
         }
         return msg.datetime.ts - prevMsg.datetime.ts < 5 * 60 * 1000;

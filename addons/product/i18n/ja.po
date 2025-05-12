@@ -3,18 +3,18 @@
 # 	* product
 # 
 # Translators:
-# Wil Odoo, 2024
 # Tiffany Chang, 2024
-# Junko Augias, 2024
-# Ryoko Tsuda <ryoko@quartile.co>, 2024
+# Wil Odoo, 2024
+# Yoshi Tashiro (Quartile) <tashiro@roomsfor.hk>, 2025
+# Junko Augias, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-27 08:16+0000\n"
+"POT-Creation-Date: 2025-01-27 13:04+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Ryoko Tsuda <ryoko@quartile.co>, 2024\n"
+"Last-Translator: Junko Augias, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,13 +84,13 @@ msgstr "%(percentage)s %% %(discount_type)s  %(base)s %(extra)s"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% discount on %(pricelist)s"
-msgstr "%(percentage)s %% 値引 %(pricelist)s上"
+msgstr "%(percentage)s %% 割引 %(pricelist)s上"
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% discount on sales price"
-msgstr "%(percentage)s %% 販売価格より値引"
+msgstr "%(percentage)s %% 販売価格より割引"
 
 #. module: product
 #. odoo-python
@@ -419,7 +419,7 @@ msgstr "要アクション"
 #: model_terms:ir.ui.view,arch_db:product.product_supplierinfo_search_view
 #: model_terms:ir.ui.view,arch_db:product.product_template_attribute_value_view_search
 msgid "Active"
-msgstr "有効化"
+msgstr "アクティブ"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_supplierinfo_search_view
@@ -772,7 +772,7 @@ msgstr "さよなら、レコード！"
 #. module: product
 #: model:product.template,name:product.product_product_10_product_template
 msgid "Cabinet with Doors"
-msgstr "ドア付きキャビネット"
+msgstr "扉付きキャビネット"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_product__can_image_1024_be_zoomed
@@ -893,8 +893,8 @@ msgstr "コンボ価格"
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_template.py:0
-msgid "Combo products can't have attributes"
-msgstr "コンボプロダクトは属性を持つことはできません"
+msgid "Combo products can't have attributes."
+msgstr "コンボプロダクトには属性を指定できません。"
 
 #. module: product
 #. odoo-python
@@ -961,7 +961,7 @@ msgstr "設定"
 #: model_terms:ir.ui.view,arch_db:product.product_label_layout_form
 #: model_terms:ir.ui.view,arch_db:product.update_product_attribute_value_form
 msgid "Confirm"
-msgstr "確認"
+msgstr "確定"
 
 #. module: product
 #: model:ir.model,name:product.model_res_partner
@@ -987,6 +987,14 @@ msgstr "含まれる数量は正である必要があります。"
 #: model_terms:ir.ui.view,arch_db:product.product_packaging_form_view
 msgid "Contained quantity"
 msgstr "入数"
+
+#. module: product
+#: model:ir.model.fields,help:product.field_product_product__uom_category_id
+#: model:ir.model.fields,help:product.field_product_template__uom_category_id
+msgid ""
+"Conversion between Units of Measure can only occur if they belong to the "
+"same category. The conversion will be made based on the ratios."
+msgstr "単位間の変換は同じカテゴリに属している場合のみ可能です。変換は比率に基づいて行われます。"
 
 #. module: product
 #: model:product.template,name:product.product_product_13_product_template
@@ -1261,17 +1269,17 @@ msgstr "破棄"
 #: model:ir.model.fields.selection,name:product.selection__product_pricelist_item__compute_price__percentage
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_item_form_view
 msgid "Discount"
-msgstr "値引"
+msgstr "割引"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_supplierinfo__discount
 msgid "Discount (%)"
-msgstr "値引 (%)"
+msgstr "割引 (%)"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_supplierinfo__price_discounted
 msgid "Discounted Price"
-msgstr "値引価格"
+msgstr "割引価格"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__display_applied_on
@@ -1564,7 +1572,7 @@ msgstr "4人用モダンオフィスワークステーション"
 #: model:ir.model.fields,field_description:product.field_product_attribute_value__is_custom
 #: model:ir.model.fields,field_description:product.field_product_template_attribute_value__is_custom
 msgid "Free text"
-msgstr "無料テキスト"
+msgstr "フリーテキスト"
 
 #. module: product
 #: model:product.template,name:product.product_product_furniture_product_template
@@ -1608,7 +1616,7 @@ msgstr "ゴールドメンバー価格表"
 #: model_terms:ir.ui.view,arch_db:product.product_template_search_view
 #: model_terms:ir.ui.view,arch_db:product.product_view_search_catalog
 msgid "Goods"
-msgstr "物品"
+msgstr "商品"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_product__type
@@ -2175,7 +2183,7 @@ msgstr "次の活動タイプ"
 msgid ""
 "No product to print, if the product is archived please unarchive it before "
 "printing its label."
-msgstr "プリントするプロダクトがありません。プロダクトがアーカイブされている場合は、ラベルを印刷する前にアーカイブ取消して下さい。"
+msgstr "プリントするプロダクトがありません。プロダクトがアーカイブされている場合は、ラベルを印刷する前にアーカイブ解除して下さい。"
 
 #. module: product
 #. odoo-javascript
@@ -2210,7 +2218,7 @@ msgstr "メモ："
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__product_template__service_tracking__no
 msgid "Nothing"
-msgstr "なし"
+msgstr "追跡しない"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute__number_related_products
@@ -2437,7 +2445,7 @@ msgstr "価格"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__price_discount
 msgid "Price Discount"
-msgstr "価格値引"
+msgstr "価格割引"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__price_round
@@ -3131,7 +3139,7 @@ msgid ""
 "To have prices that end in 9.99, round off to 10.00 and set an extra at -0.01"
 msgstr ""
 "この値の倍数となる価格を設定します。\n"
-"丸めは値引後で追加料金の前に適用します。\n"
+"丸めは割引後で追加料金の前に適用します。\n"
 "最終価格を9.99にするには、丸めを10.00に追加料金を-0.01とします。"
 
 #. module: product
@@ -3184,7 +3192,7 @@ msgstr "この規則が1つのプロダクトテンプレートにのみ適用�
 msgid ""
 "Specify the fixed amount to add or subtract (if negative) to the amount "
 "calculated with the discount."
-msgstr "値引で計算された金額に加算または（マイナスの場合）減算する固定金額を指定します。"
+msgstr "割引で計算された金額に加算または（マイナスの場合）減算する固定金額を指定します。"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist_item__price_max_margin
@@ -3466,6 +3474,13 @@ msgstr "この価格表は現在のパートナに販売するために、デフ
 
 #. module: product
 #. odoo-python
+#: code:addons/product/models/product_template.py:0
+msgid ""
+"This product is part of a combo, so its type can't be changed to \"combo\"."
+msgstr "このプロダクトはコンボの一部ですあるため、タイプを \"コンボ\" に変更することはできません。"
+
+#. module: product
+#. odoo-python
 #: code:addons/product/models/uom_uom.py:0
 msgid ""
 "This rounding precision is higher than the Decimal Accuracy (%(digits)s digits).\n"
@@ -3572,6 +3587,12 @@ msgstr "個"
 #: model_terms:ir.ui.view,arch_db:product.res_config_settings_view_form
 msgid "Units of Measure"
 msgstr "単位"
+
+#. module: product
+#: model:ir.model.fields,field_description:product.field_product_product__uom_category_id
+#: model:ir.model.fields,field_description:product.field_product_template__uom_category_id
+msgid "UoM Category"
+msgstr "単位カテゴリ"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_attribute_view_form
@@ -3943,12 +3964,12 @@ msgstr ""
 #: model:ir.model.fields,help:product.field_product_pricelist_item__percent_price
 #: model:ir.model.fields,help:product.field_product_pricelist_item__price_discount
 msgid "You can apply a mark-up by setting a negative discount."
-msgstr "負の値引値を設定することで、マークアップを適用することができます。"
+msgstr "マイナスの割引(負の値)を設定することで、上乗せ(マークアップ)を適用できます。"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist_item__price_markup
 msgid "You can apply a mark-up on the cost"
-msgstr "原価にマークアップを適用できます"
+msgstr "原価に上乗せ(マークアップ)を適用できます"
 
 #. module: product
 #: model_terms:ir.actions.act_window,help:product.product_pricelist_action2
@@ -4170,7 +4191,7 @@ msgstr "日"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "discount"
-msgstr "値引"
+msgstr "割引"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_product_view_form_normalized

@@ -7,7 +7,6 @@
 # Eric Rial <erialmedina@gmail.com>, 2024
 # CristianCruzParra, 2024
 # martioodo hola, 2024
-# Santiago Payà <santiagopim@gmail.com>, 2024
 # eriiikgt, 2024
 # Lluís Dalmau <lluis.dalmau@guifi.net>, 2024
 # José Cabrera Lozano <jose.cabrera@edukative.es>, 2024
@@ -16,33 +15,37 @@
 # Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2024
 # ericrolo, 2024
 # Raimon Coral, 2024
-# Josep Sànchez <papapep@gmx.com>, 2024
+# Josep Sànchez <papapep@pinatell.net>, 2024
 # 7b9408628f00af852f513eb4f12c005b_f9c6891, 2024
 # Carles Antoli <carlesantoli@hotmail.com>, 2024
 # Eric Antones <eantones@users.noreply.github.com>, 2024
 # M Palau <mpalau@tda.ad>, 2024
 # Cristian Cruz, 2024
-# Harcogourmet, 2024
 # Jonatan Gk, 2024
 # Arnau Ros, 2024
 # Jaime Ruiz, 2024
 # marcescu, 2024
-# jabiri7, 2024
-# Quim - eccit <quim@eccit.com>, 2024
+# Quim - coopdevs <quim.rebull@coopdevs.org>, 2024
 # Martin Trigaux, 2024
 # Manel Fernandez Ramirez <manelfera@outlook.com>, 2024
 # Óscar Fonseca <tecnico@pyming.com>, 2024
 # RGB Consulting <odoo@rgbconsulting.com>, 2024
-# Josep Anton Belchi, 2024
+# EstudiTIC - estuditic.com <odoo@estuditic.com>, 2024
 # Ivan Espinola, 2024
+# oscaryuu, 2025
+# Josep Anton Belchi, 2025
+# Xavier, 2025
+# jabiri7, 2025
+# Noemi Pla, 2025
+# Santiago Payà <santiagopim@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-02-10 13:24+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Ivan Espinola, 2024\n"
+"Last-Translator: Santiago Payà <santiagopim@gmail.com>, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/odoo/teams/41243/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +64,7 @@ msgstr "# Editor de codi"
 #. odoo-python
 #: code:addons/web/controllers/export.py:0
 msgid "%(property_string)s (%(parent_name)s)"
-msgstr ""
+msgstr "%(property_string)s (%(parent_name)s)"
 
 #. module: web
 #. odoo-javascript
@@ -121,7 +124,7 @@ msgstr "'%s' no és una data o hora correcta"
 #. odoo-javascript
 #: code:addons/web/static/src/core/file_upload/file_upload_progress_record.js:0
 msgid "(%(mbLoaded)s/%(mbTotal)sMB)"
-msgstr ""
+msgstr "(%(mbLoaded)s/%(mbTotal)sMB)"
 
 #. module: web
 #. odoo-javascript
@@ -659,7 +662,7 @@ msgstr ""
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<strong>Due Date</strong>"
-msgstr ""
+msgstr "<strong>Data de venciment</strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
@@ -669,7 +672,7 @@ msgstr ""
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<strong>Invoice Date</strong>"
-msgstr ""
+msgstr "<strong>Data de factura</strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -1177,6 +1180,8 @@ msgid ""
 "Are you sure you want to delete this property field? It will be removed for "
 "everyone using the \"%(parentName)s\" %(parentFieldLabel)s."
 msgstr ""
+"Esteu segur que voleu esborrar aquest camp de propietat? Serà esborrat per "
+"tothom utilitzant el \"%(parentName)s\" %(parentFieldLabel)s."
 
 #. module: web
 #. odoo-javascript
@@ -1304,6 +1309,18 @@ msgstr "FLETXA ENRERE"
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "Back"
 msgstr "Enrere"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s”"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s” form"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -1464,7 +1481,7 @@ msgstr ""
 #: code:addons/web/static/src/views/kanban/kanban_controller.js:0
 #: code:addons/web/static/src/views/list/list_controller.js:0
 msgid "Bye-bye, record!"
-msgstr ""
+msgstr "Adeu, registre!"
 
 #. module: web
 #. odoo-javascript
@@ -2004,7 +2021,6 @@ msgstr "Copyright © 2004"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 msgid "Could not display the selected image"
 msgstr "La imatge seleccionada no es pot mostrar"
@@ -2017,9 +2033,9 @@ msgstr "No s'ha pogut mostrar el PDF seleccionat"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
-msgid "Could not display the specified image url."
-msgstr "No s'ha pogut mostrar l'URL de la imatge especificada."
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+msgid "Could not display the selected spreadsheet"
+msgstr "No s'ha pogut mostrar el full de càlcul seleccionat"
 
 #. module: web
 #. odoo-javascript
@@ -2774,7 +2790,7 @@ msgstr "Tot"
 #. odoo-javascript
 #: code:addons/web/static/src/core/dialog/dialog.xml:0
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #. module: web
 #. odoo-javascript
@@ -3137,6 +3153,13 @@ msgstr "Aconsegueixi aquesta característica i molt més amb Odoo Enterprise!"
 #: code:addons/web/static/src/views/fields/url/url_field.xml:0
 msgid "Go to URL"
 msgstr "Anar a l'URL"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+msgid "Google Slide Viewer"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3906,6 +3929,12 @@ msgstr "Carregar dades de prova"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid "Load everything anyway."
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/search/search_bar/search_bar.js:0
 msgid "Load more"
 msgstr "Carrega més"
@@ -4057,6 +4086,12 @@ msgstr "Molts a cap"
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Match"
 msgstr "Conciliar"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+msgid "Max value"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4275,6 +4310,12 @@ msgstr "Més"
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "More Menu"
 msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "More..."
+msgstr "Més...."
 
 #. module: web
 #. odoo-javascript
@@ -4558,8 +4599,8 @@ msgstr "No s'ha trobat cap dispositiu."
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "No emoji match your search"
-msgstr "No hi ha emojis que coincideixin amb la cerca"
+msgid "No emoji matches your search"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4870,6 +4911,8 @@ msgid ""
 "Only the first %(count)s records have been deleted (out of %(total)s "
 "selected)"
 msgstr ""
+"Només els primers %(count)s registres s'han esborrat (dels %(total)s "
+"seleccionats)"
 
 #. module: web
 #. odoo-python
@@ -5409,7 +5452,7 @@ msgstr "Rang"
 #. odoo-javascript
 #: code:addons/web/static/src/core/colorlist/colorlist.js:0
 msgid "Raspberry"
-msgstr ""
+msgstr "Vermell gerd"
 
 #. module: web
 #. odoo-javascript
@@ -5427,6 +5470,10 @@ msgid ""
 "\n"
 "Think twice before you click that 'Delete' button!"
 msgstr ""
+"Estàs preparat per fer desaparèixer el registre sense deixar rastre? N'estàs segur?\n"
+"No es podrà recuperar mai més!\n"
+"\n"
+"Pensa-ho dues vegades abans de fer clic al botó «Eliminar»!"
 
 #. module: web
 #. odoo-javascript
@@ -5805,6 +5852,12 @@ msgstr "Cercar més..."
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "Search emoji"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/commands/default_providers.js:0
 msgid "Search for a command..."
 msgstr "Cerca una ordre..."
@@ -5814,12 +5867,6 @@ msgstr "Cerca una ordre..."
 #: code:addons/web/static/src/webclient/menus/menu_providers.js:0
 msgid "Search for a menu..."
 msgstr "Buscar un menu..."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "Search for an emoji"
-msgstr "Cerca un emoji"
 
 #. module: web
 #. odoo-javascript
@@ -5920,7 +5967,7 @@ msgstr "Selecciona per defecte"
 #. odoo-javascript
 #: code:addons/web/static/src/core/model_field_selector/model_field_selector_popover.js:0
 msgid "Select a field"
-msgstr ""
+msgstr "Seleccionar un camp"
 
 #. module: web
 #. odoo-javascript
@@ -6251,6 +6298,12 @@ msgstr "Estat"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "Statusbar"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/settings_confirmation_dialog.xml:0
 msgid "Stay Here"
 msgstr "Queda't aquí"
@@ -6537,12 +6590,22 @@ msgid ""
 msgstr ""
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr ""
+
+#. module: web
 #. odoo-python
 #: code:addons/web/controllers/export.py:0
 msgid ""
 "There are too many rows (%(count)s rows, limit: %(limit)s) to export as "
 "Excel 2007-2013 (.xlsx) format. Consider splitting the export."
 msgstr ""
+"Hi ha massa files a exportar al format Excel 2007-2013 (.xlsx) (%(count)s "
+"files, límit: %(limit)s) . Considereu dividir la exportació."
 
 #. module: web
 #. odoo-javascript
@@ -6685,6 +6748,18 @@ msgstr "Titania"
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
 msgstr "Títol"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To next categories"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To previous categories"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7198,7 +7273,7 @@ msgstr "Veure metadades"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "View: %(displayName)s"
-msgstr ""
+msgstr "Vista: %(displayName)s"
 
 #. module: web
 #. odoo-javascript
@@ -7431,7 +7506,7 @@ msgstr "No tens accés al model \"%s\"."
 #. odoo-python
 #: code:addons/web/models/models.py:0
 msgid "You don't have access to this record"
-msgstr ""
+msgstr "No tens accés a aquest registre"
 
 #. module: web
 #. odoo-javascript
@@ -16191,7 +16266,7 @@ msgstr "verd frondós"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "ledger"
-msgstr "llibre major"
+msgstr "llibre de comptabilitat"
 
 #. module: web
 #. odoo-javascript
@@ -17301,7 +17376,7 @@ msgstr "massatge"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "match"
-msgstr ""
+msgstr "coincideix"
 
 #. module: web
 #. odoo-javascript
@@ -18424,7 +18499,7 @@ msgstr "no m'agrada"
 #: code:addons/web/static/src/core/tree_editor/tree_editor_value_editors.js:0
 #: code:addons/web/static/src/core/tree_editor/utils.js:0
 msgid "not set"
-msgstr ""
+msgstr "no establert"
 
 #. module: web
 #. odoo-javascript
@@ -20780,7 +20855,7 @@ msgstr "registre(s)"
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_confirmation_dialog.xml:0
 msgid "records?"
-msgstr ""
+msgstr "registres?"
 
 #. module: web
 #. odoo-javascript
@@ -26195,7 +26270,7 @@ msgstr "yay"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "years"
-msgstr ""
+msgstr "anys"
 
 #. module: web
 #. odoo-javascript

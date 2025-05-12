@@ -1,7 +1,9 @@
-import { registry } from "@web/core/registry";
 import { App } from "@odoo/owl";
-import { getTemplate } from "@web/core/templates";
+
 import { browser } from "@web/core/browser/browser";
+import { registry } from "@web/core/registry";
+import { getTemplate } from "@web/core/templates";
+import { setElementContent } from "@web/core/utils/html";
 
 export const mailPopoutService = {
     start(env) {
@@ -17,8 +19,8 @@ export const mailPopoutService = {
          * - destroy the current app mounted on the window
          */
         function reset() {
-            if (externalWindow) {
-                externalWindow.document.head.innerHTML = "";
+            if (externalWindow?.document) {
+                setElementContent(externalWindow.document.head, "");
                 externalWindow.document.write(window.document.head.outerHTML);
                 externalWindow.document.body = externalWindow.document.createElement("body");
             }

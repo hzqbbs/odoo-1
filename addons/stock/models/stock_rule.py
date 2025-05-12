@@ -5,10 +5,11 @@ import logging
 from collections import defaultdict, namedtuple, OrderedDict
 from dateutil.relativedelta import relativedelta
 
-from odoo import SUPERUSER_ID, _, api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.modules.registry import Registry
 from odoo.osv import expression
+from odoo.sql_db import BaseCursor
 from odoo.tools import float_compare, float_is_zero
 from odoo.tools.misc import split_every
 
@@ -171,7 +172,7 @@ class StockRule(models.Model):
                 suffix += _("<br>If the products are not available in <b>%s</b>, a rule will be triggered to bring the missing quantity in this location.", source)
             message_dict = {
                 'pull': _(
-                    'When products are needed in <b>%(destination)s</b>, <br> <b>%(operation)s</b> are created from <b>%(source_location)s</b> to fulfill the need.',
+                    'When products are needed in <b>%(destination)s</b>, <br> <b>%(operation)s</b> are created from <b>%(source_location)s</b> to fulfill the need. %(suffix)s',
                     destination=destination,
                     operation=operation,
                     source_location=source,
@@ -229,6 +230,9 @@ class StockRule(models.Model):
         else:
             new_move_vals = self._push_prepare_move_copy_values(move, new_date)
             new_move = move.sudo().copy(new_move_vals)
+            # when no more push we should reach final destination
+            if new_move._skip_push():
+                new_move.write({'location_dest_id': new_move.location_final_id.id})
             if new_move._should_bypass_reservation():
                 new_move.write({'procure_method': 'make_to_stock'})
             if not new_move.location_id.should_bypass_reservation():
@@ -238,6 +242,9 @@ class StockRule(models.Model):
     def _push_prepare_move_copy_values(self, move_to_copy, new_date):
         company_id = self.company_id.id
         copied_quantity = move_to_copy.quantity
+        final_location_id = False
+        if move_to_copy.location_final_id and not move_to_copy.location_dest_id._child_of(move_to_copy.location_final_id):
+            final_location_id = move_to_copy.location_final_id.id
         if float_compare(move_to_copy.product_uom_qty, 0, precision_rounding=move_to_copy.product_uom.rounding) < 0:
             copied_quantity = move_to_copy.product_uom_qty
         if not company_id:
@@ -247,7 +254,7 @@ class StockRule(models.Model):
             'origin': move_to_copy.origin or move_to_copy.picking_id.name or "/",
             'location_id': move_to_copy.location_dest_id.id,
             'location_dest_id': self.location_dest_id.id,
-            'location_final_id': move_to_copy.location_final_id.id,
+            'location_final_id': final_location_id,
             'rule_id': self.id,
             'date': new_date,
             'date_deadline': move_to_copy.date_deadline,
@@ -257,6 +264,8 @@ class StockRule(models.Model):
             'propagate_cancel': self.propagate_cancel,
             'warehouse_id': self.warehouse_id.id,
             'procure_method': 'make_to_order',
+            'description_picking': move_to_copy.product_id.with_context(lang=move_to_copy._get_lang())._get_description(
+                self.picking_type_id) or move_to_copy.description_picking,
         }
         return new_move_vals
 
@@ -286,7 +295,7 @@ class StockRule(models.Model):
 
         for company_id, moves_values in moves_values_by_company.items():
             # create the move as SUPERUSER because the current user may not have the rights to do it (mto product launched by a sale for example)
-            moves = self.env['stock.move'].with_user(SUPERUSER_ID).sudo().with_company(company_id).create(moves_values)
+            moves = self.env['stock.move'].sudo().with_company(company_id).create(moves_values)
             # Since action_confirm launch following procurement_group we should activate it.
             moves._action_confirm()
         return True
@@ -315,8 +324,7 @@ class StockRule(models.Model):
         )
         date_deadline = values.get('date_deadline') and (fields.Datetime.to_datetime(values['date_deadline']) - relativedelta(days=self.delay or 0)) or False
         partner = self.partner_address_id or (values.get('group_id', False) and values['group_id'].partner_id)
-        if partner:
-            product_id = product_id.with_context(lang=partner.lang or self.env.user.lang)
+        product_id = product_id.with_context(lang=(partner and partner.lang) or self.env.user.lang)
         picking_description = product_id._get_description(self.picking_type_id)
         if values.get('product_description_variants'):
             picking_description += values['product_description_variants']
@@ -324,9 +332,7 @@ class StockRule(models.Model):
         # a new move with the correct qty
         qty_left = product_qty
 
-        move_dest_ids = []
-        if not self.location_dest_id.should_bypass_reservation():
-            move_dest_ids = values.get('move_dest_ids', False) and [(4, x.id) for x in values['move_dest_ids']] or []
+        move_dest_ids = values.get('move_dest_ids') and [(4, x.id) for x in values['move_dest_ids']] or []
 
         # when create chained moves for inter-warehouse transfers, set the warehouses as partners
         if not partner and move_dest_ids:
@@ -387,7 +393,7 @@ class StockRule(models.Model):
         delays = defaultdict(float)
         delay = sum(self.filtered(lambda r: r.action in ['pull', 'pull_push']).mapped('delay'))
         delays['total_delay'] += delay
-        global_visibility_days = self.env.context.get('global_visibility_days', 0)
+        global_visibility_days = self.env.context.get('global_visibility_days', self.env['ir.config_parameter'].sudo().get_param('stock.visibility_days', 0))
         if global_visibility_days:
             delays['total_delay'] += int(global_visibility_days)
         if self.env.context.get('bypass_delay_description'):
@@ -562,6 +568,8 @@ class ProcurementGroup(models.Model):
         locations if it could not be found.
         """
         result = self.env['stock.rule']
+        if not location_id:
+            return result
         locations = location_id
         # Get the location hierarchy, starting from location_id up to its root location.
         while locations[-1].location_id:
@@ -578,7 +586,7 @@ class ProcurementGroup(models.Model):
 
         def extract_rule(rule_dict, route_ids, warehouse_id, location_dest_id):
             rule = self.env['stock.rule']
-            for route_id in route_ids:
+            for route_id in sorted(route_ids, key=lambda r: r.sequence):
                 sub_dict = rule_dict.get((location_dest_id.id, route_id.id))
                 if not sub_dict:
                     continue
@@ -684,12 +692,17 @@ class ProcurementGroup(models.Model):
 
     @api.model
     def _run_scheduler_tasks(self, use_new_cursor=False, company_id=False):
+        task_done = 0
+
         # Minimum stock rules
         domain = self._get_orderpoint_domain(company_id=company_id)
         orderpoints = self.env['stock.warehouse.orderpoint'].search(domain)
-        if use_new_cursor:
-            self._cr.commit()
         orderpoints.sudo()._procure_orderpoint_confirm(use_new_cursor=use_new_cursor, company_id=company_id, raise_user_error=False)
+        task_done += 1
+
+        if use_new_cursor:
+            self.env['ir.cron']._notify_progress(done=task_done, remaining=self._get_scheduler_tasks_to_do() - task_done)
+            self._cr.commit()
 
         # Search all confirmed stock_moves and try to assign them
         domain = self._get_moves_to_assign_domain(company_id)
@@ -700,13 +713,26 @@ class ProcurementGroup(models.Model):
             if use_new_cursor:
                 self._cr.commit()
                 _logger.info("A batch of %d moves are assigned and committed", len(moves_chunk))
+        task_done += 1
+
+        if use_new_cursor:
+            self.env['ir.cron']._notify_progress(done=task_done, remaining=self._get_scheduler_tasks_to_do() - task_done)
+            self._cr.commit()
 
         # Merge duplicated quants
         self.env['stock.quant']._quant_tasks()
 
+        task_done += 1
         if use_new_cursor:
+            self.env['ir.cron']._notify_progress(done=task_done, remaining=self._get_scheduler_tasks_to_do() - task_done)
             self._cr.commit()
-            _logger.info("_run_scheduler_tasks is finished and committed")
+        self._context.get('scheduler_task_done', {})['task_done'] = task_done
+
+    @api.model
+    def _get_scheduler_tasks_to_do(self):
+        """ Number of task to be executed by the stock scheduler. This number will be given in log
+        message to know how many tasks succeeded."""
+        return 3
 
     @api.model
     def run_scheduler(self, use_new_cursor=False, company_id=False):
@@ -714,20 +740,10 @@ class ProcurementGroup(models.Model):
         and the availability of moves. This function is intended to be run for all the companies at the same time, so
         we run functions as SUPERUSER to avoid intercompanies and access rights issues. """
         try:
-            if use_new_cursor:
-                cr = Registry(self._cr.dbname).cursor()
-                self = self.with_env(self.env(cr=cr))  # TDE FIXME
-
             self._run_scheduler_tasks(use_new_cursor=use_new_cursor, company_id=company_id)
         except Exception:
             _logger.error("Error during stock scheduler", exc_info=True)
             raise
-        finally:
-            if use_new_cursor:
-                try:
-                    self._cr.close()
-                except Exception:
-                    pass
         return {}
 
     @api.model

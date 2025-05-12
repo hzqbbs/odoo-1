@@ -2,6 +2,7 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.addons.account.models.company import PEPPOL_MAILING_COUNTRIES
 
 
 class AccountMove(models.Model):
@@ -12,7 +13,7 @@ class AccountMove(models.Model):
         selection=[
             ('ready', 'Ready to send'),
             ('to_send', 'Queued'),
-            ('skipped', 'Skipped'),
+            ('skipped', 'Skipped'),  # TODO remove this state in master, we now put a regular error.
             ('processing', 'Pending Reception'),
             ('done', 'Done'),
             ('error', 'Error'),
@@ -50,3 +51,15 @@ class AccountMove(models.Model):
                 move.peppol_move_state = False
             else:
                 move.peppol_move_state = move.peppol_move_state
+
+    def _notify_by_email_prepare_rendering_context(self, message, **kwargs):
+        render_context = super()._notify_by_email_prepare_rendering_context(message, **kwargs)
+        invoice = render_context['record']
+        invoice_country = invoice.commercial_partner_id.country_code
+        company_country = invoice.company_id.country_code
+        if company_country in PEPPOL_MAILING_COUNTRIES and invoice_country in PEPPOL_MAILING_COUNTRIES:
+            render_context['peppol_info'] = {
+                'peppol_country': invoice_country,
+                'is_peppol_sent': invoice.peppol_move_state in ('processing', 'done'),
+            }
+        return render_context

@@ -5,15 +5,15 @@
 # Translators:
 # Martin Trigaux, 2024
 # Wil Odoo, 2024
-# Larissa Manderfeld, 2024
+# Larissa Manderfeld, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"POT-Creation-Date: 2025-03-19 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Larissa Manderfeld, 2024\n"
+"Last-Translator: Larissa Manderfeld, 2025\n"
 "Language-Team: German (https://app.transifex.com/odoo/teams/41243/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -477,11 +477,6 @@ msgid "54326786758"
 msgstr "54326786758"
 
 #. module: stock
-#: model_terms:ir.ui.view,arch_db:stock.report_inventory
-msgid "98"
-msgstr "98"
-
-#. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.stock_warn_insufficient_qty_form_view
 msgid ""
 "<br/>\n"
@@ -516,6 +511,8 @@ msgid ""
 "<br>If the products are not available in <b>%s</b>, a rule will be triggered"
 " to bring the missing quantity in this location."
 msgstr ""
+"<br>Wenn die Produkte nicht in <b>%s</b> verfügbar sind, wird eine Regel "
+"ausgelöst, um die fehlende Menge an diesen Standort zu bringen."
 
 #. module: stock
 #. odoo-python
@@ -532,33 +529,33 @@ msgstr ""
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br><br>\n"
+"        Hello <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br/><br/>\n"
 "        We are glad to inform you that your order has been shipped.\n"
 "        <t t-if=\"hasattr(object, 'carrier_tracking_ref') and object.carrier_tracking_ref\">\n"
 "            Your tracking reference is\n"
 "            <strong>\n"
 "            <t t-if=\"object.carrier_tracking_url\">\n"
-"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"></t>\n"
+"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"/>\n"
 "                <t t-if=\"multiple_carrier_tracking\">\n"
 "                    <t t-foreach=\"multiple_carrier_tracking\" t-as=\"line\">\n"
-"                        <br><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"></a>\n"
+"                        <br/><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"/>\n"
 "                    </t>\n"
 "                </t>\n"
 "                <t t-else=\"\">\n"
-"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"></a>.\n"
+"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "                </t>\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                <t t-out=\"object.carrier_tracking_ref or ''\"></t>.\n"
+"                <t t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "            </t>\n"
 "            </strong>\n"
 "        </t>\n"
-"        <br><br>\n"
-"        Please find your delivery order attached for more details.<br><br>\n"
+"        <br/><br/>\n"
+"        Please find your delivery order attached for more details.<br/><br/>\n"
 "        Thank you,\n"
-"        <t t-if=\"user.signature\">\n"
-"            <br>\n"
-"            <t t-out=\"user.signature or ''\">--<br>Mitchell Admin</t>\n"
+"        <t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
+"            <br/>\n"
+"            <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
 "        </t>\n"
 "    </p>\n"
 "</div>\n"
@@ -566,33 +563,33 @@ msgid ""
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hallo <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br><br>\n"
+"        Hallo <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br/><br/>\n"
 "       wir freuen uns, Ihnen mitteilen zu können, dass Ihre Bestellung versandt wurde.\n"
 "        <t t-if=\"hasattr(object, 'carrier_tracking_ref') and object.carrier_tracking_ref\">\n"
-"            Ihre Sendungsverfolgungsnummer ist\n"
+"            Ihre Verfolgungsreferenz ist\n"
 "            <strong>\n"
 "            <t t-if=\"object.carrier_tracking_url\">\n"
-"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"></t>\n"
+"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"/>\n"
 "                <t t-if=\"multiple_carrier_tracking\">\n"
 "                    <t t-foreach=\"multiple_carrier_tracking\" t-as=\"line\">\n"
-"                        <br><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"></a>\n"
+"                        <br/><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"/>\n"
 "                    </t>\n"
 "                </t>\n"
 "                <t t-else=\"\">\n"
-"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"></a>.\n"
+"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "                </t>\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                <t t-out=\"object.carrier_tracking_ref or ''\"></t>.\n"
+"                <t t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "            </t>\n"
 "            </strong>\n"
 "        </t>\n"
-"        <br><br>\n"
-"        Weitere Einzelheiten entnehmen Sie bitte dem beigefügten Lieferschein.<br><br>\n"
+"        <br/><br/>\n"
+"        Weitere Einzelheiten entnehmen Sie bitte dem beigefügten Lieferschein.<br/><br/>\n"
 "        Vielen Dank\n"
-"        <t t-if=\"user.signature\">\n"
-"            <br>\n"
-"            <t t-out=\"user.signature or ''\">--<br>Mitchell Admin</t>\n"
+"        <t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
+"            <br/>\n"
+"            <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
 "        </t>\n"
 "    </p>\n"
 "</div>\n"
@@ -733,6 +730,12 @@ msgid "<span class=\"o_stat_text\">Traceability</span>"
 msgstr "<span class=\"o_stat_text\">Rückverfolgbarkeit</span>"
 
 #. module: stock
+#: model_terms:ir.ui.view,arch_db:stock.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:stock.report_picking
+msgid "<span><strong>Delivery Address:</strong></span>"
+msgstr "<span><strong>Lieferadresse:</strong></span>"
+
+#. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.report_return_slip
 msgid "<span>OBTRETU</span>"
 msgstr "<span>OBTRETU</span>"
@@ -783,12 +786,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock.report_picking
 msgid "<strong>Customer Address</strong>"
 msgstr "<strong>Kundenadresse</strong>"
-
-#. module: stock
-#: model_terms:ir.ui.view,arch_db:stock.report_delivery_document
-#: model_terms:ir.ui.view,arch_db:stock.report_picking
-msgid "<strong>Delivery Address</strong>"
-msgstr "<strong>Lieferadresse</strong>"
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.report_picking
@@ -1095,6 +1092,7 @@ msgstr "Zusätzliche Informationen"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_lot_report__address
+#: model:ir.model.fields,field_description:stock.field_stock_picking__warehouse_address_id
 #: model:ir.model.fields,field_description:stock.field_stock_warehouse__partner_id
 #: model_terms:ir.ui.view,arch_db:stock.search_customer_lot_filter
 msgid "Address"
@@ -1400,7 +1398,7 @@ msgstr "August"
 #. module: stock
 #: model:ir.model.fields.selection,name:stock.selection__stock_warehouse_orderpoint__trigger__auto
 msgid "Auto"
-msgstr "Auto"
+msgstr "Automatisch"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_picking_type__auto_print_delivery_slip
@@ -3474,7 +3472,7 @@ msgstr "Erste Losnummer"
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_move__next_serial
 msgid "First SN/Lot"
-msgstr "Erste SN/Losnummer"
+msgstr "Erste Serien-/Losnummer"
 
 #. module: stock
 #. odoo-javascript
@@ -4243,12 +4241,6 @@ msgid "Immediate Transfer"
 msgstr "Sofortiger Transfer"
 
 #. module: stock
-#. odoo-python
-#: code:addons/stock/models/stock_quant.py:0
-msgid "Import"
-msgstr "Importieren"
-
-#. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/widgets/generate_serial.js:0
 msgid "Import Lots"
@@ -4387,7 +4379,7 @@ msgstr "Barcode installieren"
 #. odoo-python
 #: code:addons/stock/models/res_company.py:0
 msgid "Inter-warehouse transit"
-msgstr "Transit zwischen Lagerhäusern"
+msgstr "Lagerübergreifender Transit"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_move__location_dest_id
@@ -4977,7 +4969,7 @@ msgstr "Vorlaufzeiten"
 #. module: stock
 #: model:product.removal,name:stock.removal_least_packages
 msgid "Least Packages"
-msgstr "Wenige Pakete"
+msgstr "Pakete mit wenigsten Produkten"
 
 #. module: stock
 #: model:ir.model.fields.selection,name:stock.selection__stock_request_count__set_count__empty
@@ -5696,7 +5688,7 @@ msgstr "Nächster Aktivitätstyp"
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_location__next_inventory_date
 msgid "Next Expected"
-msgstr "Als nächstes erwartet"
+msgstr "Nächste erwartete Inventur"
 
 #. module: stock
 #. odoo-python
@@ -5897,7 +5889,7 @@ msgstr "Anzahl der Aktionen"
 #. odoo-javascript
 #: code:addons/stock/static/src/widgets/lots_dialog.xml:0
 msgid "Number of SN"
-msgstr "Anzahl der SN"
+msgstr "Anzahl Seriennummern"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_move__next_serial_count
@@ -6711,12 +6703,12 @@ msgstr "Anwesenheit hängt von der Art des Vorgangs ab."
 #. odoo-python
 #: code:addons/stock/models/stock_quant.py:0
 msgid ""
-"Press the CREATE button to define quantity for each product in your stock or"
-" import them from a spreadsheet throughout Favorites"
+"Press the \"New\" button to define the quantity for a product in your stock "
+"or import quantities from a spreadsheet via the Actions menu"
 msgstr ""
-"Drücken Sie auf die Schaltfläche ERSTELLEN, um die Mengen für jedes Produkt "
-"in Ihrem Lager zu definieren oder importieren Sie sie über Favoriten aus "
-"einer Tabellenkalkulation"
+"Drücken Sie auf die Schaltfläche „Neu“, um die Mengen für ein Produkt in "
+"Ihrem Lager zu definieren oder importieren Sie Mengen über eine "
+"Tabellenkalkulation über das Aktionsmenü."
 
 #. module: stock
 #. odoo-javascript
@@ -7121,7 +7113,7 @@ msgstr "Übertragung der Beschaffungsgruppe"
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_rule__propagate_carrier
 msgid "Propagation of carrier"
-msgstr "Übertragung des Transportunternehmens"
+msgstr "Übertragung des Zustellers"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_lot__lot_properties
@@ -7922,6 +7914,11 @@ msgid "Return"
 msgstr "Retoure ausführen"
 
 #. module: stock
+#: model_terms:ir.ui.view,arch_db:stock.view_stock_return_picking_form
+msgid "Return All"
+msgstr "Alle retournieren"
+
+#. module: stock
 #: model:ir.model,name:stock.model_stock_return_picking
 msgid "Return Picking"
 msgstr "Rücksendung"
@@ -8530,9 +8527,9 @@ msgid ""
 "customer. Apply shipping connector from delivery methods."
 msgstr ""
 "Mithilfe von Versandkonnektoren können Sie genaue Versandkosten berechnen, "
-"Versandaufkleber ausdrucken und die Abholung durch das Transportunternehmen "
-"in Ihrem Lagerhaus beantragen, um die Ware an den Kunden zu versenden. "
-"Wenden Sie den Versandkonnektor über Liefermethoden an."
+"Versandaufkleber ausdrucken und die Abholung durch den Zusteller in Ihrem "
+"Lagerhaus beantragen, um die Ware an den Kunden zu versenden. Wenden Sie den"
+" Versandkonnektor über Liefermethoden an."
 
 #. module: stock
 #: model:mail.template,name:stock.mail_template_data_delivery_confirmation
@@ -9179,6 +9176,16 @@ msgstr ""
 #: code:addons/stock/models/stock_quant.py:0
 msgid "The Lot/Serial number (%s) is linked to another product."
 msgstr "Die Los-/Seriennummer (%s) ist mit einem anderen Proukt verknüpft-"
+
+#. module: stock
+#. odoo-python
+#: code:addons/stock/models/stock_picking.py:0
+msgid ""
+"The Picking Operations report has been deleted so you cannot print at this "
+"time unless the report is restored."
+msgstr ""
+"Der Bericht über Kommissioniervorgänge wurde gelöscht, sodass Sie derzeit "
+"nicht drucken können, es sei denn, der Bericht wird wiederhergestellt."
 
 #. module: stock
 #. odoo-python
@@ -10531,7 +10538,7 @@ msgstr "Diagramm ansehen"
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_warehouse__view_location_id
 msgid "View Location"
-msgstr "Lagerort ansehen"
+msgstr "Ansichtslagerort"
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
@@ -10853,11 +10860,11 @@ msgstr "Bei Produkteingang in"
 msgid ""
 "When products are needed in <b>%(destination)s</b>, <br> "
 "<b>%(operation)s</b> are created from <b>%(source_location)s</b> to fulfill "
-"the need."
+"the need. %(suffix)s"
 msgstr ""
 "Wenn Produkte in <b>%(destination)s</b> benötigt werden, <br> "
 "werden<b>%(operation)s</b> aus <b>%(source_location)s</b> erstellt, um den "
-"Bedarf zu decken."
+"Bedarf zu decken. %(suffix)s"
 
 #. module: stock
 #. odoo-python
@@ -10876,7 +10883,7 @@ msgid ""
 "When set to True the destination location of the stock.move will be the "
 "rule.Otherwise, it takes it from the picking type."
 msgstr ""
-"Wenn diese Option auf True gesetzt ist, ist der Zielort der stock.move die "
+"Wenn diese Option auf Wahr gesetzt ist, ist der Zielort der stock.move die "
 "Regel, andernfalls wird sie vom Kommissioniertyp übernommen."
 
 #. module: stock

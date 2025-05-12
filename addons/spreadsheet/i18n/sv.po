@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-03-19 20:37+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
 "Last-Translator: Jakob Krabbe <jakob.krabbe@vertel.se>, 2024\n"
 "Language-Team: Swedish (https://app.transifex.com/odoo/teams/41243/sv/)\n"
@@ -895,12 +895,6 @@ msgstr ""
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "All the ranges and the range values must have the same size"
-msgstr "Alla intervall och intervallvärden måste ha samma storlek"
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "All the ranges must have the same dimensions."
 msgstr "Alla intervall måste ha samma mått."
 
@@ -1666,6 +1660,12 @@ msgstr "Det går inte att göra en specialpasta av en figur."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Cannot duplicate a pivot in error."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cannot find workbook relations file"
 msgstr "Kan inte hitta relationsfil för arbetsbok"
 
@@ -2176,6 +2176,12 @@ msgstr "Konverterar en angiven sträng till gemener."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Converts a specified string to uppercase."
 msgstr "Konverterar en angiven sträng till versaler."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Converts a string to a numeric value."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3326,6 +3332,7 @@ msgstr "Fältet %(field)s stöds inte på grund av sin typ (%(type)s)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/odoo_pivot.js:0
 #: code:addons/spreadsheet/static/src/pivot/pivot_helpers.js:0
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
 msgid "Field %s does not exist"
 msgstr "Fältet %s existerar inte"
 
@@ -5697,8 +5704,8 @@ msgstr "Pivot duplicerad."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Pivot duplication failed"
-msgstr "Duplicering av pivotering misslyckades"
+msgid "Pivot duplication failed."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6668,6 +6675,12 @@ msgstr "Enstaka värde från ett tabellliknande intervall."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
+msgid "Some measures are not available: %s"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Some used characters are not allowed in a sheet name (Forbidden characters "
@@ -7387,6 +7400,24 @@ msgstr "Den matris som kommer att omvandlas."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The base (%s) must be between 2 and 36 inclusive."
 msgstr "Basen (%s) måste vara mellan 2 och 36 inklusive."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base (%s) must be strictly positive."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base must be different from 1."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base of the logarithm."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8437,6 +8468,12 @@ msgstr "Logaritmen av ett tal, bas e (eulers tal)."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The logarithm of a number, for a given base."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The low end of the random range."
 msgstr "Den låga änden av det slumpmässiga intervallet."
 
@@ -8572,6 +8609,21 @@ msgstr "Minuend, eller talet som ska subtraheras från."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The minute component of the time."
 msgstr "Minutkomponenten av tiden."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/data_sources/data_source.js:0
+#: code:addons/spreadsheet/static/src/pivot/odoo_pivot_loader.js:0
+msgid "The model \"%(model)s\" does not exist."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/global_filters/components/filter_value/filter_value.js:0
+msgid ""
+"The model (%(model)s) of this global filter is not valid (it may have been "
+"renamed/deleted)."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10126,6 +10178,12 @@ msgstr "Det värde för vilket den inversa tangenten ska beräknas."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value for which to calculate the logarithm, base e."
 msgstr "Det värde som logaritmen ska beräknas för, bas e."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The value for which to calculate the logarithm."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12030,6 +12088,12 @@ msgid ""
 "evaluation."
 msgstr ""
 "kombinationen av sök- och matchningsläge stöds inte för XLOOKUP-utvärdering."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "the string to be converted"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript

@@ -1,23 +1,32 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import json
 from base64 import b64encode
 from functools import partial
+from unittest.mock import patch
+
+from werkzeug.datastructures import FileStorage
 
 from odoo import Command
-from odoo.tests import tagged
+from odoo.tests import Form, tagged
 from odoo.tools.misc import file_open
 
-from odoo.addons.base.tests.common import HttpCaseWithUserDemo
-from odoo.addons.sale.tests.common import SaleCommon
+from odoo.addons.base.tests.common import BaseUsersCommon
+from odoo.addons.sale_management.tests.common import SaleManagementCommon
+from odoo.addons.sale_pdf_quote_builder.controllers.quotation_document import (
+    QuotationDocumentController
+)
 from .files import forms_pdf, plain_pdf
 
 
 @tagged('-at_install', 'post_install')
-class TestPDFQuoteBuilder(HttpCaseWithUserDemo, SaleCommon):
+class TestPDFQuoteBuilder(BaseUsersCommon, SaleManagementCommon):
 
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+        cls.QuotationDocumentController = QuotationDocumentController()
 
         cls.sale_order.validity_date = '2020-11-04'
         cls.sale_order.partner_id.tz = 'Europe/Brussels'
@@ -56,6 +65,8 @@ class TestPDFQuoteBuilder(HttpCaseWithUserDemo, SaleCommon):
             'res_model': 'product.product',
             'res_id': cls.product.id,
         })
+
+        cls.alt_company = cls.env['res.company'].create({'name': "Backup Company"})
 
     def test_compute_customizable_pdf_form_fields_when_no_file(self):
         self.env['quotation.document'].search([]).action_archive()
@@ -129,7 +140,7 @@ class TestPDFQuoteBuilder(HttpCaseWithUserDemo, SaleCommon):
             'boolean_test': "No",
             'char_test': self.sale_order.name,
             'date_test': "11/04/2020",
-            'datetime_test': "Dec 21, 2121, 1:21:12 PM",
+            'datetime_test': "12/21/2121 13:21:12",
             'float_test': "4.99",
             'integer_test': "10",
             'selection_test': "Quotation",
@@ -146,21 +157,116 @@ class TestPDFQuoteBuilder(HttpCaseWithUserDemo, SaleCommon):
             self.assertEqual(result, expected[form_field.name])
 
     def test_product_document_dialog_params_access(self):
-        sale_order_user_demo = self.sale_order.copy({'user_id': self.user_demo.id})
-        dialog_param = sale_order_user_demo.with_user(
-            self.user_demo.id
+        sale_order_user_internal = self.sale_order.copy({'user_id': self.user_internal.id})
+        dialog_param = sale_order_user_internal.with_user(
+            self.user_internal.id
         ).get_update_included_pdf_params()
+        # should return all document data regardless of access
         self.assertEqual('Header', dialog_param['headers']['files'][0]['name'])
-        # Line product document should only be accessible by sales user
-        self.assertFalse(dialog_param['lines'])
+        self.assertEqual('Product > Test Product', dialog_param['lines'][0]['name'])
 
-        self.user_demo.groups_id += self.env.ref('sales_team.group_sale_salesman')
-        dialog_param = sale_order_user_demo.with_user(
-            self.user_demo.id
-        ).get_update_included_pdf_params()
-        # should return all document data for sale own document user
-        self.assertEqual('Header', dialog_param['headers']['files'][0]['name'])
-        self.assertTrue('Product > Test Product', dialog_param['lines'][0]['name'])
+    def test_quotation_document_is_removed_on_template_change(self):
+        so_tmpl = self.env['sale.order.template'].create({
+            'name': "test1",
+            'quotation_document_ids': [Command.link(self.header.id)],
+        })
+        so_tmpl_2 = self.env['sale.order.template'].create({'name': "test2"})
+
+        self.sale_order.write({
+            'sale_order_template_id': so_tmpl.id,
+            'quotation_document_ids': [Command.link(self.header.id)],
+        })
+
+        self.assertEqual(self.sale_order.quotation_document_ids, self.header)
+
+        so_form = Form(self.sale_order)
+        so_form.sale_order_template_id = so_tmpl_2
+        so_form.save()
+
+        self.assertNotEqual(self.sale_order.quotation_document_ids, self.header)
+
+    def test_onchange_product_removes_previously_selected_documents(self):
+        """ Check that changing a line that has a selected document unselect said document. """
+
+        available_doc = self.sale_order.order_line[0].available_product_document_ids
+        self.sale_order.order_line[0].product_document_ids = available_doc  # select the document
+
+        self.assertTrue(available_doc, msg="Default order line should have an available document.")
+        msg = "The available document should have been selected."
+        self.assertEqual(
+            self.sale_order.order_line[0].product_document_ids, available_doc, msg=msg
+        )
+
+        so_form = Form(self.sale_order)
+        with so_form.order_line.edit(0) as line:
+            line.product_id = self._create_product()
+        so_form.save()
+
+        msg = "There shouldn't be any available product documents."
+        self.assertFalse(self.sale_order.order_line[0].available_product_document_ids, msg=msg)
+        msg = "There shouldn't be any selected product documents left."
+        self.assertFalse(self.sale_order.order_line[0].product_document_ids, msg=msg)
+
+    def test_quotation_document_upload_no_template(self):
+        """Check that uploading quotation documents get assigned the active company."""
+        if 'website' not in self.env:
+            self.skipTest("Module `website` not found")
+        else:
+            from odoo.addons.website.tools import MockRequest  # noqa: PLC0415
+
+        allowed_company_ids = [self.alt_company.id, self.env.company.id]
+
+        # Upload document without Sale Order Template
+        with (
+            MockRequest(self.env) as request,
+            file_open(plain_pdf, 'rb') as file,
+            patch.object(request.httprequest.files, 'getlist', lambda _key: [FileStorage(file)]),
+        ):
+            request.params['allowed_company_ids'] = json.dumps(allowed_company_ids)
+            res = self.QuotationDocumentController.upload_document(ufile=FileStorage(file))
+            self.assertEqual(res.status_code, 200, "Upload should be successful")
+
+        quotation_document = self.env['quotation.document'].search([
+            ('name', '=', plain_pdf),
+        ], limit=1)
+        self.assertTrue(quotation_document, "A new quotation document should be created")
+        self.assertEqual(
+            quotation_document.company_id,
+            self.alt_company,
+            "Quotation document company should be the currently active company",
+        )
+
+    def test_quotation_document_upload_for_template(self):
+        """Check that uploading quotation documents get assigned the the quotation company."""
+        if 'website' not in self.env:
+            self.skipTest("Module `website` not found")
+        else:
+            from odoo.addons.website.tools import MockRequest  # noqa: PLC0415
+
+        allowed_company_ids = [self.alt_company.id, self.env.company.id]
+
+        # Upload a document for a Sale Order Template without company id
+        self.empty_order_template.company_id = False
+        with (
+            MockRequest(self.env) as request,
+            file_open(forms_pdf, 'rb') as file,
+            patch.object(request.httprequest.files, 'getlist', lambda _key: [FileStorage(file)]),
+        ):
+            request.params['allowed_company_ids'] = json.dumps(allowed_company_ids)
+            res = self.QuotationDocumentController.upload_document(
+                ufile=FileStorage(file),
+                sale_order_template_id=str(self.empty_order_template.id),
+            )
+            self.assertEqual(res.status_code, 200, "Upload should be successful")
+
+        quotation_document = self.env['quotation.document'].search([
+            ('name', '=', forms_pdf),
+        ], limit=1)
+        self.assertTrue(quotation_document, "A new quotation document should be created")
+        self.assertFalse(
+            quotation_document.company_id,
+            "Quotation document shouldn't have a company id",
+        )
 
     def _test_custom_content_kanban_like(self):
         # TODO VCR finish tour and uncomment

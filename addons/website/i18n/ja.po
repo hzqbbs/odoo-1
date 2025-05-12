@@ -5,16 +5,16 @@
 # Translators:
 # Martin Trigaux, 2024
 # Yoshi Tashiro (Quartile) <tashiro@roomsfor.hk>, 2024
-# Wil Odoo, 2024
-# Junko Augias, 2024
+# Wil Odoo, 2025
+# Junko Augias, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Junko Augias, 2024\n"
+"Last-Translator: Junko Augias, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -336,16 +336,6 @@ msgstr "+1555-555-5556"
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_charts
 msgid "+25.000"
 msgstr "+25.000"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
-msgid ", .s_searchbar_input"
-msgstr ", .s_searchbar_input"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.s_website_form_options
-msgid ", .s_website_form"
-msgstr ", .s_website_form"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
@@ -2438,7 +2428,7 @@ msgstr " %sを有効化ています。"
 #: model_terms:ir.ui.view,arch_db:website.color_combinations_debug_view
 #: model_terms:ir.ui.view,arch_db:website.website_visitor_view_kanban
 msgid "Active"
-msgstr "有効化"
+msgstr "アクティブ"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_three_columns
@@ -2619,8 +2609,8 @@ msgstr "言語を追加"
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
-msgid "Add new %s"
-msgstr "新規%sを追加"
+msgid "Add option"
+msgstr "オプション追加"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.view_edit_third_party_domains
@@ -4003,6 +3993,12 @@ msgid "Checkbox"
 msgstr "チェックボックス"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Checkbox List"
+msgstr "チェックボックスリスト"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team
 msgid "Chief Commercial Officer"
 msgstr "最高商務責任者"
@@ -4892,6 +4888,12 @@ msgstr "カスタム比率"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Custom Text"
+msgstr "カスタムテキスト"
+
+#. module: website
+#. odoo-javascript
 #: code:addons/website/static/src/components/dialog/seo.xml:0
 msgid "Custom Url"
 msgstr "カスタムURL"
@@ -5638,7 +5640,7 @@ msgstr "一般公開される記録を制限するドメイン"
 #. odoo-javascript
 #: code:addons/website/static/src/components/dialog/page_properties.xml:0
 msgid "Don't forget to update all links referring to it."
-msgstr "これを参照する全てのリンクのアップデートをお忘れなく。"
+msgstr "これを参照する全てのリンクの更新をお忘れなく。"
 
 #. module: website
 #. odoo-javascript
@@ -5789,12 +5791,6 @@ msgstr "例: /contactus又は/shop"
 #: model:ir.model.fields,help:website.field_website__domain
 msgid "E.g. https://www.mydomain.com"
 msgstr "例: https://www.mydomain.com"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid "EXTERNAL SUBMISSION - Customer not verified"
-msgstr "外部投稿 - 顧客未確認"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_horizontal
@@ -6198,6 +6194,12 @@ msgstr "例"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Existing Fields"
+msgstr "既存のフィールド"
+
+#. module: website
+#. odoo-javascript
 #: code:addons/website/static/src/components/resource_editor/utils.js:0
 msgid "Expected %(char)s"
 msgstr "想定 %(char)s"
@@ -6502,6 +6504,12 @@ msgstr "他社との差別化を図る機能"
 #: model_terms:ir.ui.view,arch_db:website.s_dynamic_snippet_options_template
 msgid "Fetched Elements"
 msgstr "フェッチされた要素"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Field"
+msgstr "フィールド"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_snippet_filter__field_names
@@ -7976,7 +7984,7 @@ msgstr "画像壁"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "In"
-msgstr "に"
+msgstr ":"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_pages_kanban_view
@@ -8370,7 +8378,7 @@ msgid ""
 "numbers and improves them. She is determined to drive success and delivers "
 "her professional acumen to bring the company to the next level."
 msgstr ""
-"Irisは国際的な経験を生かして、私たちが数字への理解を深めや改善策を立案するのをサポートしています。彼女は成功への決意を固め、会社を次のレベルに引き上げるべく、プロとしての洞察力を発揮しています。"
+"Irisは国際的な経験を生かして、私たちが数字への理解を深め改善策を立案するのをサポートしています。成功を確信し、会社を次のレベルに引き上げるべく、プロとしての洞察力を発揮しています。"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_page_properties_base_view_form
@@ -9298,7 +9306,7 @@ msgstr "マージン"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Mark Text"
-msgstr "テキストをマック"
+msgstr "マーク記号"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_masonry_block_mosaic_template
@@ -9308,7 +9316,7 @@ msgstr "違いを生み出す"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Marked Fields"
-msgstr "マックされたフィールド"
+msgstr "マークされたフィールド"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_google_map_options
@@ -9549,7 +9557,7 @@ msgid ""
 "Commercial Director in the software industry, Mich has helped the company to"
 " get where it is today."
 msgstr ""
-"Michは常にチャレンジし続けています。ソフトウェア産業で、コマーシャルディレクターとしての長年の経験があるこそ、会社をここまで成長させました。"
+"Michは常にチャレンジし続けています。ソフトウェア業界で、コマーシャルディレクターとしての長年の経験があるこそ、会社をここまで成長させました。"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_team_0_s_three_columns
@@ -9560,7 +9568,7 @@ msgid ""
 "Commercial Director in the software industry, Mich has helped the company to"
 " get where it is today. Mich is among the best minds."
 msgstr ""
-"Michは常にチャレンジし続けています。ソフトウェア産業で、コマーシャルディレクターとしての長年の経験があるこそ、会社をここまで成長させました。Michは間違いなくトップクラスの人材です。"
+"Michは常にチャレンジし続けています。ソフトウェア業界で、コマーシャルディレクターとしての長年の経験があるこそ、会社をここまで成長させました。Michは間違いなくトップクラスの人材です。"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.bs_debug_view
@@ -9929,7 +9937,7 @@ msgstr "ネットワーク"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.neutralize_ribbon
 msgid "Neutralized"
-msgstr "中和"
+msgstr "安全化"
 
 #. module: website
 #. odoo-javascript
@@ -10110,7 +10118,7 @@ msgstr "なし"
 #: model:website,prevent_zero_price_sale_text:website.default_website
 #: model:website,prevent_zero_price_sale_text:website.website2
 msgid "Not Available For Sale"
-msgstr "未発売"
+msgstr "販売不可"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_pages_kanban_view
@@ -10166,7 +10174,7 @@ msgstr "ご注意: 本ページを非表示するには、編集モードのカ�
 #: model_terms:ir.ui.view,arch_db:website.s_countdown_options
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Nothing"
-msgstr "なし"
+msgstr "何もしない"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -10314,7 +10322,7 @@ msgstr "スクロール時"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "On Success"
-msgstr "成功時"
+msgstr "送信後の動作"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.website_controller_pages_kanban_view
@@ -10459,6 +10467,12 @@ msgstr "オプション 2"
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
 msgid "Option 3"
 msgstr "オプション 3"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Option List"
+msgstr "オプションリスト"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -11205,7 +11219,7 @@ msgstr "ポートフォリオ"
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Position"
-msgstr "ポジション"
+msgstr "位置"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_media_list
@@ -11594,6 +11608,12 @@ msgstr "レーダー"
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Radio"
 msgstr "ラジオ"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Radio Button List"
+msgstr "ラジオボタンリスト"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -13039,7 +13059,7 @@ msgstr "今すぐ開始<span class=\"fa fa-angle-right ms-2\"/>"
 #: model_terms:ir.ui.view,arch_db:website.s_tabs
 #: model_terms:ir.ui.view,arch_db:website.s_text_image
 msgid "Start with the customer – find out what they want and give it to them."
-msgstr "お客様から始めよう – 望むことを見つけて提供しましょう。"
+msgstr "お客様を第一に – 顧客が望むものを見極めて提供しましょう。"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_carousel
@@ -13597,6 +13617,12 @@ msgid "The limit must be between 1 and 16."
 msgstr "上限は1と16の間である必要があります。"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/client_actions/configurator/configurator.js:0
+msgid "The logo is too large. Please upload a logo smaller than 2.5 MB."
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "The maximum number of files that can be uploaded."
 msgstr "アップロードできるファイルの最大数。"
@@ -13761,16 +13787,6 @@ msgstr "特徴の三"
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_multi_menus
 msgid "Third Menu"
 msgstr "第三のメニュー"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid ""
-"This %(model_name)s was submitted by %(user_name)s (%(user_email)s) on "
-"behalf of %(form_email)s"
-msgstr ""
-"この %(model_name)sは%(user_name)s (%(user_email)s)により "
-"%(form_email)sに代わって投稿されました。"
 
 #. module: website
 #. odoo-javascript
@@ -13963,6 +13979,7 @@ msgstr "このビューアーキテクチャは変更されました"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/systray_items/website_switcher.js:0
 #: code:addons/website/static/src/systray_items/website_switcher.xml:0
 msgid "This website does not have a domain configured."
 msgstr "このウェブサイトには設定されたドメインがありません。"
@@ -14527,7 +14544,7 @@ msgstr "テーマを更新"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_horizontal
 msgid "Updates and Improvements"
-msgstr "アップデートと改良"
+msgstr "更新と改良"
 
 #. module: website
 #. odoo-javascript
@@ -15021,7 +15038,7 @@ msgid ""
 "We also provide regular updates and new features based on user feedback, "
 "ensuring that our platform continues to evolve to meet your needs."
 msgstr ""
-"また、ユーザからのフィードバックに基づく定期的なアップデートや新機能を提供し、お客様のニーズに応えるため、弊社のプラットフォームは常に進化し続けます。"
+"また、ユーザからのフィードバックに基づく定期的な更新や新機能を提供し、お客様のニーズに応えるため、弊社のプラットフォームは常に進化し続けます。"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.footer_custom
@@ -15947,7 +15964,7 @@ msgstr "お名前"
 #. odoo-javascript
 #: code:addons/website/static/src/js/send_mail_form.js:0
 msgid "Your Question"
-msgstr "あなたの質問"
+msgstr "ご質問内容"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_title

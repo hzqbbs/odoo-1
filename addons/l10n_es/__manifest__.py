@@ -29,6 +29,7 @@ Spanish charts of accounts (PGCE 2008).
     ],
     'auto_install': ['account'],
     'data': [
+        'data/account.account.tag.csv',
         'data/res_partner_data.xml',
         'views/account_move_views.xml',
         'views/account_tax_views.xml',
@@ -46,9 +47,11 @@ Spanish charts of accounts (PGCE 2008).
         'data/mod390/mod390_section6.xml',
         'data/mod390/mod390_section7.xml',
         'data/mod390/mod390.xml',
+        'data/mod420.xml',
     ],
     'demo': [
         'demo/demo_company.xml',
+        'demo/demo_partner.xml',
     ],
     'license': 'LGPL-3',
 }

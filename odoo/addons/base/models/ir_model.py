@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
+import inspect
 import itertools
 import logging
 import random
@@ -463,6 +464,8 @@ class IrModel(models.Model):
     @api.model
     def _instanciate(self, model_data):
         """ Return a class for the custom model given by parameters ``model_data``. """
+        models.check_pg_name(model_data["model"].replace(".", "_"))
+
         class CustomModel(models.Model):
             _name = model_data['model']
             _description = model_data['name']
@@ -1274,6 +1277,7 @@ class IrModelFields(models.Model):
             'required': bool(field_data['required']),
             'readonly': bool(field_data['readonly']),
             'store': bool(field_data['store']),
+            'company_dependent': bool(field_data['company_dependent']),
         }
         if field_data['ttype'] in ('char', 'text', 'html'):
             attrs['translate'] = bool(field_data['translate'])
@@ -1321,7 +1325,7 @@ class IrModelFields(models.Model):
         elif field_data['ttype'] == 'monetary':
             # be sure that custom monetary field are always instanciated
             if not self.pool.loaded and \
-                not (field_data['currency_field'] and self._is_manual_name(field_data['currency_field'])):
+                field_data['currency_field'] and not self._is_manual_name(field_data['currency_field']):
                 return
             attrs['currency_field'] = field_data['currency_field']
         # add compute function if given
@@ -1407,7 +1411,7 @@ class ModelInherit(models.Model):
         IrModel = self.env["ir.model"]
         get_model_id = IrModel._get_id
 
-        module_mapping = defaultdict(list)
+        module_mapping = defaultdict(OrderedSet)
         for model_name in model_names:
             get_field_id = self.env["ir.model.fields"]._get_ids(model_name).get
             model_id = get_model_id(model_name)
@@ -1424,10 +1428,16 @@ class ModelInherit(models.Model):
                 ] + [
                     (model_id, get_model_id(parent_name), get_field_id(field))
                     for parent_name, field in cls._inherits.items()
+                ] + [
+                    (model_id, get_model_id(field.comodel_name), get_field_id(field_name))
+                    for (field_name, field) in inspect.getmembers(cls)
+                    if isinstance(field, fields.Many2one)
+                    if field.type == 'many2one' and not field.related and field.delegate
+                    if field_name not in cls._inherits.values()
                 ]
 
                 for item in items:
-                    module_mapping[item].append(cls._module)
+                    module_mapping[item].add(cls._module)
 
         if not module_mapping:
             return
@@ -2226,7 +2236,7 @@ class IrModelData(models.Model):
     @tools.ormcache('xmlid')
     def _xmlid_lookup(self, xmlid: str) -> tuple:
         """Low level xmlid lookup
-        Return (id, res_model, res_id) or raise ValueError if not found
+        Return (res_model, res_id) or raise ValueError if not found
         """
         module, name = xmlid.split('.', 1)
         query = "SELECT model, res_id FROM ir_model_data WHERE module=%s AND name=%s"
@@ -2477,6 +2487,8 @@ class IrModelData(models.Model):
                 ('model', '=', records._name),
                 ('res_id', 'in', records.ids),
             ])
+            cloc_exclude_data = ref_data.filtered(lambda imd: imd.module == '__cloc_exclude__')
+            ref_data -= cloc_exclude_data
             records -= records.browse((ref_data - module_data).mapped('res_id'))
             if not records:
                 return
@@ -2505,6 +2517,7 @@ class IrModelData(models.Model):
             _logger.info('Deleting %s', records)
             try:
                 with self._cr.savepoint():
+                    cloc_exclude_data.unlink()
                     records.unlink()
             except Exception:
                 if len(records) <= 1:

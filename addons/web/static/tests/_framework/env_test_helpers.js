@@ -3,9 +3,10 @@ import { startRouter } from "@web/core/browser/router";
 import { createDebugContext } from "@web/core/debug/debug_context";
 import { translatedTerms, translationLoaded } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
+import { pick } from "@web/core/utils/objects";
+import { patch } from "@web/core/utils/patch";
 import { makeEnv, startServices } from "@web/env";
 import { MockServer, makeMockServer } from "./mock_server/mock_server";
-import { patch } from "@web/core/utils/patch";
 
 /**
  * @typedef {Record<keyof Services, any>} Dependencies
@@ -104,7 +105,7 @@ export async function makeMockEnv(partialEnv, { makeNew = false } = {}) {
     });
     Object.assign(currentEnv, partialEnv, createDebugContext(currentEnv)); // This is needed if the views are in debug mode
 
-    registerDebugInfo(currentEnv);
+    registerDebugInfo("env", currentEnv);
 
     startRouter();
     await startServices(currentEnv);
@@ -144,17 +145,32 @@ export function mockService(name, serviceFactory) {
         name,
         {
             ...originalService,
-            start() {
+            start(env, dependencies) {
                 if (typeof serviceFactory === "function") {
-                    return serviceFactory(...arguments);
+                    return serviceFactory(env, dependencies);
+                } else {
+                    const service = originalService.start(env, dependencies);
+                    if (service instanceof Promise) {
+                        service.then((value) => patch(value, serviceFactory));
+                    } else {
+                        patch(service, serviceFactory);
+                    }
+                    return service;
                 }
-                const service = originalService.start(...arguments);
-                patch(service, serviceFactory);
-                return service;
             },
         },
         { force: true }
     );
+
+    // Patch already initialized service
+    if (currentEnv?.services?.[name]) {
+        if (typeof serviceFactory === "function") {
+            const dependencies = pick(currentEnv.services, ...(originalService.dependencies || []));
+            currentEnv.services[name] = serviceFactory(currentEnv, dependencies);
+        } else {
+            patch(currentEnv.services[name], serviceFactory);
+        }
+    }
 }
 
 /**

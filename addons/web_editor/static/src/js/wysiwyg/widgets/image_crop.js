@@ -181,12 +181,13 @@ export class ImageCrop extends Component {
         this.$cropperImage = this.$('.o_we_cropper_img');
         const cropperImage = this.$cropperImage[0];
         [cropperImage.style.width, cropperImage.style.height] = [this.$media.width() + 'px', this.$media.height() + 'px'];
-        
+
         const sel = this.document.getSelection();
         sel && sel.removeAllRanges();
 
         // Overlaying the cropper image over the real image
-        const offset = this.$media.offset();
+        const mediaRect = this.media.getBoundingClientRect();
+        const offset = { left: mediaRect.left, top: mediaRect.top };
         offset.left += parseInt(this.$media.css('padding-left'));
         offset.top += parseInt(this.$media.css('padding-right'));
         const frameElement = this.$media[0].ownerDocument.defaultView.frameElement
@@ -309,7 +310,6 @@ export class ImageCrop extends Component {
                 break;
             case 'rotate':
                 this.$cropperImage.cropper(action, value);
-                this._resetCropBox();
                 break;
             case 'flip': {
                 const amount = this.$cropperImage.cropper('getData')[scaleDirection] * -1;

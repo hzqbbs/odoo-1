@@ -12,11 +12,15 @@ import {
     convertNumericToUnit,
     getCSSVariableValue,
     getHtmlStyle,
+    getFontSizeDisplayValue,
 } from "@html_editor/utils/formatting";
 import { DIRECTIONS } from "@html_editor/utils/position";
 import { _t } from "@web/core/l10n/translation";
 import { FontSelector } from "./font_selector";
+import { getBaseContainerSelector } from "@html_editor/utils/base_container";
 import { withSequence } from "@html_editor/utils/resource";
+import { reactive } from "@odoo/owl";
+import { FontSizeSelector } from "./font_size_selector";
 
 export const fontItems = [
     {
@@ -49,9 +53,16 @@ export const fontItems = [
     { name: _t("Header 5"), tagName: "h5" },
     { name: _t("Header 6"), tagName: "h6" },
 
-    { name: _t("Normal"), tagName: "p" },
+    {
+        name: _t("Normal"),
+        tagName: "div",
+        // for the FontSelector component
+        selector: getBaseContainerSelector("DIV"),
+    },
+    { name: _t("Paragraph"), tagName: "p" },
 
     // TODO @phoenix use them if showExtendedTextStylesOptions is true
+    // consider baseContainer if enabling them
     // {
     //     name: _t("Light"),
     //     tagName: "p",
@@ -97,7 +108,7 @@ const handledElemSelector = [...headingTags, "PRE", "BLOCKQUOTE"].join(", ");
 
 export class FontPlugin extends Plugin {
     static id = "font";
-    static dependencies = ["split", "selection", "dom", "format"];
+    static dependencies = ["baseContainer", "input", "split", "selection", "dom", "format"];
     resources = {
         user_commands: [
             {
@@ -126,7 +137,11 @@ export class FontPlugin extends Plugin {
                 title: _t("Text"),
                 description: _t("Paragraph block"),
                 icon: "fa-paragraph",
-                run: () => this.dependencies.dom.setTag({ tagName: "P" }),
+                run: () => {
+                    this.dependencies.dom.setTag({
+                        tagName: this.dependencies.baseContainer.getDefaultNodeName(),
+                    });
+                },
             },
             {
                 id: "setTagQuote",
@@ -159,11 +174,13 @@ export class FontPlugin extends Plugin {
                 Component: FontSelector,
                 props: {
                     getItems: () => fontItems,
+                    getDisplay: () => this.font,
                     onSelected: (item) => {
                         this.dependencies.dom.setTag({
                             tagName: item.tagName,
                             extraClass: item.extraClass,
                         });
+                        this.updateFontSelectorParams();
                     },
                 },
             },
@@ -171,15 +188,24 @@ export class FontPlugin extends Plugin {
                 id: "font-size",
                 groupId: "font-size",
                 title: _t("Font size"),
-                Component: FontSelector,
+                Component: FontSizeSelector,
                 props: {
                     getItems: () => this.fontSizeItems,
-                    onSelected: (item) =>
+                    getDisplay: () => this.fontSize,
+                    onFontSizeInput: (size) => {
+                        this.dependencies.format.formatSelection("fontSize", {
+                            formatProps: { size },
+                            applyStyle: true,
+                        });
+                        this.updateFontSizeSelectorParams();
+                    },
+                    onSelected: (item) => {
                         this.dependencies.format.formatSelection("setFontSizeClassName", {
                             formatProps: { className: item.className },
-                        }),
-                    isFontSize: true,
-                    document: this.document,
+                            applyStyle: true,
+                        });
+                        this.updateFontSizeSelectorParams();
+                    },
                 },
             },
         ],
@@ -223,6 +249,18 @@ export class FontPlugin extends Plugin {
 
         /** Handlers */
         input_handlers: this.onInput.bind(this),
+        selectionchange_handlers: [
+            this.updateFontSelectorParams.bind(this),
+            this.updateFontSizeSelectorParams.bind(this),
+        ],
+        post_undo_handlers: [
+            this.updateFontSelectorParams.bind(this),
+            this.updateFontSizeSelectorParams.bind(this),
+        ],
+        post_redo_handlers: [
+            this.updateFontSelectorParams.bind(this),
+            this.updateFontSizeSelectorParams.bind(this),
+        ],
 
         /** Overrides */
         split_element_block_overrides: [
@@ -233,6 +271,44 @@ export class FontPlugin extends Plugin {
         delete_backward_overrides: withSequence(20, this.handleDeleteBackward.bind(this)),
         delete_backward_word_overrides: this.handleDeleteBackward.bind(this),
     };
+
+    setup() {
+        this.fontSize = reactive({ displayName: "" });
+        this.font = reactive({ displayName: "" });
+    }
+
+    get fontName() {
+        const sel = this.dependencies.selection.getSelectionData().deepEditableSelection;
+        // if (!sel) {
+        //     return "Normal";
+        // }
+        const anchorNode = sel.anchorNode;
+        const block = closestBlock(anchorNode);
+        const tagName = block.tagName.toLowerCase();
+
+        const matchingItems = fontItems.filter((item) => {
+            return item.selector ? block.matches(item.selector) : item.tagName === tagName;
+        });
+
+        const matchingItemsWitoutExtraClass = matchingItems.filter((item) => !item.extraClass);
+
+        if (!matchingItems.length) {
+            return _t("Normal");
+        }
+
+        return (
+            matchingItems.find((item) => block.classList.contains(item.extraClass)) ||
+            (matchingItemsWitoutExtraClass.length && matchingItemsWitoutExtraClass[0])
+        ).name;
+    }
+
+    get fontSizeName() {
+        const sel = this.dependencies.selection.getSelectionData().deepEditableSelection;
+        if (!sel) {
+            return fontSizeItems[0].name;
+        }
+        return Math.round(getFontSizeDisplayValue(sel, this.document));
+    }
 
     get fontSizeItems() {
         const style = getHtmlStyle(this.document);
@@ -280,10 +356,14 @@ export class FontPlugin extends Plugin {
             if (closestBlockNode.nodeName !== "PRE") {
                 closestBlockNode.remove();
             }
-            const p = this.document.createElement("p");
-            closestPre.after(p);
-            fillEmpty(p);
-            this.dependencies.selection.setCursorStart(p);
+            const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+            const dir = closestBlockNode.getAttribute("dir") || closestPre.getAttribute("dir");
+            if (dir) {
+                baseContainer.setAttribute("dir", dir);
+            }
+            closestPre.after(baseContainer);
+            fillEmpty(baseContainer);
+            this.dependencies.selection.setCursorStart(baseContainer);
         } else {
             const lineBreak = this.document.createElement("br");
             targetNode.insertBefore(lineBreak, targetNode.childNodes[targetOffset]);
@@ -317,10 +397,14 @@ export class FontPlugin extends Plugin {
             if (closestBlockNode.nodeName !== "BLOCKQUOTE") {
                 closestBlockNode.remove();
             }
-            const p = this.document.createElement("p");
-            closestQuote.after(p);
-            fillEmpty(p);
-            this.dependencies.selection.setCursorStart(p);
+            const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+            const dir = closestBlockNode.getAttribute("dir") || closestQuote.getAttribute("dir");
+            if (dir) {
+                baseContainer.setAttribute("dir", dir);
+            }
+            closestQuote.after(baseContainer);
+            fillEmpty(baseContainer);
+            this.dependencies.selection.setCursorStart(baseContainer);
             return true;
         }
     }
@@ -341,13 +425,18 @@ export class FontPlugin extends Plugin {
             // @todo @phoenix: if this condition can be anticipated before the split,
             // handle the splitBlock only in such case.
             if (
+                newElement &&
                 headingTags.includes(newElement.tagName) &&
                 !descendants(newElement).some(isVisibleTextNode)
             ) {
-                const p = this.document.createElement("P");
-                newElement.replaceWith(p);
-                p.replaceChildren(this.document.createElement("br"));
-                this.dependencies.selection.setCursorStart(p);
+                const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+                const dir = newElement.getAttribute("dir");
+                if (dir) {
+                    baseContainer.setAttribute("dir", dir);
+                }
+                newElement.replaceWith(baseContainer);
+                baseContainer.replaceChildren(this.document.createElement("br"));
+                this.dependencies.selection.setCursorStart(baseContainer);
             }
             return true;
         }
@@ -372,11 +461,11 @@ export class FontPlugin extends Plugin {
         if (this.getResource("unremovable_node_predicates").some((p) => p(closestHandledElement))) {
             return;
         }
-        const p = this.document.createElement("p");
-        p.append(...closestHandledElement.childNodes);
-        closestHandledElement.after(p);
+        const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+        baseContainer.append(...closestHandledElement.childNodes);
+        closestHandledElement.after(baseContainer);
         closestHandledElement.remove();
-        this.dependencies.selection.setCursorStart(p);
+        this.dependencies.selection.setCursorStart(baseContainer);
         return true;
     }
 
@@ -412,5 +501,13 @@ export class FontPlugin extends Plugin {
             fillEmpty(blockEl);
             this.dependencies.dom.setTag({ tagName: headingToBe });
         }
+    }
+
+    updateFontSelectorParams() {
+        this.font.displayName = this.fontName;
+    }
+
+    updateFontSizeSelectorParams() {
+        this.fontSize.displayName = this.fontSizeName;
     }
 }

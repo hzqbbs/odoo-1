@@ -176,8 +176,7 @@ class ReportSaleDetails(models.AbstractModel):
                             payment['count'] = True
                     else:
                         is_cash_method = True
-                        previous_session = self.env['pos.session'].search([('id', '<', session.id), ('state', '=', 'closed'), ('config_id', '=', session.config_id.id)], limit=1)
-                        payment['final_count'] = payment['total'] + previous_session.cash_register_balance_end_real + session.cash_real_transaction
+                        payment['final_count'] = payment['total'] + session.cash_register_balance_start + session.cash_real_transaction
                         payment['money_counted'] = cash_counted
                         payment['money_difference'] = payment['money_counted'] - payment['final_count']
                         cash_moves = self.env['account.bank.statement.line'].search([('pos_session_id', '=', session.id)])
@@ -274,8 +273,8 @@ class ReportSaleDetails(models.AbstractModel):
             refund_products.append(category_dictionnary)
         refund_products = sorted(refund_products, key=lambda l: str(l['name']))
 
-        products, products_info = self._get_total_and_qty_per_category(products)
-        refund_products, refund_info = self._get_total_and_qty_per_category(refund_products)
+        products, products_info = self.with_context(config_id=configs[0].id if len(configs) > 0 else False)._get_total_and_qty_per_category(products)
+        refund_products, refund_info = self.with_context(config_id=configs[0].id if len(configs) > 0 else False)._get_total_and_qty_per_category(refund_products)
 
         currency = {
             'symbol': user_currency.symbol,
@@ -349,9 +348,10 @@ class ReportSaleDetails(models.AbstractModel):
     def _get_products_and_taxes_dict(self, line, products, taxes, currency):
         key2 = (line.product_id, line.price_unit, line.discount)
         key1 = line.product_id.product_tmpl_id.pos_categ_ids[0].name if len(line.product_id.product_tmpl_id.pos_categ_ids) else _('Not Categorized')
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
         products.setdefault(key1, {})
         products[key1].setdefault(key2, [0.0, 0.0, 0.0])
-        products[key1][key2][0] += line.qty
+        products[key1][key2][0] = round(products[key1][key2][0] + line.qty, precision)
         products[key1][key2][1] += self._get_product_total_amount(line)
         products[key1][key2][2] += line.price_subtotal
 

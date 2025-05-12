@@ -14,7 +14,10 @@ class Project(models.Model):
     def _compute_purchase_orders_count(self):
         purchase_orders_per_project = dict(
             self.env['purchase.order']._read_group(
-                domain=[('project_id', 'in', self.ids)],
+                domain=[
+                    ('project_id', 'in', self.ids),
+                    ('order_line', '!=', False),
+                ],
                 groupby=['project_id'],
                 aggregates=['id:array_agg'],
             )
@@ -52,7 +55,10 @@ class Project(models.Model):
             'name': self.env._('Purchase Orders'),
             'type': 'ir.actions.act_window',
             'res_model': 'purchase.order',
-            'views': [[False, 'list'], [False, 'form']],
+            'views': [
+                [False, 'list'], [self.env.ref('purchase.purchase_order_view_kanban_without_dashboard').id, 'kanban'],
+                [False, 'form'], [False, 'calendar'], [False, 'pivot'], [False, 'graph'], [False, 'activity'],
+            ],
             'domain': [('id', 'in', purchase_orders.ids)],
             'context': {
                 'default_project_id': self.id,
@@ -175,7 +181,6 @@ class Project(models.Model):
             domain = [
                 ('move_id.move_type', 'in', ['in_invoice', 'in_refund']),
                 ('parent_state', 'in', ['draft', 'posted']),
-                ('price_subtotal', '>', 0),
                 ('id', 'not in', purchase_order_line_invoice_line_ids),
             ]
             self._get_costs_items_from_purchase(domain, profitability_items, with_action=with_action)

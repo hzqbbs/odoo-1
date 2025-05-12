@@ -26,6 +26,9 @@ class TestPosQris(AccountTestInvoicingHttpCommon):
             'l10n_id_qris_mid': 'mid',
         })
 
+        cls.env['product.combo.item'].search([]).unlink()
+        cls.env['product.product'].search([]).write({'available_in_pos': False})
+
         cls.product_1 = cls.env['product.product'].create({
             'name': 'Test Product',
             'available_in_pos': True,
@@ -133,6 +136,7 @@ class TestPosQris(AccountTestInvoicingHttpCommon):
 
         def _patched_make_qris_request(endpoint, params):
             if endpoint == 'show_qris.php':
+                self.assertTrue(params['cliTrxNumber'])
                 return {
                     "status": "success",
                     "data": {

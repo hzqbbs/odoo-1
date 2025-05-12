@@ -7,15 +7,15 @@
 # Tiffany Chang, 2024
 # Martin Trigaux, 2024
 # Wil Odoo, 2024
-# Tony Ng, 2024
+# Tony Ng, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-03-19 20:37+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Tony Ng, 2024\n"
+"Last-Translator: Tony Ng, 2025\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -346,7 +346,7 @@ msgstr "2 列"
 msgid ""
 "A boolean indicating whether to use A1 style notation (TRUE) or R1C1 style "
 "notation (FALSE)."
-msgstr "真假值，表示使用「A1」格式（真）抑或「R1C1」格式（假）標示。"
+msgstr "真假值，TRUE（真）表示使用「A1」格式表示法，FALSE（假）表示使用「R1C1」格式表示法。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -354,7 +354,7 @@ msgstr "真假值，表示使用「A1」格式（真）抑或「R1C1」格式（
 msgid ""
 "A boolean; if TRUE, empty cells selected in the text arguments won't be "
 "included in the result."
-msgstr "真假值;如果為 TRUE，則在文本參數中選擇的空單元格將不會包含在結果中。"
+msgstr "真假值，如果為 TRUE（真），文字引數選取的空白儲存格，不會包含在結果內。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -792,7 +792,7 @@ msgstr "要計算平均值的額外數值。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Additional values to be returned if their corresponding conditions are TRUE."
-msgstr "如果相應條件為 TRUE，則傳回附加值。"
+msgstr "若相應條件為 TRUE（真），則傳回附加值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -837,12 +837,6 @@ msgid ""
 "All the dates should be greater or equal to the first date in cashflow_dates"
 " (%s)."
 msgstr "所有日期應大於或等於 cashflow_dates（%s）中的第一個日期。"
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "All the ranges and the range values must have the same size"
-msgstr "所有範圍及範圍值，大小必須相同"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1152,19 +1146,19 @@ msgstr "面積"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Argument ignore must be between 0 and 3"
-msgstr "忽略參數必須介乎 0 至 3 之間"
+msgstr "忽略引數必須介乎 0 至 3 之間"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Argument must be a reference to a cell or range."
-msgstr "參數必須是對儲存格或區域的引用。"
+msgstr "引數必須是對儲存格或區域的引用。"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Argument range must be a single row or column."
-msgstr "參數範圍必須是單列或單欄。"
+msgstr "引數範圍必須是單列或單欄。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1176,7 +1170,7 @@ msgstr "數組"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Array arguments to [[FUNCTION_NAME]] are of different size."
-msgstr "[[FUNCTION_NAME]] 內的陣列參數，範圍大小不同。"
+msgstr "[[FUNCTION_NAME]] 內的陣列引數，範圍大小不同。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1563,6 +1557,12 @@ msgstr "取消"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cannot do a special paste of a figure."
 msgstr "無法對圖形進行特殊貼上。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Cannot duplicate a pivot in error."
+msgstr "不可複製錯誤的樞紐。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2064,6 +2064,12 @@ msgstr "將指定字串轉換為全小寫。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Converts a specified string to uppercase."
 msgstr "將指定字串轉換為全大寫。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Converts a string to a numeric value."
+msgstr "將字串轉換為數值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3189,6 +3195,7 @@ msgstr "欄位 %(field)s 因其類型（%(type)s）而不被支援"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/odoo_pivot.js:0
 #: code:addons/spreadsheet/static/src/pivot/pivot_helpers.js:0
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
 msgid "Field %s does not exist"
 msgstr "欄位 %s 不存在"
 
@@ -3470,7 +3477,7 @@ msgstr "函數"
 msgid ""
 "Function ${name} has an argument that has been declared with more than one "
 "type whose type 'META'. The 'META' type can only be declared alone."
-msgstr "函數 ${name} 有一個已宣告的參數有多個類型，其類型為 META。但 META 類型只能單獨宣告。"
+msgstr "函數 ${name} 有一個已宣告的引數有多個類型，其類型為 META。但 META 類型只能單獨宣告。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3478,7 +3485,7 @@ msgstr "函數 ${name} 有一個已宣告的參數有多個類型，其類型為
 msgid ""
 "Function ${name} has at mandatory arguments declared after optional ones. "
 "All optional arguments must be after all mandatory arguments."
-msgstr "函數 ${name} 在可選參數之後宣告強制參數。所有可選參數必須在所有必需參數之後。"
+msgstr "函數 ${name} 在可選引數之後宣告強制引數。所有可選引數必須在所有必需引數之後。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3486,7 +3493,7 @@ msgstr "函數 ${name} 在可選參數之後宣告強制參數。所有可選參
 msgid ""
 "Function ${name} has no-repeatable arguments declared after repeatable ones."
 " All repeatable arguments must be declared last."
-msgstr "函數 ${name} 的不可重複參數在可重複參數之後宣告。所有可重複的參數必須留在最後宣告。"
+msgstr "函數 ${name} 的不可重複引數在可重複引數之後宣告。所有可重複的引數必須留在最後宣告。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3499,7 +3506,7 @@ msgstr "函數 %s 要求參數 %s 是對一個儲存格或區域的引用。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Function PIVOT takes an even number of arguments."
-msgstr "函數 PIVOT 接受偶數個數的參數。"
+msgstr "函數 PIVOT 接受偶數個數的引數。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3652,7 +3659,8 @@ msgstr "取得有關儲存格的資訊。"
 msgid ""
 "Given a general exponential form of y = b*m^x for a curve fit, calculates b "
 "if TRUE or forces b to be 1 and only calculates the m values if FALSE."
-msgstr "給定一般指數形式 y = b*m^x 進行曲線擬合，如果為真，則計算 b；如果為假，則強制 b 為 1 並只計算 m 值。"
+msgstr ""
+"給定一般指數形式 y = b*m^x 進行曲線擬合，如果為 TRUE（真），則計算 b；如果為 FALSE（假），則強制 b 為 1 並只計算 m 值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4208,7 +4216,7 @@ msgstr "無效的下拐點公式"
 msgid ""
 "Invalid number of arguments for the %s function. Expected %s maximum, but "
 "got %s instead."
-msgstr "%s 函數的參數數無效。要求 %s 最大，但得到的是 %s。"
+msgstr "%s 函數的引數數無效。要求 %s 最大，但得到的是 %s。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4216,7 +4224,7 @@ msgstr "%s 函數的參數數無效。要求 %s 最大，但得到的是 %s。"
 msgid ""
 "Invalid number of arguments for the %s function. Expected %s minimum, but "
 "got %s instead."
-msgstr "%s 函數的參數數無效。要求 %s 最小，但得到 %s。"
+msgstr "%s 函數的引數數無效。要求 %s 最小，但得到 %s。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4224,7 +4232,7 @@ msgstr "%s 函數的參數數無效。要求 %s 最小，但得到 %s。"
 msgid ""
 "Invalid number of arguments for the %s function. Expected all arguments "
 "after position %s to be supplied by groups of %s arguments"
-msgstr "%s 函數的參數數量無效。要求 %s 位置之後的所有參數將由 %s 參數組提供。"
+msgstr "%s 函數的引數數量無效。要求 %s 位置之後的所有引數將由 %s 引數組提供。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5145,13 +5153,13 @@ msgstr "沒有結果"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No results for the given arguments of TOCOL."
-msgstr "TOCOL 的給定參數無結果。"
+msgstr "TOCOL 的給定引數無結果。"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No results for the given arguments of TOROW."
-msgstr "TOROW 的給定參數無結果。"
+msgstr "TOROW 的給定引數無結果。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5338,8 +5346,8 @@ msgid ""
 "returned from the last row or column in the array. If search_key is not "
 "found, a non-exact match may be returned."
 msgstr ""
-"使用該函數的一種方法是提供一個排序列或欄 search_array，使用第二個參數 result_range 檢索 "
-"search_key。另一種方法是將這兩個參數合併為一個 search_array，搜索第一列或欄，然後從數組的最後一列或欄傳回一個值。如果找不到 "
+"使用該函數的一種方法是提供一個排序列或欄 search_array，使用第二個引數 result_range 檢索 "
+"search_key。另一種方法是將這兩個引數合併為一個 search_array，搜索第一列或欄，然後從數組的最後一列或欄傳回一個值。如果找不到 "
 "search_key，則可能傳回一個非精確符合的值。"
 
 #. module: spreadsheet
@@ -5493,8 +5501,8 @@ msgstr "樞紐分析已複製。"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Pivot duplication failed"
-msgstr "樞紐分析複製失敗"
+msgid "Pivot duplication failed."
+msgstr "樞紐分析複製失敗。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6439,6 +6447,12 @@ msgstr "表格範圍內的單個值。"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
+msgid "Some measures are not available: %s"
+msgstr "部份量度未能使用：%s"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Some used characters are not allowed in a sheet name (Forbidden characters "
@@ -6775,7 +6789,7 @@ msgstr "貨幣符號"
 msgid ""
 "TRUE or FALSE indicating whether to sort sort_column in ascending order. "
 "FALSE sorts in descending order."
-msgstr "表示是否對 sort_column 作遞增排序。假（FALSE）表示遞減排序。"
+msgstr "以真假值表示是否對 sort_column 作遞增排序。設為 FALSE（假）表示遞減排序。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6975,26 +6989,26 @@ msgstr "年化利率。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The argument %s is not a valid measure. Here are the measures: %s"
-msgstr "參數 %s 不是有效的量度。以下是可用量度： %s"
+msgstr "引數 %s 不是有效的量度。以下是可用量度： %s"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The argument dimension must be positive"
-msgstr "參數維度必須為正數"
+msgstr "引數維度必須為正數"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The argument is missing. Please provide a value"
-msgstr "參數缺漏。請提供一個值"
+msgstr "引數缺漏。請提供一個值"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "The argument square_matrix must have the same number of columns and rows."
-msgstr "參數 square_matrix 的欄數和列數必須相同。"
+msgstr "引數 square_matrix 的欄數和列數必須相同。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7007,13 +7021,13 @@ msgstr "引數 array_x 及 array_y 必須包含最少一對數字。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The arguments condition must be a single column or row."
-msgstr "參數條件必須是單欄或單列。"
+msgstr "引數條件必須是單欄或單列。"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The arguments conditions must have the same dimensions."
-msgstr "參數條件必須具有相同的維度。"
+msgstr "引數條件必須具有相同的維度。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7132,6 +7146,24 @@ msgstr "基數（%s）必須在 2 至 36 之間，包括此兩值。"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base (%s) must be strictly positive."
+msgstr "底數（%s）必須為正數。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base must be different from 1."
+msgstr "底數必須不可是 1。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base of the logarithm."
+msgstr "對數的底數。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The base to convert the value from."
 msgstr "轉換數值的基數。"
 
@@ -7220,7 +7252,7 @@ msgstr "儲存格引用的欄號（不是名稱）。A 欄是 1 。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The columns argument (%s) must be strictly positive."
-msgstr "欄參數（%s）必須為正數。"
+msgstr "欄引數（%s）必須為正數。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7228,14 +7260,14 @@ msgstr "欄參數（%s）必須為正數。"
 msgid ""
 "The columns arguments (%s) must be greater or equal than the number of "
 "columns of the array."
-msgstr "欄參數（%s）必須大於或等於數組的欄數。"
+msgstr "欄引數（%s）必須大於或等於數組的欄數。"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "The columns arguments must be between -%s and %s (got %s), excluding 0."
-msgstr "直欄的參數必須介乎 -%s 至 %s 之間（但收到 %s），不包括 0。"
+msgstr "直欄的引數必須介乎 -%s 至 %s 之間（但收到 %s），不包括 0。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7622,7 +7654,7 @@ msgstr "提高 e（歐拉數）至冪的指數（幾次方）。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The extract_length argument (%s) must be positive or null."
-msgstr "extract_length 參數（%s）必須為正數或空值。"
+msgstr "extract_length 引數（%s）必須為正數或空值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7901,7 +7933,7 @@ msgstr "函數 [[FUNCTION_NAME]] 要求一個數字值，但 '%s' 是一個字�
 msgid ""
 "The function [[FUNCTION_NAME]] has an argument with value '%s'. It should be"
 " one of: %s."
-msgstr "函數 [[FUNCTION_NAME]] 有一個值為 '%s' 的參數。它應該是以下參數之一：%s。"
+msgstr "函數 [[FUNCTION_NAME]] 有一個值為 '%s' 的引數。它應該是以下引數之一：%s。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8097,6 +8129,12 @@ msgstr "數字以 e（歐拉數）為底的對數（log）。"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The logarithm of a number, for a given base."
+msgstr "就給定底數而言，數字的對數。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The low end of the random range."
 msgstr "隨機範圍的下限。"
 
@@ -8223,6 +8261,21 @@ msgstr "被減數，即打算從中減去數值的數字。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The minute component of the time."
 msgstr "時間中的分鐘部份。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/data_sources/data_source.js:0
+#: code:addons/spreadsheet/static/src/pivot/odoo_pivot_loader.js:0
+msgid "The model \"%(model)s\" does not exist."
+msgstr "模型「%(model)s」不存在。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/global_filters/components/filter_value/filter_value.js:0
+msgid ""
+"The model (%(model)s) of this global filter is not valid (it may have been "
+"renamed/deleted)."
+msgstr "此全域篩選器的模型「%(model)s」無效（可能已重新命名/刪除）。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9111,7 +9164,7 @@ msgstr "投資收益再投資所獲得的回報（百分比）。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The returned value if condition1 is TRUE."
-msgstr "條件 condition1 為真時傳回的值。"
+msgstr "條件 condition1 為 TRUE（真）時，所傳回的值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9131,7 +9184,7 @@ msgstr "儲存格引用的列號。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The rows argument (%s) must be strictly positive."
-msgstr "列參數（%s）必須為正數。"
+msgstr "列引數（%s）必須為正數。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9139,13 +9192,13 @@ msgstr "列參數（%s）必須為正數。"
 msgid ""
 "The rows arguments (%s) must be greater or equal than the number of rows of "
 "the array."
-msgstr "列參數（%s）必須大於或等於陣列的列數。"
+msgstr "列引數（%s）必須大於或等於陣列的列數。"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The rows arguments must be between -%s and %s (got %s), excluding 0."
-msgstr "橫列的參數必須介乎 -%s 至 %s 之間（但收到 %s），不包括 0。"
+msgstr "橫列的引數必須介乎 -%s 至 %s 之間（但收到 %s），不包括 0。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9199,7 +9252,7 @@ msgstr "第二個補充。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The second argument is missing. Please provide a value"
-msgstr "第二個參數缺漏。請提供一個值"
+msgstr "第二個引數缺漏。請提供一個值"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9359,7 +9412,7 @@ msgstr "starting_at（%s）必須大於或等於 1。"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The starting_at argument (%s) must be positive greater than one."
-msgstr "starting_at 參數（%s）必須是大於 1 的正數。"
+msgstr "starting_at 引數（%s）必須是大於 1 的正數。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9691,6 +9744,12 @@ msgstr "計算反正切值的數值。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value for which to calculate the logarithm, base e."
 msgstr "計算對數的數值（以 e 為底數）。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The value for which to calculate the logarithm."
+msgstr "要計算對數的數值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10239,7 +10298,7 @@ msgstr "該公式具有超過 100 個部份。無法正確處理，請考慮將�
 msgid ""
 "This function takes in two currency codes as arguments, and returns the "
 "exchange rate from the first currency to the second as float."
-msgstr "此函數採用兩個貨幣代碼作為參數，並將由第一種貨幣到第二種貨幣的匯率作為浮點數傳回。"
+msgstr "此函數採用兩個貨幣代碼作為引數，並將由第一種貨幣到第二種貨幣的匯率作為浮點數傳回。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10600,13 +10659,13 @@ msgstr "缺漏參數 %d 的值。函數 [[FUNCTION_NAME]] 要求的值是一個�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Value if it is not an #N/A error, otherwise 2nd argument."
-msgstr "如果不是 #N/A 錯誤，則為值，否則為第二個參數。"
+msgstr "如果不是 #N/A 錯誤，則為值，否則為第二個引數。"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Value if it is not an error, otherwise 2nd argument."
-msgstr "如果不是錯誤則返回值，否則傳回第二個參數。"
+msgstr "如果不是錯誤則返回值，否則傳回第二個引數。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11549,6 +11608,12 @@ msgstr "XLOOKUP 的計算，不支援該搜尋及配對模式組合。"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "the string to be converted"
+msgstr "要轉換的字串"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "today"
 msgstr "今天"
 
@@ -11568,7 +11633,7 @@ msgstr "頂部"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "true"
-msgstr "否"
+msgstr "真"
 
 #. module: spreadsheet
 #. odoo-javascript

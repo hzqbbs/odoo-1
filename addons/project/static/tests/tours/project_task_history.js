@@ -11,24 +11,20 @@ import { registry } from "@web/core/registry";
 import { stepUtils } from "@web_tour/tour_service/tour_utils";
 
 const baseDescriptionContent = "Test project task history version";
-const descriptionField = "div.note-editable.odoo-editor-editable p";
 function changeDescriptionContentAndSave(newContent) {
     const newText = `${baseDescriptionContent} ${newContent}`;
-    return [ {
-        // force focus on editable so editor will create initial p (if not yet done)
-        trigger: "div.note-editable.odoo-editor-editable",
-        run: "click",
-    }, {
-        trigger: descriptionField,
-        run: async function(actions) {
-            const textTriggerElement = this.anchor.querySelector(descriptionField);
-            await actions.editor(newText, textTriggerElement);
-            await new Promise((r) => setTimeout(r, 300));
+    return [
+        {
+            // force focus on editable so editor will create initial p (if not yet done)
+            trigger: "div.note-editable.odoo-editor-editable",
+            run: "click",
         },
-    }, {
-        trigger: "button.o_form_button_save",
-        run: "click",
-    }];
+        {
+            trigger: `div.note-editable[spellcheck='true'].odoo-editor-editable`,
+            run: `editor ${newText}`,
+        },
+        ...stepUtils.saveForm(),
+    ];
 }
 
 registry.category("web_tour.tours").add("project_task_history_tour", {
@@ -81,7 +77,7 @@ registry.category("web_tour.tours").add("project_task_history_tour", {
         run: function () {
             const items = document.querySelectorAll(".revision-list .btn");
             if (items.length !== 4) {
-                throw new Error('Expect 4 Revisions in the history dialog, got ' + items.length);
+                console.error("Expect 4 Revisions in the history dialog, got " + items.length);
             }
         },
     }, {
@@ -120,12 +116,12 @@ registry.category("web_tour.tours").add("project_task_history_tour", {
         run: "click",
     }, {
         content: "Verify that the description contains the right text after the restore",
-        trigger: descriptionField,
+        trigger: `div.note-editable.odoo-editor-editable`,
         run: function () {
             const p = this.anchor?.innerText;
             const expected = `${baseDescriptionContent} 1`;
             if (p !== expected) {
-                throw new Error(`Expect description to be ${expected}, got ${p}`);
+                console.error(`Expect description to be ${expected}, got ${p}`);
             }
         }
     }, {
@@ -155,10 +151,7 @@ registry.category("web_tour.tours").add("project_task_history_tour", {
         content: 'Set task name',
         run: 'edit New task',
     },
-    {
-        trigger: "button.o_form_button_save",
-        run: "click",
-    },
+    ...stepUtils.saveForm(),
         ...changeDescriptionContentAndSave("0"),
         ...changeDescriptionContentAndSave("1"),
         ...changeDescriptionContentAndSave("2"),

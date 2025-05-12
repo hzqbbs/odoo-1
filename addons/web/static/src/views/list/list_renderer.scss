@@ -524,6 +524,10 @@
         }
     }
 
+    .o_data_row.o_dragged {
+        display: flex;
+    }
+
     .o_optional_columns_dropdown .dropdown-item .o-checkbox .text-truncate {
         max-width: 30em;
     }
@@ -574,15 +578,7 @@
     .o_list_view .o_list_selection_container {
         position: fixed;
         top: 0;
-        right: 0;
         left: 0;
-        justify-content: center;
-
-        .o_list_selection_box {
-            --#{$variable-prefix}list-group-active-color: #{$white};
-            --#{$variable-prefix}list-group-active-border-color: RGB(var(--primary-rgb));
-            --#{$variable-prefix}list-group-active-bg: RGB(var(--primary-rgb));
-        }
     }
 }
 .modal-footer .o_list_selection_box {

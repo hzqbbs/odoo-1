@@ -24,6 +24,14 @@ class SaleOrderLine(models.Model):
     def get_description_following_lines(self):
         return self.name.splitlines()[1:]
 
+    def _get_order_date(self):
+        self.ensure_one()
+        if self.order_id.website_id and self.state == 'draft':
+            # cart prices must always be computed based on the current time, not on the order
+            # creation date.
+            return fields.Datetime.now()
+        return super()._get_order_date()
+
     def _get_shop_warning(self, clear=True):
         self.ensure_one()
         warn = self.shop_warning
@@ -51,14 +59,13 @@ class SaleOrderLine(models.Model):
 
     def _is_reorder_allowed(self):
         self.ensure_one()
-        return self.product_id._is_add_to_cart_allowed()
+        return bool(self.product_id) and self.product_id._is_add_to_cart_allowed()
 
     def _get_cart_display_price(self):
         self.ensure_one()
-        is_combo = self.product_type == 'combo'
         price_type = (
             'price_subtotal'
             if self.order_id.website_id.show_line_subtotals_tax_selection == 'tax_excluded'
             else 'price_total'
         )
-        return sum(self.linked_line_ids.mapped(price_type)) if is_combo else self[price_type]
+        return sum(self._get_lines_with_price().mapped(price_type))

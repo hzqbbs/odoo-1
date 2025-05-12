@@ -1577,7 +1577,7 @@ test("Many2ManyTagsField with edit_tags option", async () => {
         expect(args[0]).toEqual([12], {
             message: "should call get_formview_id with correct id",
         });
-        return Promise.resolve(false);
+        return false;
     });
     onRpc("partner.type", "web_save", ({ args }) => {
         expect(args[1]).toEqual({ name: "new" });
@@ -1639,4 +1639,33 @@ test("Many2ManyTagsField with edit_tags option overrides color edition", async (
     // Edit name of tag
     await fieldInput("name").edit("new");
     await clickSave();
+});
+
+test("Many2ManyTagsField: press backspace multiple times to remove tag", async () => {
+    Partner._records[0].timmy = [12, 14];
+    Partner._fields.timmy.onChange = () => {};
+
+    const def = new Deferred();
+    onRpc("onchange", ({ args }) => {
+        expect.step(`onchange ${JSON.stringify(args[1].timmy)}`);
+    });
+    await mountView({
+        type: "form",
+        resModel: "partner",
+        arch: `
+            <form>
+                <field name="timmy" widget="many2many_tags"/>
+            </form>`,
+        resId: 1,
+    });
+
+    expect(".o_field_many2many_tags .badge").toHaveCount(2);
+
+    await contains(".o_field_many2many_tags .badge:eq(1)").click();
+    press("BackSpace");
+    press("BackSpace");
+    def.resolve();
+    await animationFrame();
+    expect(".o_field_many2many_tags .badge").toHaveCount(1);
+    expect.verifySteps(["onchange [[3,14]]"]);
 });

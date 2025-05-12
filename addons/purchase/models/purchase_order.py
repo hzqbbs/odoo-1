@@ -243,6 +243,8 @@ class PurchaseOrder(models.Model):
                 currency=order.currency_id or order.company_id.currency_id,
                 company=order.company_id,
             )
+            if order.currency_id != order.company_currency_id:
+                order.tax_totals['amount_total_cc'] = f"({formatLang(self.env, order.amount_total_cc, currency_obj=self.company_currency_id)})"
 
     @api.depends('company_id.account_fiscal_country_id', 'fiscal_position_id.country_id', 'fiscal_position_id.foreign_vat')
     def _compute_tax_country_id(self):
@@ -476,6 +478,7 @@ class PurchaseOrder(models.Model):
             'default_template_id': template_id,
             'default_composition_mode': 'comment',
             'default_email_layout_xmlid': "mail.mail_notification_layout_with_responsible_signature",
+            'email_notification_allow_footer': True,
             'force_email': True,
             'mark_rfq_as_sent': True,
         })

@@ -58,28 +58,45 @@ export class PosKanbanRenderer extends KanbanRenderer {
         });
 
         onWillRender(() => this.checkDisplayedResult());
-        onWillStart(async () => {
-            this.isPosManager = await user.hasGroup("point_of_sale.group_pos_manager");
-        });
+    }
+
+    async clickLoadScenario(item) {
+        await this.loadScenario.call(item);
+        if (this.loadScenario.status == "error") {
+            throw this.loadScenario.result;
+        }
     }
 
     checkDisplayedResult() {
         this.posState.show_predefined_scenarios = this.props.list.count === 0;
     }
 
+    showAccessDeniedDialog(body) {
+        this.dialog.add(AlertDialog, {
+            title: _t("Access Denied"),
+            body: body,
+        });
+    }
+
     async callWithViewUpdate(func) {
         try {
-            if (!this.isPosManager) {
-                this.dialog.add(AlertDialog, {
-                    title: _t("Access Denied"),
-                    body: _t(
+            const isPosManager = await user.hasGroup("point_of_sale.group_pos_manager");
+            if (!isPosManager) {
+                this.showAccessDeniedDialog(
+                    _t(
                         "It seems like you don't have enough rights to create point of sale configurations."
-                    ),
-                });
+                    )
+                );
                 return;
             }
             await func();
             await updatePosKanbanViewState(this.orm, this.posState);
+        } catch (e) {
+            if (e.exceptionName === "odoo.exceptions.AccessError") {
+                this.showAccessDeniedDialog(e.data.message);
+            } else {
+                throw e;
+            }
         } finally {
             this.env.searchModel.clearQuery();
         }
@@ -94,7 +111,7 @@ export class PosKanbanRenderer extends KanbanRenderer {
                 iconFile: "clothes-icon.png",
             },
             {
-                name: _t("Furnitures"),
+                name: _t("Furniture"),
                 description: _t("Stock, product configurator, replenishment, discounts"),
                 functionName: "load_onboarding_furniture_scenario",
                 iconFile: "furniture-icon.png",

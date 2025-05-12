@@ -50,7 +50,7 @@ class TestWebsiteSession(HttpCaseWithUserDemo):
         self.assertTrue(res.next.path_url.startswith("/web/login/totp"))
 
     def test_04_ensure_website_get_cached_values_can_be_called(self):
-        session = self.authenticate('portal', 'portal')
+        session = self.authenticate('admin', 'admin')
 
         # Force a browser language that is not installed
         session.context['lang'] = 'fr_MC'
@@ -77,7 +77,7 @@ class TestWebsiteSession(HttpCaseWithUserDemo):
         # Create session for demo user.
         public_session = self.authenticate(None, None)
         demo_session = self.authenticate('demo', 'demo')
-        record = self.env['test.model'].search([])
+        record = self.env['test.model'].search([], limit=1)
         result = self.url_open(f'/test_website/model_item_sudo/{record.id}')
         self.assertTrue(has_branding(result.text), "Should have branding for user demo")
 

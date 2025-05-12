@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Rasareeyar Lappiam, 2024
+# Rasareeyar Lappiam, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Rasareeyar Lappiam, 2024\n"
+"Last-Translator: Rasareeyar Lappiam, 2025\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,6 +83,15 @@ msgid ""
 "            \"<span style=\"font-weight: bolder;\">/</span>\"\n"
 "        </span>"
 msgstr ""
+"<span style=\"font-size: 14px;\">\n"
+"            ด้านล่างรายการนี้ ให้ลอง\n"
+"            <span style=\"font-weight: bolder;\">คำสั่ง</span>\n"
+"            โดย\n"
+"            <span style=\"font-weight: bolder;\">\n"
+"                <font style=\"color: #017E84\">พิมพ์</font>\n"
+"            </span>\n"
+"            \"<span style=\"font-weight: bolder;\">/</span>\"\n"
+"        </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -170,6 +179,13 @@ msgid ""
 "        to reflect your preferred workflow.\n"
 "    </span>"
 msgstr ""
+"<span style=\"font-size: 14px;\">\n"
+"        ปรับแต่งขั้นตอนต่างๆ จาก\n"
+"        <span style=\"font-weight: bolder;\">\n"
+"            <font class=\"text-o-color-2\">มุมมองคัมบัง</font>\n"
+"        </span>\n"
+"        เพื่อให้สะท้อนถึงการทำงานที่คุณต้องการ\n"
+"    </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -199,6 +215,9 @@ msgid ""
 "        Use it to manage your work, take notes on the go, and create tasks based on them.\n"
 "    </span>"
 msgstr ""
+"<span style=\"font-size: 14px;\">\n"
+"        ใช้เพื่อจัดการงานของคุณ จดบันทึกในขณะเดินทาง และสร้างงานตามบันทึกเหล่านั้น\n"
+"    </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -208,6 +227,10 @@ msgid ""
 "    </span>\n"
 "    <br/>"
 msgstr ""
+"<span style=\"font-size: 14px;\">\n"
+"        ไม่ว่าคุณจะอยู่ที่ไหน ใช้แป้นพิมพ์ลัดวิเศษเพื่อเพิ่มการช่วยเตือนตัวเอง &amp;#128161;\n"
+"    </span>\n"
+"    <br/>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -256,6 +279,10 @@ msgid ""
 "            </span>\n"
 "            (Windows/Linux)"
 msgstr ""
+"<span style=\"font-weight: bolder;\">\n"
+"                <font class=\"text-o-color-2\">Alt + Shift + T</font>\n"
+"            </span>\n"
+"            (Windows/Linux)"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -265,6 +292,10 @@ msgid ""
 "            </span>\n"
 "            (MacOs)"
 msgstr ""
+"<span style=\"font-weight: bolder;\">\n"
+"                <font class=\"text-o-color-2\">Ctrl + Shift + T</font>\n"
+"            </span>\n"
+"            (MacOs)"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.mail_activity_todo_create_popup
@@ -425,7 +456,7 @@ msgstr "กิจกรรมล่าสุด"
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Manage your to-dos and assigned tasks from a single place"
-msgstr ""
+msgstr "จัดการสิ่งที่ต้องทำและงานที่ได้รับมอบหมายจากที่เดียว"
 
 #. module: project_todo
 #: model_terms:ir.actions.act_window,help:project_todo.project_task_action_todo
@@ -515,7 +546,7 @@ msgstr "ชื่อ To-do"
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_form
 msgid "To-do..."
-msgstr ""
+msgstr "To-do..."
 
 #. module: project_todo
 #: model:ir.actions.act_window,name:project_todo.project_task_action_todo
@@ -581,7 +612,7 @@ msgstr "เพิ่ม  to-do ของคุณลงในไปป์ไล�
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "convert-todo"
-msgstr ""
+msgstr "convert-todo"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_quick_create_form
@@ -596,4 +627,4 @@ msgstr "เมนูโหลด To-dos"
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "todo-access"
-msgstr ""
+msgstr "todo-access"

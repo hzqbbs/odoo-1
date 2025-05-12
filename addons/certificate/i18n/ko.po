@@ -5,14 +5,15 @@
 # Translators:
 # Wil Odoo, 2024
 # Daye Jeong, 2024
+# Sarah Park, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 08:55+0000\n"
+"POT-Creation-Date: 2024-12-16 13:39+0000\n"
 "PO-Revision-Date: 2024-09-29 00:00+0000\n"
-"Last-Translator: Daye Jeong, 2024\n"
+"Last-Translator: Sarah Park, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -339,14 +340,6 @@ msgid "The certificate and public key are not compatible."
 msgstr "인증서와 공개 키가 호환되지 않습니다."
 
 #. module: certificate
-#. odoo-python
-#: code:addons/certificate/models/certificate.py:0
-msgid ""
-"The certificate subject field contains invalid characters. Make sure all "
-"characters are unicode valid."
-msgstr "인증서 제목 필드에 잘못된 문자가 포함되어 있습니다. 사용된 모든 문자가 유효한 유니코드인지 확인하십시오."
-
-#. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__date_end
 msgid "The date on which the certificate expires (UTC)"
 msgstr "인증서가 만료되는 날짜 (UTC)"
@@ -359,8 +352,20 @@ msgstr "인증서의 유효 기간이 시작되는 날짜 (UTC)"
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
+msgid "The key size should be at least 512 bytes."
+msgstr "키 크기는 최소 512 바이트 이상이어야 합니다."
+
+#. module: certificate
+#. odoo-python
+#: code:addons/certificate/models/key.py:0
 msgid "The private key could not be loaded."
 msgstr "개인 키를 불러올 수 없습니다."
+
+#. module: certificate
+#. odoo-python
+#: code:addons/certificate/models/key.py:0
+msgid "The public exponent should be 65537 (or 3 for legacy purposes)."
+msgstr "공개 지수는 65537(또는 레거시 목적으로는 3)이어야 합니다."
 
 #. module: certificate
 #. odoo-python

@@ -10,14 +10,13 @@ import { registry } from "@web/core/registry";
 import { inLeftSide } from "@point_of_sale/../tests/tours/utils/common";
 
 registry.category("web_tour.tours").add("ReceiptScreenTour", {
-    checkDelay: 50,
     steps: () =>
         [
             // press close button in receipt screen
             Chrome.startPoS(),
             ProductScreen.addOrderline("Letter Tray", "10", "5"),
             ProductScreen.clickPartnerButton(),
-            ProductScreen.clickCustomer("Addison Olson"),
+            ProductScreen.clickCustomer("Partner Full"),
             ProductScreen.clickPayButton(),
             PaymentScreen.clickPaymentMethod("Bank"),
             PaymentScreen.validateButtonIsHighlighted(true),
@@ -102,7 +101,6 @@ registry.category("web_tour.tours").add("ReceiptScreenTour", {
 });
 
 registry.category("web_tour.tours").add("ReceiptScreenDiscountWithPricelistTour", {
-    checkDelay: 50,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -114,11 +112,23 @@ registry.category("web_tour.tours").add("ReceiptScreenDiscountWithPricelistTour"
             PaymentScreen.clickPaymentMethod("Cash"),
             PaymentScreen.clickValidate(),
             Order.hasLine({ oldPrice: "7" }),
+
+            ReceiptScreen.clickNextOrder(),
+            ProductScreen.addOrderline("Test Product", "1"),
+            inLeftSide([
+                { ...ProductScreen.clickLine("Test Product")[0], isActive: ["mobile"] },
+                Numpad.click("Price"),
+                Numpad.isActive("Price"),
+                Numpad.click("9"),
+            ]),
+            ProductScreen.clickPayButton(),
+            PaymentScreen.clickPaymentMethod("Cash"),
+            PaymentScreen.clickValidate(),
+            ReceiptScreen.noDiscountAmount(),
         ].flat(),
 });
 
 registry.category("web_tour.tours").add("OrderPaidInCash", {
-    checkDelay: 50,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -143,7 +153,6 @@ registry.category("web_tour.tours").add("OrderPaidInCash", {
 });
 
 registry.category("web_tour.tours").add("ReceiptTrackingMethodTour", {
-    checkDelay: 50,
     steps: () =>
         [
             Chrome.startPoS(),

@@ -71,6 +71,23 @@ describe('Copy', () => {
                     window.chai.expect(clipboardData.getData('text/odoo-editor')).to.be.equal('<table><tbody><tr><td><ul><li>a</li><li>b</li><li>c</li></ul></td><td><br></td></tr></tbody></table>');
                 },
             });
+            await testEditor(BasicEditor, {
+                contentBefore: `<p>[abcd</p><table><tbody><tr><td><br></td><td><br></td></tr></tbody></table>]`,
+                stepFunction: async (editor) => {
+                  const clipboardData = new DataTransfer();
+                  await triggerEvent(editor.editable, "copy", { clipboardData });
+                  window.chai
+                    .expect(clipboardData.getData("text/html"))
+                    .to.be.equal(
+                      `<p>abcd</p><table class="o_selected_table"><tbody><tr><td class="o_selected_td"><br></td><td class="o_selected_td"><br></td></tr></tbody></table>`
+                    );
+                  window.chai
+                    .expect(clipboardData.getData("text/odoo-editor"))
+                    .to.be.equal(
+                      `<p>abcd</p><table class="o_selected_table"><tbody><tr><td class="o_selected_td"><br></td><td class="o_selected_td"><br></td></tr></tbody></table>`
+                    );
+                },
+            });
         });
         it('should wrap the selected text with clones of ancestors up to a block element to keep styles', async () => {
             await testEditor(BasicEditor, {
@@ -147,6 +164,17 @@ describe('Copy', () => {
                     window.chai.expect(clipboardData.getData('text/plain')).to.be.equal('content');
                     window.chai.expect(clipboardData.getData('text/html')).to.be.equal('<p>content</p>');
                     window.chai.expect(clipboardData.getData('text/odoo-editor')).to.be.equal('<p>content</p>');
+                },
+            });
+        });
+
+        it('should replace NBSP characters with space when copying text', async () => {
+            await testEditor(BasicEditor, {
+                contentBefore: '<p>[content\u00A0]</p>',
+                stepFunction: async editor => {
+                    const clipboardData = new DataTransfer();
+                    triggerEvent(editor.editable, 'copy', { clipboardData });
+                    window.chai.expect(clipboardData.getData('text/plain')).to.be.equal('content ');
                 },
             });
         });
@@ -234,12 +262,12 @@ describe('Cut', () => {
 describe('Paste', () => {
     describe('Html Paste cleaning', () => {
         describe('whitelist', async () => {
-            it('should keep whitelisted Tags tag', async () => {
-                for (const node of CLIPBOARD_WHITELISTS.nodes) {
-                    if (!['TABLE', 'THEAD', 'TH', 'TBODY', 'TR', 'TD', 'IMG', 'BR', 'LI', '.fa'].includes(node)) {
-                        const isInline = ['I', 'B', 'U', 'S', 'EM', 'STRONG', 'IMG', 'BR', 'A', 'FONT'].includes(node);
-                        const html = isInline ? `a<${node.toLowerCase()}>b</${node.toLowerCase()}>c` : `a</p><${node.toLowerCase()}>b</${node.toLowerCase()}><p>c`;
+            for (const node of CLIPBOARD_WHITELISTS.nodes) {
+                if (!['TABLE', 'THEAD', 'TH', 'TBODY', 'TR', 'TD', 'IMG', 'BR', 'LI', '.fa'].includes(node)) {
+                    const isInline = ['I', 'B', 'U', 'S', 'EM', 'STRONG', 'IMG', 'BR', 'A', 'FONT'].includes(node);
+                    const html = isInline ? `a<${node.toLowerCase()}>b</${node.toLowerCase()}>c` : `a</p><${node.toLowerCase()}>b</${node.toLowerCase()}><p>c`;
 
+                    it('should keep whitelisted Tags tag', async () => {
                         await testEditor(BasicEditor, {
                             contentBefore: '<p>123[]4</p>',
                             stepFunction: async editor => {
@@ -247,10 +275,10 @@ describe('Paste', () => {
                             },
                             contentAfter: '<p>123' + html.replace(/<\/?font>/g, '') + '[]4</p>',
                         });
-                    }
+                    });
                 }
+            }
 
-            });
             it('should keep whitelisted Tags tag (2)', async () => {
                 await testEditor(BasicEditor, {
                     contentBefore: '<p>123[]</p>',
@@ -485,6 +513,24 @@ describe('Paste', () => {
                         await pasteText(editor, 'x    y');
                     },
                     contentAfter: '<p>ax&nbsp; &nbsp; y[]d</p>',
+                });
+            });
+            it('should paste a text on line break', async () => {
+                await testEditor(BasicEditor, {
+                    contentBefore: '<p>abc<br>[def]</p>',
+                    stepFunction: async editor => {
+                        await pasteText(editor, 'x');
+                    },
+                    contentAfter: '<p>abc<br>x[]</p>',
+                });
+            });
+            it('should paste a text at line-break when selected text is formatted', async () => {
+                await testEditor(BasicEditor, {
+                    contentBefore: '<p>abc<br><b>[def]</b></p>',
+                    stepFunction: async editor => {
+                        await pasteText(editor, 'x');
+                    },
+                    contentAfter: '<p>abc<br><b>x[]</b></p>',
                 });
             });
             it('should paste a text in a span', async () => {
@@ -1866,6 +1912,18 @@ describe('Paste', () => {
             });
         });
     });
+    describe('Complex html div', () => {
+        const complexHtmlData = `<div><div><span style="color: #fb4934;">abc</span><span style="color: #ebdbb2;">def</span></div><div dir="rtl"><span style="color: #fb4934;">ghi</span><span style="color: #fe8019;">jkl</span></div><div><span style="color: #fb4934;">jkl</span><span style="color: #ebdbb2;">mno</span></div></div>`;
+        it('should convert div to p', async () =>{
+            await testEditor(BasicEditor, {
+                contentBefore: '<p>[]<br></p>',
+                stepFunction: async editor => {
+                    await pasteHtml(editor, complexHtmlData);
+                },
+                contentAfter: '<p>abcdef</p><p dir="rtl">ghijkl</p><p>jklmno[]</p>',
+            });
+        });
+    });
     describe('Special cases', () => {
         describe('lists', async () => {
             it('should paste a list in a p', async () => {
@@ -2527,6 +2585,15 @@ describe('Paste', () => {
                         await pasteText(editor, 'http://www.xyz.com');
                     },
                     contentAfter: '<pre>http://www.xyz.com[]</pre>',
+                })
+            });
+            it('Should pad link with zws and put selection after the link', async () => {
+                await testEditor(BasicEditor, {
+                    contentBefore: '<p>[]<br></p>',
+                    stepFunction: async editor => {
+                        await pasteHtml(editor, '<p><a href="http://www.xyz.com">a</a></p><p><a href="http://existing.com">b</a></p>');
+                    },
+                    contentAfter: '<p><a href="http://www.xyz.com">a</a></p><p><a href="http://existing.com">b</a>[]</p>',
                 });
             });
         });

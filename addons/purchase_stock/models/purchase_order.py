@@ -242,8 +242,10 @@ class PurchaseOrder(models.Model):
 
     def _get_final_location_record(self):
         self.ensure_one()
-        if self.dest_address_id and self.picking_type_id.code == 'dropship':
-            return self.dest_address_id.property_stock_customer
+        if self.picking_type_id.code == 'dropship':
+            if self.dest_address_id:
+                return self.dest_address_id.property_stock_customer
+            return self.picking_type_id.default_location_dest_id
         return self.picking_type_id.warehouse_id.lot_stock_id
 
     @api.model
@@ -256,12 +258,16 @@ class PurchaseOrder(models.Model):
             self.env['stock.warehouse']._warehouse_redirect_warning()
         return picking_type[:1]
 
+    def _prepare_group_vals(self):
+        self.ensure_one()
+        return {
+            'name': self.name,
+            'partner_id': self.partner_id.id,
+        }
+
     def _prepare_picking(self):
         if not self.group_id:
-            self.group_id = self.group_id.create({
-                'name': self.name,
-                'partner_id': self.partner_id.id
-            })
+            self.group_id = self.group_id.create(self._prepare_group_vals())
         if not self.partner_id.property_stock_supplier.id:
             raise UserError(_("You must set a Vendor Location for this partner %s", self.partner_id.name))
         return {

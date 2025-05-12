@@ -33,7 +33,7 @@ class PurchaseOrderLine(models.Model):
     taxes_id = fields.Many2many('account.tax', string='Taxes', context={'active_test': False})
     product_uom = fields.Many2one('uom.uom', string='Unit of Measure', domain="[('category_id', '=', product_uom_category_id)]")
     product_uom_category_id = fields.Many2one(related='product_id.uom_id.category_id')
-    product_id = fields.Many2one('product.product', string='Product', domain=[('purchase_ok', '=', True)], change_default=True, index='btree_not_null')
+    product_id = fields.Many2one('product.product', string='Product', domain=[('purchase_ok', '=', True)], change_default=True, index='btree_not_null', ondelete='restrict')
     product_type = fields.Selection(related='product_id.type', readonly=True)
     price_unit = fields.Float(
         string='Unit Price', required=True, digits='Product Price', aggregator='avg',
@@ -94,8 +94,8 @@ class PurchaseOrderLine(models.Model):
         for line in self:
             base_line = line._prepare_base_line_for_taxes_computation()
             self.env['account.tax']._add_tax_details_in_base_line(base_line, line.company_id)
-            line.price_subtotal = base_line['tax_details']['total_excluded_currency']
-            line.price_total = base_line['tax_details']['total_included_currency']
+            line.price_subtotal = base_line['tax_details']['raw_total_excluded_currency']
+            line.price_total = base_line['tax_details']['raw_total_included_currency']
             line.price_tax = line.price_total - line.price_subtotal
 
     def _prepare_base_line_for_taxes_computation(self):
@@ -110,7 +110,7 @@ class PurchaseOrderLine(models.Model):
             tax_ids=self.taxes_id,
             quantity=self.product_qty,
             partner_id=self.order_id.partner_id,
-            currency_id=self.order_id.currency_id,
+            currency_id=self.order_id.currency_id or self.order_id.company_id.currency_id,
             rate=self.order_id.currency_rate,
         )
 
@@ -359,7 +359,7 @@ class PurchaseOrderLine(models.Model):
 
             # record product names to avoid resetting custom descriptions
             default_names = []
-            vendors = line.product_id._prepare_sellers({})
+            vendors = line.product_id._prepare_sellers(params=params)
             product_ctx = {'seller_id': None, 'partner_id': None, 'lang': get_lang(line.env, line.partner_id.lang).code}
             default_names.append(line._get_product_purchase_description(line.product_id.with_context(product_ctx)))
             for vendor in vendors:
@@ -598,9 +598,8 @@ class PurchaseOrderLine(models.Model):
         product_taxes = product_id.supplier_taxes_id.filtered(lambda x: x.company_id in company_id.parent_ids)
         taxes = po.fiscal_position_id.map_tax(product_taxes)
 
-        price_unit = seller.price if seller else product_id.standard_price
         price_unit = self.env['account.tax']._fix_tax_included_price_company(
-            price_unit, product_taxes, taxes, company_id)
+            seller.price, product_taxes, taxes, company_id) if seller else 0
         if price_unit and seller and po.currency_id and seller.currency_id != po.currency_id:
             price_unit = seller.currency_id._convert(
                 price_unit, po.currency_id, po.company_id, po.date_order or fields.Date.today())

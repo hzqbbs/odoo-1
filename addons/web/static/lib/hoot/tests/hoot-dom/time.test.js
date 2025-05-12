@@ -12,7 +12,7 @@ describe.timeout(1_000)(parseUrl(import.meta.url), () => {
 
         await advanceTime(5_000);
 
-        const timeoutId = window.setTimeout(() => expect.step("timeout"), 2_000);
+        const timeoutId = window.setTimeout(() => expect.step("timeout"), "2000");
         const intervalId = window.setInterval(() => expect.step("interval"), 3_000);
         const animationHandle = window.requestAnimationFrame((delta) => {
             expect(delta).toBeGreaterThan(5_000);
@@ -80,7 +80,7 @@ describe.timeout(1_000)(parseUrl(import.meta.url), () => {
 
         const ms = await runAllTimers();
 
-        expect(ms).toBeWithin(1e6 - 1, 1e6); // more or less
+        expect(ms).toBeCloseTo(1e6, { margin: 10 });
         expect.verifySteps(["animation", "timeout"]);
     });
 

@@ -4,15 +4,15 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Rasareeyar Lappiam, 2024
+# Rasareeyar Lappiam, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2024-12-16 13:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Rasareeyar Lappiam, 2024\n"
+"Last-Translator: Rasareeyar Lappiam, 2025\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -324,7 +324,7 @@ msgstr "โคคา-โคล่า"
 #. module: pos_restaurant
 #: model:pos.category,name:pos_restaurant.pos_category_cocktails
 msgid "Cocktails"
-msgstr ""
+msgstr "ค็อกเทล"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__color
@@ -345,7 +345,7 @@ msgstr "ต่อไป"
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_cosmopolitan_product_template
 msgid "Cosmopolitan"
-msgstr ""
+msgstr "คอสโมโพลิแทน"
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.product_cosmopolitan_product_template
@@ -380,6 +380,12 @@ msgstr "ลบข้อผิดพลาด"
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.res_config_settings_view_form
 msgid "Design floors and assign orders to tables"
 msgstr "ออกแบบชั้นและมอบหมายออเดอร์ให้กับโต๊ะ"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
+msgid "Dine in"
+msgstr "รับประทานอาหารในร้าน"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__display_name
@@ -434,12 +440,6 @@ msgid "Enter a table number"
 msgstr ""
 
 #. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
-msgid "Error"
-msgstr "ผิดพลาด"
-
-#. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.espresso_product_template
 msgid "Espresso"
 msgstr "เอสเพรสโซ"
@@ -448,7 +448,7 @@ msgstr "เอสเพรสโซ"
 #: model:product.attribute.value,name:pos_restaurant.product_attribute_value_extra_cheese
 #: model:product.attribute.value,name:pos_restaurant.product_attribute_value_extra_cheese_pasta
 msgid "Extra cheese"
-msgstr ""
+msgstr "เพิ่มชีส"
 
 #. module: pos_restaurant
 #: model:product.attribute,name:pos_restaurant.product_extra_pasta
@@ -549,12 +549,6 @@ msgid "Funghi"
 msgstr "ฟุงกิ"
 
 #. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "General Note"
-msgstr "หมายเหตุทั่วไป"
-
-#. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.product_negroni_product_template
 msgid "Gin, vermouth rosso, Campari, and an orange peel."
 msgstr "จิน เวอร์มุตรอสโซ คัมพารี และเปลือกส้ม"
@@ -567,7 +561,7 @@ msgstr "ชาเขียว"
 #. module: pos_restaurant
 #: model:product.attribute.value,name:pos_restaurant.product_attribute_value_grilled_vegetables
 msgid "Grilled vegetables"
-msgstr ""
+msgstr "ผักย่าง"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -681,7 +675,13 @@ msgstr ""
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_margarita_product_template
 msgid "Margarita"
-msgstr ""
+msgstr "มาร์การิต้า"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
+msgid "Message"
+msgstr "ข้อความ"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.milkshake_banana_product_template
@@ -696,7 +696,7 @@ msgstr "มินิทเมด"
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_mojito_product_template
 msgid "Mojito"
-msgstr ""
+msgstr "โมจิโต้"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_moscow_mule_product_template
@@ -712,12 +712,12 @@ msgstr "แซนวิชมอซซาเรลล่าชีส"
 #: model:product.attribute.value,name:pos_restaurant.product_attribute_value_mushroom
 #: model:product.attribute.value,name:pos_restaurant.product_attribute_value_mushroom_pasta
 msgid "Mushroom"
-msgstr ""
+msgstr "เห็ด"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_negroni_product_template
 msgid "Negroni"
-msgstr ""
+msgstr "เนโกรนี"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -733,9 +733,9 @@ msgstr "ไม่มีทิป"
 
 #. module: pos_restaurant
 #. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
-msgid "No table or floating order found with this number"
-msgstr ""
+#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
+msgid "Note"
+msgstr "โน้ต"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -827,7 +827,7 @@ msgstr "เปเป้ ลาเต้ กอร์กอนโซล่า โ
 #. module: pos_restaurant
 #: model:product.attribute.value,name:pos_restaurant.product_attribute_value_peperoni
 msgid "Pepperoni"
-msgstr ""
+msgstr "เปปเปอร์โรนี"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1061,7 +1061,7 @@ msgstr "รูปร่าง"
 #. module: pos_restaurant
 #: model:product.attribute,name:pos_restaurant.product_sides_buns_pizza
 msgid "Sides"
-msgstr ""
+msgstr "เครื่องเคียง"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1183,6 +1183,12 @@ msgid "Take Away"
 msgstr "ซื้อกลับบ้าน"
 
 #. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
+msgid "Take out"
+msgstr ""
+
+#. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_config__takeaway
 #: model:ir.model.fields,field_description:pos_restaurant.field_res_config_settings__pos_takeaway
 msgid "Takeaway"
@@ -1216,7 +1222,7 @@ msgstr "จำนวนลูกค้าเริ่มต้นที่ต้
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__table_number
 msgid "The number of the table as displayed on the floor plan"
-msgstr ""
+msgstr "หมายเลขโต๊ะตามที่แสดงไว้ในแผนผังชั้น"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__parent_id

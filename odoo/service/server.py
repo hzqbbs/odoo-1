@@ -15,6 +15,7 @@ import subprocess
 import sys
 import threading
 import time
+import contextlib
 from io import BytesIO
 
 import psutil
@@ -159,6 +160,12 @@ class RequestHandler(werkzeug.serving.WSGIRequestHandler):
         if self.headers.get('Upgrade') == 'websocket':
             self.rfile = BytesIO()
             self.wfile = BytesIO()
+
+    def log_error(self, format, *args):
+        if format == "Request timed out: %r" and config['test_enable']:
+            _logger.info(format, *args)
+        else:
+            super().log_error(format, *args)
 
 class ThreadedWSGIServerReloadable(LoggingBaseWSGIServerMixIn, werkzeug.serving.ThreadedWSGIServer):
     """ werkzeug Threaded WSGI Server patched to allow reusing a listen socket
@@ -450,8 +457,7 @@ class ThreadedServer(CommonServer):
         # same time. This is known as the thundering herd effect.
 
         from odoo.addons.base.models.ir_cron import ir_cron
-        conn = odoo.sql_db.db_connect('postgres')
-        with conn.cursor() as cr:
+        def _run_cron(cr):
             pg_conn = cr._cnx
             # LISTEN / NOTIFY doesn't work in recovery mode
             cr.execute("SELECT pg_is_in_recovery()")
@@ -461,8 +467,8 @@ class ThreadedServer(CommonServer):
             else:
                 _logger.warning("PG cluster in recovery mode, cron trigger not activated")
             cr.commit()
-
-            while True:
+            alive_time = time.monotonic()
+            while config['limit_time_worker_cron'] <= 0 or (time.monotonic() - alive_time) <= config['limit_time_worker_cron']:
                 select.select([pg_conn], [], [], SLEEP_INTERVAL + number)
                 time.sleep(number / 100)
                 pg_conn.poll()
@@ -478,6 +484,12 @@ class ThreadedServer(CommonServer):
                         except Exception:
                             _logger.warning('cron%d encountered an Exception:', number, exc_info=True)
                         thread.start_time = None
+        while True:
+            conn = odoo.sql_db.db_connect('postgres')
+            with contextlib.closing(conn.cursor()) as cr:
+                _run_cron(cr)
+                cr._cnx.close()
+            _logger.info('cron%d max age (%ss) reached, releasing connection.', number, config['limit_time_worker_cron'])
 
     def cron_spawn(self):
         """ Start the above runner function in a daemon thread.
@@ -1165,6 +1177,7 @@ class WorkerCron(Worker):
 
     def __init__(self, multi):
         super(WorkerCron, self).__init__(multi)
+        self.alive_time = time.monotonic()
         # process_work() below process a single database per call.
         # The variable db_index is keeping track of the next database to
         # process.
@@ -1186,6 +1199,13 @@ class WorkerCron(Worker):
             except select.error as e:
                 if e.args[0] != errno.EINTR:
                     raise
+
+    def check_limits(self):
+        super().check_limits()
+
+        if config['limit_time_worker_cron'] > 0 and (time.monotonic() - self.alive_time) > config['limit_time_worker_cron']:
+            _logger.info('WorkerCron (%s) max age (%ss) reached.', self.pid, config['limit_time_worker_cron'])
+            self.alive = False
 
     def _db_list(self):
         if config['db_name']:
@@ -1236,6 +1256,7 @@ class WorkerCron(Worker):
 
     def stop(self):
         super().stop()
+        self.dbcursor._cnx.close()
         self.dbcursor.close()
 
 #----------------------------------------------------------
@@ -1246,7 +1267,8 @@ server = None
 server_phoenix = False
 
 def load_server_wide_modules():
-    server_wide_modules = {'base', 'web'} | set(odoo.conf.server_wide_modules)
+    server_wide_modules = list(odoo.conf.server_wide_modules)
+    server_wide_modules.extend(m for m in ('base', 'web') if m not in server_wide_modules)
     for m in server_wide_modules:
         try:
             odoo.modules.module.load_openerp_module(m)
@@ -1302,6 +1324,7 @@ def preload_registries(dbnames):
     for dbname in dbnames:
         try:
             update_module = config['init'] or config['update']
+            threading.current_thread().dbname = dbname
             registry = Registry.new(dbname, update_module=update_module)
 
             # run test_file if provided
@@ -1329,7 +1352,7 @@ def preload_registries(dbnames):
                     with registry.cursor() as cr:
                         env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
                         env['ir.qweb']._pregenerate_assets_bundles()
-                result = loader.run_suite(post_install_suite)
+                result = loader.run_suite(post_install_suite, global_report=registry._assertion_report)
                 registry._assertion_report.update(result)
                 _logger.info("%d post-tests in %.2fs, %s queries",
                              registry._assertion_report.testsRun - tests_before,

@@ -5,17 +5,17 @@
 # Translators:
 # Luis Felipe Miléo <mileo@kmee.com.br>, 2024
 # Martin Trigaux, 2024
-# Wil Odoo, 2024
 # Rodrigo Sottomaior Macedo <sottomaiormacedotec@sottomaiormacedo.tech>, 2024
-# Maitê Dietze, 2024
+# Wil Odoo, 2025
+# Maitê Dietze, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Maitê Dietze, 2024\n"
+"Last-Translator: Maitê Dietze, 2025\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/odoo/teams/41243/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -349,16 +349,6 @@ msgstr "+1555-555-5556"
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_charts
 msgid "+25.000"
 msgstr "+25.000"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
-msgid ", .s_searchbar_input"
-msgstr ", .s_searchbar_input"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.s_website_form_options
-msgid ", .s_website_form"
-msgstr ", .s_website_form"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
@@ -2736,8 +2726,8 @@ msgstr "Adicionar idiomas"
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
-msgid "Add new %s"
-msgstr "Adicionar %s"
+msgid "Add option"
+msgstr "Adicionar opção"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.view_edit_third_party_domains
@@ -4157,6 +4147,12 @@ msgid "Checkbox"
 msgstr "Caixa de seleção"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Checkbox List"
+msgstr "Lista de caixas de seleção"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team
 msgid "Chief Commercial Officer"
 msgstr "Diretor Comercial"
@@ -5069,6 +5065,12 @@ msgstr "Chave personalizada"
 #: model_terms:ir.ui.view,arch_db:website.s_card_options
 msgid "Custom Ratio"
 msgstr "Proporção personalizada"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Custom Text"
+msgstr "Texto personalizado"
 
 #. module: website
 #. odoo-javascript
@@ -5994,12 +5996,6 @@ msgid "E.g. https://www.mydomain.com"
 msgstr "Ex., https://www.meudominio.com"
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid "EXTERNAL SUBMISSION - Customer not verified"
-msgstr "SUBMISSÃO EXTERNA - Cliente não verificado"
-
-#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_horizontal
 msgid ""
 "Each update is thoroughly tested to guarantee compatibility and reliability,"
@@ -6418,6 +6414,12 @@ msgstr "Exemplos"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Existing Fields"
+msgstr "Campos existentes"
+
+#. module: website
+#. odoo-javascript
 #: code:addons/website/static/src/components/resource_editor/utils.js:0
 msgid "Expected %(char)s"
 msgstr "%(char)s esperados"
@@ -6740,6 +6742,12 @@ msgstr "Recursos que nos diferenciam"
 #: model_terms:ir.ui.view,arch_db:website.s_dynamic_snippet_options_template
 msgid "Fetched Elements"
 msgstr "Elementos buscados"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Field"
+msgstr "Campo"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_snippet_filter__field_names
@@ -8850,7 +8858,7 @@ msgid ""
 "It's time to elevate your fitness journey with coaching that's as unique as "
 "you are. Choose your path, embrace the guidance, and transform your life."
 msgstr ""
-"Está na hora de elevar sua jornada fitness com um coaching tão especial "
+"Está na hora de elevar sua jornada fitness com um treinamento tão especial "
 "quanto você. Escolha seu percurso, acolha a orientação e transforme sua "
 "vida."
 
@@ -10835,6 +10843,12 @@ msgid "Option 3"
 msgstr "Opção 3"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Option List"
+msgstr "Lista de opções"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Optional"
 msgstr "Opcional"
@@ -10876,9 +10890,9 @@ msgid ""
 "Our Coaching combines personalized fitness plans with mindfulness practices,"
 " ensuring you achieve harmony in your body and peace in your mind."
 msgstr ""
-"Nosso coaching combina planos de exercício personalizados com práticas de "
-"mindfulness, garantindo que você tenha harmonia com seu com seu corpo e paz "
-"na mente."
+"Nosso treinamento combina planos de exercício personalizados com práticas de"
+" mindfulness, garantindo que você tenha harmonia com seu com seu corpo e paz"
+" na mente."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.template_footer_links
@@ -12021,6 +12035,12 @@ msgstr "Radar"
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Radio"
 msgstr "Seleção (círculo)"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Radio Button List"
+msgstr "Lista de botões de rádio"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -14071,6 +14091,12 @@ msgid "The limit must be between 1 and 16."
 msgstr "O limite deve ser entre 1 e 16."
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/client_actions/configurator/configurator.js:0
+msgid "The logo is too large. Please upload a logo smaller than 2.5 MB."
+msgstr "O logotipo é muito grande. Carregue um logotipo com menos de 2,5 MB."
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "The maximum number of files that can be uploaded."
 msgstr "O número máximo de arquivos que podem ser carregados."
@@ -14241,16 +14267,6 @@ msgid "Third Menu"
 msgstr "Terceiro menu"
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid ""
-"This %(model_name)s was submitted by %(user_name)s (%(user_email)s) on "
-"behalf of %(form_email)s"
-msgstr ""
-"Este %(model_name)s foi enviado por %(user_name)s (%(user_email)s) em nome "
-"de %(form_email)s"
-
-#. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/components/dialog/page_properties.xml:0
 msgid "This URL is contained in the “%(field)s” of the following “%(model)s”"
@@ -14264,9 +14280,9 @@ msgid ""
 "nutrition guidance, and expert coaching. Elevate your fitness level and "
 "achieve feats you never thought possible."
 msgstr ""
-"Este programa de coaching oferece treinamentos com foco em força, orientação"
-" nutricional e coaching especializado. Eleve seu nível fitness e alcance "
-"façanhas que nunca pensou serem possíveis."
+"Este programa de treinamento oferece treinamentos com foco em força, "
+"orientação nutricional e coaching especializado. Eleve seu nível fitness e "
+"alcance façanhas que nunca pensou serem possíveis."
 
 #. module: website
 #: model:ir.model.fields,help:website.field_res_config_settings__favicon
@@ -14459,6 +14475,7 @@ msgstr "Este arco de visualização foi modificado"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/systray_items/website_switcher.js:0
 #: code:addons/website/static/src/systray_items/website_switcher.xml:0
 msgid "This website does not have a domain configured."
 msgstr "Este site não tem um domínio configurado."
@@ -16163,7 +16180,7 @@ msgid ""
 "support, we're committed to helping you achieve lasting results that align "
 "with your aspirations."
 msgstr ""
-"Bem-vindo(a) à nossa ampla gama de Serviços de coaching fitness "
+"Bem-vindo(a) à nossa ampla gama de Serviços de treinamento fitness "
 "personalizados. Com exercícios e planos nutricionais sob medida e apoio "
 "incontestável, estamos comprometidos a ajudar você a alcançar resultados "
 "duradouros que se alinham com suas aspirações."

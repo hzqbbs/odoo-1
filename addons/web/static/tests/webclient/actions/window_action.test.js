@@ -98,9 +98,9 @@ class Partner extends models.Model {
                     </t>
                 </templates>
             </kanban>`,
-        "list,false": `<list><field name="foo"/></list>`,
-        "pivot,false": `<pivot/>`,
-        "search,false": `<search><field name="foo" string="Foo"/></search>`,
+        list: `<list><field name="foo"/></list>`,
+        pivot: `<pivot/>`,
+        search: `<search><field name="foo" string="Foo"/></search>`,
         "search,4": `
             <search>
                 <filter name="m2o" help="M2O" domain="[('m2o', '=', 1)]"/>
@@ -117,9 +117,9 @@ class Pony extends models.Model {
         { id: 9, name: "Fluttershy" },
     ];
     _views = {
-        "list,false": `<list><field name="name"/></list>`,
-        "form,false": `<form><field name="name"/></form>`,
-        "search,false": `<search/>`,
+        list: `<list><field name="name"/></list>`,
+        form: `<form><field name="name"/></form>`,
+        search: `<search/>`,
     };
 }
 
@@ -131,7 +131,6 @@ defineActions([
         xml_id: "action_1",
         name: "Partners Action 1",
         res_model: "partner",
-        type: "ir.actions.act_window",
         views: [[1, "kanban"]],
     },
     {
@@ -140,7 +139,6 @@ defineActions([
         name: "Partner",
         res_id: 2,
         res_model: "partner",
-        type: "ir.actions.act_window",
         views: [[74, "form"]],
     },
     {
@@ -148,8 +146,6 @@ defineActions([
         xml_id: "action_3",
         name: "Partners",
         res_model: "partner",
-        mobile_view_mode: "kanban",
-        type: "ir.actions.act_window",
         views: [
             [false, "list"],
             [1, "kanban"],
@@ -161,7 +157,6 @@ defineActions([
         xml_id: "action_4",
         name: "Partners Action 4",
         res_model: "partner",
-        type: "ir.actions.act_window",
         views: [
             [1, "kanban"],
             [false, "list"],
@@ -174,7 +169,6 @@ defineActions([
         name: "Create a Partner",
         res_model: "partner",
         target: "new",
-        type: "ir.actions.act_window",
         views: [[false, "form"]],
     },
     {
@@ -182,7 +176,6 @@ defineActions([
         xml_id: "action_8",
         name: "Favorite Ponies",
         res_model: "pony",
-        type: "ir.actions.act_window",
         views: [
             [false, "list"],
             [false, "form"],
@@ -193,7 +186,6 @@ defineActions([
         xml_id: "action_9",
         name: "Ponies",
         res_model: "pony",
-        type: "ir.actions.act_window",
         views: [[false, "list"]],
     },
 ]);
@@ -266,7 +258,8 @@ test("click on new record button in list when there is no form in the action", a
     expect.verifySteps(["get_views", "onchange"]);
 });
 
-test.tags("desktop")("sidebar is present in list view", async () => {
+test.tags("desktop");
+test("sidebar is present in list view", async () => {
     expect.assertions(4);
 
     Partner._toolbar = {
@@ -287,7 +280,8 @@ test.tags("desktop")("sidebar is present in list view", async () => {
     expect('.o_cp_action_menus button.dropdown-toggle:contains("Action")').toBeVisible();
 });
 
-test.tags("desktop")("can switch between views", async () => {
+test.tags("desktop");
+test("can switch between views", async () => {
     stepAllNetworkCalls();
 
     await mountWithCleanup(WebClient);
@@ -332,7 +326,8 @@ test.tags("desktop")("can switch between views", async () => {
     ]);
 });
 
-test.tags("desktop")("switching into a view with mode=edit lands in edit mode", async () => {
+test.tags("desktop");
+test("switching into a view with mode=edit lands in edit mode", async () => {
     Partner._views["kanban,1"] = `
         <kanban on_create="quick_create" default_group_by="m2o">
             <templates>
@@ -343,11 +338,10 @@ test.tags("desktop")("switching into a view with mode=edit lands in edit mode", 
         </kanban>`;
     defineActions([
         {
-            id: 1,
+            id: 10,
             xml_id: "action_1",
             name: "Partners Action 1 patched",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "kanban"],
                 [false, "form"],
@@ -357,7 +351,7 @@ test.tags("desktop")("switching into a view with mode=edit lands in edit mode", 
     stepAllNetworkCalls();
 
     await mountWithCleanup(WebClient);
-    await getService("action").doAction(1);
+    await getService("action").doAction(10);
     expect(".o_kanban_view").toHaveCount(1, { message: "should display the kanban view" });
     // quick create record and click Edit
     await createKanbanRecord();
@@ -429,7 +423,8 @@ test("orderedBy in context is not propagated when executing another action", asy
     await contains('button[name="8"]').click();
 });
 
-test.tags("desktop")("breadcrumbs are updated when switching between views", async () => {
+test.tags("desktop");
+test("breadcrumbs are updated when switching between views", async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
     expect(".o_control_panel .breadcrumb-item").toHaveCount(0);
@@ -468,7 +463,8 @@ test.tags("desktop")("breadcrumbs are updated when switching between views", asy
     expect(queryAllTexts(".breadcrumb-item, .o_breadcrumb .active")).toEqual(["Partners"]);
 });
 
-test.tags("desktop")("switch buttons are updated when switching between views", async () => {
+test.tags("desktop");
+test("switch buttons are updated when switching between views", async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
     expect(".o_control_panel button.o_switch_view").toHaveCount(2, {
@@ -523,7 +519,8 @@ test.tags("desktop")("switch buttons are updated when switching between views", 
         message: "list should be the active view",
     });
 });
-test.tags("desktop")("pager is updated when switching between views", async () => {
+test.tags("desktop");
+test("pager is updated when switching between views", async () => {
     Partner._views["list,false"] = `<list limit="3"><field name="foo"/></list>`;
 
     await mountWithCleanup(WebClient);
@@ -572,7 +569,8 @@ test.tags("desktop")("pager is updated when switching between views", async () =
     });
 });
 
-test.tags("desktop")("Props are updated and kept when switching/restoring views", async () => {
+test.tags("desktop");
+test("Props are updated and kept when switching/restoring views", async () => {
     Partner._views["form,false"] = /* xml */ `
         <form>
             <group>
@@ -639,14 +637,14 @@ test.tags("desktop")("Props are updated and kept when switching/restoring views"
     expect(getPagerLimit()).toBe(5);
 });
 
-test.tags("desktop")("domain is kept when switching between views", async () => {
+test.tags("desktop");
+test("domain is kept when switching between views", async () => {
     defineActions([
         {
-            id: 3,
+            id: 30,
             name: "Partners",
             res_model: "partner",
             search_view_id: [4, "a custom search view"],
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [1, "kanban"],
@@ -656,7 +654,7 @@ test.tags("desktop")("domain is kept when switching between views", async () => 
     ]);
 
     await mountWithCleanup(WebClient);
-    await getService("action").doAction(3);
+    await getService("action").doAction(30);
     expect(".o_data_row").toHaveCount(5);
 
     // activate a domain
@@ -677,7 +675,8 @@ test.tags("desktop")("domain is kept when switching between views", async () => 
     expect(".o_data_row").toHaveCount(5);
 });
 
-test.tags("desktop")("A new form view can be reloaded after a failed one", async () => {
+test.tags("desktop");
+test("A new form view can be reloaded after a failed one", async () => {
     expect.errors(1);
     await mountWithCleanup(WebClient);
 
@@ -731,7 +730,8 @@ test.tags("desktop")("A new form view can be reloaded after a failed one", async
     ]);
 });
 
-test.tags("desktop")("there is no flickering when switching between views", async () => {
+test.tags("desktop");
+test("there is no flickering when switching between views", async () => {
     let def;
     onRpc(() => def);
 
@@ -795,7 +795,8 @@ test.tags("desktop")("there is no flickering when switching between views", asyn
     expect(queryAllTexts(".breadcrumb-item, .o_breadcrumb .active")).toEqual(["Partners"]);
 });
 
-test.tags("desktop")("breadcrumbs are updated when display_name changes", async () => {
+test.tags("desktop");
+test("breadcrumbs are updated when display_name changes", async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
 
@@ -815,7 +816,8 @@ test.tags("desktop")("breadcrumbs are updated when display_name changes", async 
     ]);
 });
 
-test.tags("desktop")('reverse breadcrumb works on accesskey "b"', async () => {
+test.tags("desktop");
+test('reverse breadcrumb works on accesskey "b"', async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
 
@@ -841,7 +843,8 @@ test.tags("desktop")('reverse breadcrumb works on accesskey "b"', async () => {
     });
 });
 
-test.tags("desktop")("reload previous controller when discarding a new record", async () => {
+test.tags("desktop");
+test("reload previous controller when discarding a new record", async () => {
     stepAllNetworkCalls();
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
@@ -869,32 +872,25 @@ test.tags("desktop")("reload previous controller when discarding a new record", 
     ]);
 });
 
-test.tags("desktop")("execute_action of type object are handled", async () => {
+test.tags("desktop");
+test("execute_action of type object are handled", async () => {
     expect.assertions(4);
     serverState.userContext = { some_key: 2 };
 
-    onRpc("/web/dataset/call_button/*", async (request) => {
-        const { params } = await request.json();
-        expect(params).toEqual(
+    onRpc("partner", "object", async function ({ args, kwargs }) {
+        expect(kwargs).toEqual(
             {
-                args: [[1]],
-                kwargs: {
-                    context: {
-                        lang: "en",
-                        uid: 7,
-                        tz: "taht",
-                        allowed_company_ids: [1],
-                        some_key: 2,
-                    },
+                context: {
+                    lang: "en",
+                    uid: 7,
+                    tz: "taht",
+                    allowed_company_ids: [1],
+                    some_key: 2,
                 },
-                method: "object",
-                model: "partner",
             },
             { message: "should call route with correct arguments" }
         );
-        const record = Partner._records.find((r) => r.id === 1);
-        record.foo = "value changed";
-        return Promise.resolve(false);
+        return this.env["partner"].write(args[0], { foo: "value changed" });
     });
     stepAllNetworkCalls();
 
@@ -925,19 +921,31 @@ test.tags("desktop")("execute_action of type object are handled", async () => {
     ]);
 });
 
-test.tags("desktop")("execute_action of type object: disable buttons (2)", async () => {
+test.tags("desktop");
+test("execute_action of type object: disable buttons (2)", async () => {
+    Partner._views["form,false"] = `
+        <form>
+            <header>
+                <button name="object" string="Call method" type="object"/>
+                <button name="40" string="Execute action" type="action"/>
+            </header>
+            <group>
+                <field name="display_name"/>
+                <field name="foo"/>
+            </group>
+        </form>`;
     Pony._views["form,44"] = `
         <form>
             <field name="name"/>
             <button string="Cancel" class="cancel-btn" special="cancel"/>
         </form>`;
+
     defineActions([
         {
-            id: 4,
+            id: 40,
             name: "Create a Partner",
             res_model: "pony",
             target: "new",
-            type: "ir.actions.act_window",
             views: [[44, "form"]],
         },
     ]);
@@ -955,25 +963,20 @@ test.tags("desktop")("execute_action of type object: disable buttons (2)", async
     expect(".o_form_view").toHaveCount(1);
 
     // click on 'Execute action', to execute action 4 in a dialog
-    await contains('.o_form_view button[name="4"]').click();
-    expect(".o_form_button_create").toHaveProperty("disabled", true, {
-        message: "control panel buttons should be disabled",
-    });
+    await contains('.o_form_view button[name="40"]').click();
+    expect(".o_form_button_create").not.toBeEnabled();
 
     def.resolve();
     await animationFrame();
     expect(".modal .o_form_view").toHaveCount(1);
-    expect(".o_form_button_create").not.toHaveProperty("disabled", true, {
-        message: "control panel buttons should have been re-enabled",
-    });
+    expect(".o_form_button_create").toBeEnabled();
 
     await contains(".modal .cancel-btn").click();
-    expect(".o_form_button_create").not.toHaveProperty("disabled", true, {
-        message: "control panel buttons should still be enabled",
-    });
+    expect(".o_form_button_create").toBeEnabled();
 });
 
-test.tags("desktop")("view button: block ui attribute", async () => {
+test.tags("desktop");
+test("view button: block ui attribute", async () => {
     Partner._views["form,false"] = `
             <form>
                 <header>
@@ -1006,6 +1009,7 @@ test.tags("desktop")("view button: block ui attribute", async () => {
     expect(".o-main-components-container .o_blockUI").toHaveCount(0);
 });
 
+test.tags("desktop");
 test("execute_action of type object raises error: re-enables buttons", async () => {
     expect.errors(1);
 
@@ -1022,9 +1026,10 @@ test("execute_action of type object raises error: re-enables buttons", async () 
 
     // click on 'Execute action', to execute action 4 in a dialog
     await click('.o_form_view button[name="object"]');
-    expect(".o_form_button_create").toHaveProperty("disabled", true);
+    expect(".o_form_button_create").not.toBeEnabled();
     await animationFrame();
-    expect(".o_form_button_create").toHaveProperty("disabled", false);
+    expect.verifyErrors(["RPC_ERROR"]);
+    expect(".o_form_button_create").toBeEnabled();
 });
 
 test("execute_action of type object raises error in modal: re-enables buttons", async () => {
@@ -1046,13 +1051,15 @@ test("execute_action of type object raises error in modal: re-enables buttons", 
     expect(".modal .o_form_view").toHaveCount(1);
     await click('.modal footer button[name="object"]');
     expect(".modal .o_form_view").toHaveCount(1);
-    expect(".modal footer button").toHaveProperty("disabled", true);
+    expect(".modal footer button").not.toBeEnabled();
     await animationFrame();
+    expect.verifyErrors(["RPC_ERROR"]);
     expect(".modal .o_form_view").toHaveCount(1);
-    expect(".modal footer button").not.toHaveProperty("disabled", true);
+    expect(".modal footer button").toBeEnabled();
 });
 
-test.tags("desktop")("execute_action of type action are handled", async () => {
+test.tags("desktop");
+test("execute_action of type action are handled", async () => {
     stepAllNetworkCalls();
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
@@ -1086,7 +1093,8 @@ test.tags("desktop")("execute_action of type action are handled", async () => {
     ]);
 });
 
-test.tags("desktop")("execute smart button and back", async () => {
+test.tags("desktop");
+test("execute smart button and back", async () => {
     onRpc("web_read", ({ kwargs }) => {
         expect.step("web_read");
         expect(kwargs.context).not.toInclude("default_partner");
@@ -1110,7 +1118,8 @@ test.tags("desktop")("execute smart button and back", async () => {
     expect.verifySteps(["web_read", "web_search_read", "web_read"]);
 });
 
-test.tags("desktop")("execute smart button and fails on desktop", async () => {
+test.tags("desktop");
+test("execute smart button and fails on desktop", async () => {
     expect.errors(1);
     onRpc("web_search_read", () => {
         throw makeServerError({ message: "Oups" });
@@ -1139,7 +1148,8 @@ test.tags("desktop")("execute smart button and fails on desktop", async () => {
     expect.verifyErrors(["Oups"]);
 });
 
-test.tags("mobile")("execute smart button and fails on mobile", async () => {
+test.tags("mobile");
+test("execute smart button and fails on mobile", async () => {
     expect.errors(1);
     onRpc("web_search_read", () => {
         throw makeServerError({ message: "Oups" });
@@ -1169,7 +1179,8 @@ test.tags("mobile")("execute smart button and fails on mobile", async () => {
     expect.verifyErrors(["Oups"]);
 });
 
-test.tags("desktop")("requests for execute_action of type object: disable buttons", async () => {
+test.tags("desktop");
+test("requests for execute_action of type object: disable buttons", async () => {
     let def = undefined;
     onRpc("web_read", () => def); // block the 'read' call
     onRpc("/web/dataset/call_button/*", () => false);
@@ -1185,21 +1196,18 @@ test.tags("desktop")("requests for execute_action of type object: disable button
     await contains(".o_form_view button:contains(Call method)").click();
 
     // Buttons should be disabled
-    expect(".o_form_view button:contains(Call method)").toHaveProperty("disabled", true, {
-        message: "buttons should be disabled",
-    });
+    expect(".o_form_view button:contains(Call method)").not.toBeEnabled();
 
     // Release the 'read' call
     def.resolve();
     await animationFrame();
 
     // Buttons should be enabled after the reload
-    expect(".o_form_view button:contains(Call method)").not.toHaveProperty("disabled", true, {
-        message: "buttons should not be disabled anymore",
-    });
+    expect(".o_form_view button:contains(Call method)").toBeEnabled();
 });
 
-test.tags("desktop")("action with html help returned by a call_button", async () => {
+test.tags("desktop");
+test("action with html help returned by a call_button", async () => {
     onRpc("/web/dataset/call_button/*", () => {
         return {
             res_model: "partner",
@@ -1219,7 +1227,8 @@ test.tags("desktop")("action with html help returned by a call_button", async ()
     expect(".o_list_view .o_nocontent_help p").toHaveText("I am not a helper");
 });
 
-test.tags("desktop")("can open different records from a multi record view", async () => {
+test.tags("desktop");
+test("can open different records from a multi record view", async () => {
     stepAllNetworkCalls();
 
     await mountWithCleanup(WebClient);
@@ -1258,13 +1267,13 @@ test.tags("desktop")("can open different records from a multi record view", asyn
     ]);
 });
 
-test.tags("desktop")("restore previous view state when switching back", async () => {
+test.tags("desktop");
+test("restore previous view state when switching back", async () => {
     defineActions([
         {
-            id: 3,
+            id: 30,
             name: "Partners",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "graph"],
                 [1, "kanban"],
@@ -1275,7 +1284,7 @@ test.tags("desktop")("restore previous view state when switching back", async ()
     Partner._views["graph,false"] = "<graph/>";
 
     await mountWithCleanup(WebClient);
-    await getService("action").doAction(3);
+    await getService("action").doAction(30);
     expect(".o_graph_renderer [data-mode='bar']").toHaveClass("active");
     expect(".o_graph_renderer [data-mode='line']").not.toHaveClass("active");
 
@@ -1291,7 +1300,8 @@ test.tags("desktop")("restore previous view state when switching back", async ()
     expect(".o_graph_renderer [data-mode='line']").toHaveClass("active");
 });
 
-test.tags("desktop")("can't restore previous action if form is invalid", async () => {
+test.tags("desktop");
+test("can't restore previous action if form is invalid", async () => {
     Partner._fields.foo = fields.Char({ required: true });
 
     await mountWithCleanup(WebClient);
@@ -1310,13 +1320,13 @@ test.tags("desktop")("can't restore previous action if form is invalid", async (
     expect(".o_field_widget[name=foo]").toHaveClass("o_field_invalid");
 });
 
-test.tags("desktop")("view switcher is properly highlighted in pivot view", async () => {
+test.tags("desktop");
+test("view switcher is properly highlighted in pivot view", async () => {
     defineActions([
         {
-            id: 3,
+            id: 30,
             name: "Partners",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "pivot"],
@@ -1326,7 +1336,7 @@ test.tags("desktop")("view switcher is properly highlighted in pivot view", asyn
     ]);
 
     await mountWithCleanup(WebClient);
-    await getService("action").doAction(3);
+    await getService("action").doAction(30);
     expect(".o_control_panel .o_switch_view.o_list").toHaveClass("active", {
         message: "list button in control panel is active",
     });
@@ -1344,7 +1354,8 @@ test.tags("desktop")("view switcher is properly highlighted in pivot view", asyn
     });
 });
 
-test.tags("desktop")("can interact with search view", async () => {
+test.tags("desktop");
+test("can interact with search view", async () => {
     Partner._views["search,false"] = `
         <search>
             <group>
@@ -1367,7 +1378,8 @@ test.tags("desktop")("can interact with search view", async () => {
     });
 });
 
-test.tags("desktop")("can open a many2one external window", async () => {
+test.tags("desktop");
+test("can open a many2one external window", async () => {
     Partner._views["search,false"] = `
         <search>
             <group>
@@ -1410,7 +1422,8 @@ test.tags("desktop")("can open a many2one external window", async () => {
     ]);
 });
 
-test.tags("desktop")('save when leaving a "dirty" view', async () => {
+test.tags("desktop");
+test('save when leaving a "dirty" view', async () => {
     expect.assertions(4);
     onRpc("partner", "web_save", ({ args }) => {
         expect(args).toEqual([[1], { foo: "pinkypie" }]);
@@ -1428,7 +1441,8 @@ test.tags("desktop")('save when leaving a "dirty" view', async () => {
     expect(".o_kanban_view").toHaveCount(1, { message: "should be in kanban view" });
 });
 
-test.tags("desktop")("limit set in action is passed to each created controller", async () => {
+test.tags("desktop");
+test("limit set in action is passed to each created controller", async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction({
         name: "Partners",
@@ -1447,7 +1461,8 @@ test.tags("desktop")("limit set in action is passed to each created controller",
     expect(".o_kanban_record:not(.o_kanban_ghost)").toHaveCount(2);
 });
 
-test.tags("desktop")("go back to a previous action using the breadcrumbs", async () => {
+test.tags("desktop");
+test("go back to a previous action using the breadcrumbs", async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
 
@@ -1524,13 +1539,13 @@ test("form views restore the correct id in url when coming back in breadcrumbs",
     expect(router.current.resId).toBe(1);
 });
 
-test.tags("desktop")("honor group_by specified in actions context", async () => {
+test.tags("desktop");
+test("honor group_by specified in actions context", async () => {
     defineActions([
         {
-            id: 3,
+            id: 30,
             name: "Partners",
             res_model: "partner",
-            type: "ir.actions.act_window",
             context: "{'group_by': 'm2o'}",
             views: [[false, "list"]],
         },
@@ -1543,7 +1558,7 @@ test.tags("desktop")("honor group_by specified in actions context", async () => 
         </search>`;
 
     await mountWithCleanup(WebClient);
-    await getService("action").doAction(3);
+    await getService("action").doAction(30);
     expect(".o_list_table_grouped").toHaveCount(1, { message: "should be grouped" });
     expect(".o_group_header").toHaveCount(2, {
         message: "should be grouped by 'bar' (two groups) at first load",
@@ -1564,19 +1579,22 @@ test.tags("desktop")("honor group_by specified in actions context", async () => 
     });
 });
 
+test.tags("desktop");
 test("switch request to unknown view type", async () => {
-    defineActions([
-        {
-            id: 33,
-            name: "Partners",
-            res_model: "partner",
-            type: "ir.actions.act_window",
-            views: [
-                [false, "list"],
-                [1, "kanban"],
-            ],
-        },
-    ]);
+    defineActions(
+        [
+            {
+                id: 33,
+                name: "Partners",
+                res_model: "partner",
+                views: [
+                    [false, "list"],
+                    [1, "kanban"],
+                ],
+            },
+        ],
+        { mode: "replace" }
+    );
 
     stepAllNetworkCalls();
 
@@ -1597,13 +1615,13 @@ test("switch request to unknown view type", async () => {
     ]);
 });
 
-test.tags("desktop")("execute action with unknown view type", async () => {
+test.tags("desktop");
+test("execute action with unknown view type", async () => {
     defineActions([
         {
             id: 33,
             name: "Partners",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "unknown"], // typically, an enterprise-only view on a community db
@@ -1626,7 +1644,6 @@ test("flags field of ir.actions.act_window is used", async () => {
             name: "Partners",
             res_id: 1,
             res_model: "partner",
-            type: "ir.actions.act_window",
             flags: {
                 mode: "edit",
             },
@@ -1637,7 +1654,6 @@ test("flags field of ir.actions.act_window is used", async () => {
             name: "Partners",
             res_id: 1,
             res_model: "partner",
-            type: "ir.actions.act_window",
             flags: {
                 mode: "readonly",
             },
@@ -1672,7 +1688,8 @@ test("flags field of ir.actions.act_window is used", async () => {
     ]);
 });
 
-test.tags("desktop")("save current search", async () => {
+test.tags("desktop");
+test("save current search", async () => {
     expect.assertions(4);
 
     defineActions([
@@ -1684,7 +1701,6 @@ test.tags("desktop")("save current search", async () => {
             name: "Partners",
             res_model: "partner",
             search_view_id: [4, "a custom search view"],
-            type: "ir.actions.act_window",
             views: [[false, "list"]],
         },
     ]);
@@ -1721,14 +1737,14 @@ test.tags("desktop")("save current search", async () => {
     await saveFavorite();
 });
 
-test.tags("desktop")("list with default_order and favorite filter with no orderedBy", async () => {
+test.tags("desktop");
+test("list with default_order and favorite filter with no orderedBy", async () => {
     Partner._views["list,1"] = '<list default_order="foo desc"><field name="foo"/></list>';
     defineActions([
         {
             id: 100,
             name: "Partners",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [1, "list"],
                 [false, "form"],
@@ -1776,15 +1792,15 @@ test.tags("desktop")("list with default_order and favorite filter with no ordere
     );
 });
 
-test.tags("desktop")("action with default favorite and context.active_id", async () => {
+test.tags("desktop");
+test("action with default favorite and context.active_id", async () => {
     expect.assertions(4);
 
     defineActions([
         {
-            id: 3,
+            id: 30,
             name: "Partners",
             res_model: "partner",
-            type: "ir.actions.act_window",
             context: "{ 'active_id': 4, 'active_ids': [4], 'active_model': 'whatever' }",
             views: [[false, "list"]],
         },
@@ -1804,7 +1820,7 @@ test.tags("desktop")("action with default favorite and context.active_id", async
     });
 
     await mountWithCleanup(WebClient);
-    await getService("action").doAction(3);
+    await getService("action").doAction(30);
 
     expect(".o_list_view").toHaveCount(1);
     expect(".o_searchview .o_searchview_facet").toHaveCount(1);
@@ -1834,17 +1850,15 @@ test("search menus are still available when switching between actions", async ()
 test.tags("desktop");
 test("current act_window action is stored in session_storage if possible", async () => {
     let expectedAction;
-    patchWithCleanup(browser, {
-        sessionStorage: Object.assign(Object.create(sessionStorage), {
-            setItem(k, value) {
-                expect(JSON.parse(value)).toEqual(expectedAction);
-            },
-        }),
+    patchWithCleanup(browser.sessionStorage, {
+        setItem(k, value) {
+            expect(JSON.parse(value)).toEqual(expectedAction);
+        },
     });
     await mountWithCleanup(WebClient);
 
     // execute an action that can be stringified -> should be stored
-    expectedAction = MockServer.current.actions[3];
+    expectedAction = MockServer.current._findAction(3);
     await getService("action").doAction(3);
     expect(".o_list_view").toHaveCount(1);
 
@@ -1861,7 +1875,8 @@ test("current act_window action is stored in session_storage if possible", async
     expect(".o_kanban_view").toHaveCount(1);
 });
 
-test.tags("desktop")("destroy action with lazy loaded controller", async () => {
+test.tags("desktop");
+test("destroy action with lazy loaded controller", async () => {
     redirect("/odoo/action-3/2");
 
     await mountWithCleanup(WebClient);
@@ -1878,7 +1893,8 @@ test.tags("desktop")("destroy action with lazy loaded controller", async () => {
     expect(".o_kanban_view").toHaveCount(1);
 });
 
-test.tags("desktop")("execute action from dirty, new record, and come back", async () => {
+test.tags("desktop");
+test("execute action from dirty, new record, and come back", async () => {
     Partner._fields.bar = fields.Many2one({ relation: "partner", default: 1 });
     Partner._views["form,false"] = `
         <form>
@@ -1936,14 +1952,14 @@ test.tags("desktop")("execute action from dirty, new record, and come back", asy
     ]);
 });
 
-test.tags("desktop")("execute a contextual action from a form view", async () => {
+test.tags("desktop");
+test("execute a contextual action from a form view", async () => {
     expect.assertions(4);
 
     const contextualAction = {
-        id: 8,
+        id: 80,
         name: "Favorite Ponies",
         res_model: "pony",
-        type: "ir.actions.act_window",
         context: "{}", // need a context to evaluate
         views: [
             [false, "list"],
@@ -1977,13 +1993,13 @@ test.tags("desktop")("execute a contextual action from a form view", async () =>
     expect(".o_list_view").toHaveCount(1);
 });
 
-test.tags("desktop")("go back to action with form view as main view, and res_id", async () => {
+test.tags("desktop");
+test("go back to action with form view as main view, and res_id", async () => {
     defineActions([
         {
             id: 999,
             name: "Partner",
             res_model: "partner",
-            type: "ir.actions.act_window",
             res_id: 2,
             views: [[44, "form"]],
         },
@@ -2058,7 +2074,8 @@ test("action with res_id, load another res_id, do new action, restore previous",
     expect(".o_control_panel .o_pager_counter").toHaveText("2 / 2");
 });
 
-test.tags("desktop")("open a record, come back, and create a new record", async () => {
+test.tags("desktop");
+test("open a record, come back, and create a new record", async () => {
     await mountWithCleanup(WebClient);
 
     // execute an action and open a record
@@ -2080,7 +2097,8 @@ test.tags("desktop")("open a record, come back, and create a new record", async 
     expect(".o_form_view .o_form_editable").toHaveCount(1);
 });
 
-test.tags("desktop")("open form view, use the pager, execute action, and come back", async () => {
+test.tags("desktop");
+test("open form view, use the pager, execute action, and come back", async () => {
     await mountWithCleanup(WebClient);
 
     // execute an action and open a record
@@ -2155,7 +2173,8 @@ test("onClose should be called only once with right parameters", async () => {
     expect(".modal").toHaveCount(0);
 });
 
-test.tags("desktop")("search view should keep focus during do_search", async () => {
+test.tags("desktop");
+test("search view should keep focus during do_search", async () => {
     // One should be able to type something in the search view, press on enter to
     // make the facet and trigger the search, then do this process
     // over and over again seamlessly.
@@ -2277,7 +2296,8 @@ test("do not pushState when target=new and dialog is opened", async () => {
     });
 });
 
-test.tags("desktop")("do not restore after action button clicked on desktop", async () => {
+test.tags("desktop");
+test("do not restore after action button clicked on desktop", async () => {
     Partner._views["form,false"] = `
         <form>
             <header>
@@ -2300,7 +2320,8 @@ test.tags("desktop")("do not restore after action button clicked on desktop", as
     expect(".o_form_buttons_view .o_form_button_save").not.toBeVisible();
 });
 
-test.tags("mobile")("do not restore after action button clicked on mobile", async () => {
+test.tags("mobile");
+test("do not restore after action button clicked on mobile", async () => {
     Partner._views["form,false"] = `
         <form>
             <header>
@@ -2334,7 +2355,8 @@ test("debugManager is active for views", async () => {
     expect(".o-dropdown--menu .o-dropdown-item:contains('View: Kanban')").toHaveCount(1);
 });
 
-test.tags("desktop")("reload a view via the view switcher keep state", async () => {
+test.tags("desktop");
+test("reload a view via the view switcher keep state", async () => {
     onRpc("read_group", () => {
         expect.step("read_group");
     });
@@ -2396,7 +2418,8 @@ test("doAction supports being passed globalState prop", async () => {
     });
 });
 
-test.tags("desktop")("window action in target new fails (onchange) on desktop", async () => {
+test.tags("desktop");
+test("window action in target new fails (onchange) on desktop", async () => {
     expect.errors(1);
 
     onRpc("partner", "onchange", () => {
@@ -2414,13 +2437,14 @@ test.tags("desktop")("window action in target new fails (onchange) on desktop", 
     await mountWithCleanup(WebClient);
     await getService("action").doAction(2);
     await contains(".o_form_view button[name='5']").click();
-    await waitFor(".modal"); // errors are async
-    expect(".modal").toHaveCount(1);
-    expect(".modal .o_error_dialog").toHaveCount(1);
-    expect(".modal .modal-title").toHaveText("Validation Error");
+    await expect(waitFor(".modal .o_error_dialog .modal-title")).resolves.toHaveText(
+        "Validation Error"
+    );
+    expect.verifyErrors(["RPC_ERROR"]);
 });
 
-test.tags("mobile")("window action in target new fails (onchange) on mobile", async () => {
+test.tags("mobile");
+test("window action in target new fails (onchange) on mobile", async () => {
     expect.errors(1);
 
     onRpc("partner", "onchange", () => {
@@ -2439,13 +2463,14 @@ test.tags("mobile")("window action in target new fails (onchange) on mobile", as
     await getService("action").doAction(2);
     await contains(`.o_cp_action_menus button:has(.fa-cog)`).click();
     await contains(".o-dropdown-item-unstyled-button button[name='5']").click();
-    await waitFor(".modal"); // errors are async
-    expect(".modal").toHaveCount(1);
-    expect(".modal .o_error_dialog").toHaveCount(1);
-    expect(".modal .modal-title").toHaveText("Validation Error");
+    await expect(waitFor(".modal .o_error_dialog .modal-title")).resolves.toHaveText(
+        "Validation Error"
+    );
+    expect.verifyErrors(["RPC_ERROR"]);
 });
 
-test.tags("desktop")("Uncaught error in target new is catch only once on desktop", async () => {
+test.tags("desktop");
+test("Uncaught error in target new is catch only once on desktop", async () => {
     expect.errors(1);
 
     defineActions([
@@ -2454,7 +2479,6 @@ test.tags("desktop")("Uncaught error in target new is catch only once on desktop
             name: "Partner",
             res_model: "partner",
             target: "new",
-            type: "ir.actions.act_window",
             views: [[false, "list"]],
         },
     ]);
@@ -2474,13 +2498,14 @@ test.tags("desktop")("Uncaught error in target new is catch only once on desktop
     await mountWithCleanup(WebClient);
     await getService("action").doAction(2);
     await contains(".o_form_view button[name='26']").click();
-    await waitFor(".modal"); // errors are async
-    expect(".modal").toHaveCount(1);
-    expect(".modal .o_error_dialog").toHaveCount(1);
-    expect(".modal .modal-title").toHaveText("Validation Error");
+    await expect(waitFor(".modal .o_error_dialog .modal-title")).resolves.toHaveText(
+        "Validation Error"
+    );
+    expect.verifyErrors(["RPC_ERROR"]);
 });
 
-test.tags("mobile")("Uncaught error in target new is catch only once on mobile", async () => {
+test.tags("mobile");
+test("Uncaught error in target new is catch only once on mobile", async () => {
     expect.errors(1);
 
     defineActions([
@@ -2489,7 +2514,6 @@ test.tags("mobile")("Uncaught error in target new is catch only once on mobile",
             name: "Partner",
             res_model: "partner",
             target: "new",
-            type: "ir.actions.act_window",
             views: [[false, "list"]],
         },
     ]);
@@ -2510,10 +2534,10 @@ test.tags("mobile")("Uncaught error in target new is catch only once on mobile",
     await getService("action").doAction(2);
     await contains(`.o_cp_action_menus button:has(.fa-cog)`).click();
     await contains(".o-dropdown-item-unstyled-button button[name='26']").click();
-    await waitFor(".modal"); // errors are async
-    expect(".modal").toHaveCount(1);
-    expect(".modal .o_error_dialog").toHaveCount(1);
-    expect(".modal .modal-title").toHaveText("Validation Error");
+    await expect(waitFor(".modal .o_error_dialog .modal-title")).resolves.toHaveText(
+        "Validation Error"
+    );
+    expect.verifyErrors(["RPC_ERROR"]);
 });
 
 test("action and get_views rpcs are cached", async () => {
@@ -2543,7 +2567,40 @@ test("action and get_views rpcs are cached", async () => {
     expect.verifySteps(["/web/action/load", "web_search_read"]);
 });
 
-test.tags("desktop")("pushState also changes the title of the tab", async () => {
+test("get_views rpcs are cached (different context.active_id)", async () => {
+    class IrActionsAct_Window extends models.Model {
+        _name = "ir.actions.act_window";
+    }
+    defineModels([IrActionsAct_Window]);
+
+    stepAllNetworkCalls();
+
+    await mountWithCleanup(WebClient);
+    expect.verifySteps(["/web/webclient/translations", "/web/webclient/load_menus"]);
+
+    await getService("action").doAction({
+        name: "Partner",
+        res_model: "partner",
+        type: "ir.actions.act_window",
+        views: [[false, "kanban"]],
+        context: { active_id: 33 },
+    });
+    expect(".o_kanban_view").toHaveCount(1);
+    expect.verifySteps(["get_views", "web_search_read"]);
+
+    await getService("action").doAction({
+        name: "Partner",
+        res_model: "partner",
+        type: "ir.actions.act_window",
+        views: [[false, "kanban"]],
+        context: { active_id: 44 },
+    });
+    expect(".o_kanban_view").toHaveCount(1);
+    expect.verifySteps(["web_search_read"]);
+});
+
+test.tags("desktop");
+test("pushState also changes the title of the tab", async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3); // list view
 
@@ -2577,7 +2634,6 @@ test("action help given to View in props if not empty", async () => {
     const action = {
         name: "Partners",
         res_model: "partner",
-        type: "ir.actions.act_window",
         views: [[false, "list"]],
     };
     defineActions([
@@ -2607,8 +2663,8 @@ test("action help given to View in props if not empty", async () => {
 
 test("load a tree", async () => {
     Partner._views = {
-        "list,false": `<list><field name="foo"/></list>`,
-        "search,false": `<search/>`,
+        list: `<list><field name="foo"/></list>`,
+        search: `<search/>`,
     };
 
     await mountWithCleanup(WebClient);
@@ -2622,10 +2678,11 @@ test("load a tree", async () => {
     expect(".o_list_view").toHaveCount(1);
 });
 
-test.tags("desktop")("sample server: populate groups", async () => {
+test.tags("desktop");
+test("sample server: populate groups", async () => {
     Partner._records = [];
     Partner._views = {
-        "kanban,false": `
+        kanban: `
             <kanban sample="1" default_group_by="write_date:month">
                 <templates>
                     <t t-name="card">
@@ -2633,11 +2690,11 @@ test.tags("desktop")("sample server: populate groups", async () => {
                     </t>
                 </templates>
             </kanban>`,
-        "pivot,false": `
+        pivot: `
             <pivot sample="1">
                 <field name="write_date" type="row"/>
             </pivot>`,
-        "search,false": `<search/>`,
+        search: `<search/>`,
     };
     onRpc("web_read_group", () => {
         return {
@@ -2680,7 +2737,8 @@ test.tags("desktop")("sample server: populate groups", async () => {
     expect(".o_pivot_view .o_view_sample_data").toHaveCount(1);
 });
 
-test.tags("desktop")("click on breadcrumb of a deleted record", async () => {
+test.tags("desktop");
+test("click on breadcrumb of a deleted record", async () => {
     expect.errors(1);
     Partner._views["form,false"] = `
         <form>
@@ -2724,7 +2782,8 @@ test.tags("desktop")("click on breadcrumb of a deleted record", async () => {
     ]);
 });
 
-test.tags("desktop")("executing an action closes dialogs", async () => {
+test.tags("desktop");
+test("executing an action closes dialogs", async () => {
     await mountWithCleanup(WebClient);
     await getService("action").doAction(3);
     expect(".o_list_view").toHaveCount(1);

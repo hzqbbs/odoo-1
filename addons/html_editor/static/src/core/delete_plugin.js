@@ -2,6 +2,7 @@ import { Plugin } from "../plugin";
 import { closestBlock, isBlock } from "../utils/blocks";
 import {
     isAllowedContent,
+    isButton,
     isContentEditable,
     isEditorTab,
     isEmpty,
@@ -12,12 +13,14 @@ import {
     isShrunkBlock,
     isTangible,
     isTextNode,
+    isVisibleTextNode,
     isWhitespace,
+    isZwnbsp,
     isZWS,
     nextLeaf,
     previousLeaf,
 } from "../utils/dom_info";
-import { getState, isFakeLineBreak, prepareUpdate } from "../utils/dom_state";
+import { getState, isFakeLineBreak, observeMutations, prepareUpdate } from "../utils/dom_state";
 import {
     childNodes,
     closestElement,
@@ -39,6 +42,8 @@ import {
 } from "../utils/position";
 import { CTYPES } from "../utils/content_types";
 import { withSequence } from "@html_editor/utils/resource";
+import { compareListTypes } from "@html_editor/main/list/utils";
+import { hasTouch, isBrowserChrome } from "@web/core/browser/feature_detection";
 
 /**
  * @typedef {Object} RangeLike
@@ -58,7 +63,7 @@ import { withSequence } from "@html_editor/utils/resource";
  */
 
 export class DeletePlugin extends Plugin {
-    static dependencies = ["selection", "history"];
+    static dependencies = ["baseContainer", "selection", "history", "input"];
     static id = "delete";
     static shared = ["deleteRange", "deleteSelection", "delete"];
     resources = {
@@ -83,6 +88,8 @@ export class DeletePlugin extends Plugin {
             withSequence(5, this.onBeforeInputInsertText.bind(this)),
             this.onBeforeInputDelete.bind(this),
         ],
+        input_handlers: (ev) => this.onAndroidChromeInput?.(ev),
+        selectionchange_handlers: withSequence(5, () => this.onAndroidChromeSelectionChange?.()),
         /** Overrides */
         delete_backward_overrides: withSequence(30, this.deleteBackwardUnmergeable.bind(this)),
         delete_backward_word_overrides: withSequence(20, this.deleteBackwardUnmergeable.bind(this)),
@@ -94,11 +101,10 @@ export class DeletePlugin extends Plugin {
         // @todo @phoenix: move these predicates to different plugins
         unremovable_node_predicates: [
             (node) => node.classList?.contains("oe_unremovable"),
-            // Website stuff?
-            (node) => node.classList?.contains("o_editable"),
             // Monetary field
             (node) => node.matches?.("[data-oe-type='monetary'] > span"),
         ],
+        invalid_for_base_container_predicates: (node) => this.isUnremovable(node, this.editable),
     };
 
     setup() {
@@ -144,6 +150,7 @@ export class DeletePlugin extends Plugin {
      */
     delete(direction, granularity) {
         const selection = this.dependencies.selection.getEditableSelection();
+        this.dispatchTo("before_delete_handlers");
 
         if (!selection.isCollapsed) {
             this.deleteSelection(selection);
@@ -187,6 +194,7 @@ export class DeletePlugin extends Plugin {
             this.includeEndOrStartBlock,
         ]);
         range = this.deleteRange(range);
+        this.document.getSelection()?.removeAllRanges();
         this.setCursorFromRange(range, { collapseToEnd: true });
     }
 
@@ -427,9 +435,9 @@ export class DeletePlugin extends Plugin {
                 !block.parentElement.isContentEditable
             ) {
                 // @todo: not sure we want this when allowInlineAtRoot is true
-                const p = this.document.createElement("p");
-                p.appendChild(this.document.createElement("br"));
-                block.appendChild(p);
+                const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+                baseContainer.appendChild(this.document.createElement("br"));
+                block.appendChild(baseContainer);
             } else {
                 block.appendChild(this.document.createElement("br"));
             }
@@ -497,6 +505,16 @@ export class DeletePlugin extends Plugin {
             }
         }
 
+        const endContainerList = closestElement(endContainer, "UL, OL");
+        if (
+            ["OL", "UL"].includes(startContainer.nodeName) &&
+            endContainerList &&
+            !compareListTypes(startContainer, endContainerList)
+        ) {
+            const newRange = this.document.createRange();
+            newRange.setStart(range.endContainer, endOffset);
+            return { allNodesRemoved, range: newRange };
+        }
         return { allNodesRemoved, range: { ...range, endOffset } };
     }
 
@@ -582,7 +600,7 @@ export class DeletePlugin extends Plugin {
             // The joinable in this case is its sibling (previous for the start
             // side, next for the end side), but only if inline.
             const sibling = childNodes(commonAncestor)[side === "start" ? offset - 1 : offset];
-            if (sibling && !isBlock(sibling)) {
+            if (sibling && !isBlock(sibling) && !(sibling.nodeType === Node.TEXT_NODE && !isVisibleTextNode(sibling))) {
                 return { node: sibling, type: "inline" };
             }
             // No fragment to join.
@@ -737,10 +755,13 @@ export class DeletePlugin extends Plugin {
      * @returns {Range}
      */
     includeBlockEnd(block, range) {
-        const { endContainer, endOffset, commonAncestorContainer } = range;
+        const { startContainer, endContainer, endOffset, commonAncestorContainer } = range;
+        const startList = closestElement(startContainer, "UL, OL");
+        const endList = closestElement(endContainer, "UL, OL");
         if (
             block === commonAncestorContainer ||
-            !this.isCursorAtEndOfElement(block, endContainer, endOffset)
+            !this.isCursorAtEndOfElement(block, endContainer, endOffset) ||
+            (startList && endList && !compareListTypes(startList, endList))
         ) {
             return range;
         }
@@ -1011,6 +1032,11 @@ export class DeletePlugin extends Plugin {
             // TODO ABD: add test
             return true;
         }
+        const isZwnbspLinkPad = (node) =>
+            isButton(node.previousSibling) || isButton(node.nextSibling);
+        if (isZwnbsp(textNode) && isZwnbspLinkPad(textNode)) {
+            return true;
+        }
         // ZWS and ZWNBSP are invisible.
         if (["\u200B", "\uFEFF"].includes(char)) {
             return false;
@@ -1025,9 +1051,7 @@ export class DeletePlugin extends Plugin {
 
         // If not preceded by content, it is invisible.
         if (offset) {
-            if (isWhitespace(textNode.textContent[offset - char.length])) {
-                return false;
-            }
+            return !isWhitespace(textNode.textContent[offset - char.length]);
         } else if (!(getState(...leftPos(textNode), DIRECTIONS.LEFT).cType & CTYPES.CONTENT)) {
             return false;
         }
@@ -1145,19 +1169,57 @@ export class DeletePlugin extends Plugin {
         };
         const argsForDelete = handledInputTypes[ev.inputType];
         if (argsForDelete) {
-            ev.preventDefault();
             this.delete(...argsForDelete);
+            ev.preventDefault();
+            if (isBrowserChrome() && hasTouch()) {
+                this.preventDefaultDeleteAndroidChrome(ev);
+            }
         }
     }
 
     onBeforeInputInsertText(ev) {
         if (ev.inputType === "insertText") {
-            const selection = this.dependencies.selection.getEditableSelection();
+            const selection = this.dependencies.selection.getSelectionData().deepEditableSelection;
             if (!selection.isCollapsed) {
-                this.deleteSelection();
+                this.dispatchTo("before_delete_handlers");
+                this.deleteSelection(selection);
+                this.dispatchTo("delete_handlers");
             }
             // Default behavior: insert text and trigger input event
         }
+    }
+
+    /**
+     * Beforeinput event of type deleteContentBackward cannot be default
+     * prevented in Android Chrome. So we need to revert:
+     * - eventual mutations between beforeinput and input events
+     * - eventual selection change after input event
+     *
+     * @param {InputEvent} beforeInputEvent
+     */
+    preventDefaultDeleteAndroidChrome(beforeInputEvent) {
+        const restoreDOM = this.dependencies.history.makeSavePoint();
+        this.onAndroidChromeInput = (ev) => {
+            if (ev.inputType !== beforeInputEvent.inputType) {
+                return;
+            }
+            // Revert DOM changes that occurred between beforeinput and input.
+            restoreDOM();
+
+            // Revert selection changes after input event, within the same tick.
+            // If further mutations occurred, consider selection change legit
+            // (e.g. dictionary input) and do not revert it.
+            const { restore: restoreSelection } = this.dependencies.selection.preserveSelection();
+            const observerOptions = { childList: true, subtree: true, characterData: true };
+            const getMutationRecords = observeMutations(this.editable, observerOptions);
+            this.onAndroidChromeSelectionChange = () => {
+                const shouldRevertSelectionChanges = !getMutationRecords().length;
+                if (shouldRevertSelectionChanges) {
+                    restoreSelection();
+                }
+            };
+            setTimeout(() => delete this.onAndroidChromeSelectionChange);
+        };
     }
 
     // ======== AD-HOC STUFF ========
@@ -1186,7 +1248,11 @@ export class DeletePlugin extends Plugin {
             return;
         }
 
-        if (isEmpty(closestUnmergeable) && !this.isUnremovable(closestUnmergeable)) {
+        if (
+            (isEmpty(closestUnmergeable) ||
+                this.delegateTo("is_empty_predicates", closestUnmergeable)) &&
+            !this.isUnremovable(closestUnmergeable)
+        ) {
             closestUnmergeable.remove();
             this.dependencies.selection.setSelection({
                 anchorNode: destContainer,

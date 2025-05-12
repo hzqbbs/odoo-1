@@ -618,6 +618,7 @@ publicWidget.registry.CarouselBootstrapUpgradeFix = publicWidget.Widget.extend({
         "[data-snippet='s_quotes_carousel'] .carousel",
         "[data-snippet='s_quotes_carousel_minimal'] .carousel",
         "[data-snippet='s_carousel_intro'] .carousel",
+        "#o-carousel-product.carousel", // TODO adapt the shop XML directly in master
     ].join(", "),
     disabledInEditableMode: false,
     events: {
@@ -651,7 +652,7 @@ publicWidget.registry.CarouselBootstrapUpgradeFix = publicWidget.Widget.extend({
             // instead of "carousel", it's better not to change the behavior and
             // let the user update the snippet manually to avoid making changes
             // that they don't expect.
-            const snippetName = this.el.closest("[data-snippet]").dataset.snippet;
+            const snippetName = this.el.closest("[data-snippet]")?.dataset.snippet;
             this.el.dataset.bsRide = this.OLD_AUTO_SLIDING_SNIPPETS.includes(snippetName) ? "carousel" : "true";
             await this._destroyCarouselInstance();
             const options = this.editableMode ? {ride: false, pause: true} : undefined;
@@ -1024,6 +1025,12 @@ registry.backgroundVideo = publicWidget.Widget.extend(MobileYoutubeAutoplayMixin
                 videoContainerEl.classList.remove('d-none');
             });
         }
+        this.__adjustIframe = debounce(() => this._adjustIframe(), 100);
+        const resizeObserver = new ResizeObserver(this.__adjustIframe.bind(this));
+        // A change in an element padding does not trigger the resizeObserver so
+        // both inner and outer element are observed for any resizing.
+        resizeObserver.observe(this.$target[0].parentElement);
+        resizeObserver.observe(this.$target[0]);
         return Promise.all(proms).then(() => this._appendBgVideo());
     },
     /**
@@ -1459,7 +1466,7 @@ registry.WebsiteAnimate = publicWidget.Widget.extend({
      */
     start() {
         this.lastScroll = 0;
-        this.$scrollingElement = $().getScrollingElement();
+        this.$scrollingElement = this.findScrollingElement();
         this.$scrollingTarget = $().getScrollingTarget(this.$scrollingElement);
         this.$animatedElements = this.$('.o_animate');
 
@@ -1523,6 +1530,10 @@ registry.WebsiteAnimate = publicWidget.Widget.extend({
         this.__onScrollWebsiteAnimate.cancel();
         this.$scrollingTarget[0].removeEventListener('scroll', this.__onScrollWebsiteAnimate, {capture: true});
         this.$scrollingElement[0].classList.remove('o_wanim_overflow_xy_hidden');
+    },
+
+    findScrollingElement() {
+        return $().getScrollingElement();
     },
 
     //--------------------------------------------------------------------------

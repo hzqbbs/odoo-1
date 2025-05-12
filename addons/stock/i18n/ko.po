@@ -4,16 +4,16 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Sarah Park, 2024
-# Daye Jeong, 2024
+# Daye Jeong, 2025
+# Sarah Park, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"POT-Creation-Date: 2025-03-19 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Daye Jeong, 2024\n"
+"Last-Translator: Sarah Park, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -462,11 +462,6 @@ msgid "54326786758"
 msgstr "54326786758"
 
 #. module: stock
-#: model_terms:ir.ui.view,arch_db:stock.report_inventory
-msgid "98"
-msgstr "98"
-
-#. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.stock_warn_insufficient_qty_form_view
 msgid ""
 "<br/>\n"
@@ -498,7 +493,7 @@ msgstr "<br><b>%s</b>에서 필요가 제기되고 이를 이행하기 위한 �
 msgid ""
 "<br>If the products are not available in <b>%s</b>, a rule will be triggered"
 " to bring the missing quantity in this location."
-msgstr ""
+msgstr "<br><b>%s</b>에서 제품을 사용할 수 없는 경우 이 위치에서 누락된 수량을 채우기 위한 규칙이 활성화됩니다. "
 
 #. module: stock
 #. odoo-python
@@ -514,33 +509,33 @@ msgstr ""
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br><br>\n"
+"        Hello <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br/><br/>\n"
 "        We are glad to inform you that your order has been shipped.\n"
 "        <t t-if=\"hasattr(object, 'carrier_tracking_ref') and object.carrier_tracking_ref\">\n"
 "            Your tracking reference is\n"
 "            <strong>\n"
 "            <t t-if=\"object.carrier_tracking_url\">\n"
-"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"></t>\n"
+"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"/>\n"
 "                <t t-if=\"multiple_carrier_tracking\">\n"
 "                    <t t-foreach=\"multiple_carrier_tracking\" t-as=\"line\">\n"
-"                        <br><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"></a>\n"
+"                        <br/><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"/>\n"
 "                    </t>\n"
 "                </t>\n"
 "                <t t-else=\"\">\n"
-"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"></a>.\n"
+"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "                </t>\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                <t t-out=\"object.carrier_tracking_ref or ''\"></t>.\n"
+"                <t t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "            </t>\n"
 "            </strong>\n"
 "        </t>\n"
-"        <br><br>\n"
-"        Please find your delivery order attached for more details.<br><br>\n"
+"        <br/><br/>\n"
+"        Please find your delivery order attached for more details.<br/><br/>\n"
 "        Thank you,\n"
-"        <t t-if=\"user.signature\">\n"
-"            <br>\n"
-"            <t t-out=\"user.signature or ''\">--<br>Mitchell Admin</t>\n"
+"        <t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
+"            <br/>\n"
+"            <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
 "        </t>\n"
 "    </p>\n"
 "</div>\n"
@@ -548,33 +543,33 @@ msgid ""
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        안녕하세요, <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>님.<br><br>\n"
-"        고객님께서 주문하신 상품이 발송되었음을 안내드립니다.\n"
+"        안녕하세요, <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>님.<br/><br/>\n"
+"        고객님이 주문하신 상품이 발송되었습니다.\n"
 "        <t t-if=\"hasattr(object, 'carrier_tracking_ref') and object.carrier_tracking_ref\">\n"
-"            배송 조회 번호는 다음과 같습니다.\n"
+"            배송 조회 번호는 다음과 같습니다:\n"
 "            <strong>\n"
 "            <t t-if=\"object.carrier_tracking_url\">\n"
-"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"></t>\n"
+"                <t t-set=\"multiple_carrier_tracking\" t-value=\"object.get_multiple_carrier_tracking()\"/>\n"
 "                <t t-if=\"multiple_carrier_tracking\">\n"
 "                    <t t-foreach=\"multiple_carrier_tracking\" t-as=\"line\">\n"
-"                        <br><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"></a>\n"
+"                        <br/><a t-att-href=\"line[1]\" target=\"_blank\" t-out=\"line[0] or ''\"/>\n"
 "                    </t>\n"
 "                </t>\n"
 "                <t t-else=\"\">\n"
-"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"></a>.\n"
+"                    <a t-attf-href=\"{{ object.carrier_tracking_url }}\" target=\"_blank\" t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "                </t>\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                <t t-out=\"object.carrier_tracking_ref or ''\"></t>.\n"
+"                <t t-out=\"object.carrier_tracking_ref or ''\"/>.\n"
 "            </t>\n"
 "            </strong>\n"
 "        </t>\n"
-"        <br><br>\n"
-"        자세한 내용은 첨부된 배송주문서를 확인하시기 바랍니다..<br><br>\n"
+"        <br/><br/>\n"
+"        자세한 내용은 첨부된 배송 주문서를 확인해 주세요.<br/><br/>\n"
 "        감사합니다.\n"
-"        <t t-if=\"user.signature\">\n"
-"            <br>\n"
-"            <t t-out=\"user.signature or ''\">--<br>Mitchell Admin</t>\n"
+"        <t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
+"            <br/>\n"
+"            <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
 "        </t>\n"
 "    </p>\n"
 "</div>\n"
@@ -715,6 +710,12 @@ msgid "<span class=\"o_stat_text\">Traceability</span>"
 msgstr "<span class=\"o_stat_text\">추적가능성</span>"
 
 #. module: stock
+#: model_terms:ir.ui.view,arch_db:stock.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:stock.report_picking
+msgid "<span><strong>Delivery Address:</strong></span>"
+msgstr "<span><strong>배송 주소:</strong></span>"
+
+#. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.report_return_slip
 msgid "<span>OBTRETU</span>"
 msgstr "<span>OBTRETU</span>"
@@ -765,12 +766,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock.report_picking
 msgid "<strong>Customer Address</strong>"
 msgstr "<strong>고객 주소</strong>"
-
-#. module: stock
-#: model_terms:ir.ui.view,arch_db:stock.report_delivery_document
-#: model_terms:ir.ui.view,arch_db:stock.report_picking
-msgid "<strong>Delivery Address</strong>"
-msgstr "<strong>배송 주소</strong>"
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.report_picking
@@ -1065,6 +1060,7 @@ msgstr "추가 정보"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_lot_report__address
+#: model:ir.model.fields,field_description:stock.field_stock_picking__warehouse_address_id
 #: model:ir.model.fields,field_description:stock.field_stock_warehouse__partner_id
 #: model_terms:ir.ui.view,arch_db:stock.search_customer_lot_filter
 msgid "Address"
@@ -4083,12 +4079,6 @@ msgid "Immediate Transfer"
 msgstr "즉시 이동"
 
 #. module: stock
-#. odoo-python
-#: code:addons/stock/models/stock_quant.py:0
-msgid "Import"
-msgstr "가져오기"
-
-#. module: stock
 #. odoo-javascript
 #: code:addons/stock/static/src/widgets/generate_serial.js:0
 msgid "Import Lots"
@@ -5382,9 +5372,9 @@ msgid ""
 "to appear as a third party in the context of any claim for damages filed "
 "against the client by an end consumer."
 msgstr ""
-"My Company (Chicago)는 합의된 기간에 따라 적시에 성능 기준에 맞는 서비스를 제공하기 위해 최선을 다할 것을 약속합니다."
-" 그러나 이러한 의무 중 어떤 것도 결과를 달성하기 위한 의무 사항으로 간주될 수 없습니다. My Company (Chicago)는 어떤"
-" 상황에서도 최종 소비자가 고객에게 제기한 손해 배상 청구와 관련하여 고객이 당사를 제3자 업체로 표시되도록 할 수 없습니다."
+"My Company(Chicago)는 합의된 기간 내 적시에 성실히 서비스를 제공하여 성과를 달성하기 위해 최선을 다할 것을 약속합니다."
+" 단, 상기 사항 중 어떠한 의무도 결과 달성을 보장하는 의무 사항으로 간주될 수 없습니다. My Company(Chicago)는 어떤 "
+"상황에서도 최종 소비자가 고객에게 제기한 손해배상 청구와 관련하여 고객이 당사를 제3자 업체로 표시하도록 요구할 수 없습니다."
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.quant_search_view
@@ -6012,9 +6002,9 @@ msgid ""
 "My Company (Chicago) will be authorized to suspend any provision of services"
 " without prior warning in the event of late payment."
 msgstr ""
-"청구서나 주문서에 다른 지불 기간이 명시되어 있지 않는 한, 당사의 청구서는 영업일 기준 21일 이내에 지불하도록 되어 있습니다. "
-"기한일까지 결제가 완료되지 않은 경우 My Company (Chicago)는 미납금의 10%에 해당하는 고정 이자를 요청할 권한을 "
-"가집니다. 또한 My Company (Chicago)는 연체 시 사전 경고 없이 서비스 제공을 중단할 권한이 있습니다."
+"당사의 청구 대금은 청구서 또는 주문서에 별도의 지급 기간이 명시되어 있지 않는 한, 영업일 기준으로 21일 이내에 지급되어야 합니다. "
+"만약 기한일까지 결제가 완료되지 않은 경우 My Company(Chicago)는 미납 금액의 10%에 해당하는 고정 이자를 청구할 권한을"
+" 보유합니다. 또한 My Company(Chicago)는 연체 발생 시 사전 통지 없이 서비스 제공을 중단할 권한을 보유합니다."
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_warehouse__out_type_id
@@ -6503,9 +6493,9 @@ msgstr "참석은 작업 유형에 따라 다릅니다."
 #. odoo-python
 #: code:addons/stock/models/stock_quant.py:0
 msgid ""
-"Press the CREATE button to define quantity for each product in your stock or"
-" import them from a spreadsheet throughout Favorites"
-msgstr "신규 버튼을 눌러 각 품목에 대한 재고 수량을 정의하거나 즐겨찾기에 있는 스프레드 시트에서 가져오기할 수 있습니다."
+"Press the \"New\" button to define the quantity for a product in your stock "
+"or import quantities from a spreadsheet via the Actions menu"
+msgstr "“새로 만들기” 버튼을 눌러 재고에 있는 품목 수량을 지정하거나 작업 메뉴를 통해 스프레드시트에서 수량을 가져옵니다."
 
 #. module: stock
 #. odoo-javascript
@@ -7692,6 +7682,11 @@ msgid "Return"
 msgstr "반납"
 
 #. module: stock
+#: model_terms:ir.ui.view,arch_db:stock.view_stock_return_picking_form
+msgid "Return All"
+msgstr "모두 반환"
+
+#. module: stock
 #: model:ir.model,name:stock.model_stock_return_picking
 msgid "Return Picking"
 msgstr "반품 선별"
@@ -8190,13 +8185,13 @@ msgid ""
 "FEFO: products/lots with the closest removal date will be moved out first (the availability of this method depends on the \"Expiration Dates\" setting).\n"
 "Least Packages: FIFO but with the least number of packages possible when there are several packages containing the same product."
 msgstr ""
-"모든 품목 카테고리에 적용할 수 있는 표준화된 제거 전략을 수립합니다:\n"
+"본 품목 카테고리의 출처 위치와 무관하게 적용할 수 있는 구체적인 제거 전략을 수립합니다:\n"
 "\n"
 "FIFO: 가장 먼저 입고된 제품/로트부터 우선적으로 출고됩니다.\n"
 "LIFO: 가장 최근에 입고된 제품/로트가 우선적으로 출고됩니다.\n"
-"가장 가까운 위치: 대상 위치에서 가장 가까운 곳에 위치한 제품/로트가 우선적으로 출고됩니다.\n"
-"FEFO: 만료일이 가장 가까운 제품/로트가 우선적으로 출고되며, '만료일' 설정이 활성화된 경우에 한하여 적용됩니다.\n"
-"최소 패키지: FIFO를 활용하되 여러 패키지에 동일한 제품이 포함된 경우 단위 수가 가장 적은 패키지의 우선순위를 지정합니다."
+"가장 가까운 위치: 대상 위치에서 가장 근접한 곳에 위치한 제품/로트가 우선적으로 출고됩니다.\n"
+"FEFO: 유통기한이 가장 임박한 제품/로트가 우선적으로 출고됩니다 ('유통기한' 설정이 활성화된 경우에 한하여 적용).\n"
+"최소 패키지: FIFO 방식으로 처리하되, 여러 패키지에 동일한 제품이 포함된 경우 단위 수가 가장 패키지 수량이 적은 경우 우선적으로 출고됩니다."
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
@@ -8293,12 +8288,12 @@ msgstr "Shiprocket 배송"
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_warehouse__code
 msgid "Short Name"
-msgstr "약식 이름"
+msgstr "약칭"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_warehouse__code
 msgid "Short name used to identify your warehouse"
-msgstr "창고를 식별하는데 사용되는 약식 이름"
+msgstr "창고를 식별할 때 사용하는 약칭"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_picking__show_allocation
@@ -8911,6 +8906,14 @@ msgstr "로트/일련 번호(%s)가 다른 제품에 연결되어 있습니다."
 
 #. module: stock
 #. odoo-python
+#: code:addons/stock/models/stock_picking.py:0
+msgid ""
+"The Picking Operations report has been deleted so you cannot print at this "
+"time unless the report is restored."
+msgstr "피킹 작업 보고서가 삭제되었으므로 지금은 인쇄할 수 없습니다. 인쇄하려면 보고서를 복구하세요. "
+
+#. module: stock
+#. odoo-python
 #: code:addons/stock/models/stock_quant.py:0
 msgid ""
 "The Serial Number (%(serial_number)s) is already used in location(s): %(location_list)s.\n"
@@ -9160,7 +9163,7 @@ msgstr ""
 #. module: stock
 #: model:ir.model.constraint,message:stock.constraint_stock_warehouse_warehouse_code_uniq
 msgid "The short name of the warehouse must be unique per company!"
-msgstr "창고의 약식 이름은 회사별로 다르게 지정해야 합니다!"
+msgstr "창고 약칭은 회사별로 다르게 지정해야 합니다!"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_res_partner__property_stock_customer
@@ -10349,7 +10352,7 @@ msgstr "폐기 수량 부족 경고"
 #: code:addons/stock/models/stock_warehouse.py:0
 #: model:ir.model.fields.selection,name:stock.selection__res_partner__picking_warn__warning
 msgid "Warning"
-msgstr "경고"
+msgstr "주의"
 
 #. module: stock
 #. odoo-python
@@ -10383,7 +10386,7 @@ msgstr "경고: 원본 위치 변경"
 #: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_internal_search
 msgid "Warnings"
-msgstr "경고"
+msgstr "주의"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_res_config_settings__group_warning_stock
@@ -10481,10 +10484,10 @@ msgstr "품목 도착 위치"
 msgid ""
 "When products are needed in <b>%(destination)s</b>, <br> "
 "<b>%(operation)s</b> are created from <b>%(source_location)s</b> to fulfill "
-"the need."
+"the need. %(suffix)s"
 msgstr ""
-"품목이 <b>%(destination)s</b> 장소에서 필요한 경우, <br> <b>%(operation)s</b> 항목이 "
-"<b>%(source_location)s</b> 장소에서 필요한 내용이 생성됩니다."
+"품목이 <b>%(destination)s</b> 위치에서 필요한 경우, <br> <b>%(operation)s</b> 항목이 "
+"<b>%(source_location)s</b> 위치에서 %(suffix)s 필요에 맞게 생성됩니다."
 
 #. module: stock
 #. odoo-python

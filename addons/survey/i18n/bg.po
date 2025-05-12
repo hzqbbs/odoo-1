@@ -16,15 +16,18 @@
 # Martin Trigaux, 2024
 # Ивайло Малинов <iv.malinov@gmail.com>, 2024
 # Maria Boyadjieva <marabo2000@gmail.com>, 2024
+# Venelin Stoykov, 2024
 # Petko Karamotchev, 2024
+# Milena Georgieva, 2024
+# Veselina Slavkova, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"POT-Creation-Date: 2025-04-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Petko Karamotchev, 2024\n"
+"Last-Translator: Veselina Slavkova, 2025\n"
 "Language-Team: Bulgarian (https://app.transifex.com/odoo/teams/41243/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,6 +91,12 @@ msgstr ""
 #: code:addons/survey/models/survey_survey.py:0
 msgid "%s (copy)"
 msgstr "%s (копие)"
+
+#. module: survey
+#. odoo-python
+#: code:addons/survey/models/survey_question.py:0
+msgid "%s Votes"
+msgstr ""
 
 #. module: survey
 #. odoo-python
@@ -225,7 +234,7 @@ msgid ""
 "        <tbody>\n"
 "            <tr><td>\n"
 "                <!-- We use the logo of the company that created the survey (to handle multi company cases) -->\n"
-"                <a href=\"/\"><img t-if=\"not object.survey_id.create_uid.company_id.uses_default_logo\" t-attf-src=\"/logo.png?company={{ object.survey_id.create_uid.company_id.id }}\" style=\"vertical-align:baseline;max-width:100px;\"></a>\n"
+"                <a href=\"/\"><img t-if=\"not object.survey_id.create_uid.company_id.uses_default_logo\" t-attf-src=\"/logo.png?company={{ object.survey_id.create_uid.company_id.id }}\" style=\"vertical-align:baseline;max-width:100px;\"/></a>\n"
 "            </td><td style=\"text-align:right;vertical-align:middle;\">\n"
 "                    Certification: <t t-out=\"object.survey_id.display_name or ''\">Feedback Form</t>\n"
 "            </td></tr>\n"
@@ -240,7 +249,7 @@ msgid ""
 "                        <strong t-out=\"object.survey_id.display_name or ''\">Furniture Creation</strong>\n"
 "                    certification\n"
 "                </p>\n"
-"                <p>Congratulations for passing the test with a score of <strong t-out=\"object.scoring_percentage\"></strong>%!</p>\n"
+"                <p>Congratulations for passing the test with a score of <strong t-out=\"object.scoring_percentage\"/>%!</p>\n"
 "            </td></tr>\n"
 "        </tbody>\n"
 "    </table>\n"
@@ -253,14 +262,14 @@ msgstr ""
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Dear <t t-out=\"object.partner_id.name or 'participant'\">participant</t><br><br>\n"
+"        Dear <t t-out=\"object.partner_id.name or 'participant'\">participant</t><br/><br/>\n"
 "        <t t-if=\"object.survey_id.certification\">\n"
 "            You have been invited to take a new certification.\n"
 "        </t>\n"
 "        <t t-else=\"\">\n"
 "            We are conducting a survey and your response would be appreciated.\n"
 "        </t>\n"
-"        <div style=\"margin: 16px 0px 16px 0px;\">\n"
+"        </p><div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a t-att-href=\"(object.get_start_url())\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                <t t-if=\"object.survey_id.certification\">\n"
 "                    Start Certification\n"
@@ -271,7 +280,7 @@ msgid ""
 "            </a>\n"
 "        </div>\n"
 "        <t t-if=\"object.deadline\">\n"
-"            Please answer the survey for <t t-out=\"format_date(object.deadline) or ''\">05/05/2021</t>.<br><br>\n"
+"            Please answer the survey for <t t-out=\"format_date(object.deadline) or ''\">05/05/2021</t>.<br/><br/>\n"
 "        </t>\n"
 "        <t t-if=\"object.survey_id.certification\">\n"
 "            We wish you good luck!\n"
@@ -279,7 +288,7 @@ msgid ""
 "        <t t-else=\"\">\n"
 "            Thank you in advance for your participation.\n"
 "        </t>\n"
-"    </p>\n"
+"    \n"
 "</div>\n"
 "            "
 msgstr ""
@@ -919,7 +928,7 @@ msgstr ""
 #. module: survey
 #: model:ir.model.fields.selection,name:survey.selection__survey_survey__access_mode__public
 msgid "Anyone with the link"
-msgstr ""
+msgstr "Всеки с връзката"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_gamification_challenge__challenge_category
@@ -1114,7 +1123,7 @@ msgstr ""
 #. module: survey
 #: model:survey.question,question_placeholder:survey.survey_feedback_p1_q1
 msgid "Brussels"
-msgstr ""
+msgstr "Брюксел"
 
 #. module: survey
 #: model:survey.question,question_placeholder:survey.survey_demo_quiz_p1_q3
@@ -1449,7 +1458,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/survey/static/src/js/survey_session_manage.js:0
 msgid "Copied!"
-msgstr ""
+msgstr "Копирано!"
 
 #. module: survey
 #: model:survey.question.answer,value:survey.survey_demo_quiz_p4_q1_sug3
@@ -1642,7 +1651,7 @@ msgstr "Дата за отговор"
 #: model:ir.model.fields.selection,name:survey.selection__survey_question__question_type__datetime
 #: model:ir.model.fields.selection,name:survey.selection__survey_user_input_line__answer_type__datetime
 msgid "Datetime"
-msgstr ""
+msgstr "Дата и час"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_user_input_line__value_datetime
@@ -2019,6 +2028,11 @@ msgid "Group By"
 msgstr "Групиране по"
 
 #. module: survey
+#: model:ir.model,name:survey.model_ir_http
+msgid "HTTP Routing"
+msgstr "HTTP Маршрутизиране"
+
+#. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_invite__existing_mode
 #: model_terms:ir.ui.view,arch_db:survey.survey_invite_view_form
 msgid "Handle existing"
@@ -2349,7 +2363,7 @@ msgstr ""
 #: code:addons/survey/models/survey_user_input.py:0
 #: code:addons/survey/static/src/js/survey_result.js:0
 msgid "Incorrect"
-msgstr ""
+msgstr "Неправилно"
 
 #. module: survey
 #: model:survey.question.answer,value:survey.survey_feedback_p2_q1_sug7
@@ -3261,6 +3275,10 @@ msgid ""
 "a placeholder expression that provides the appropriate language, e.g. {{ "
 "object.partner_id.lang }}."
 msgstr ""
+"Език за незадължителен превод (ISO код), който да се избере при изпращане на"
+" имейл. Ако не е зададен, ще се използва английската версия. Обикновено това"
+" трябва да бъде заместващ израз, който предоставя подходящия език, напр. {{ "
+"object.partner_id.lang }}."
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_question_form
@@ -3512,7 +3530,7 @@ msgstr "Преглед"
 #. module: survey
 #: model:survey.question,title:survey.vendor_certification_page_2
 msgid "Prices"
-msgstr ""
+msgstr "Цени"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_page_statistics_header
@@ -3538,7 +3556,7 @@ msgstr "Продукти"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.user_input_session_manage_content
 msgid "Progress bar"
-msgstr ""
+msgstr "Лента за напредък"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_question_answer__question_id
@@ -4579,7 +4597,7 @@ msgstr ""
 #. module: survey
 #: model:survey.question.answer,value:survey.survey_feedback_p2_q2_row1
 msgid "The new layout and design is fresh and up-to-date"
-msgstr ""
+msgstr "Новото оформление и дизайн са свежи и актуални"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_403_page
@@ -4590,38 +4608,41 @@ msgstr "Страницата, която търсите, не е разреше�
 #: model:ir.model.constraint,message:survey.constraint_survey_survey_scoring_success_min_check
 msgid "The percentage of success has to be defined between 0 and 100."
 msgstr ""
+"Процентът на успех трябва да бъде определен в диапазона между 0 и 100."
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_question__is_time_limited
 msgid "The question is limited in time"
-msgstr ""
+msgstr "Въпросът е ограничен във времето"
 
 #. module: survey
 #: model:ir.model.constraint,message:survey.constraint_survey_question_scale
 msgid ""
 "The scale must be a growing non-empty range between 0 and 10 (inclusive)"
 msgstr ""
+"Скалата трябва да бъде нарастващ, ненулев диапазон между 0 и 10 "
+"(включително)"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_session_code
 msgid "The session did not start yet."
-msgstr ""
+msgstr "Сесията все още не е започнала."
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_fill_form_start
 msgid "The session will begin automatically when the host starts."
-msgstr ""
+msgstr "Сесията ще започне автоматично, когато домакинът я стартира."
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/controllers/main.py:0
 msgid "The survey has already started."
-msgstr ""
+msgstr "Анкетата вече е започнала."
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_survey__is_time_limited
 msgid "The survey is limited in time"
-msgstr ""
+msgstr "Анкетата е ограничена във времето"
 
 #. module: survey
 #: model:ir.model.fields,help:survey.field_survey_survey__session_question_start_time
@@ -4629,34 +4650,41 @@ msgid ""
 "The time at which the current question has started, used to handle the timer"
 " for attendees."
 msgstr ""
+"Времето, в което текущият въпрос е започнал, се използва за управление на "
+"таймера за участниците."
 
 #. module: survey
 #: model:ir.model.constraint,message:survey.constraint_survey_survey_time_limit_check
 msgid ""
 "The time limit needs to be a positive number if the survey is time limited."
 msgstr ""
+"Лимитът за време трябва да бъде положително число, ако анкетата е ограничена"
+" във времето."
 
 #. module: survey
 #: model:survey.question.answer,value:survey.survey_feedback_p2_q2_row3
 msgid "The tool to compare the products is useful to make a choice"
 msgstr ""
+"Инструментът за сравнение на продуктите е полезен за вземане на решение"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/controllers/main.py:0
 msgid "The user has not succeeded the certification"
-msgstr ""
+msgstr "Потребителят не е издържал сертификацията"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_fill_form
 msgid "There was an error during the validation of the survey."
-msgstr ""
+msgstr "Възникна грешка по време на валидирането на анкетата."
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/survey_survey_template.py:0
 msgid "They are a default answer, used if the participant skips the question"
 msgstr ""
+"Те са предварително зададен отговор, използван ако участникът пропусне "
+"въпроса"
 
 #. module: survey
 #. odoo-python
@@ -4664,12 +4692,13 @@ msgstr ""
 msgid ""
 "They are technical parameters that guarantees the responsiveness of the page"
 msgstr ""
+"Това са технически параметри, които гарантират отзивчивостта на страницата"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/survey_user_input.py:0
 msgid "This answer cannot be overwritten."
-msgstr ""
+msgstr "Този отговор не може да бъде презаписан."
 
 #. module: survey
 #. odoo-python
@@ -4682,7 +4711,7 @@ msgstr "Този отговор трябва да е имейл адрес"
 #. odoo-javascript
 #: code:addons/survey/static/src/js/survey_form.js:0
 msgid "This answer must be an email address."
-msgstr ""
+msgstr "Този отговор трябва да бъде имейл адрес."
 
 #. module: survey
 #: model:ir.model.fields,help:survey.field_survey_survey__session_code
@@ -4690,11 +4719,13 @@ msgid ""
 "This code will be used by your attendees to reach your session. Feel free to"
 " customize it however you like!"
 msgstr ""
+"Този код ще бъде използван от вашите участници, за да се присъединят към "
+"сесията ви. Можете да го персонализирате, както пожелаете!"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_button_form_view
 msgid "This is a Test Survey Entry."
-msgstr ""
+msgstr "Това е тестов запис за анкета."
 
 #. module: survey
 #. odoo-javascript
@@ -4703,7 +4734,7 @@ msgstr ""
 #: code:addons/survey/static/src/js/survey_form.js:0
 #: code:addons/survey/tests/test_survey.py:0
 msgid "This is not a date"
-msgstr ""
+msgstr "Това не е дата"
 
 #. module: survey
 #. odoo-python
@@ -4728,7 +4759,7 @@ msgstr "Този въпрос изисква отговор."
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_page_print
 msgid "This question was skipped"
-msgstr ""
+msgstr "Този въпрос беше пропуснат"
 
 #. module: survey
 #: model_terms:survey.question,description:survey.survey_feedback_p1
@@ -4736,17 +4767,21 @@ msgid ""
 "This section is about general information about you. Answering them helps "
 "qualifying your answers."
 msgstr ""
+"Тази секция е за обща информация за вас. Отговорите на тези въпроси помагат "
+"за квалифицирането на вашите отговори."
 
 #. module: survey
 #: model_terms:survey.question,description:survey.survey_feedback_p2
 msgid "This section is about our eCommerce experience itself."
-msgstr ""
+msgstr "Тази секция е за самото ни преживяване с електронната търговия."
 
 #. module: survey
 #: model_terms:survey.survey,description:survey.survey_demo_quiz
 msgid ""
 "This small quiz will test your knowledge about our Company. Be prepared!"
 msgstr ""
+"Този кратък тест ще провери знанията ви за нашата компания. Бъдете "
+"подготвени!"
 
 #. module: survey
 #: model_terms:survey.survey,description:survey.survey_feedback
@@ -4754,6 +4789,8 @@ msgid ""
 "This survey allows you to give a feedback about your experience with our products.\n"
 "    Filling it helps us improving your experience."
 msgstr ""
+"Тази анкета ви позволява да дадете обратна връзка за вашето преживяване с нашите продукти.\n"
+"    Попълването ѝ ни помага да подобрим вашето преживяване."
 
 #. module: survey
 #. odoo-python
@@ -4762,11 +4799,14 @@ msgid ""
 "This survey does not allow external people to participate. You should create"
 " user accounts or update survey access mode accordingly."
 msgstr ""
+"Тази анкета не позволява участие на външни лица. Трябва да създадете "
+"потребителски акаунти или да актуализирате режима на достъп до анкетата "
+"съответно."
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_closed_expired
 msgid "This survey is now closed. Thank you for your interest!"
-msgstr ""
+msgstr "Тази анкета вече е затворена. Благодарим ви за проявения интерес!"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_auth_required
@@ -4776,38 +4816,38 @@ msgstr "Това проучване е отворено само за хора �
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_survey_view_form
 msgid "Time & Scoring"
-msgstr ""
+msgstr "Време и оценяване"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_survey_view_form
 msgid "Time Limit"
-msgstr ""
+msgstr "Лимит за време"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_question_form
 msgid "Time Limit (seconds)"
-msgstr ""
+msgstr "Лимит за време (секунди)"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_survey__time_limit
 msgid "Time limit (minutes)"
-msgstr ""
+msgstr "Лимит за време (минути)"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_question__time_limit
 #: model:ir.model.fields,field_description:survey.field_survey_survey__session_speed_rating_time_limit
 msgid "Time limit (seconds)"
-msgstr ""
+msgstr "Лимит за време (минути)"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_fill_form_start
 msgid "Time limit for this certification:"
-msgstr ""
+msgstr "Лимит за време за тази сертификация:"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_fill_form_start
 msgid "Time limit for this survey:"
-msgstr ""
+msgstr "Лимит за време за тази анкета:"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_question_form

@@ -7,27 +7,28 @@
 # nurbakhit nurka <nurbakhit@bumanit.mn>, 2024
 # Mandalbayar Batbayar <bat.mandalbayar@gmail.com>, 2024
 # 486aab72cd7cb5d98a82d40b0db4c5f2_4397374 <25b041e3e1ecd3f217ca34118196bd3e_836923>, 2024
-# Bayarkhuu Bataa, 2024
 # Uuganbayar Batbaatar <uuganaaub33@gmail.com>, 2024
 # Sanjaajamts Badamjunai <b.sanjaajamtsfc@gmail.com>, 2024
 # tserendavaa tsogtoo <tseegii011929@gmail.com>, 2024
 # Onii Onii <onii0223@yahoo.com>, 2024
-# Minj P <pminj322@gmail.com>, 2024
 # baaska sh <sh.baaskash@gmail.com>, 2024
 # Torbat Jargalsaikhan, 2024
 # Otgonbayar.A <gobi.mn@gmail.com>, 2024
 # Batmunkh Ganbat <batmunkh2522@gmail.com>, 2024
 # Martin Trigaux, 2024
-# hish, 2024
-# Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2024
+# Bayarkhuu Bataa, 2024
+# Munkhbaatar Gombosuren, 2024
+# hish, 2025
+# Minj P <pminj322@gmail.com>, 2025
+# Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-02-10 13:24+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2024\n"
+"Last-Translator: Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2025\n"
 "Language-Team: Mongolian (https://app.transifex.com/odoo/teams/41243/mn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +89,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/remaining_days/remaining_days_field.js:0
 msgid "%s days ago"
-msgstr ""
+msgstr "%s өдрийн өмнө"
 
 #. module: web
 #. odoo-javascript
@@ -630,7 +631,7 @@ msgstr ""
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<strong>Due Date</strong>"
-msgstr ""
+msgstr "<strong>Эцсийн огноо</strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
@@ -640,7 +641,7 @@ msgstr ""
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<strong>Invoice Date</strong>"
-msgstr ""
+msgstr "<strong>Нэхэмжлэлийн огноо</strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -761,7 +762,7 @@ msgstr "Хандалтыг татгалзав"
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Access Error"
-msgstr "Хандалтын Алдаа"
+msgstr "Хандалтын алдаа"
 
 #. module: web
 #. odoo-javascript
@@ -1173,7 +1174,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/views/graph/graph_controller.xml:0
 msgid "Ascending"
-msgstr ""
+msgstr "Өсөх эрэмбэ"
 
 #. module: web
 #. odoo-javascript
@@ -1269,6 +1270,18 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "Back"
 msgstr "Буцах"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s”"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
+msgid "Back to “%s” form"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -1959,7 +1972,6 @@ msgstr "Зохиогчийн эрх"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 msgid "Could not display the selected image"
 msgstr ""
@@ -1972,9 +1984,9 @@ msgstr ""
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
-msgid "Could not display the specified image url."
-msgstr ""
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+msgid "Could not display the selected spreadsheet"
+msgstr "Сонгогдсон Spreadsheet-ийг харуулах боломжгүй"
 
 #. module: web
 #. odoo-javascript
@@ -3013,7 +3025,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "French"
-msgstr ""
+msgstr "Франц хэл"
 
 #. module: web
 #. odoo-javascript
@@ -3085,6 +3097,13 @@ msgstr "Энэ болон бусад олон боломжийг Odoo Enterprise
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/url/url_field.xml:0
 msgid "Go to URL"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+msgid "Google Slide Viewer"
 msgstr ""
 
 #. module: web
@@ -3531,7 +3550,7 @@ msgstr "Япон"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "Japanese"
-msgstr ""
+msgstr "Япон хэл"
 
 #. module: web
 #. odoo-javascript
@@ -3846,6 +3865,12 @@ msgstr "Демо өгөгдөл ачааллах"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid "Load everything anyway."
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/search/search_bar/search_bar.js:0
 msgid "Load more"
 msgstr "Нэмж ачааллах"
@@ -3997,6 +4022,12 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Match"
 msgstr "Тулгах"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+msgid "Max value"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4214,6 +4245,12 @@ msgstr "Илүү"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "More Menu"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "More..."
 msgstr ""
 
 #. module: web
@@ -4498,7 +4535,7 @@ msgstr ""
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "No emoji match your search"
+msgid "No emoji matches your search"
 msgstr ""
 
 #. module: web
@@ -4719,7 +4756,7 @@ msgstr "Odoo S.A."
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Odoo Server Error"
-msgstr ""
+msgstr "Odoo серверийн алдаа"
 
 #. module: web
 #. odoo-javascript
@@ -5737,6 +5774,12 @@ msgstr "Дэлгэрэнгүй хайлт..."
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "Search emoji"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/commands/default_providers.js:0
 msgid "Search for a command..."
 msgstr ""
@@ -5745,12 +5788,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/menus/menu_providers.js:0
 msgid "Search for a menu..."
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "Search for an emoji"
 msgstr ""
 
 #. module: web
@@ -6183,6 +6220,12 @@ msgstr "Төлөв"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+msgid "Statusbar"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/settings_confirmation_dialog.xml:0
 msgid "Stay Here"
 msgstr ""
@@ -6467,6 +6510,14 @@ msgid ""
 msgstr ""
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr ""
+
+#. module: web
 #. odoo-python
 #: code:addons/web/controllers/export.py:0
 msgid ""
@@ -6614,6 +6665,18 @@ msgstr ""
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
 msgstr "Гарчиг"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To next categories"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "To previous categories"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7126,7 +7189,7 @@ msgstr "Тэмдэг өгөгдлийг харах"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "View: %(displayName)s"
-msgstr ""
+msgstr "Харагдац: %(displayName)s"
 
 #. module: web
 #. odoo-javascript

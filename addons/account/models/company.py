@@ -11,6 +11,7 @@ from odoo.tools import date_utils, format_list, SQL
 from odoo.tools.mail import is_html_empty
 from odoo.tools.misc import format_date
 from odoo.addons.account.models.account_move import MAX_HASH_VERSION
+from odoo.addons.account.models.partner import _ref_company_registry
 from odoo.addons.base_vat.models.res_partner import _ref_vat
 
 
@@ -29,10 +30,23 @@ MONTH_SELECTION = [
     ('12', 'December'),
 ]
 
-PEPPOL_LIST = [
-    'AD', 'AL', 'AT', 'BA', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI',
-    'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MC', 'ME',
-    'MK', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'TR', 'VA',
+# List of countries where Peppol should be used by default.
+# !!! KEEP ALIGNED WITH ACCOUNT_PEPPOL MANIFEST -> COUNTRIES
+PEPPOL_DEFAULT_COUNTRIES = [
+    'AT', 'BE', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI',
+    'FR', 'GR', 'IE', 'IS', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL',
+    'NO', 'PL', 'PT', 'RO', 'SE', 'SI',
+]
+
+# List of countries where Peppol footnote will be added when sending by mail.
+PEPPOL_MAILING_COUNTRIES = [
+    'BE', 'LU', 'NL', 'SE', 'NO',
+]
+
+# List of countries where Peppol is accessible.
+PEPPOL_LIST = PEPPOL_DEFAULT_COUNTRIES + [
+    'AD', 'AL',  'BA', 'BG', 'GB', 'HR', 'HU', 'LI', 'MC', 'ME',
+    'MK', 'RS', 'SK', 'SM', 'TR', 'VA',
 ]
 
 INTEGRITY_HASH_BATCH_SIZE = 1000
@@ -59,26 +73,29 @@ class ResCompany(models.Model):
     fiscalyear_lock_date = fields.Date(
         string="Global Lock Date",
         tracking=True,
-        help="No users can edit accounts prior to and inclusive of this date."
-             " Use it for fiscal year locking for example.")
+        help="Any entry up to and including that date will be postponed to a later time, in accordance with its journal's sequence.",
+    )
     tax_lock_date = fields.Date(
         string="Tax Return Lock Date",
         tracking=True,
-        help="No users can edit journal entries related to a tax prior and inclusive of this date.")
+        help="Any entry with taxes up to and including that date will be postponed to a later time, in accordance with its journal's sequence. "
+             "The tax lock date is automatically set when the tax closing entry is posted.",
+    )
     sale_lock_date = fields.Date(
         string='Sales Lock Date',
         tracking=True,
-        help='Prevents creation and modification of entries in sales journals up to the defined date inclusive.'
+        help="Any sales entry prior to and including this date will be postponed to a later date, in accordance with its journal's sequence.",
     )
     purchase_lock_date = fields.Date(
         string='Purchase Lock date',
         tracking=True,
-        help='Prevents creation and modification of entries in purchase journals up to the defined date inclusive.'
+        help="Any purchase entry prior to and including this date will be postponed to a later date, in accordance with its journal's sequence.",
     )
     hard_lock_date = fields.Date(
         string='Hard Lock Date',
         tracking=True,
-        help='Like the "Global Lock Date", but no exceptions are possible.'
+        help="Any entry up to and including that date will be postponed to a later time, in accordance with its journal sequence. "
+             "This lock date is irreversible and does not allow any exception.",
     )
     # The user lock date fields are explicitly invalidated when
     #   * writing the corresponding lock date field on any company
@@ -251,6 +268,7 @@ class ResCompany(models.Model):
         help="Default on whether the sales price used on the product and invoices with this Company includes its taxes."
     )
     company_vat_placeholder = fields.Char(compute='_compute_company_vat_placeholder')
+    company_registry_placeholder = fields.Char(compute='_compute_company_registry_placeholder')
 
     def get_next_batch_payment_communication(self):
         '''
@@ -378,7 +396,10 @@ class ResCompany(models.Model):
     @api.depends('hard_lock_date')
     def _compute_user_hard_lock_date(self):
         for company in self:
-            company.user_hard_lock_date = max(c.hard_lock_date or date.min for c in company.sudo().parent_ids)
+            company.user_hard_lock_date = max(
+                c.hard_lock_date or date.min
+                for c in company.with_context(active_test=False).sudo().parent_ids
+            )
 
     def _initiate_account_onboardings(self):
         account_onboarding_routes = [
@@ -393,7 +414,7 @@ class ResCompany(models.Model):
         companies = super().create(vals_list)
         for company in companies:
             if root_template := company.parent_ids[0].chart_template:
-                def try_loading(company=company):
+                def try_loading(company=company, root_template=root_template):
                     self.env['account.chart.template']._load(
                         root_template,
                         company,
@@ -1020,3 +1041,12 @@ class ResCompany(models.Model):
                     placeholder = _("%s, or / if not applicable", expected_vat)
 
             company.company_vat_placeholder = placeholder
+
+    @api.depends('country_id', 'account_fiscal_country_id')
+    def _compute_company_registry_placeholder(self):
+        """ Provides a dynamic placeholder on the company registry field for countries that may need it.
+        Add your country and the value you want in the _ref_company_registry map in the partner.py file.
+        """
+        for company in self:
+            country_code = (company.account_fiscal_country_id or company.country_id).code or ''
+            company.company_registry_placeholder = _ref_company_registry.get(country_code.lower(), '')

@@ -10,28 +10,29 @@
 # Eric Rial <erialmedina@gmail.com>, 2024
 # Albert Parera, 2024
 # martioodo hola, 2024
-# Jonatan Gk, 2024
 # Josep Anton Belchi, 2024
+# Jonatan Gk, 2024
 # eriiikgt, 2024
 # Manel Fernandez Ramirez <manelfera@outlook.com>, 2024
 # Arnau Ros, 2024
 # Óscar Fonseca <tecnico@pyming.com>, 2024
-# marcescu, 2024
-# Josep Sànchez <papapep@gmx.com>, 2024
-# Quim - eccit <quim@eccit.com>, 2024
+# Josep Sànchez <papapep@pinatell.net>, 2024
+# Quim - coopdevs <quim.rebull@coopdevs.org>, 2024
 # Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2024
 # RGB Consulting <odoo@rgbconsulting.com>, 2024
 # Ivan Espinola, 2024
 # Martin Trigaux, 2024
-# jabiri7, 2024
+# jabiri7, 2025
+# marcescu, 2025
+# Santiago Payà <santiagopim@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2024-12-16 13:41+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: jabiri7, 2024\n"
+"Last-Translator: Santiago Payà <santiagopim@gmail.com>, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/odoo/teams/41243/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,13 +50,13 @@ msgstr "%spx"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
 msgid "%spx (Original)"
-msgstr ""
+msgstr "%spx (Original)"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
 msgid "%spx (Suggested)"
-msgstr ""
+msgstr "%spx (Suggerit)"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1246,7 +1247,7 @@ msgstr "Per raons tècniques, aquest bloc no es pot deixar anar aquí"
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "Format"
-msgstr "Formata"
+msgstr "Formatar"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1485,7 +1486,7 @@ msgstr "Icona"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Icon Formatting"
-msgstr "Formatatge de la icona"
+msgstr "Format de la icona"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1551,7 +1552,7 @@ msgstr "Imatge"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Image Formatting"
-msgstr "Formatatge de la imatge"
+msgstr "Format de la imatge"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1721,7 +1722,7 @@ msgstr "Instal·lar %s"
 #. odoo-python
 #: code:addons/web_editor/models/ir_ui_view.py:0
 msgid "Invalid field value for %(field_name)s: %(value)s"
-msgstr ""
+msgstr "Valor no vàlid per a %(field_name)s: %(value)s"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2788,7 +2789,7 @@ msgstr "L'URL sembla vàlida."
 #. odoo-python
 #: code:addons/web_editor/models/ir_qweb_fields.py:0
 msgid "The datetime %(value)s does not match the format %(format)s"
-msgstr ""
+msgstr "La data/hora %(value)s no concorda amb el format%(format)s"
 
 #. module: web_editor
 #. odoo-python
@@ -3103,7 +3104,7 @@ msgstr "Vídeo"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Video Formatting"
-msgstr "Formatatge de vídeo"
+msgstr "Format de vídeo"
 
 #. module: web_editor
 #. odoo-javascript
@@ -3219,7 +3220,6 @@ msgstr "Sí"
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/components/media_dialog/image_selector.js:0
-#, python-format
 msgid ""
 "You can not replace a field by this image. If you want to use this image, "
 "first save it on your computer and then upload it here."
@@ -3228,7 +3228,6 @@ msgstr ""
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
-#, python-format
 msgid "You can not use this image in a field"
 msgstr ""
 

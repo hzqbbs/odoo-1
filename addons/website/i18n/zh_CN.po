@@ -4,20 +4,20 @@
 # 
 # Translators:
 # 山西清水欧度(QQ:54773801) <54773801@qq.com>, 2024
-# Jeffery CHEN <jeffery9@gmail.com>, 2024
 # Martin Trigaux, 2024
-# Wil Odoo, 2024
 # Raymond Yu <cl_yu@hotmail.com>, 2024
-# Odoo哥 <vnsoft.he@gmail.com>, 2024
 # Chloe Wang, 2024
+# Wil Odoo, 2025
+# 何彬 <vnsoft.he@gmail.com>, 2025
+# Jeffery CHEN <jeffery9@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Chloe Wang, 2024\n"
+"Last-Translator: Jeffery CHEN <jeffery9@gmail.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -337,16 +337,6 @@ msgstr "+1555-555-5556"
 #: model_terms:ir.ui.view,arch_db:website.s_numbers_charts
 msgid "+25.000"
 msgstr "+25.000"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
-msgid ", .s_searchbar_input"
-msgstr ", .s_searchbar_input"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.s_website_form_options
-msgid ", .s_website_form"
-msgstr ", .s_website_form"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
@@ -2599,8 +2589,8 @@ msgstr "添加语言"
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
-msgid "Add new %s"
-msgstr "添加新的 %s"
+msgid "Add option"
+msgstr "增加选项"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.view_edit_third_party_domains
@@ -3979,6 +3969,12 @@ msgid "Checkbox"
 msgstr "复选框"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Checkbox List"
+msgstr "复选框列表"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_company_team
 msgid "Chief Commercial Officer"
 msgstr "首席商务官"
@@ -4864,6 +4860,12 @@ msgstr "自定义键"
 #: model_terms:ir.ui.view,arch_db:website.s_card_options
 msgid "Custom Ratio"
 msgstr "自定义比例"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Custom Text"
+msgstr "自定义文本"
 
 #. module: website
 #. odoo-javascript
@@ -5766,12 +5768,6 @@ msgid "E.g. https://www.mydomain.com"
 msgstr "例如 https://www.mydomain.com"
 
 #. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid "EXTERNAL SUBMISSION - Customer not verified"
-msgstr "外部提交 - 客户未核实"
-
-#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_horizontal
 msgid ""
 "Each update is thoroughly tested to guarantee compatibility and reliability,"
@@ -6172,6 +6168,12 @@ msgstr "例子"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Existing Fields"
+msgstr "现有字段"
+
+#. module: website
+#. odoo-javascript
 #: code:addons/website/static/src/components/resource_editor/utils.js:0
 msgid "Expected %(char)s"
 msgstr "预期%(char)s"
@@ -6473,6 +6475,12 @@ msgstr "使我们与众不同的特点"
 #: model_terms:ir.ui.view,arch_db:website.s_dynamic_snippet_options_template
 msgid "Fetched Elements"
 msgstr "已读取元素"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Field"
+msgstr "字段"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website_snippet_filter__field_names
@@ -9663,7 +9671,7 @@ msgstr "现代"
 #: model:ir.model.fields,field_description:website.field_website_controller_page__arch_updated
 #: model:ir.model.fields,field_description:website.field_website_page__arch_updated
 msgid "Modified Architecture"
-msgstr "修改的体系结构"
+msgstr "修改的结构"
 
 #. module: website
 #: model:ir.model,name:website.model_ir_module_module
@@ -10427,6 +10435,12 @@ msgstr "选项 2"
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
 msgid "Option 3"
 msgstr "选项 3"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Option List"
+msgstr "选项列表"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -11550,6 +11564,12 @@ msgstr "雷达"
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Radio"
 msgstr "单选"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+msgid "Radio Button List"
+msgstr "单选按钮列表"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
@@ -13551,6 +13571,12 @@ msgid "The limit must be between 1 and 16."
 msgstr "必须在 1 到 16 之间."
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/client_actions/configurator/configurator.js:0
+msgid "The logo is too large. Please upload a logo smaller than 2.5 MB."
+msgstr ""
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "The maximum number of files that can be uploaded."
 msgstr "上载文档数目上限。"
@@ -13715,14 +13741,6 @@ msgstr "第三功能"
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_multi_menus
 msgid "Third Menu"
 msgstr "第三个菜单"
-
-#. module: website
-#. odoo-python
-#: code:addons/website/controllers/form.py:0
-msgid ""
-"This %(model_name)s was submitted by %(user_name)s (%(user_email)s) on "
-"behalf of %(form_email)s"
-msgstr "此%(model_name)s由%(user_name)s（%(user_email)s）代表%(form_email)s提交"
 
 #. module: website
 #. odoo-javascript
@@ -13914,6 +13932,7 @@ msgstr "此视图结构已修改"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/systray_items/website_switcher.js:0
 #: code:addons/website/static/src/systray_items/website_switcher.xml:0
 msgid "This website does not have a domain configured."
 msgstr "该网站未设置网域名称。"

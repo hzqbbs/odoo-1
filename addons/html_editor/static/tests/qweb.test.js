@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@odoo/hoot";
-import { click, queryAll, queryAllTexts, queryOne, select } from "@odoo/hoot-dom";
+import { click, dblclick, queryAll, queryAllTexts, queryOne, select } from "@odoo/hoot-dom";
 import { animationFrame, tick } from "@odoo/hoot-mock";
 import { setupEditor } from "./_helpers/editor";
 import { getContent, setSelection } from "./_helpers/selection";
@@ -223,14 +223,18 @@ test("select text inside t-out", async () => {
         config,
     });
     expect(getContent(el)).toBe(
-        `<div><t t-out="test" data-oe-t-inline="true" contenteditable="false">Hello</t></div>`
+        `<div><t t-out="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t></div>`
     );
 
     setSelection({ anchorNode: el.querySelector("t[t-out]").childNodes[0], anchorOffset: 1 });
 
     await tick();
     expect(getContent(el)).toBe(
-        `<div>[<t t-out="test" data-oe-t-inline="true" contenteditable="false">Hello</t>]</div>`
+        `<div><t t-out="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">H[]ello</t></div>`
+    );
+    await dblclick("t");
+    expect(getContent(el)).toBe(
+        `<div>[<t t-out="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t>]</div>`
     );
 });
 
@@ -239,14 +243,18 @@ test("select text inside t-esc", async () => {
         config,
     });
     expect(getContent(el)).toBe(
-        `<div><t t-esc="test" data-oe-t-inline="true" contenteditable="false">Hello</t></div>`
+        `<div><t t-esc="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t></div>`
     );
 
     setSelection({ anchorNode: el.querySelector("t[t-esc]").childNodes[0], anchorOffset: 1 });
 
     await tick();
     expect(getContent(el)).toBe(
-        `<div>[<t t-esc="test" data-oe-t-inline="true" contenteditable="false">Hello</t>]</div>`
+        `<div><t t-esc="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">H[]ello</t></div>`
+    );
+    await dblclick("t");
+    expect(getContent(el)).toBe(
+        `<div>[<t t-esc="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t>]</div>`
     );
 });
 
@@ -255,14 +263,18 @@ test("select text inside t-field", async () => {
         config,
     });
     expect(getContent(el)).toBe(
-        `<div><t t-field="test" data-oe-t-inline="true" contenteditable="false">Hello</t></div>`
+        `<div><t t-field="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t></div>`
     );
 
     setSelection({ anchorNode: el.querySelector("t[t-field]").childNodes[0], anchorOffset: 1 });
 
     await tick();
     expect(getContent(el)).toBe(
-        `<div>[<t t-field="test" data-oe-t-inline="true" contenteditable="false">Hello</t>]</div>`
+        `<div><t t-field="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">H[]ello</t></div>`
+    );
+    await dblclick("t");
+    expect(getContent(el)).toBe(
+        `<div>[<t t-field="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t>]</div>`
     );
 });
 
@@ -276,15 +288,15 @@ test("cleaning removes content editable", async () => {
             <t t-raw="test">Hello</t>
         </div>`,
         {
-            config,
+            config: { Plugins: config.Plugins.filter((plugin) => plugin.id !== "editorVersion") },
         }
     );
     expect(getContent(el)).toBe(`
         <div>
-            <t t-field="test" data-oe-t-inline="true" contenteditable="false">Hello</t>
-            <t t-out="test" data-oe-t-inline="true" contenteditable="false">Hello</t>
-            <t t-esc="test" data-oe-t-inline="true" contenteditable="false">Hello</t>
-            <t t-raw="test" data-oe-t-inline="true" contenteditable="false">Hello</t>
+            <t t-field="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t>
+            <t t-out="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t>
+            <t t-esc="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t>
+            <t t-raw="test" data-oe-t-inline="true" data-oe-protected="true" contenteditable="false">Hello</t>
         </div>`);
 
     expect(editor.getContent()).toBe(`

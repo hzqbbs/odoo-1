@@ -24,18 +24,20 @@
 # MichaelHadar, 2024
 # david danilov, 2024
 # ZVI BLONDER <ZVIBLONDER@gmail.com>, 2024
-# Lilach Gilliam <lilach.gilliam@gmail.com>, 2024
 # Netta Waizer, 2024
 # Yihya Hugirat <hugirat@gmail.com>, 2024
-# hed shefer <hed@laylinetech.com>, 2024
+# Jonathan Spier, 2024
+# Lilach Gilliam <lilach.gilliam@gmail.com>, 2025
+# or balmas, 2025
+# Hed Shefer <hed@laylinetech.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"POT-Creation-Date: 2024-12-16 13:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: hed shefer <hed@laylinetech.com>, 2024\n"
+"Last-Translator: Hed Shefer <hed@laylinetech.com>, 2025\n"
 "Language-Team: Hebrew (https://app.transifex.com/odoo/teams/41243/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,7 +147,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/views/widget/subtask_counter.js:0
 msgid "%(closedCount)s sub-tasks closed out of %(totalCount)s"
-msgstr ""
+msgstr "%(closedCount)s תת משימות סגורות מתוך %(totalCount)s"
 
 #. module: project
 #. odoo-python
@@ -169,7 +171,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/project/models/project_project.py:0
 msgid "%(name)s Dashboard"
-msgstr ""
+msgstr "%(name)s לוח בקרה "
 
 #. module: project
 #. odoo-python
@@ -187,19 +189,19 @@ msgstr "אבני דרך של %(name)s"
 #. odoo-python
 #: code:addons/project/models/project_project.py:0
 msgid "%(name)s's Rating"
-msgstr ""
+msgstr "דירוג של %(name)s"
 
 #. module: project
 #. odoo-python
 #: code:addons/project/models/project_project.py:0
 msgid "%(name)s's Tasks Analysis"
-msgstr ""
+msgstr "ניתוח משימות של %(name)s"
 
 #. module: project
 #. odoo-python
 #: code:addons/project/models/res_partner.py:0
 msgid "%(partner_name)s's Tasks"
-msgstr ""
+msgstr "המשימות של %(partner_name)s"
 
 #. module: project
 #. odoo-python
@@ -214,7 +216,7 @@ msgstr "%s (העתק)"
 #. odoo-javascript
 #: code:addons/project/static/src/components/notebook_task_one2many_field/notebook_task_list_renderer.js:0
 msgid "%s closed tasks"
-msgstr ""
+msgstr "%s משימות סגורות"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.milestone_deadline
@@ -230,7 +232,7 @@ msgstr "(עדכון אחרון של הפרויקט),"
 #. odoo-javascript
 #: code:addons/project/static/src/project_sharing/components/depend_on_ids_one2many/depend_on_ids_list_renderer.xml:0
 msgid "(other) tasks to which you do not have access."
-msgstr ""
+msgstr "משימות (אחרות) שאין לך גישה אליהן."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_message_user_assigned
@@ -239,6 +241,8 @@ msgid ""
 ",\n"
 "    <br/><br/>"
 msgstr ""
+",\n"
+" <br/><br/>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.milestone_deadline
@@ -265,29 +269,29 @@ msgstr ""
 #: model:mail.template,body_html:project.rating_project_request_email_template
 msgid ""
 "<div>\n"
-"    <t t-set=\"access_token\" t-value=\"object._rating_get_access_token()\"></t>\n"
-"    <t t-set=\"partner\" t-value=\"object._rating_get_partner()\"></t>\n"
+"    <t t-set=\"access_token\" t-value=\"object._rating_get_access_token()\"/>\n"
+"    <t t-set=\"partner\" t-value=\"object._rating_get_partner()\"/>\n"
 "    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"width:100%; margin:0px auto;\">\n"
 "    <tbody>\n"
 "        <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
 "            <t t-if=\"partner.name\">\n"
-"                Hello <t t-out=\"partner.name or ''\">Brandon Freeman</t>,<br><br>\n"
+"                Hello <t t-out=\"partner.name or ''\">Brandon Freeman</t>,<br/><br/>\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                Hello,<br><br>\n"
+"                Hello,<br/><br/>\n"
 "            </t>\n"
 "            Please take a moment to rate our services related to the <strong t-out=\"object.name or ''\">Planning and budget</strong> task\n"
 "            <t t-if=\"object._rating_get_operator().name\">\n"
-"                assigned to <strong t-out=\"object._rating_get_operator().name or ''\">Mitchell Admin</strong>.<br>\n"
+"                assigned to <strong t-out=\"object._rating_get_operator().name or ''\">Mitchell Admin</strong>.<br/>\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                .<br>\n"
+"                .<br/>\n"
 "            </t>\n"
 "        </td></tr>\n"
 "        <tr><td style=\"text-align: center;\">\n"
 "            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"width:100%; margin: 32px 0px 32px 0px; display: inline-table;\">\n"
 "                <tr><td style=\"font-size: 13px;text-align:center;\">\n"
-"                    <strong>Tell us how you feel about our services</strong><br>\n"
+"                    <strong>Tell us how you feel about our services</strong><br/>\n"
 "                    <span style=\"font-size: 12px; opacity: 0.5; color: #454748;\">(click on one of these smileys)</span>\n"
 "                </td></tr>\n"
 "                <tr><td style=\"font-size: 13px;\">\n"
@@ -295,17 +299,17 @@ msgid ""
 "                        <tr>\n"
 "                            <td>\n"
 "                                <a t-attf-href=\"/rate/{{ access_token }}/5\" t-att-class=\"'pe-none' if object._rating_get_operator() else ''\">\n"
-"                                    <img alt=\"Satisfied\" src=\"/rating/static/src/img/rating_5.png\" title=\"Satisfied\">\n"
+"                                    <img alt=\"Satisfied\" src=\"/rating/static/src/img/rating_5.png\" title=\"Satisfied\"/>\n"
 "                                </a>\n"
 "                            </td>\n"
 "                            <td>\n"
 "                                <a t-attf-href=\"/rate/{{ access_token }}/3\" t-att-class=\"'pe-none' if object._rating_get_operator() else ''\">\n"
-"                                    <img alt=\"Okay\" src=\"/rating/static/src/img/rating_3.png\" title=\"Okay\">\n"
+"                                    <img alt=\"Okay\" src=\"/rating/static/src/img/rating_3.png\" title=\"Okay\"/>\n"
 "                                </a>\n"
 "                            </td>\n"
 "                            <td>\n"
 "                                <a t-attf-href=\"/rate/{{ access_token }}/1\" t-att-class=\"'pe-none' if object._rating_get_operator() else ''\">\n"
-"                                    <img alt=\"Dissatisfied\" src=\"/rating/static/src/img/rating_1.png\" title=\"Dissatisfied\">\n"
+"                                    <img alt=\"Dissatisfied\" src=\"/rating/static/src/img/rating_1.png\" title=\"Dissatisfied\"/>\n"
 "                                </a>\n"
 "                            </td>\n"
 "                        </tr>\n"
@@ -316,13 +320,13 @@ msgid ""
 "        <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
 "            We appreciate your feedback. It helps us improve continuously.\n"
 "            <t t-if=\"object.project_id.rating_status == 'stage'\">\n"
-"                <br><span style=\"margin: 0; font-size: 12px; opacity: 0.5; color: #454748;\">This satisfaction survey has been sent because your task has been moved to the <b t-out=\"object.stage_id.name or ''\">In progress</b> stage</span>\n"
+"                <br/><span style=\"margin: 0; font-size: 12px; opacity: 0.5; color: #454748;\">This satisfaction survey has been sent because your task has been moved to the <b t-out=\"object.stage_id.name or ''\">In progress</b> stage</span>\n"
 "            </t>\n"
 "            <t t-if=\"object.project_id.rating_status == 'periodic'\">\n"
-"                <br><span style=\"margin: 0; font-size: 12px; opacity: 0.5; color: #454748;\">This satisfaction survey is sent <b t-out=\"object.project_id.rating_status_period or ''\">weekly</b> as long as the task is in the <b t-out=\"object.stage_id.name or ''\">In progress</b> stage.</span>\n"
+"                <br/><span style=\"margin: 0; font-size: 12px; opacity: 0.5; color: #454748;\">This satisfaction survey is sent <b t-out=\"object.project_id.rating_status_period or ''\">weekly</b> as long as the task is in the <b t-out=\"object.stage_id.name or ''\">In progress</b> stage.</span>\n"
 "            </t>\n"
 "        </td></tr>\n"
-"        <tr><td><br>Best regards,</td></tr>\n"
+"        <tr><td><br/>Best regards,</td></tr>\n"
 "        <tr><td>\n"
 "           <t t-out=\"object.project_id.company_id.name or ''\">YourCompany</t>\n"
 "        </td></tr>\n"
@@ -345,14 +349,14 @@ msgstr ""
 #: model:mail.template,body_html:project.project_done_email_template
 msgid ""
 "<div>\n"
-"    Dear <t t-out=\"object.partner_id.name or 'customer'\">Brandon Freeman</t>,<br>\n"
+"    Dear <t t-out=\"object.partner_id.name or 'customer'\">Brandon Freeman</t>,<br/>\n"
 "    It is my pleasure to let you know that we have successfully completed the project \"<strong t-out=\"object.name or ''\">Renovations</strong>\".\n"
-"    <t t-if=\"user.signature\">\n"
-"        <br>\n"
-"        <t t-out=\"user.signature or ''\">--<br>Mitchell Admin</t>\n"
+"    <t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
+"        <br/>\n"
+"        <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
 "    </t>\n"
 "</div>\n"
-"<br><span style=\"margin: 0px 0px 0px 0px; font-size: 12px; opacity: 0.5; color: #454748;\" groups=\"project.group_project_stages\">You are receiving this email because your project has been moved to the stage <b t-out=\"object.stage_id.name or ''\">Done</b></span>\n"
+"<br/><span style=\"margin: 0px 0px 0px 0px; font-size: 12px; opacity: 0.5; color: #454748;\" groups=\"project.group_project_stages\">You are receiving this email because your project has been moved to the stage <b t-out=\"object.stage_id.name or ''\">Done</b></span>\n"
 "            "
 msgstr ""
 
@@ -360,15 +364,15 @@ msgstr ""
 #: model:mail.template,body_html:project.mail_template_data_project_task
 msgid ""
 "<div>\n"
-"    Dear <t t-out=\"object.partner_id.name or 'customer'\">Brandon Freeman</t>,<br><br>\n"
-"    Thank you for contacting us. We appreciate your interest in our products/services.<br>\n"
-"    Our team is currently reviewing your inquiry and will respond to your email as soon as possible.<br>\n"
-"    If you have any further questions or concerns in the meantime, please do not hesitate to let us know. We are here to help.<br><br>\n"
-"    Thank you for your patience.<br>\n"
+"    Dear <t t-out=\"object.partner_id.name or 'customer'\">Brandon Freeman</t>,<br/><br/>\n"
+"    Thank you for contacting us. We appreciate your interest in our products/services.<br/>\n"
+"    Our team is currently reviewing your inquiry and will respond to your email as soon as possible.<br/>\n"
+"    If you have any further questions or concerns in the meantime, please do not hesitate to let us know. We are here to help.<br/><br/>\n"
+"    Thank you for your patience.<br/>\n"
 "    Best regards,\n"
-"    <t t-if=\"user.signature\">\n"
-"        <br>\n"
-"        <t t-out=\"user.signature or ''\">--<br>Mitchell Admin</t>\n"
+"    <t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
+"        <br/>\n"
+"        <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
 "    </t>\n"
 "</div>\n"
 "        "
@@ -390,7 +394,7 @@ msgstr ""
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_task_view_activity
 msgid "<i class=\"fa fa-lock\"/> Private"
-msgstr ""
+msgstr "<i class=\"fa fa-lock\"/> פרטי"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.task_type_edit
@@ -409,7 +413,7 @@ msgstr ""
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_sharing_project_task_view_form
 msgid "<i class=\"oi oi-arrow-right me-1\"/>Back to edit mode"
-msgstr ""
+msgstr "<i class=\"oi oi-arrow-right me-1\"/> בחזרה למצב עריכה"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_kanban
@@ -429,7 +433,7 @@ msgstr ""
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.portal_my_task
 msgid "<small class=\"text-muted\">Customer</small>"
-msgstr ""
+msgstr "<small class=\"text-muted\">לקוח</small>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_project_kanban
@@ -451,17 +455,17 @@ msgstr ""
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_milestone_view_form
 msgid "<span class=\"fw-normal\"> Done</span>"
-msgstr ""
+msgstr "<span class=\"fw-normal\"> בוצע</span>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_milestone_view_form
 msgid "<span class=\"fw-normal\"> Tasks</span>"
-msgstr ""
+msgstr "<span class=\"fw-normal\">משימות</span>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_sharing_project_task_view_form
 msgid "<span class=\"o_stat_text\">Blocked Tasks</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">משימות חסומות</span>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_form2
@@ -472,7 +476,7 @@ msgstr "<span class=\"o_stat_text\">דירוג אחרון</span>"
 #: model_terms:ir.ui.view,arch_db:project.project_sharing_project_task_view_form
 #: model_terms:ir.ui.view,arch_db:project.view_task_form2
 msgid "<span class=\"o_stat_text\">Parent Task</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">משימת אב</span>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_form2
@@ -482,12 +486,12 @@ msgstr "<span class=\"o_stat_text\">תת-משימה</span>"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
 msgid "<span class=\"o_stat_text\">Tasks</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">משימות</span>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
 msgid "<span class=\"text-muted o_row ps-1 pb-3\">Send a rating request:</span>"
-msgstr ""
+msgstr "<span class=\"text-muted o_row ps-1 pb-3\">שלח בקשת דירוג:</span>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
@@ -556,13 +560,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "A new task has been created and is not part of any project."
-msgstr ""
+msgstr "משימה חדשה נוצרה ואינה חלק מפרויקט כלשהו."
 
 #. module: project
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "A new task has been created in the \"%(project_name)s\" project."
-msgstr ""
+msgstr "משימה חדשה נוצרה בפרויקט \"%(project_name)s\". "
 
 #. module: project
 #. odoo-python
@@ -575,12 +579,12 @@ msgstr "לא ניתן לקשר שלב אישי לפרויקט מכיוון שה�
 #. module: project
 #: model:ir.model.constraint,message:project.constraint_project_task_private_task_has_no_parent
 msgid "A private task cannot have a parent."
-msgstr ""
+msgstr "למשימה פרטית לא יכול להיות הורה."
 
 #. module: project
 #: model:ir.model.constraint,message:project.constraint_project_task_recurring_task_has_no_parent
 msgid "A subtask cannot be recurrent."
-msgstr ""
+msgstr "תת משימה לא יכולה להיות חוזרת."
 
 #. module: project
 #: model:ir.model.constraint,message:project.constraint_project_tags_name_uniq
@@ -641,7 +645,7 @@ msgstr "סימון פעילות חריגה"
 #: model:ir.actions.act_window,name:project.mail_activity_plan_action_config_project_task_plan
 #: model:ir.ui.menu,name:project.mail_activity_plan_menu_config_project
 msgid "Activity Plans"
-msgstr ""
+msgstr "תכניות פעילויות "
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_project__activity_state
@@ -680,13 +684,13 @@ msgstr "הוסף אבן דרך"
 #. odoo-javascript
 #: code:addons/project/static/src/components/subtask_kanban_list/subtask_kanban_create/subtask_kanban_create.js:0
 msgid "Add Sub-tasks"
-msgstr ""
+msgstr "הוסף תת משימות"
 
 #. module: project
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid "Add a sub-task"
-msgstr ""
+msgstr "הוסף תת משימה"
 
 #. module: project
 #. odoo-javascript
@@ -771,7 +775,7 @@ msgstr "סטטוס"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_status
 msgid "Alias status assessed on the last message received."
-msgstr ""
+msgstr "סטטוס כינוי הוערך בהודעה האחרונה שהתקבלה."
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_project__alias_model_id
@@ -842,7 +846,7 @@ msgstr "נתח את התקדמות הפרויקטים שלך ואת הביצוע
 #. module: project
 #: model:ir.model.fields,help:project.field_project_share_wizard__share_link
 msgid "Anyone with this link can access the project in read mode."
-msgstr ""
+msgstr "כל מי שיש לו קישור זה יכול לגשת לפרויקט במצב קריאה."
 
 #. module: project
 #: model:ir.model.fields.selection,name:project.selection__project_task__state__03_approved
@@ -896,7 +900,7 @@ msgstr "האם אתה בטוח שברצונך להמשיך?"
 #: model_terms:ir.ui.view,arch_db:project.view_project_project_stage_delete_wizard
 #: model_terms:ir.ui.view,arch_db:project.view_project_task_type_delete_wizard
 msgid "Are you sure you want to delete these stages?"
-msgstr ""
+msgstr "האם אתה בטוח שברצונך למחוק את השלבים האלה?"
 
 #. module: project
 #. odoo-javascript
@@ -909,7 +913,7 @@ msgstr "האם אתה בטוח שברצונך למחוק רשומה זו?"
 #. odoo-javascript
 #: code:addons/project/static/src/views/project_task_form/project_task_form_controller.js:0
 msgid "Are you sure you want to restore this version ?"
-msgstr ""
+msgstr "האם אתה בטוח שברצונך לשחזר גרסה זו?"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_project_kanban
@@ -988,6 +992,7 @@ msgid ""
 "Attach all documents or links to the task directly, to have all research "
 "information centralized."
 msgstr ""
+"צרף את כל המסמכים או הקישורים למשימה ישירות, כדי לרכז את כל מידע המחקר."
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_milestone__message_attachment_count
@@ -1001,6 +1006,11 @@ msgstr "כמות קבצים מצורפים"
 #: model_terms:ir.ui.view,arch_db:project.portal_my_task
 msgid "Attachments"
 msgstr "קבצים מצורפים"
+
+#. module: project
+#: model:ir.model.fields,help:project.field_project_task__attachment_ids
+msgid "Attachments that don't come from a message"
+msgstr "קבצים מצורפים שלא מגיעים מהודעה"
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_update__user_id
@@ -1054,7 +1064,7 @@ msgstr "דירוג ממוצע (%)"
 #. module: project
 #: model:ir.model.fields,field_description:project.field_report_project_task_user__rating_avg
 msgid "Average Rating (1-5)"
-msgstr ""
+msgstr "דירוג ממוצע (1-5)"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_project_kanban
@@ -1111,13 +1121,13 @@ msgstr "חסום על ידי"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_form2
 msgid "Blocked Tasks"
-msgstr ""
+msgstr "משימות חסומות  "
 
 #. module: project
 #: model:ir.actions.act_window,name:project.project_sharing_project_task_action_blocking_tasks
 #: model_terms:ir.ui.view,arch_db:project.view_task_search_form_base
 msgid "Blocking"
-msgstr ""
+msgstr "חוסם"
 
 #. module: project
 #. odoo-javascript
@@ -1162,7 +1172,7 @@ msgstr "בוטל"
 #: model:mail.message.subtype,name:project.mt_project_task_changes_requested
 #: model:mail.message.subtype,name:project.mt_task_changes_requested
 msgid "Changes Requested"
-msgstr ""
+msgstr "שינויים מבוקשים"
 
 #. module: project
 #. odoo-javascript
@@ -1183,7 +1193,7 @@ msgstr "בחר <b>שם</b> משימה <i>(למשל עיצוב אתר, רכישת
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_share_wizard_view_form
 msgid "Choose one of the following access modes for your collaborators:"
-msgstr ""
+msgstr "בחר אחד ממצבי הגישה הבאים עבור השותפים שלך:"
 
 #. module: project
 #. odoo-javascript
@@ -1195,7 +1205,7 @@ msgstr "סקירת לקוח"
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid "Close the sub-tasks list"
-msgstr ""
+msgstr "סגור את רשימת תתי המשימות "
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task__closed_depend_on_count
@@ -1217,12 +1227,12 @@ msgstr "משימות סגורות"
 #: model:ir.model.fields,field_description:project.field_project_task__is_closed
 #: model:ir.model.fields,field_description:project.field_report_project_task_user__is_closed
 msgid "Closed state"
-msgstr ""
+msgstr "מצב סגור"
 
 #. module: project
 #: model:ir.model.fields.selection,name:project.selection__project_task_burndown_chart_report__is_closed__closed
 msgid "Closed tasks"
-msgstr ""
+msgstr "משימות סגורות"
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task_burndown_chart_report__is_closed
@@ -1337,14 +1347,14 @@ msgstr "איש קשר"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_task_convert_to_subtask_view_form
 msgid "Convert Task"
-msgstr ""
+msgstr "המר משימה"
 
 #. module: project
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 #: model:ir.actions.server,name:project.action_server_convert_to_subtask
 msgid "Convert to Task/Sub-Task"
-msgstr ""
+msgstr "המר למשימה/תת- משימה"
 
 #. module: project
 #. odoo-javascript
@@ -1368,7 +1378,7 @@ msgstr "תמונת הכריכה"
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
 "Create <b>activities</b> to set yourself to-dos or to schedule meetings."
-msgstr ""
+msgstr "צור <b>פעילויות</b>כדי להגדיר לעצמך מטלות או לתזמן פגישות."
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_report_project_task_user__create_date
@@ -1394,7 +1404,7 @@ msgstr "צור שלב חדש בצינור המשימות"
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid "Create a new sub-task"
-msgstr ""
+msgstr "צור תת משימה חדשה"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_project_view_form_simplified_footer
@@ -1499,6 +1509,7 @@ msgid ""
 "Currently restricted to internal employees, click to make it available to "
 "everyone viewing this document."
 msgstr ""
+"כרגע מוגבל לעובדים פנימיים, לחץ כדי להפוך אותו לזמין לכל מי שצופה במסמך זה."
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_project__alias_bounced_content
@@ -1599,6 +1610,8 @@ msgid ""
 "Date on which this project ends. The timeframe defined on the project is "
 "taken into account when viewing its planning."
 msgstr ""
+"התאריך שבו פרויקט זה מסתיים. מסגרת הזמן שהוגדרה בפרויקט נלקחת בחשבון בעת "
+"​​הצגת התכנון שלו."
 
 #. module: project
 #: model:ir.model.fields,help:project.field_project_task__date_assign
@@ -1606,6 +1619,8 @@ msgid ""
 "Date on which this task was last assigned (or unassigned). Based on this, "
 "you can get statistics on the time it usually takes to assign tasks."
 msgstr ""
+"התאריך שבו משימה זו הוקצתה לאחרונה (או בוטלה). בהתבסס על זה, אתה יכול לקבל "
+"נתונים סטטיסטיים על הזמן שלוקח בדרך כלל להקצות משימות."
 
 #. module: project
 #: model:ir.model.fields.selection,name:project.selection__project_task__repeat_unit__day
@@ -1658,7 +1673,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:project.project_project_stage_configure
 msgid ""
 "Define the steps your projects move through from creation to completion."
-msgstr ""
+msgstr "הגדירו את השלבים שהפרויקטים שלכם עוברים מהיצירה ועד ההשלמה."
 
 #. module: project
 #: model_terms:ir.actions.act_window,help:project.open_task_type_form
@@ -1686,7 +1701,7 @@ msgstr "מחק את אבן דרך"
 #: code:addons/project/models/project_project_stage.py:0
 #: model_terms:ir.ui.view,arch_db:project.view_project_project_stage_delete_wizard
 msgid "Delete Project Stage"
-msgstr ""
+msgstr "מחק את שלב הפרויקט"
 
 #. module: project
 #. odoo-python
@@ -1704,6 +1719,8 @@ msgid ""
 "Deliver your services automatically when a milestone is reached by linking "
 "it to a sales order item."
 msgstr ""
+"ספק את השירותים שלך באופן אוטומטי כאשר אבן דרך מושגת על ידי קישורו לפריט "
+"הזמנת מכירות."
 
 #. module: project
 #. odoo-javascript
@@ -1738,7 +1755,7 @@ msgstr "תיאור"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__description
 msgid "Description to provide more information and context about this project"
-msgstr ""
+msgstr "תיאור כדי לספק מידע והקשר נוסף על פרויקט זה"
 
 #. module: project
 #. odoo-javascript
@@ -1862,7 +1879,7 @@ msgstr "ערוך"
 #. module: project
 #: model:ir.model.fields.selection,name:project.selection__project_share_collaborator_wizard__access_mode__edit_limited
 msgid "Edit with limited access"
-msgstr ""
+msgstr "עריכה עם גישה מוגבלת "
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_share_wizard_view_form
@@ -1870,6 +1887,8 @@ msgid ""
 "Edit with limited access: collaborators can view and edit tasks they follow "
 "in the Kanban view."
 msgstr ""
+"עריכה עם גישה מוגבלת: שותפי עריכה יכולים להציג ולערוך משימות שהם עוקבים "
+"אחריהם בתצוגת קנבן."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_share_wizard_view_form
@@ -1911,7 +1930,7 @@ msgstr "עותק דוא\"ל"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_domain
 msgid "Email domain e.g. 'example.com' in 'odoo@example.com'"
-msgstr ""
+msgstr "דומיין דוא\"ל, למשל, 'example.com' ב-'odoo@example.com'"
 
 #. module: project
 #: model_terms:digest.tip,tip_description:project.digest_tip_project_1
@@ -1984,7 +2003,7 @@ msgstr "מועדף"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_search_form_base
 msgid "Favorite Projects"
-msgstr ""
+msgstr "פרויקטים אהובים"
 
 #. module: project
 #. odoo-javascript
@@ -2093,7 +2112,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid "Give the sub-task a <b>name</b>"
-msgstr ""
+msgstr "תן לתת משימה <b>שם</b>"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_share_wizard_confirm_form
@@ -2161,7 +2180,7 @@ msgstr "שלום"
 #. odoo-javascript
 #: code:addons/project/static/src/components/notebook_task_one2many_field/notebook_task_list_renderer.js:0
 msgid "Hide closed tasks"
-msgstr ""
+msgstr "הסתר משימות סגורות"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_form2
@@ -2182,12 +2201,12 @@ msgstr "היסטוריה"
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task__html_field_history
 msgid "History data"
-msgstr ""
+msgstr "נתונים היסטוריים "
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task__html_field_history_metadata
 msgid "History metadata"
-msgstr ""
+msgstr "היסטורית מטא דטא"
 
 #. module: project
 #: model:project.tags,name:project.project_tags_13
@@ -2480,7 +2499,7 @@ msgstr "חודש אחרון"
 #. module: project
 #: model:ir.model.fields,field_description:project.field_report_project_task_user__rating_last_value
 msgid "Last Rating (1-5)"
-msgstr ""
+msgstr "דירוג אחרון (1-5)"
 
 #. module: project
 #. odoo-python
@@ -2567,7 +2586,7 @@ msgstr "בוא ניצור את <b>הפרויקט</b>הראשון שלך."
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid "Let's create your first <b>stage</b>."
-msgstr ""
+msgstr "בוא ניצור את <b>השלב</b> הראשון."
 
 #. module: project
 #. odoo-javascript
@@ -2579,7 +2598,7 @@ msgstr "בוא ניצור את <b>המשימה</b> הראשונה שלך."
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid "Let's create your second <b>stage</b>."
-msgstr ""
+msgstr "בוא ניצור את <b>השלב </b>השני. "
 
 #. module: project
 #. odoo-javascript
@@ -2610,7 +2629,7 @@ msgstr "חי"
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_project__alias_incoming_local
 msgid "Local-part based incoming detection"
-msgstr "זיהוי נכנסות מבוסס חלק מקומי"
+msgstr "זיהוי הודעות נכנסות מבוסס על החלק המקומי בכתובת"
 
 #. module: project
 #. odoo-javascript
@@ -2622,7 +2641,7 @@ msgstr "עיצוב לוגו"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid "Look for the"
-msgstr ""
+msgstr "חפש את ה"
 
 #. module: project
 #: model:ir.model.fields.selection,name:project.selection__project_task__priority__0
@@ -2660,13 +2679,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/components/project_right_side_panel/components/project_milestone.xml:0
 msgid "Mark as reached"
-msgstr ""
+msgstr "סמן כהושג"
 
 #. module: project
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid "Mark the task as <b>Cancelled</b>"
-msgstr ""
+msgstr "סמן את המשימה כ<b>בוטלה</b>"
 
 #. module: project
 #. odoo-javascript
@@ -2801,7 +2820,7 @@ msgstr "שם"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
 msgid "Name of the Tasks"
-msgstr ""
+msgstr "שם של המשימות"
 
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__label_tasks
@@ -2829,7 +2848,7 @@ msgstr "חדש"
 #. module: project
 #: model:project.tags,name:project.project_tags_01
 msgid "New Feature"
-msgstr ""
+msgstr "תכונה חדשה"
 
 #. module: project
 #. odoo-javascript
@@ -2847,7 +2866,7 @@ msgstr "הזמנות חדשות"
 #. odoo-javascript
 #: code:addons/project/static/src/views/project_project_calendar/project_project_calendar_controller.js:0
 msgid "New Project"
-msgstr ""
+msgstr "פרויקט חדש"
 
 #. module: project
 #. odoo-javascript
@@ -2865,7 +2884,7 @@ msgstr "בקשה חדשה"
 #. odoo-javascript
 #: code:addons/project/static/src/views/project_task_calendar/project_task_calendar_controller.js:0
 msgid "New Task"
-msgstr ""
+msgstr "משימה חדשה"
 
 #. module: project
 #. odoo-python
@@ -2916,7 +2935,7 @@ msgstr "סוג הפעילות הבאה"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.portal_tasks_list
 msgid "No Customer"
-msgstr ""
+msgstr "לקוח חסר"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.portal_tasks_list
@@ -2937,7 +2956,7 @@ msgstr "ללא נושא"
 #. module: project
 #: model_terms:ir.actions.act_window,help:project.mail_activity_type_action_config_project_types
 msgid "No activity types found. Let's create one!"
-msgstr ""
+msgstr "לא נמצאו סוגי פעילות. בואו נייצר אחד!"
 
 #. module: project
 #: model_terms:ir.actions.act_window,help:project.rating_rating_action_project_report
@@ -3049,7 +3068,7 @@ msgstr "לא לפי המסלול"
 #. module: project
 #: model:project.tags,name:project.project_tags_10
 msgid "Office"
-msgstr ""
+msgstr "משרד"
 
 #. module: project
 #: model:account.analytic.account,name:project.analytic_office_design
@@ -3307,7 +3326,7 @@ msgstr "כתובת גישה לפורטל"
 msgid ""
 "Portal users will be removed from the followers of the project and its "
 "tasks."
-msgstr ""
+msgstr "משתמשי הפורטל יוסרו מהעוקבים אחר הפרויקט ומשימותיו."
 
 #. module: project
 #. odoo-javascript
@@ -3319,7 +3338,7 @@ msgstr "קודם"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid "Prioritize your tasks by marking important ones using the"
-msgstr ""
+msgstr "תיעדוף את המשימות שלך על ידי סימון חשיבות באמצעות ה"
 
 #. module: project
 #. odoo-python
@@ -3348,7 +3367,7 @@ msgstr "פרטי"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_search_form
 msgid "Private Tasks"
-msgstr ""
+msgstr "משימות פרטיות "
 
 #. module: project
 #. odoo-python
@@ -3477,7 +3496,7 @@ msgstr "תגיות פרויקט"
 #. module: project
 #: model:ir.model,name:project.model_project_task_type_delete_wizard
 msgid "Project Task Stage Delete Wizard"
-msgstr ""
+msgstr " אשף המחיקה של שלב משימת הפרויקט"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_task_view_activity
@@ -3487,7 +3506,7 @@ msgstr "משימות הפרויקט"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.quick_create_project_form
 msgid "Project Title"
-msgstr ""
+msgstr "כותרת פרויקט "
 
 #. module: project
 #: model:ir.model,name:project.model_project_update
@@ -3503,7 +3522,7 @@ msgstr "נראות הפרויקט"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
 msgid "Project description..."
-msgstr ""
+msgstr "תיאור פרויקט..."
 
 #. module: project
 #. odoo-python
@@ -3524,7 +3543,7 @@ msgstr "משימות הפרויקט"
 #. module: project
 #: model:mail.template,name:project.project_done_email_template
 msgid "Project: Project Completed"
-msgstr ""
+msgstr "פרויקט: פרויקט הושלם "
 
 #. module: project
 #: model:mail.template,name:project.mail_template_data_project_task
@@ -3539,7 +3558,7 @@ msgstr "פרויקט: שלח דירוג"
 #. module: project
 #: model:mail.template,name:project.rating_project_request_email_template
 msgid "Project: Task Rating Request"
-msgstr ""
+msgstr "פרויקט: בקשת דירוג משימה"
 
 #. module: project
 #. odoo-python
@@ -3567,7 +3586,7 @@ msgstr "פרויקטים"
 #: model_terms:ir.actions.act_window,help:project.open_view_project_all_group_stage
 msgid ""
 "Projects contain tasks on the same topic, and each has its own dashboard."
-msgstr ""
+msgstr "פרויקטים מכילים משימות באותו נושא, ולכל אחד יש לוח מחוונים משלו."
 
 #. module: project
 #: model:ir.model.fields,help:project.field_project_task_type__project_ids
@@ -3587,7 +3606,7 @@ msgstr "מאפיינים"
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_share_wizard__share_link
 msgid "Public Link"
-msgstr ""
+msgstr "קישור ציבורי"
 
 #. module: project
 #. odoo-javascript
@@ -3619,6 +3638,8 @@ msgid ""
 "identify those on hold until dependencies are resolved with the hourglass "
 "icon."
 msgstr ""
+"בדוק במהירות את הסטטוס של משימות לאישורים או בקשות לשינוי, וזהה את אלו "
+"הממתינות עד לפתרון התלות באמצעות סמל שעון החול."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_task_view_tree_base
@@ -3635,7 +3656,7 @@ msgstr "דירוג (/5)"
 #: model_terms:ir.ui.view,arch_db:project.rating_rating_view_graph
 #: model_terms:ir.ui.view,arch_db:project.rating_rating_view_pivot
 msgid "Rating (1-5)"
-msgstr ""
+msgstr "דירוג (1-5)"
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task__rating_avg_text
@@ -3750,7 +3771,7 @@ msgstr "אירוע חוזר"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.portal_layout
 msgid "Recurrent tasks"
-msgstr ""
+msgstr "משימות חוזרות "
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_res_config_settings__group_project_recurring_tasks
@@ -3941,7 +3962,7 @@ msgstr "חפש בלקוח"
 #. odoo-python
 #: code:addons/project/controllers/portal.py:0
 msgid "Search in Milestone"
-msgstr ""
+msgstr "חפש באבן דרך"
 
 #. module: project
 #. odoo-python
@@ -4000,7 +4021,7 @@ msgstr "שלח דוא\"ל"
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_share_collaborator_wizard__send_invitation
 msgid "Send Invitation"
-msgstr ""
+msgstr "שלח הזמנה"
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task_type__sequence
@@ -4017,7 +4038,7 @@ msgstr "הגדר תמונת כריכה/כיסוי"
 #: code:addons/project/models/project_project.py:0
 #: model:ir.model.fields.selection,name:project.selection__project_project__last_update_status__to_define
 msgid "Set Status"
-msgstr ""
+msgstr "הגדר סטטוס"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
@@ -4036,7 +4057,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/components/project_task_priority_switch_field/project_task_priority_switch_field.js:0
 msgid "Set priority as %s"
-msgstr ""
+msgstr "הגדר עדיפות כ %s"
 
 #. module: project
 #. odoo-javascript
@@ -4073,7 +4094,7 @@ msgstr "שתף את הפרויקט"
 #: model:ir.actions.act_window,name:project.portal_share_action
 #: model_terms:ir.ui.view,arch_db:project.view_task_kanban
 msgid "Share Task"
-msgstr ""
+msgstr "שתף משימה"
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task__show_display_in_project
@@ -4090,7 +4111,7 @@ msgstr "הצג את כל הרשומות שתאריך הפעולה הבא שלה�
 #. odoo-javascript
 #: code:addons/project/static/src/components/notebook_task_one2many_field/notebook_task_list_renderer.js:0
 msgid "Show closed tasks"
-msgstr ""
+msgstr "הצג משימות סגורות"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_update_default_description
@@ -4197,7 +4218,7 @@ msgstr "השלב השתנה"
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "Stage: %s"
-msgstr ""
+msgstr "שלב :%s"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_task_search_form_base
@@ -4331,17 +4352,17 @@ msgstr "פעילויות משימה"
 #: model:mail.message.subtype,name:project.mt_project_task_approved
 #: model:mail.message.subtype,name:project.mt_task_approved
 msgid "Task Approved"
-msgstr ""
+msgstr "משימה אושרה "
 
 #. module: project
 #: model:mail.message.subtype,name:project.mt_project_task_canceled
 msgid "Task Canceled"
-msgstr ""
+msgstr "משימה בוטלה"
 
 #. module: project
 #: model:mail.message.subtype,name:project.mt_task_canceled
 msgid "Task Cancelled"
-msgstr ""
+msgstr "משימה בוטלה"
 
 #. module: project
 #. odoo-python
@@ -4373,7 +4394,7 @@ msgstr "משימה בוצעה"
 #: model:mail.message.subtype,name:project.mt_project_task_in_progress
 #: model:mail.message.subtype,name:project.mt_task_in_progress
 msgid "Task In Progress"
-msgstr ""
+msgstr "משימה בביצוע"
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_res_config_settings__module_hr_timesheet
@@ -4383,7 +4404,7 @@ msgstr "יומני פעילות"
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_project__task_properties_definition
 msgid "Task Properties"
-msgstr ""
+msgstr "מאפייני משימה"
 
 #. module: project
 #: model:mail.message.subtype,name:project.mt_project_task_rating
@@ -4439,22 +4460,22 @@ msgstr ""
 #: model:mail.message.subtype,name:project.mt_project_task_waiting
 #: model:mail.message.subtype,name:project.mt_task_waiting
 msgid "Task Waiting"
-msgstr ""
+msgstr "משימה ממתינה"
 
 #. module: project
 #: model:mail.message.subtype,description:project.mt_task_approved
 msgid "Task approved"
-msgstr ""
+msgstr "משימה אושרה"
 
 #. module: project
 #: model:mail.message.subtype,description:project.mt_task_canceled
 msgid "Task cancelled"
-msgstr ""
+msgstr "משימה בוטלה"
 
 #. module: project
 #: model:mail.message.subtype,description:project.mt_task_done
 msgid "Task done"
-msgstr ""
+msgstr "משימה בוצעה"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.task_track_depending_tasks
@@ -4612,7 +4633,7 @@ msgstr ""
 #. module: project
 #: model:ir.model.constraint,message:project.constraint_project_project_project_date_greater
 msgid "The project's start date must be before its end date."
-msgstr ""
+msgstr "תאריך התחלת הפרויקט חייב להיות לפני תאריך הסיום."
 
 #. module: project
 #. odoo-javascript
@@ -4634,7 +4655,7 @@ msgstr ""
 #: code:addons/project/models/project_task.py:0
 msgid ""
 "The task and the associated partner must be linked to the same company."
-msgstr ""
+msgstr "המשימה והשותף המשויך חייבים להיות מקושרים לאותה חברה."
 
 #. module: project
 #. odoo-python
@@ -4685,7 +4706,7 @@ msgstr "אין משימות."
 #. odoo-python
 #: code:addons/project/controllers/portal.py:0
 msgid "There is nothing to report."
-msgstr ""
+msgstr "אין מה לדווח."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_share_wizard_confirm_form
@@ -4774,19 +4795,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "This task has sub-tasks, so it can't be private."
-msgstr ""
+msgstr "למשימה זו יש תתי משימות, לכן אינה יכולה להיות פרטית "
 
 #. module: project
 #. odoo-javascript
 #: code:addons/project/static/src/components/project_task_state_selection/project_task_state_selection.xml:0
 msgid "This task is blocked by another unfinished task"
-msgstr ""
+msgstr "משימה זו חסומה ע\"י משימה אחרת שלא הסתיימה"
 
 #. module: project
 #. odoo-javascript
 #: code:addons/project/static/src/project_sharing/components/depend_on_ids_one2many/depend_on_ids_list_renderer.xml:0
 msgid "This task is currently blocked by"
-msgstr ""
+msgstr "משימה זו כרגע חסומה ע\"י "
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_project_task_type_delete_confirmation_wizard
@@ -4801,6 +4822,8 @@ msgid ""
 "Those represent the different categories of things you have to do (e.g. "
 "\"Call\" or \"Send email\")."
 msgstr ""
+"אלה מייצגים את הקטגוריות השונות של דברים שעליך לעשות (למשל \"התקשר\" או "
+"\"שלח אימייל\")."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
@@ -4812,7 +4835,7 @@ msgstr "ניהול זמן"
 #: model:digest.tip,name:project.digest_tip_project_1
 #: model_terms:digest.tip,tip_description:project.digest_tip_project_1
 msgid "Tip: Create tasks from incoming emails"
-msgstr ""
+msgstr "טיפ: צור משימות מאימיילים נכנסים"
 
 #. module: project
 #: model:digest.tip,name:project.digest_tip_project_3
@@ -4845,7 +4868,7 @@ msgstr "תואר"
 #. odoo-javascript
 #: code:addons/project/static/src/components/project_right_side_panel/components/project_profitability.xml:0
 msgid "To Bill"
-msgstr ""
+msgstr "לחיוב"
 
 #. module: project
 #: model:project.project.stage,name:project.project_project_stage_0
@@ -4908,13 +4931,13 @@ msgstr "סה\"כ"
 #. odoo-javascript
 #: code:addons/project/static/src/components/project_right_side_panel/components/project_profitability.xml:0
 msgid "Total Costs"
-msgstr ""
+msgstr "סה\"כ עלויות "
 
 #. module: project
 #. odoo-javascript
 #: code:addons/project/static/src/components/project_right_side_panel/components/project_profitability.xml:0
 msgid "Total Revenues"
-msgstr ""
+msgstr "סה\"כ הכנסות "
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.res_config_settings_view_form
@@ -4967,7 +4990,7 @@ msgstr "פעמיים בחודש"
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "Two tasks cannot depend on each other."
-msgstr ""
+msgstr "שתי משימות לא יכולות להיות תלויות זו בזו. "
 
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__activity_exception_decoration
@@ -4980,13 +5003,13 @@ msgstr "סוג הפעילות החריגה ברשומה."
 #. odoo-python
 #: code:addons/project/models/project_project_stage.py:0
 msgid "Unarchive Projects"
-msgstr ""
+msgstr "הוצא פרויקטים מהארכיון"
 
 #. module: project
 #. odoo-python
 #: code:addons/project/models/project_task_type.py:0
 msgid "Unarchive Tasks"
-msgstr ""
+msgstr "הוצא משימות מהארכיון"
 
 #. module: project
 #. odoo-javascript
@@ -5028,7 +5051,7 @@ msgstr "עד"
 #: model:mail.message.subtype,name:project.mt_project_update_create
 #: model:mail.message.subtype,name:project.mt_update_create
 msgid "Update Created"
-msgstr ""
+msgstr "עדכון נוצר"
 
 #. module: project
 #: model:project.tags,name:project.project_tags_03
@@ -5086,7 +5109,7 @@ msgstr "השתמש בתגיות כדי לסווג את המשימות שלך"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid "Use the"
-msgstr ""
+msgstr "השתמש ב-"
 
 #. module: project
 #. odoo-javascript
@@ -5194,7 +5217,7 @@ msgstr "שבועות"
 #. module: project
 #: model:project.tags,name:project.project_tags_14
 msgid "Work"
-msgstr ""
+msgstr "עבודה"
 
 #. module: project
 #: model:ir.model.fields,field_description:project.field_project_task__working_days_open
@@ -5301,6 +5324,8 @@ msgid ""
 "You cannot delete stages containing projects. You can either archive them or"
 " first delete all of their projects."
 msgstr ""
+"לא ניתן למחוק שלבים המכילים פרויקטים. אתה יכול לאחסן אותם בארכיון או למחוק "
+"תחילה את כל הפרויקטים שלהם."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_project_project_stage_delete_wizard
@@ -5308,6 +5333,7 @@ msgid ""
 "You cannot delete stages containing projects. You should first delete all of"
 " their projects."
 msgstr ""
+"לא ניתן למחוק שלבים המכילים פרויקטים. תחילה עליך למחוק את כל הפרויקטים שלהם."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.view_project_task_type_delete_wizard
@@ -5330,13 +5356,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "You cannot read the following fields on tasks: %(field_list)s"
-msgstr ""
+msgstr "אין לך אפשרות לקרוא השדות הבאים במשימות :%(field_list)s"
 
 #. module: project
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "You cannot write on the following fields on tasks: %(field_list)s"
-msgstr ""
+msgstr "אין לך אפשרות לכתוב בשדות הבאים במשימות :%(field_list)s"
 
 #. module: project
 #. odoo-python
@@ -5353,12 +5379,12 @@ msgstr "הוקצת ל"
 #. odoo-python
 #: code:addons/project/models/project_task.py:0
 msgid "You have been invited to follow %s"
-msgstr ""
+msgstr "הוזמנת לעקוב אחרי%s"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.task_invitation_follower
 msgid "You have been invited to follow Task Document :"
-msgstr ""
+msgstr "הוזמנת לעקוב אחרי מסמך המשימה :"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_share_wizard_confirm_form
@@ -5386,12 +5412,12 @@ msgstr "אתה חייב להיות"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid "Your managers decide which feedback is accepted"
-msgstr ""
+msgstr "המנהלים שלך מחליטים איזה משוב יתקבל"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.edit_project
 msgid "alias"
-msgstr ""
+msgstr "כינוי"
 
 #. module: project
 #. odoo-javascript
@@ -5406,6 +5432,8 @@ msgid ""
 "and which feedback is\n"
 "      moved to the \"Refused\" column."
 msgstr ""
+"ואיזה משוב \n"
+"מועבר לעמודת \"מסורב\"."
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_sharing_project_task_view_kanban
@@ -5422,7 +5450,7 @@ msgstr "אווטר"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid "button."
-msgstr ""
+msgstr "כפתור."
 
 #. module: project
 #. odoo-javascript
@@ -5472,7 +5500,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:project.edit_project
 #: model_terms:ir.ui.view,arch_db:project.project_project_view_form_simplified
 msgid "e.g. mycompany.com"
-msgstr ""
+msgstr "למשל, e.g. mycompany.com"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_project_view_form_simplified
@@ -5513,12 +5541,12 @@ msgstr "מחובר"
 #. module: project
 #: model:ir.actions.server,name:project.action_server_view_my_task
 msgid "menu view My Tasks"
-msgstr ""
+msgstr "תצוגת תפריט במשימות שלי"
 
 #. module: project
 #: model:ir.model.fields.selection,name:project.selection__project_project__rating_status__periodic
 msgid "on a periodic basis"
-msgstr ""
+msgstr "על בסיס תקופתי "
 
 #. module: project
 #: model_terms:digest.tip,tip_description:project.digest_tip_project_1
@@ -5566,7 +5594,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/components/project_task_name_with_subtask_count_char_field/project_task_name_with_subtask_count_char_field.xml:0
 msgid "sub-tasks)"
-msgstr ""
+msgstr "תת- משימות)"
 
 #. module: project
 #. odoo-python
@@ -5577,12 +5605,12 @@ msgstr "משימה"
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_update_default_description
 msgid "the deadline for the following milestone has been updated:"
-msgstr ""
+msgstr "המועד האחרון לאבן הדרך הבאה עודכן:"
 
 #. module: project
 #: model_terms:ir.ui.view,arch_db:project.project_update_default_description
 msgid "the deadline for the following milestones has been updated:"
-msgstr ""
+msgstr "המועד האחרון לאבני הדרך הבאות עודכן:"
 
 #. module: project
 #. odoo-javascript
@@ -5591,6 +5619,8 @@ msgid ""
 "to define if the project is\n"
 "      ready for the next step."
 msgstr ""
+"כדי להגדיר האם הפרויקט\n"
+"מוכן לעבור לצעד הבא."
 
 #. module: project
 #. odoo-javascript
@@ -5607,7 +5637,7 @@ msgstr ""
 #. module: project
 #: model:ir.model.fields.selection,name:project.selection__project_project__rating_status__stage
 msgid "when reaching a given stage"
-msgstr ""
+msgstr "כאשר מגיעים לשלב נתון"
 
 #. module: project
 #: model_terms:digest.tip,tip_description:project.digest_tip_project_1

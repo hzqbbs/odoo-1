@@ -96,13 +96,13 @@ test("save only once when hiding tab several times quickly", async () => {
     expect.verifySteps(["save"]);
 });
 
-test.tags("desktop")(`save when page changed`, async () => {
+test.tags("desktop");
+test(`save when page changed`, async () => {
     defineActions([
         {
             id: 1,
             name: "Partner",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "form"],
@@ -148,13 +148,13 @@ test.tags("desktop")(`save when page changed`, async () => {
     expect(`.o_field_widget[name="name"] input`).toHaveValue("aaa");
 });
 
-test.tags("desktop")(`save when breadcrumb clicked`, async () => {
+test.tags("desktop");
+test(`save when breadcrumb clicked`, async () => {
     defineActions([
         {
             id: 1,
             name: "Partner",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "form"],
@@ -198,13 +198,13 @@ test.tags("desktop")(`save when breadcrumb clicked`, async () => {
     expect('.o_field_widget[name="name"] input').toHaveValue("aaa");
 });
 
-test.tags("desktop")(`error on save when breadcrumb clicked`, async () => {
+test.tags("desktop");
+test(`error on save when breadcrumb clicked`, async () => {
     defineActions([
         {
             id: 1,
             name: "Partner",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "form"],
@@ -239,13 +239,13 @@ test.tags("desktop")(`error on save when breadcrumb clicked`, async () => {
     expect(`.o_error_dialog`).toHaveCount(1);
 });
 
-test.tags("desktop")(`save when action changed`, async () => {
+test.tags("desktop");
+test(`save when action changed`, async () => {
     defineActions([
         {
             id: 1,
             name: "Partner",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "form"],
@@ -255,7 +255,6 @@ test.tags("desktop")(`save when action changed`, async () => {
             id: 2,
             name: "Other action",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [[false, "kanban"]],
         },
     ]);
@@ -337,6 +336,12 @@ test("save on closing tab/browser", async () => {
     await sendBeaconDeferred;
     expect.verifySteps(["sendBeacon"]);
     expect(event.defaultPrevented).toBe(false);
+
+    // With all changes saved, the save/discard buttons should now be invisible.
+    // While it typically doesn't matter when leaving a page, an urgent save may get triggered
+    // by a user action that remains on the page, e.g. opening a VoIP client (see opw 4308954).
+    await animationFrame();
+    expect(`.o_form_status_indicator_buttons:not(.invisible)`).toHaveCount(0);
 });
 
 test("save on closing tab/browser (sendBeacon fails)", async () => {
@@ -465,13 +470,13 @@ test("save on closing tab/browser (not dirty) with text field", async () => {
     expect.verifySteps([]);
 });
 
-test.tags("desktop")(`save on closing tab/browser (detached form)`, async () => {
+test.tags("desktop");
+test(`save on closing tab/browser (detached form)`, async () => {
     defineActions([
         {
             id: 1,
             name: "Partner",
             res_model: "partner",
-            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "form"],
@@ -770,7 +775,8 @@ test("save when action button clicked", async () => {
     expect(`.o_field_widget[name='expertise'] input`).toHaveValue("test");
 });
 
-test.tags("desktop")(`save when action button clicked on desktop`, async () => {
+test.tags("desktop");
+test(`save when action button clicked on desktop`, async () => {
     await mountView({
         resModel: "partner",
         type: "form",
@@ -811,7 +817,8 @@ test("error on save when action button clicked", async () => {
     expect(`.o_error_dialog`).toHaveCount(1);
 });
 
-test.tags("desktop")(`save when create button clicked`, async () => {
+test.tags("desktop");
+test(`save when create button clicked`, async () => {
     onRpc("web_save", () => expect.step("save"));
     await mountView({
         resModel: "partner",

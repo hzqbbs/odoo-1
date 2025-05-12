@@ -8,18 +8,18 @@
 # Martin Trigaux, 2024
 # Jeffery CHEN <jeffery9@gmail.com>, 2024
 # 山西清水欧度(QQ:54773801) <54773801@qq.com>, 2024
-# Chloe Wang, 2024
 # Wil Odoo, 2024
-# Odoo哥 <vnsoft.he@gmail.com>, 2024
 # Raymond Yu <cl_yu@hotmail.com>, 2024
+# Chloe Wang, 2025
+# 何彬 <vnsoft.he@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2025-03-19 20:37+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Raymond Yu <cl_yu@hotmail.com>, 2024\n"
+"Last-Translator: 何彬 <vnsoft.he@gmail.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -842,12 +842,6 @@ msgstr "所有日期应大于或等于cashflow_dates（%s）中的第一个日�
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "All the ranges and the range values must have the same size"
-msgstr "所有范围和范围值的大小必须相同"
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "All the ranges must have the same dimensions."
 msgstr "所有范围的尺寸必须相同。"
 
@@ -1568,6 +1562,12 @@ msgstr "无法对图形进行特殊粘贴。"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Cannot duplicate a pivot in error."
+msgstr "不可复制错误的枢纽。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cannot find workbook relations file"
 msgstr "无法查找到工作簿关系文件"
 
@@ -2065,6 +2065,12 @@ msgstr "将指定字符串转换为小写。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Converts a specified string to uppercase."
 msgstr "将指定字符串转换为大写。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Converts a string to a numeric value."
+msgstr "将字符串转换为数值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3190,6 +3196,7 @@ msgstr "不支持类型为 %(type)s的字段（%(field)s）"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/odoo_pivot.js:0
 #: code:addons/spreadsheet/static/src/pivot/pivot_helpers.js:0
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
 msgid "Field %s does not exist"
 msgstr "字段%s不存在"
 
@@ -5492,8 +5499,8 @@ msgstr "数据透视已复制。"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Pivot duplication failed"
-msgstr "数据透视复制失败"
+msgid "Pivot duplication failed."
+msgstr "数据透视表复制失败。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6438,6 +6445,12 @@ msgstr "表格范围内的单个值。"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
+msgid "Some measures are not available: %s"
+msgstr "部分指标不可用：%s"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Some used characters are not allowed in a sheet name (Forbidden characters "
@@ -7127,6 +7140,24 @@ msgstr "将被转换的数组。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The base (%s) must be between 2 and 36 inclusive."
 msgstr "基数（%s）必须在2和36之间，包括在内。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base (%s) must be strictly positive."
+msgstr "基准值 (%s) 必须是一个正数。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base must be different from 1."
+msgstr "基准值不能为1"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The base of the logarithm."
+msgstr "对数的底数。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8095,6 +8126,12 @@ msgstr "数字的对数，以e为底（欧拉数）。"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The logarithm of a number, for a given base."
+msgstr "在给定底数下，一个数的对数值。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The low end of the random range."
 msgstr "随机范围的下限。"
 
@@ -8221,6 +8258,21 @@ msgstr "要从中减去的减号或数字。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The minute component of the time."
 msgstr "时间中的分钟部分。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/data_sources/data_source.js:0
+#: code:addons/spreadsheet/static/src/pivot/odoo_pivot_loader.js:0
+msgid "The model \"%(model)s\" does not exist."
+msgstr "模型“%(model)s”不存在"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/global_filters/components/filter_value/filter_value.js:0
+msgid ""
+"The model (%(model)s) of this global filter is not valid (it may have been "
+"renamed/deleted)."
+msgstr "此全局筛选器的模型（%(model)s）无效（可能已重命名/删除）。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9689,6 +9741,12 @@ msgstr "计算反正切值的数值。"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value for which to calculate the logarithm, base e."
 msgstr "计算对数的数值（以 e 为底数）。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "The value for which to calculate the logarithm."
+msgstr "用于计算对数的值。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11543,6 +11601,12 @@ msgid ""
 "the search and match mode combination is not supported for XLOOKUP "
 "evaluation."
 msgstr "搜索和匹配模式组合不支持 XLOOKUP 评估。"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "the string to be converted"
+msgstr "要转换的字符串"
 
 #. module: spreadsheet
 #. odoo-javascript

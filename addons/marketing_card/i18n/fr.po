@@ -4,15 +4,15 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Manon Rondou, 2024
+# Manon Rondou, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Manon Rondou, 2024\n"
+"Last-Translator: Manon Rondou, 2025\n"
 "Language-Team: French (https://app.transifex.com/odoo/teams/41243/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -207,6 +207,11 @@ msgstr "Nombre de clics sur les cartes"
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_count
 msgid "Card Count"
 msgstr "Nombre de cartes"
+
+#. module: marketing_card
+#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
+msgid "Card Layout"
+msgstr "Mise en page de la carte"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__card_requires_sync_count
@@ -697,6 +702,11 @@ msgstr "Évaluations"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
+msgid "Recipient Message"
+msgstr "Message du destinataire"
+
+#. module: marketing_card
+#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Recipients"
 msgstr "Destinataires"
 
@@ -893,13 +903,8 @@ msgid "Tags may not reuse existing names."
 msgstr "Les étiquettes ne peuvent pas reprendre des noms existants."
 
 #. module: marketing_card
-#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "Thanks for sharing, here is your reward!"
-msgstr "Merci pour votre partage, voici votre récompense !"
-
-#. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__reward_message
-msgid "Thanks to You Message"
+msgid "Thank You Message"
 msgstr "Message de remerciement"
 
 #. module: marketing_card
@@ -980,6 +985,11 @@ msgstr "Votre page d'accueil"
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_5
 msgid "button text"
 msgstr "texte du bouton"
+
+#. module: marketing_card
+#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
+msgid "e.g. \"Thanks for sharing, here is your reward!\""
+msgstr "par exemple : \"Merci pour le partage, voici votre récompense !\""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form

@@ -8,9 +8,10 @@ from freezegun import freeze_time
 from odoo import fields
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.fields import Command
-from odoo.tests import Form, tagged
+from odoo.tests import Form, HttpCase, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.addons.mail.tests.common import MailCommon
 from odoo.addons.sale.tests.common import SaleCommon
 
 
@@ -338,6 +339,36 @@ class TestSaleOrder(SaleCommon):
             self.sale_order.partner_id.name,
             self.sale_order.with_context(sale_show_partner_name=True).display_name)
 
+    def test_sol_names(self):
+        """Check that the SOL description gets used for the display name."""
+        self.sale_order.order_line = [
+            Command.create({'is_downpayment': True}),
+            Command.create({'display_type': 'line_note', 'name': "Foo\nBar\nBaz"}),
+        ]
+        sol1, sol2, sol3, sol4 = self.sale_order.order_line
+        sol1.name += "\nOK THANK YOU\nGOOD BYE"
+
+        self.assertEqual(
+            sol1.display_name,
+            f"{self.sale_order.name} - OK THANK YOU ({self.partner.name})",
+            "Product line with description should display the first line of description",
+        )
+        self.assertEqual(
+            sol2.display_name,
+            f"{self.sale_order.name} - {sol2.product_id.name} ({self.partner.name})",
+            "Product line without description should display the product name",
+        )
+        self.assertEqual(
+            sol3.display_name,
+            f"{self.sale_order.name} - {sol3.name} ({self.partner.name})",
+            "Down payment line should display the down payment name",
+        )
+        self.assertEqual(
+            sol4.display_name,
+            f"{self.sale_order.name} - Foo ({self.partner.name})",
+            "Multi-line note should display the first line only",
+        )
+
     def test_state_changes(self):
         """Test some untested state changes methods & logic."""
         self.sale_order.action_quotation_sent()
@@ -638,6 +669,48 @@ class TestSaleOrder(SaleCommon):
             {'product_id': product_no_branch_tax.id, 'tax_id': (tax_a + tax_b).ids},
             {'product_id': product_no_tax.id, 'tax_id': []},
         ])
+
+    def test_price_recomputation_on_readonly_unit_price(self):
+        """Make sure that price computation works fine when unit price is readonly.
+
+        Since the client doesn't send readonly fields, flagging the field as readonly
+        will result in the `price_unit` being absent from the values, but not the
+        `technical_price_unit` field, which would disable the price computation.
+
+        This test makes sure that the `technical_price_unit` is correctly discarded
+        if not provided in the same request as the `price_unit`
+        """
+        self.pricelist.item_ids = [
+            Command.create({
+                'product_id': self.product.id,
+                'fixed_price': 22.0,
+                'min_quantity': 3.0,
+            })
+        ]
+
+        # Order update
+        product_sol = self.sale_order.order_line[0]
+        self.assertNotEqual(product_sol.price_unit, 22)
+        self.sale_order.write({
+            'order_line': [Command.update(
+                product_sol.id,
+                {'product_uom_qty': 4.0, 'technical_price_unit': 22.0}
+            )],
+        })
+        self.assertEqual(product_sol.price_unit, 22.0)
+
+        # Order creation
+        new_order = self.env['sale.order'].create({
+            'partner_id': self.partner.id,
+            'order_line': [
+                Command.create({
+                    'product_id': self.product.id,
+                    'product_uom_qty': 5.0,
+                    'technical_price_unit': 22.0,
+                }),
+            ],
+        })
+        self.assertEqual(new_order.order_line.price_unit, 22.0)
 
 
 @tagged('post_install', '-at_install')
@@ -952,3 +1025,26 @@ class TestSalesTeam(SaleCommon):
         order.action_update_taxes()
         self.assertEqual(order.amount_total, 252)
         self.assertEqual(order.amount_tax, 52)
+
+@tagged('post_install', '-at_install')
+class TestSaleMailComposerUI(MailCommon, HttpCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestSaleMailComposerUI, cls).setUpClass()
+        cls.env['mail.alias.domain'].create({'name': 'example.com'})
+        cls.partner = cls.env['res.partner'].create({
+            'name': 'test customer',
+            'email': 'dummy@example.com'
+        })
+        cls.quotation = cls.env['sale.order'].create({
+            'partner_id': cls.partner.id,
+        })
+
+    def test_mail_attachment_removal_tour(self):
+        url = f"/odoo/sales/{self.quotation.id}"
+        with self.mock_mail_app():
+            self.start_tour(
+                url,
+                "mail_attachment_removal_tour",
+                login="admin",
+            )

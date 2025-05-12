@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Daye Jeong, 2024
+# Daye Jeong, 2025
+# Sarah Park, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"POT-Creation-Date: 2025-05-07 20:36+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Daye Jeong, 2024\n"
+"Last-Translator: Sarah Park, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -513,9 +514,11 @@ msgstr "다음과 연결됨"
 #. odoo-python
 #: code:addons/stock_account/models/product.py:0
 msgid ""
-"Lot %(lot)s has a negative quantity in stock. Correct this"
-"                         quantity before enabling lot valuation"
-msgstr "로트 %(lot)s의 재고 수량이 음수입니다. 로트 평가를 활성화하기 전에 이 수량을 수정하세요. "
+"Lot %(lot)s has a negative quantity in stock.\n"
+"Correct this quantity before enabling/disabling lot valuation."
+msgstr ""
+"로트 %(lot)s에 있는 재고 수량이 음수입니다.\n"
+"로트 재고 평가를 활성화/비활성화하기 전에 수량을 수정하세요."
 
 #. module: stock_account
 #. odoo-python
@@ -607,6 +610,16 @@ msgstr "출고"
 #: model_terms:ir.ui.view,arch_db:stock_account.view_inventory_valuation_search
 msgid "Product"
 msgstr "품목"
+
+#. module: stock_account
+#. odoo-python
+#: code:addons/stock_account/models/product.py:0
+msgid ""
+"Product %(product)s has quantity in valued location %(location)s without any lot.\n"
+"Please assign lots to all your quantities before enabling lot valuation."
+msgstr ""
+"%(product)s 품목 중에 %(location)s 평가 위치에 있는 수량은 로트가 지정되지 않았습니다. 로트 평가 활성화 전에 모든"
+" 수량에 로트를 지정하세요."
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_product_category
@@ -904,6 +917,18 @@ msgstr "자동 평가 기능을 사용하려면 재고 계정을 설정해야 �
 
 #. module: stock_account
 #. odoo-python
+#: code:addons/stock_account/models/stock_move_line.py:0
+msgid ""
+"The stock valuation of a move is based on the type of the source and "
+"destination locations. As the move is already processed, you cannot modify "
+"the locations in a way that changes the valuation logic defined during the "
+"initial processing."
+msgstr ""
+"이동에 대한 재고 평가는 출발지와 도착지의 유형에 따라 결정됩니다. 이동이 이미 처리되었으므로, 초기 처리 과정에서 정의된 평가 논리를 "
+"변경하는 방식으로 위치를 수정할 수 없습니다."
+
+#. module: stock_account
+#. odoo-python
 #: code:addons/stock_account/wizard/stock_valuation_layer_revaluation.py:0
 msgid ""
 "The value of a stock valuation layer cannot be negative. Landed cost could "
@@ -1114,7 +1139,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_account/models/product.py:0
 msgid "Warning"
-msgstr "경고"
+msgstr "주의"
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_category__property_stock_valuation_account_id
@@ -1148,6 +1173,7 @@ msgstr "품목 비축 재고 재평가용 마법사 모델"
 
 #. module: stock_account
 #. odoo-python
+#: code:addons/stock_account/models/stock_lot.py:0
 #: code:addons/stock_account/wizard/stock_valuation_layer_revaluation.py:0
 msgid "You cannot adjust the valuation of a layer with zero quantity"
 msgstr "수량이 0인 레이어의 평가액은 조정할 수 없습니다. "
